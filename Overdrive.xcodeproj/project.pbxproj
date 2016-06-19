@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B3B72B8D1D16EA600004A7C2 /* Overdrive.h in Headers */ = {isa = PBXBuildFile; fileRef = B3DD52E91D16CC0000EBF640 /* Overdrive.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B3B72B8E1D16EA850004A7C2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DD52EC1D16CC4300EBF640 /* Result.swift */; };
+		B3B72B8F1D16EA880004A7C2 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DD52EE1D16CC7F00EBF640 /* State.swift */; };
+		B3B72B901D16EA8B0004A7C2 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DD52F01D16CCA300EBF640 /* Task.swift */; };
+		B3B72B911D16EA8E0004A7C2 /* Dispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DD52F21D16CDFE00EBF640 /* Dispatch.swift */; };
+		B3B72B921D16EA910004A7C2 /* TaskQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DD52F41D16D7A800EBF640 /* TaskQueue.swift */; };
+		B3B72B9C1D16EAE70004A7C2 /* Overdrive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3B72B851D16EA330004A7C2 /* Overdrive.framework */; };
+		B3B72BA21D16EB340004A7C2 /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DD52FC1D16D83200EBF640 /* TaskTests.swift */; };
 		B3DD52EB1D16CC0000EBF640 /* Overdrive.h in Headers */ = {isa = PBXBuildFile; fileRef = B3DD52E91D16CC0000EBF640 /* Overdrive.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B3DD52ED1D16CC4300EBF640 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DD52EC1D16CC4300EBF640 /* Result.swift */; };
 		B3DD52EF1D16CC7F00EBF640 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DD52EE1D16CC7F00EBF640 /* State.swift */; };
@@ -18,6 +26,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		B3B72B9D1D16EAE70004A7C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B3DD52D31D16CBEB00EBF640 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B3B72B841D16EA330004A7C2;
+			remoteInfo = "Overdrive macOS";
+		};
 		B3DD53001D16D83200EBF640 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B3DD52D31D16CBEB00EBF640 /* Project object */;
@@ -28,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B3B72B851D16EA330004A7C2 /* Overdrive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Overdrive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3B72B971D16EAE70004A7C2 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3DD52DC1D16CBEB00EBF640 /* Overdrive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Overdrive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3DD52E81D16CC0000EBF640 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3DD52E91D16CC0000EBF640 /* Overdrive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Overdrive.h; sourceTree = "<group>"; };
@@ -42,6 +59,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B3B72B811D16EA330004A7C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B3B72B941D16EAE70004A7C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B3B72B9C1D16EAE70004A7C2 /* Overdrive.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B3DD52D81D16CBEB00EBF640 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -74,6 +106,8 @@
 			children = (
 				B3DD52DC1D16CBEB00EBF640 /* Overdrive.framework */,
 				B3DD52FA1D16D83200EBF640 /* Tests.xctest */,
+				B3B72B851D16EA330004A7C2 /* Overdrive.framework */,
+				B3B72B971D16EAE70004A7C2 /* Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -104,6 +138,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		B3B72B821D16EA330004A7C2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B3B72B8D1D16EA600004A7C2 /* Overdrive.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B3DD52D91D16CBEB00EBF640 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -115,6 +157,42 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		B3B72B841D16EA330004A7C2 /* Overdrive macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B3B72B8C1D16EA330004A7C2 /* Build configuration list for PBXNativeTarget "Overdrive macOS" */;
+			buildPhases = (
+				B3B72B801D16EA330004A7C2 /* Sources */,
+				B3B72B811D16EA330004A7C2 /* Frameworks */,
+				B3B72B821D16EA330004A7C2 /* Headers */,
+				B3B72B831D16EA330004A7C2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Overdrive macOS";
+			productName = "Overdrive osx";
+			productReference = B3B72B851D16EA330004A7C2 /* Overdrive.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		B3B72B961D16EAE70004A7C2 /* Tests macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B3B72B9F1D16EAE70004A7C2 /* Build configuration list for PBXNativeTarget "Tests macOS" */;
+			buildPhases = (
+				B3B72B931D16EAE70004A7C2 /* Sources */,
+				B3B72B941D16EAE70004A7C2 /* Frameworks */,
+				B3B72B951D16EAE70004A7C2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B3B72B9E1D16EAE70004A7C2 /* PBXTargetDependency */,
+			);
+			name = "Tests macOS";
+			productName = OverdriveTests;
+			productReference = B3B72B971D16EAE70004A7C2 /* Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		B3DD52DB1D16CBEB00EBF640 /* Overdrive iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B3DD52E41D16CBEB00EBF640 /* Build configuration list for PBXNativeTarget "Overdrive iOS" */;
@@ -161,6 +239,12 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Said Sikira";
 				TargetAttributes = {
+					B3B72B841D16EA330004A7C2 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					B3B72B961D16EAE70004A7C2 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 					B3DD52DB1D16CBEB00EBF640 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
@@ -183,11 +267,27 @@
 			targets = (
 				B3DD52DB1D16CBEB00EBF640 /* Overdrive iOS */,
 				B3DD52F91D16D83200EBF640 /* Tests iOS */,
+				B3B72B841D16EA330004A7C2 /* Overdrive macOS */,
+				B3B72B961D16EAE70004A7C2 /* Tests macOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B3B72B831D16EA330004A7C2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B3B72B951D16EAE70004A7C2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B3DD52DA1D16CBEB00EBF640 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -205,6 +305,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B3B72B801D16EA330004A7C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B3B72B8E1D16EA850004A7C2 /* Result.swift in Sources */,
+				B3B72B911D16EA8E0004A7C2 /* Dispatch.swift in Sources */,
+				B3B72B921D16EA910004A7C2 /* TaskQueue.swift in Sources */,
+				B3B72B901D16EA8B0004A7C2 /* Task.swift in Sources */,
+				B3B72B8F1D16EA880004A7C2 /* State.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B3B72B931D16EAE70004A7C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B3B72BA21D16EB340004A7C2 /* TaskTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B3DD52D71D16CBEB00EBF640 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -228,6 +348,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		B3B72B9E1D16EAE70004A7C2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B3B72B841D16EA330004A7C2 /* Overdrive macOS */;
+			targetProxy = B3B72B9D1D16EAE70004A7C2 /* PBXContainerItemProxy */;
+		};
 		B3DD53011D16D83200EBF640 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B3DD52DB1D16CBEB00EBF640 /* Overdrive iOS */;
@@ -236,6 +361,76 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		B3B72B8A1D16EA330004A7C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = Sources/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = io.swiftable.Overdrive;
+				PRODUCT_NAME = Overdrive;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		B3B72B8B1D16EA330004A7C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = Sources/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = io.swiftable.Overdrive;
+				PRODUCT_NAME = Overdrive;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		B3B72BA01D16EAE70004A7C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = io.swiftable.OverdriveTests;
+				PRODUCT_NAME = Tests;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		B3B72BA11D16EAE70004A7C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = io.swiftable.OverdriveTests;
+				PRODUCT_NAME = Tests;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		B3DD52E21D16CBEB00EBF640 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -369,7 +564,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.swiftable.Tests;
+				PRODUCT_BUNDLE_IDENTIFIER = io.swiftable.OverdriveTests;
 				PRODUCT_NAME = Tests;
 			};
 			name = Debug;
@@ -379,7 +574,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.swiftable.Tests;
+				PRODUCT_BUNDLE_IDENTIFIER = io.swiftable.OverdriveTests;
 				PRODUCT_NAME = Tests;
 			};
 			name = Release;
@@ -387,6 +582,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B3B72B8C1D16EA330004A7C2 /* Build configuration list for PBXNativeTarget "Overdrive macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B3B72B8A1D16EA330004A7C2 /* Debug */,
+				B3B72B8B1D16EA330004A7C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		B3B72B9F1D16EAE70004A7C2 /* Build configuration list for PBXNativeTarget "Tests macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B3B72BA01D16EAE70004A7C2 /* Debug */,
+				B3B72BA11D16EAE70004A7C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		B3DD52D61D16CBEB00EBF640 /* Build configuration list for PBXProject "Overdrive" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -403,6 +614,7 @@
 				B3DD52E61D16CBEB00EBF640 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B3DD53021D16D83200EBF640 /* Build configuration list for PBXNativeTarget "Tests iOS" */ = {
 			isa = XCConfigurationList;
@@ -411,6 +623,7 @@
 				B3DD53041D16D83200EBF640 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

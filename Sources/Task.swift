@@ -115,7 +115,7 @@ public class Task<T>: NSOperation {
         }
     }
     
-    func willEnqueue() {
+    final func willEnqueue() {
         state = .Pending
     }
     

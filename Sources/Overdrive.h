@@ -6,7 +6,7 @@
 //  Copyright © 2016 Said Sikira. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for Overdrive.
 FOUNDATION_EXPORT double OverdriveVersionNumber;
