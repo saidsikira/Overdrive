@@ -9,27 +9,60 @@
 import class Foundation.NSOperation
 
 public class Task<T>: NSOperation {
-    @objc class func keyPathsForValuesAffectingIsReady() -> Set<NSObject> {
-        return ["state"]
-    }
     
-    @objc class func keyPathsForValuesAffectingIsExecuting() -> Set<NSObject> {
-        return ["state"]
-    }
+    /**
+     Internal result object
+     
+      - Warning: Should never be set directly, only via `result` property
+    */
+    private var internalResult: Result<T>?
     
-    @objc class func keyPathsForValuesAffectingIsFinished() -> Set<NSObject> {
-        return ["state"]
-    }
+    /**
+     Internal task state
+     
+     - Warning: Setting the state directly using this property will result
+     in unexpected behaviour. Use the `state` property to set and retrieve
+     current state.
+    */
+    private var internalState: State = .Initialized
     
+    /**
+     Internal completion block
+     
+     - Warning: Accessing this property directly will result in unexpected behavior.
+     Use `onCompleteBlock` instead.
+    */
+    private var internalOnCompleteBlock: ((T) -> Void)?
+    
+    /**
+     Internal error completion block
+     
+     - Warning: Accessing this property directly will result in unexpected behavior.
+     Use `onErrorBlock` instead.
+     */
+    private var internalOnErrorBlock: ((ErrorType) -> Void)?
+    
+    /**
+     Private queue used in task state machine
+    */
     let queue = dispatch_queue_create("io.overdrive.task", nil)
     
-    var internalResult: Result<T>?
+    //MARK: Class properties
     
-    public var result: Result<T>? {
+    /**
+     Task result. Result can contain either value or error.
+     
+     `Value(T)`: value of type defined by the Task
+     
+     `Error(ErrorType)`: error that may have occured
+     
+     This object is not goint to be populated with result until task 
+     achieves `Finished` state. You can access the result value directly,
+     or setup completion blocks that will execute when task finishes.
+    */
+    private(set) public var result: Result<T>? {
         get {
-            return Dispatch.sync(queue) {
-                return self.internalResult
-            }
+            return Dispatch.sync(queue) { return self.internalResult }
         }
         
         set(newResult) {
@@ -39,19 +72,16 @@ public class Task<T>: NSOperation {
         }
     }
     
+    /// Completion block that will be executed when the task finishes execution
     @available(*, deprecated, message = "use onResult completion instead")
     public override var completionBlock: (() -> Void)? {
         get {
             return nil
         }
         set {
-            assert(false, "Use onComplete completion block instead of completionBlock")
+            assert(false, "Use onComplete method to define the behaviour")
         }
     }
-    
-    //MARK: Completion blocks
-    private var internalOnCompleteBlock: ((T) -> Void)?
-    private var internalOnErrorBlock: ((ErrorType) -> Void)?
     
     var onCompleteBlock: ((T) -> Void)? {
         get {
@@ -95,8 +125,6 @@ public class Task<T>: NSOperation {
         return self
     }
     
-    var internalState: State = .Initialized
-    
     var state: State {
         get {
             return Dispatch.sync(queue) { return self.internalState }
@@ -107,7 +135,8 @@ public class Task<T>: NSOperation {
             willChangeValueForKey("state")
             
             Dispatch.sync(queue) {
-                assert(self.internalState.canTransitionToState(newState), "Invalid state transformation")
+                assert(self.internalState.canTransitionToState(newState),
+                       "Invalid state transformation")
                 self.internalState = newState
             }
             
@@ -198,5 +227,19 @@ public class Task<T>: NSOperation {
     
     public override init() {
         super.init()
+    }
+    
+    //MARK: KVO mechanisms
+    
+    @objc class func keyPathsForValuesAffectingIsReady() -> Set<NSObject> {
+        return ["state"]
+    }
+    
+    @objc class func keyPathsForValuesAffectingIsExecuting() -> Set<NSObject> {
+        return ["state"]
+    }
+    
+    @objc class func keyPathsForValuesAffectingIsFinished() -> Set<NSObject> {
+        return ["state"]
     }
 }
