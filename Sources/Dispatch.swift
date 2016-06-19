@@ -8,10 +8,6 @@
 
 import Foundation
 
-extension dispatch_queue_t {
-    
-}
-
 class Dispatch {
     class func sync(queue: dispatch_queue_t, block: Void -> Void) {
         dispatch_sync(queue, block)
