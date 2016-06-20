@@ -32,7 +32,7 @@ class Dispatch {
      without needing to syncronize with locks.
      
      ### Example:
-     ```
+     ```swift
      var internalState = 0
      public var state: Int {
         return Dispatch.sync {

@@ -43,6 +43,11 @@ public class Task<T>: NSOperation {
     private var internalOnErrorBlock: ((ErrorType) -> Void)?
     
     /**
+     Internal task observers
+    */
+    private var internalObservers: [TaskObserver] = []
+    
+    /**
      Private queue used in task state machine
     */
     let queue = dispatch_queue_create("io.overdrive.task", nil)
@@ -185,6 +190,18 @@ public class Task<T>: NSOperation {
         return self
     }
     
+    private(set) public var observers: [TaskObserver] {
+        get {
+            return Dispatch.sync(queue) { return self.internalObservers }
+        }
+        
+        set {
+            Dispatch.sync(queue) {
+                self.internalObservers = newValue
+            }
+        }
+    }
+    
     /**
      Main task state object. Any state change triggers internal `NSOperation` observers.
      
@@ -266,6 +283,10 @@ public class Task<T>: NSOperation {
         state = .Ready
     }
     
+    public final func addObserver(observer: TaskObserver) {
+        observers.append(observer)
+    }
+    
     /**
      Finish execution of the task with result. Calling this method will change 
      task state to `Finished` and call neccesary completion blocks. If task finished
@@ -294,6 +315,10 @@ public class Task<T>: NSOperation {
     */
     private final func moveToFinishedState() {
         state = .Finished
+        
+        for observer in observers {
+            observer.taskDidFinishExecution(self)
+        }
     }
     
     public override final func start() {
@@ -307,6 +332,10 @@ public class Task<T>: NSOperation {
     public override final func main() {
         assert(state == .Ready, "Task must be performed on OperationQueue")
         state = .Executing
+        
+        for observer in observers {
+            observer.taskDidStartExecution(self)
+        }
         
         if !cancelled {
             run()

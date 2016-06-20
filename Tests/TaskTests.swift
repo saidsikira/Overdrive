@@ -27,7 +27,7 @@ class FailableTask: Task<Int> {
 
 class TaskTests: XCTestCase {
     
-    let queue = TaskQueue()
+    let queue = TaskQueue(qos: .Default)
     
     func testTaskState() {
         let task = SimpleTask()

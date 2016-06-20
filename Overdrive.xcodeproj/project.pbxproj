@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B31CF9991D185B44003D4B2B /* TaskQueueDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31CF9981D185B44003D4B2B /* TaskQueueDelegate.swift */; };
+		B31CF99A1D185B44003D4B2B /* TaskQueueDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31CF9981D185B44003D4B2B /* TaskQueueDelegate.swift */; };
+		B31CF99B1D185B44003D4B2B /* TaskQueueDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31CF9981D185B44003D4B2B /* TaskQueueDelegate.swift */; };
+		B3AD42761D1838B400348607 /* TaskObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD42751D1838B400348607 /* TaskObserver.swift */; };
+		B3AD42771D1838B400348607 /* TaskObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD42751D1838B400348607 /* TaskObserver.swift */; };
+		B3AD42781D1838B400348607 /* TaskObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD42751D1838B400348607 /* TaskObserver.swift */; };
+		B3AD427A1D18450800348607 /* TaskObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD42791D18450700348607 /* TaskObserverTests.swift */; };
+		B3AD427B1D18450800348607 /* TaskObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD42791D18450700348607 /* TaskObserverTests.swift */; };
+		B3AD427C1D18450800348607 /* TaskObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD42791D18450700348607 /* TaskObserverTests.swift */; };
 		B3B72B8D1D16EA600004A7C2 /* Overdrive.h in Headers */ = {isa = PBXBuildFile; fileRef = B3DD52E91D16CC0000EBF640 /* Overdrive.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B3B72B8E1D16EA850004A7C2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DD52EC1D16CC4300EBF640 /* Result.swift */; };
 		B3B72B8F1D16EA880004A7C2 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DD52EE1D16CC7F00EBF640 /* State.swift */; };
@@ -58,6 +67,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B31CF9981D185B44003D4B2B /* TaskQueueDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskQueueDelegate.swift; sourceTree = "<group>"; };
+		B3AD42751D1838B400348607 /* TaskObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskObserver.swift; sourceTree = "<group>"; };
+		B3AD42791D18450700348607 /* TaskObserverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskObserverTests.swift; sourceTree = "<group>"; };
 		B3B72B851D16EA330004A7C2 /* Overdrive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Overdrive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B72B971D16EAE70004A7C2 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B72BA81D16EE310004A7C2 /* Overdrive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Overdrive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,11 +163,13 @@
 			children = (
 				B3DD52E91D16CC0000EBF640 /* Overdrive.h */,
 				B3DD52E81D16CC0000EBF640 /* Info.plist */,
+				B3DD52F21D16CDFE00EBF640 /* Dispatch.swift */,
 				B3DD52EC1D16CC4300EBF640 /* Result.swift */,
 				B3DD52EE1D16CC7F00EBF640 /* State.swift */,
 				B3DD52F01D16CCA300EBF640 /* Task.swift */,
-				B3DD52F21D16CDFE00EBF640 /* Dispatch.swift */,
+				B3AD42751D1838B400348607 /* TaskObserver.swift */,
 				B3DD52F41D16D7A800EBF640 /* TaskQueue.swift */,
+				B31CF9981D185B44003D4B2B /* TaskQueueDelegate.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -163,8 +177,9 @@
 		B3DD52FB1D16D83200EBF640 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				B3DD52FC1D16D83200EBF640 /* TaskTests.swift */,
 				B3DD52FE1D16D83200EBF640 /* Info.plist */,
+				B3AD42791D18450700348607 /* TaskObserverTests.swift */,
+				B3DD52FC1D16D83200EBF640 /* TaskTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -428,7 +443,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3B72B8E1D16EA850004A7C2 /* Result.swift in Sources */,
+				B31CF99A1D185B44003D4B2B /* TaskQueueDelegate.swift in Sources */,
 				B3B72B911D16EA8E0004A7C2 /* Dispatch.swift in Sources */,
+				B3AD42771D1838B400348607 /* TaskObserver.swift in Sources */,
 				B3B72B921D16EA910004A7C2 /* TaskQueue.swift in Sources */,
 				B3B72B901D16EA8B0004A7C2 /* Task.swift in Sources */,
 				B3B72B8F1D16EA880004A7C2 /* State.swift in Sources */,
@@ -439,6 +456,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3AD427B1D18450800348607 /* TaskObserverTests.swift in Sources */,
 				B3B72BA21D16EB340004A7C2 /* TaskTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -448,7 +466,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3B72BB11D16EE680004A7C2 /* Result.swift in Sources */,
+				B31CF99B1D185B44003D4B2B /* TaskQueueDelegate.swift in Sources */,
 				B3B72BB41D16EE700004A7C2 /* Dispatch.swift in Sources */,
+				B3AD42781D1838B400348607 /* TaskObserver.swift in Sources */,
 				B3B72BB51D16EE720004A7C2 /* TaskQueue.swift in Sources */,
 				B3B72BB31D16EE6D0004A7C2 /* Task.swift in Sources */,
 				B3B72BB21D16EE6B0004A7C2 /* State.swift in Sources */,
@@ -459,6 +479,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3AD427C1D18450800348607 /* TaskObserverTests.swift in Sources */,
 				B3B72BC51D16EED90004A7C2 /* TaskTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -468,7 +489,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3DD52ED1D16CC4300EBF640 /* Result.swift in Sources */,
+				B31CF9991D185B44003D4B2B /* TaskQueueDelegate.swift in Sources */,
 				B3DD52F31D16CDFE00EBF640 /* Dispatch.swift in Sources */,
+				B3AD42761D1838B400348607 /* TaskObserver.swift in Sources */,
 				B3DD52F51D16D7A800EBF640 /* TaskQueue.swift in Sources */,
 				B3DD52F11D16CCA300EBF640 /* Task.swift in Sources */,
 				B3DD52EF1D16CC7F00EBF640 /* State.swift in Sources */,
@@ -479,6 +502,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3AD427A1D18450800348607 /* TaskObserverTests.swift in Sources */,
 				B3DD52FD1D16D83200EBF640 /* TaskTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -812,6 +836,7 @@
 				B3B72BAE1D16EE310004A7C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B3B72BC21D16EE820004A7C2 /* Build configuration list for PBXNativeTarget "Tests tvOS" */ = {
 			isa = XCConfigurationList;
@@ -820,6 +845,7 @@
 				B3B72BC41D16EE820004A7C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B3DD52D61D16CBEB00EBF640 /* Build configuration list for PBXProject "Overdrive" */ = {
 			isa = XCConfigurationList;
