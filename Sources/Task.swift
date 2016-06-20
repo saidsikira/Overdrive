@@ -83,6 +83,18 @@ public class Task<T>: NSOperation {
         }
     }
     
+    /**
+     Completion block that is executed when the task reaches `Finished` state and 
+     `.Value` is passed to the `finish:` method. Completion block takes one 
+     argument `T`, which is `.Value` component from the task result.
+     
+     See `Result<T>`.
+     
+     Block should be set by using `onComplete:` method on `Self`.
+     
+     - Warning: Setting this property directly may result in unexpected behaviour.
+     Always use `onComplete:` method on `Self` to set the block.
+    */
     var onCompleteBlock: ((T) -> Void)? {
         get {
             return Dispatch.sync(queue) {
@@ -99,6 +111,16 @@ public class Task<T>: NSOperation {
         }
     }
     
+    /**
+     Completion block that is executed when the task reaches `Finished` state and 
+     error is passed to the `finish:` method. Completion block has one argument,
+     `ErrorType` and no return type. `ErrorType`.
+     
+     Block should be set by using `onError:` method on `Self`.
+     
+     - Warning: Setting this property directly may result in unexpected behaviour.
+     Always use `onError:` method on `Self` to set the block.
+    */
     var onErrorBlock: ((ErrorType) -> Void)? {
         get {
             return Dispatch.sync(queue) {
@@ -115,16 +137,68 @@ public class Task<T>: NSOperation {
         }
     }
     
+    /**
+     Use this method to set completion block that will be executed when task
+     finishes execution.
+     
+     - Note: Completion block set will only be executed if the
+     task finishes with `.Value` result. 
+     
+     If the task finishes with `.Error` result, onError completion will be called.
+     
+     - Warning: This method should only be called before the task state becomes `.Pending`.
+     Calling this method after `.Pending` state may result in unexpected behaviour.
+     
+     - Parameter completion: Completion block that should be executed. Takes only
+     one parameter `T` and no return type.
+     
+     - Returns: `Self`. This method will always return itself, so that it can be used
+     in chain with other task methods.
+    */
     public final func onComplete(completion: ((T) -> ())) -> Self {
+        assert(state < .Executing, "On complete called after task is executed")
         onCompleteBlock = completion
         return self
     }
     
+    /**
+     Use this method to set completion block that will be executed when task
+     finishes with error.
+     
+     - Note: Completion block set will only be executed if the
+     task finishes with `.Error` result.
+     
+     If the task finishes with `.Value` result, onComplete completion will be called.
+     
+     - Warning: This method should only be called before the task state becomes `.Pending`.
+     Calling this method after `.Pending` state may result in unexpected behaviour.
+     
+     - Parameter completion: Completion block that should be executed. Takes only
+     one parameter `ErrorType` and no return type.
+     
+     - Returns: `Self`. This method will always return itself, so that it can be used
+     in chain with other task methods.
+     */
     public final func onError(completion: ((ErrorType) -> ())) -> Self {
+        assert(state < .Executing, "On complete called after task is executed")
         onErrorBlock = completion
         return self
     }
     
+    /**
+     Main task state object. Any state change triggers internal `NSOperation` observers.
+     
+     State can be one of the following:
+     
+     * `Initialized`
+     * `Pending`
+     * `Ready`
+     * `Executing`
+     * `Finished`
+     
+     - Note:
+     You can change state from any thread.
+    */
     var state: State {
         get {
             return Dispatch.sync(queue) { return self.internalState }
@@ -132,6 +206,7 @@ public class Task<T>: NSOperation {
         
         set(newState) {
             
+            // Notify internal `NSOperation` observers that state will be changed
             willChangeValueForKey("state")
             
             Dispatch.sync(queue) {
@@ -140,10 +215,15 @@ public class Task<T>: NSOperation {
                 self.internalState = newState
             }
             
+            // Notifity internal `NSOperation` observers that state is changed
             didChangeValueForKey("state")
         }
     }
     
+    /**
+     This method changes state of `self` to `Pending`. It is called when task is
+     added to the `TaskQueue`
+    */
     final func willEnqueue() {
         state = .Pending
     }
@@ -186,6 +266,17 @@ public class Task<T>: NSOperation {
         state = .Ready
     }
     
+    /**
+     Finish execution of the task with result. Calling this method will change 
+     task state to `Finished` and call neccesary completion blocks. If task finished
+     with `Value(T)`, `onCompleteBlock` will be executed. If task finished with 
+     `Error(ErrorType)` result, `onErrorBlock` will be executed.
+     
+     - Parameter result: Task result (`.Value(T)` or `.Error(ErrorType)`)
+     
+     - Note: 
+     Safe to call from any thread.
+    */
     public final func finish(result: Result<T>) {
         self.result = result
         moveToFinishedState()
@@ -198,6 +289,9 @@ public class Task<T>: NSOperation {
         }
     }
     
+    /**
+     Changes task state to `Finished`
+    */
     private final func moveToFinishedState() {
         state = .Finished
     }
