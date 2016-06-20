@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B3B72BA71D16EE310004A7C2"
-               BuildableName = "Overdrive tvOS.framework"
+               BuildableName = "Overdrive.framework"
                BlueprintName = "Overdrive tvOS"
                ReferencedContainer = "container:Overdrive.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B3B72BA71D16EE310004A7C2"
-            BuildableName = "Overdrive tvOS.framework"
+            BuildableName = "Overdrive.framework"
             BlueprintName = "Overdrive tvOS"
             ReferencedContainer = "container:Overdrive.xcodeproj">
          </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B3B72BA71D16EE310004A7C2"
-            BuildableName = "Overdrive tvOS.framework"
+            BuildableName = "Overdrive.framework"
             BlueprintName = "Overdrive tvOS"
             ReferencedContainer = "container:Overdrive.xcodeproj">
          </BuildableReference>
@@ -83,7 +83,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B3B72BA71D16EE310004A7C2"
-            BuildableName = "Overdrive tvOS.framework"
+            BuildableName = "Overdrive.framework"
             BlueprintName = "Overdrive tvOS"
             ReferencedContainer = "container:Overdrive.xcodeproj">
          </BuildableReference>
