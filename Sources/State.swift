@@ -6,7 +6,7 @@
 //  Copyright © 2016 Said Sikira. All rights reserved.
 //
 
-enum State {
+enum State: Int, Comparable {
     case Initialized
     case Pending
     case Ready
@@ -29,4 +29,9 @@ enum State {
             return false
         }
     }
+}
+
+
+func < (lhs: State, rhs: State) -> Bool {
+    return lhs.rawValue < rhs.rawValue
 }
