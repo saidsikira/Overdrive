@@ -14,7 +14,7 @@ public class TaskQueue: NSOperationQueue {
     public static var main: TaskQueue = TaskQueue(qos: .UserInteractive)
     
     /// TaskQueue delegate object
-    weak var delegate: TaskQueueDelegate?
+    weak public var delegate: TaskQueueDelegate?
     
     //MARK: Init methods
     
