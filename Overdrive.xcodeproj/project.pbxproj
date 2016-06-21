@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B304B27D1D19765200845F2D /* CollectionType+Overdrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B304B27C1D19765200845F2D /* CollectionType+Overdrive.swift */; };
+		B304B27E1D19765200845F2D /* CollectionType+Overdrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B304B27C1D19765200845F2D /* CollectionType+Overdrive.swift */; };
+		B304B27F1D19765200845F2D /* CollectionType+Overdrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B304B27C1D19765200845F2D /* CollectionType+Overdrive.swift */; };
 		B31CF9991D185B44003D4B2B /* TaskQueueDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31CF9981D185B44003D4B2B /* TaskQueueDelegate.swift */; };
 		B31CF99A1D185B44003D4B2B /* TaskQueueDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31CF9981D185B44003D4B2B /* TaskQueueDelegate.swift */; };
 		B31CF99B1D185B44003D4B2B /* TaskQueueDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31CF9981D185B44003D4B2B /* TaskQueueDelegate.swift */; };
@@ -79,6 +82,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B304B27C1D19765200845F2D /* CollectionType+Overdrive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionType+Overdrive.swift"; sourceTree = "<group>"; };
 		B31CF9981D185B44003D4B2B /* TaskQueueDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskQueueDelegate.swift; sourceTree = "<group>"; };
 		B31CF99D1D189FCB003D4B2B /* NSQualityOfService+Overdrive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSQualityOfService+Overdrive.swift"; sourceTree = "<group>"; };
 		B3AD42751D1838B400348607 /* TaskObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskObserver.swift; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				B31CF99D1D189FCB003D4B2B /* NSQualityOfService+Overdrive.swift */,
+				B304B27C1D19765200845F2D /* CollectionType+Overdrive.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -514,6 +519,7 @@
 				B31CF99A1D185B44003D4B2B /* TaskQueueDelegate.swift in Sources */,
 				B3B72B911D16EA8E0004A7C2 /* Dispatch.swift in Sources */,
 				B3AD42771D1838B400348607 /* TaskObserver.swift in Sources */,
+				B304B27E1D19765200845F2D /* CollectionType+Overdrive.swift in Sources */,
 				B3B72B921D16EA910004A7C2 /* TaskQueue.swift in Sources */,
 				B3B1C88A1D1929A200B6386A /* FinishBlockObserver.swift in Sources */,
 				B3B72B901D16EA8B0004A7C2 /* Task.swift in Sources */,
@@ -541,6 +547,7 @@
 				B31CF99B1D185B44003D4B2B /* TaskQueueDelegate.swift in Sources */,
 				B3B72BB41D16EE700004A7C2 /* Dispatch.swift in Sources */,
 				B3AD42781D1838B400348607 /* TaskObserver.swift in Sources */,
+				B304B27F1D19765200845F2D /* CollectionType+Overdrive.swift in Sources */,
 				B3B72BB51D16EE720004A7C2 /* TaskQueue.swift in Sources */,
 				B3B1C88B1D1929A200B6386A /* FinishBlockObserver.swift in Sources */,
 				B3B72BB31D16EE6D0004A7C2 /* Task.swift in Sources */,
@@ -568,6 +575,7 @@
 				B31CF9991D185B44003D4B2B /* TaskQueueDelegate.swift in Sources */,
 				B3DD52F31D16CDFE00EBF640 /* Dispatch.swift in Sources */,
 				B3AD42761D1838B400348607 /* TaskObserver.swift in Sources */,
+				B304B27D1D19765200845F2D /* CollectionType+Overdrive.swift in Sources */,
 				B3DD52F51D16D7A800EBF640 /* TaskQueue.swift in Sources */,
 				B3B1C8891D1929A200B6386A /* FinishBlockObserver.swift in Sources */,
 				B3DD52F11D16CCA300EBF640 /* Task.swift in Sources */,
