@@ -62,11 +62,14 @@ public class TaskQueue: NSOperationQueue {
     */
     public func addTasks<T>(tasks: [Task<T>]) {
         for task in tasks {
+            // Create finish observer and setup completion block
             let finishObserver = FinishBlockObserver { [weak self] in
-                if let q = self {
-                    q.delegate?.didFinish(task: task, inQueue: q)
+                if let queue = self {
+                    queue.delegate?.didFinish(task: task, inQueue: queue)
                 }
             }
+            
+            // Add observer to the task
             task.addObserver(finishObserver)
             
             addOperation(task)
