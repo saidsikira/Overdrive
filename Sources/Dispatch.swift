@@ -54,4 +54,15 @@ class Dispatch {
         }
         return result!
     }
+    
+    /**
+     Use this method to **asynchronously** dispatch block of code to the
+     dispatch queue.
+     
+     - Parameter queue: `dispatch_queue_t` used to dispatch block
+     - Parameter block: Block of code to be dispatched
+    */
+    class func async(queue: dispatch_queue_t, block: () -> Void) {
+        dispatch_async(queue, block)
+    }
 }
