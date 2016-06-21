@@ -25,6 +25,9 @@
 		B3B1C8991D19597700B6386A /* GetLocationTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1C8971D19597700B6386A /* GetLocationTask.swift */; };
 		B3B1C89A1D19597700B6386A /* GetLocationTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1C8971D19597700B6386A /* GetLocationTask.swift */; };
 		B3B1C89B1D19597700B6386A /* GetLocationTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1C8971D19597700B6386A /* GetLocationTask.swift */; };
+		B3B1C89D1D1959DE00B6386A /* URLSessionDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1C89C1D1959DE00B6386A /* URLSessionDataTask.swift */; };
+		B3B1C89E1D1959DE00B6386A /* URLSessionDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1C89C1D1959DE00B6386A /* URLSessionDataTask.swift */; };
+		B3B1C89F1D1959DE00B6386A /* URLSessionDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1C89C1D1959DE00B6386A /* URLSessionDataTask.swift */; };
 		B3B72B8D1D16EA600004A7C2 /* Overdrive.h in Headers */ = {isa = PBXBuildFile; fileRef = B3DD52E91D16CC0000EBF640 /* Overdrive.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B3B72B8E1D16EA850004A7C2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DD52EC1D16CC4300EBF640 /* Result.swift */; };
 		B3B72B8F1D16EA880004A7C2 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DD52EE1D16CC7F00EBF640 /* State.swift */; };
@@ -82,6 +85,7 @@
 		B3AD42791D18450700348607 /* TaskObserverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskObserverTests.swift; sourceTree = "<group>"; };
 		B3B1C8881D1929A200B6386A /* FinishBlockObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishBlockObserver.swift; sourceTree = "<group>"; };
 		B3B1C8971D19597700B6386A /* GetLocationTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetLocationTask.swift; sourceTree = "<group>"; };
+		B3B1C89C1D1959DE00B6386A /* URLSessionDataTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionDataTask.swift; sourceTree = "<group>"; };
 		B3B72B851D16EA330004A7C2 /* Overdrive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Overdrive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B72B971D16EAE70004A7C2 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B72BA81D16EE310004A7C2 /* Overdrive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Overdrive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +196,7 @@
 		B3B1C8981D19597700B6386A /* NSURLSession */ = {
 			isa = PBXGroup;
 			children = (
+				B3B1C89C1D1959DE00B6386A /* URLSessionDataTask.swift */,
 			);
 			path = NSURLSession;
 			sourceTree = "<group>";
@@ -514,6 +519,7 @@
 				B3B72B901D16EA8B0004A7C2 /* Task.swift in Sources */,
 				B31CF99F1D189FCB003D4B2B /* NSQualityOfService+Overdrive.swift in Sources */,
 				B3B1C89A1D19597700B6386A /* GetLocationTask.swift in Sources */,
+				B3B1C89E1D1959DE00B6386A /* URLSessionDataTask.swift in Sources */,
 				B3B72B8F1D16EA880004A7C2 /* State.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -540,6 +546,7 @@
 				B3B72BB31D16EE6D0004A7C2 /* Task.swift in Sources */,
 				B31CF9A01D189FCB003D4B2B /* NSQualityOfService+Overdrive.swift in Sources */,
 				B3B1C89B1D19597700B6386A /* GetLocationTask.swift in Sources */,
+				B3B1C89F1D1959DE00B6386A /* URLSessionDataTask.swift in Sources */,
 				B3B72BB21D16EE6B0004A7C2 /* State.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -566,6 +573,7 @@
 				B3DD52F11D16CCA300EBF640 /* Task.swift in Sources */,
 				B31CF99E1D189FCB003D4B2B /* NSQualityOfService+Overdrive.swift in Sources */,
 				B3B1C8991D19597700B6386A /* GetLocationTask.swift in Sources */,
+				B3B1C89D1D1959DE00B6386A /* URLSessionDataTask.swift in Sources */,
 				B3DD52EF1D16CC7F00EBF640 /* State.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
