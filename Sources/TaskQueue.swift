@@ -26,7 +26,7 @@ public class TaskQueue: NSOperationQueue {
     /**
      Initilizes TaskQueue with specific `NSQualityOfService` class. Defining
      quality of service class will later determine how tasks are executed.
-    */
+     */
     public init(qos: NSQualityOfService) {
         super.init()
         self.qualityOfService = qos
@@ -39,15 +39,25 @@ public class TaskQueue: NSOperationQueue {
      delegate method responsible for adding task.
      
      - Parameter task: Task<T> to be added
-    */
+     */
     public func addTask<T>(task: Task<T>) {
+        
         let finishObserver = FinishBlockObserver { [weak self] in
-            if let q = self {
-                q.delegate?.didFinish(task: task, inQueue: q)
+            if let queue = self {
+                queue.delegate?.didFinish(task: task, inQueue: queue)
             }
         }
         task.addObserver(finishObserver)
         
+        if task.shouldRetry {
+            let retryObserver = RetryTaskObserver { [weak self] in
+                if let queue = self {
+                    queue.retry(task: task)
+                }
+            }
+            task.addObserver(retryObserver)
+        }
+
         addOperation(task)
         delegate?.didAdd(task: task, toQueue: self)
         
@@ -59,23 +69,25 @@ public class TaskQueue: NSOperationQueue {
      call delegate method responsible for adding tasks.
      
      - Parameter tasks: Array of `Task<T>`
-    */
+     */
     public func addTasks<T>(tasks: [Task<T>]) {
         for task in tasks {
             // Create finish observer and setup completion block
-            let finishObserver = FinishBlockObserver { [weak self] in
-                if let queue = self {
-                    queue.delegate?.didFinish(task: task, inQueue: queue)
-                }
-            }
-            
-            // Add observer to the task
-            task.addObserver(finishObserver)
-            
-            addOperation(task)
-            delegate?.didAdd(task: task, toQueue: self)
-            
+            addTask(task)
+        }
+    }
+}
+
+extension TaskQueue {
+    func retry<T>(task task: Task<T>) {
+        do {
+            try task.decreaseRetryCount()
+            task.state = .Initialized
+            addTask(task)
             task.willEnqueue()
+            delegate?.didRetry(task: task, inQueue: self)
+        } catch {
+            
         }
     }
 }

@@ -35,13 +35,13 @@ class TaskTests: XCTestCase {
         let expectation = expectationWithDescription("Task state test")
         XCTAssert(task.state == .Initialized, "Task state should be: Initialized")
         
-        queue.addTask(task)
-        
         task.onComplete { value in
             XCTAssert(task.state == .Finished, "Task state should be: Finished")
             expectation.fulfill()
         }
         
+        queue.addTask(task)
+
         waitForExpectationsWithTimeout(0.1) { handlerError in
             print(handlerError)
         }

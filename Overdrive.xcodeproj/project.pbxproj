@@ -47,6 +47,12 @@
 		B3B72BB51D16EE720004A7C2 /* TaskQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DD52F41D16D7A800EBF640 /* TaskQueue.swift */; };
 		B3B72BBF1D16EE820004A7C2 /* Overdrive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3B72BA81D16EE310004A7C2 /* Overdrive.framework */; };
 		B3B72BC51D16EED90004A7C2 /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DD52FC1D16D83200EBF640 /* TaskTests.swift */; };
+		B3BB185D1D1C0D24002B1979 /* RetryTaskObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB185C1D1C0D24002B1979 /* RetryTaskObserver.swift */; };
+		B3BB185E1D1C0D24002B1979 /* RetryTaskObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB185C1D1C0D24002B1979 /* RetryTaskObserver.swift */; };
+		B3BB185F1D1C0D24002B1979 /* RetryTaskObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB185C1D1C0D24002B1979 /* RetryTaskObserver.swift */; };
+		B3C5DF591D1C4F7200D79532 /* DependencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5DF581D1C4F7200D79532 /* DependencyTests.swift */; };
+		B3C5DF5A1D1C4F7200D79532 /* DependencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5DF581D1C4F7200D79532 /* DependencyTests.swift */; };
+		B3C5DF5B1D1C4F7200D79532 /* DependencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5DF581D1C4F7200D79532 /* DependencyTests.swift */; };
 		B3DD52EB1D16CC0000EBF640 /* Overdrive.h in Headers */ = {isa = PBXBuildFile; fileRef = B3DD52E91D16CC0000EBF640 /* Overdrive.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B3DD52ED1D16CC4300EBF640 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DD52EC1D16CC4300EBF640 /* Result.swift */; };
 		B3DD52EF1D16CC7F00EBF640 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DD52EE1D16CC7F00EBF640 /* State.swift */; };
@@ -94,6 +100,8 @@
 		B3B72B971D16EAE70004A7C2 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B72BA81D16EE310004A7C2 /* Overdrive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Overdrive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B72BBA1D16EE810004A7C2 /* Tests tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3BB185C1D1C0D24002B1979 /* RetryTaskObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetryTaskObserver.swift; sourceTree = "<group>"; };
+		B3C5DF581D1C4F7200D79532 /* DependencyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyTests.swift; sourceTree = "<group>"; };
 		B3DD52DC1D16CBEB00EBF640 /* Overdrive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Overdrive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3DD52E81D16CC0000EBF640 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3DD52E91D16CC0000EBF640 /* Overdrive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Overdrive.h; sourceTree = "<group>"; };
@@ -169,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				B3B1C8881D1929A200B6386A /* FinishBlockObserver.swift */,
+				B3BB185C1D1C0D24002B1979 /* RetryTaskObserver.swift */,
 			);
 			path = Observers;
 			sourceTree = "<group>";
@@ -253,6 +262,7 @@
 				B3DD52FE1D16D83200EBF640 /* Info.plist */,
 				B3AD42791D18450700348607 /* TaskObserverTests.swift */,
 				B3DD52FC1D16D83200EBF640 /* TaskTests.swift */,
+				B3C5DF581D1C4F7200D79532 /* DependencyTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -525,6 +535,7 @@
 				B3B72B901D16EA8B0004A7C2 /* Task.swift in Sources */,
 				B31CF99F1D189FCB003D4B2B /* NSQualityOfService+Overdrive.swift in Sources */,
 				B3B1C89A1D19597700B6386A /* GetLocationTask.swift in Sources */,
+				B3BB185E1D1C0D24002B1979 /* RetryTaskObserver.swift in Sources */,
 				B3B1C89E1D1959DE00B6386A /* URLSessionDataTask.swift in Sources */,
 				B3B72B8F1D16EA880004A7C2 /* State.swift in Sources */,
 			);
@@ -536,6 +547,7 @@
 			files = (
 				B3AD427B1D18450800348607 /* TaskObserverTests.swift in Sources */,
 				B3B72BA21D16EB340004A7C2 /* TaskTests.swift in Sources */,
+				B3C5DF5A1D1C4F7200D79532 /* DependencyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -553,6 +565,7 @@
 				B3B72BB31D16EE6D0004A7C2 /* Task.swift in Sources */,
 				B31CF9A01D189FCB003D4B2B /* NSQualityOfService+Overdrive.swift in Sources */,
 				B3B1C89B1D19597700B6386A /* GetLocationTask.swift in Sources */,
+				B3BB185F1D1C0D24002B1979 /* RetryTaskObserver.swift in Sources */,
 				B3B1C89F1D1959DE00B6386A /* URLSessionDataTask.swift in Sources */,
 				B3B72BB21D16EE6B0004A7C2 /* State.swift in Sources */,
 			);
@@ -564,6 +577,7 @@
 			files = (
 				B3AD427C1D18450800348607 /* TaskObserverTests.swift in Sources */,
 				B3B72BC51D16EED90004A7C2 /* TaskTests.swift in Sources */,
+				B3C5DF5B1D1C4F7200D79532 /* DependencyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,6 +595,7 @@
 				B3DD52F11D16CCA300EBF640 /* Task.swift in Sources */,
 				B31CF99E1D189FCB003D4B2B /* NSQualityOfService+Overdrive.swift in Sources */,
 				B3B1C8991D19597700B6386A /* GetLocationTask.swift in Sources */,
+				B3BB185D1D1C0D24002B1979 /* RetryTaskObserver.swift in Sources */,
 				B3B1C89D1D1959DE00B6386A /* URLSessionDataTask.swift in Sources */,
 				B3DD52EF1D16CC7F00EBF640 /* State.swift in Sources */,
 			);
@@ -592,6 +607,7 @@
 			files = (
 				B3AD427A1D18450800348607 /* TaskObserverTests.swift in Sources */,
 				B3DD52FD1D16D83200EBF640 /* TaskTests.swift in Sources */,
+				B3C5DF591D1C4F7200D79532 /* DependencyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

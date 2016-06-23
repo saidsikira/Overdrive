@@ -9,4 +9,5 @@
 public protocol TaskQueueDelegate: class {
     func didAdd<T>(task task: Task<T>, toQueue queue: TaskQueue)
     func didFinish<T>(task task: Task<T>, inQueue queue: TaskQueue)
+    func didRetry<T>(task task: Task<T>, inQueue queue: TaskQueue)
 }

@@ -48,6 +48,11 @@ public class Task<T>: NSOperation {
     private var internalObservers: [TaskObserver] = []
     
     /**
+     Internal number of retry counts
+    */
+    private var internalRetryCount: Int = 0
+    
+    /**
      Private queue used in task state machine
     */
     let queue = dispatch_queue_create("io.overdrive.task", nil)
@@ -85,6 +90,18 @@ public class Task<T>: NSOperation {
         }
         set {
             assert(false, "Use onComplete method to define the behaviour")
+        }
+    }
+    
+    var retryCount: Int {
+        get {
+            return Dispatch.sync(queue) { return self.internalRetryCount }
+        }
+        
+        set(newCount) {
+            Dispatch.sync(queue) {
+                self.internalRetryCount = newCount
+            }
         }
     }
     
@@ -202,6 +219,11 @@ public class Task<T>: NSOperation {
         }
     }
     
+    public func retry(times: Int) -> Self {
+        retryCount = times
+        return self
+    }
+    
     /**
      Main task state object. Any state change triggers internal `NSOperation` observers.
      
@@ -227,7 +249,7 @@ public class Task<T>: NSOperation {
             willChangeValueForKey("state")
             
             Dispatch.sync(queue) {
-                assert(self.internalState.canTransitionToState(newState),
+                assert(self.internalState.canTransitionToState(newState, shouldRetry: self.shouldRetry),
                        "Invalid state transformation")
                 self.internalState = newState
             }
@@ -364,5 +386,24 @@ public class Task<T>: NSOperation {
     
     @objc class func keyPathsForValuesAffectingIsFinished() -> Set<NSObject> {
         return ["state"]
+    }
+}
+
+enum RetryCountError: ErrorType {
+    case CountIsZero
+}
+
+
+extension Task {
+    var shouldRetry: Bool {
+        return retryCount > 0
+    }
+    
+    func decreaseRetryCount() throws {
+        if retryCount > 0 {
+            retryCount = retryCount - 1
+        } else {
+            throw RetryCountError.CountIsZero
+        }
     }
 }
