@@ -18,9 +18,4 @@ extension CollectionType where Generator.Element: NSOperation {
             operation.cancel()
         }
     }
-    
-    public func dependency<T>(dependency dependency: T.Type) -> T? {
-        let filtered = filter { $0 as? T != nil }.first
-        return filtered as? T
-    }
 }
