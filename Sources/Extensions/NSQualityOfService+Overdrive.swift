@@ -6,7 +6,7 @@
 //  Copyright © 2016 Said Sikira. All rights reserved.
 //
 
-import Foundation
+import enum Foundation.NSQualityOfService
 
 extension NSQualityOfService: CustomStringConvertible {
     public var description: String {
