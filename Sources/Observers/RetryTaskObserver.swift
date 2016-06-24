@@ -38,7 +38,4 @@ class RetryTaskObserver: TaskObserver {
             return
         }
     }
-    
-    func taskDidStartExecution<T>(task: Task<T>) {
-    }
 }

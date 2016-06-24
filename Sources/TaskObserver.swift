@@ -11,3 +11,15 @@ public protocol TaskObserver {
     func taskDidStartExecution<T>(task: Task<T>)
     func taskDidFinishExecution<T>(task: Task<T>)
 }
+
+extension TaskObserver {
+    var observerName: String {
+        return String(self.dynamicType)
+    }
+    
+    func taskDidStartExecution<T>(task: Task<T>) {
+    }
+    
+    func taskDidFinishExecution<T>(task: Task<T>) {
+    }
+}
