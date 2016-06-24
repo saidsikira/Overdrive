@@ -6,9 +6,19 @@
 //  Copyright © 2016 Said Sikira. All rights reserved.
 //
 
-internal class FinishBlockObserver: TaskObserver {
+/**
+ Task observer that is used to notify `TaskQueue` that the task finished execution.
+*/
+class FinishBlockObserver: TaskObserver {
+    
+    /**
+     Completion block that will be executed when task finished execution.
+     
+     Called regardless of the task result.
+    */
     var finishExecutionBlock: (Void -> ())
     
+    /// Create new `FinishBlockObserver` with completion block
     init(finishExecutionBlock: (Void -> ())) {
         self.finishExecutionBlock = finishExecutionBlock
     }
