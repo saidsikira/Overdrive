@@ -7,6 +7,7 @@
 //
 
 public protocol TaskObserver {
+    var observerName: String { get }
     func taskDidStartExecution<T>(task: Task<T>)
     func taskDidFinishExecution<T>(task: Task<T>)
 }

@@ -18,6 +18,8 @@ class FinishBlockObserver: TaskObserver {
     */
     var finishExecutionBlock: (Void -> ())
     
+    var observerName: String = "FinishBlockObserver"
+    
     /// Create new `FinishBlockObserver` with completion block
     init(finishExecutionBlock: (Void -> ())) {
         self.finishExecutionBlock = finishExecutionBlock

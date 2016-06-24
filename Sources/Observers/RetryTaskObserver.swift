@@ -17,6 +17,8 @@ class RetryTaskObserver: TaskObserver {
     /// Retry block that will be executed if task should retry execution
     let retryBlock: (Void -> ())
     
+    var observerName: String = "RetryTaskObserver"
+    
     /// Create new `RetryTaskObserver` with completion block.
     init(retryCompletionBlock: (Void -> ())) {
         retryBlock = retryCompletionBlock
