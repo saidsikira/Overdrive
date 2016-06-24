@@ -41,12 +41,12 @@ public class TaskQueue: NSOperationQueue {
      - Parameter task: Task<T> to be added
      */
     public func addTask<T>(task: Task<T>) {
-        
         let finishObserver = FinishBlockObserver { [weak self] in
             if let queue = self {
                 queue.delegate?.didFinish(task: task, inQueue: queue)
             }
         }
+        
         task.addObserver(finishObserver)
         
         if task.shouldRetry {
@@ -57,7 +57,7 @@ public class TaskQueue: NSOperationQueue {
             }
             task.addObserver(retryObserver)
         }
-
+        
         addOperation(task)
         delegate?.didAdd(task: task, toQueue: self)
         
@@ -83,7 +83,7 @@ extension TaskQueue {
         do {
             try task.decreaseRetryCount()
             task.state = .Initialized
-            addTask(task)
+            addOperation(task)
             task.willEnqueue()
             delegate?.didRetry(task: task, inQueue: self)
         } catch {

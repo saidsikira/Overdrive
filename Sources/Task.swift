@@ -207,6 +207,14 @@ public class Task<T>: NSOperation {
         return self
     }
     
+    /**
+     Array of all task observers (read-only).
+     
+     Contains two observers by default:
+     1. `FinishBlockObserver` - used to notify TaskQueue that the task is finished
+     2. `RetryTaskObserver` - used to notify TaskQueue that the task should retry execution
+     
+    */
     private(set) public var observers: [TaskObserver] {
         get {
             return Dispatch.sync(queue) { return self.internalObservers }
@@ -219,6 +227,14 @@ public class Task<T>: NSOperation {
         }
     }
     
+    /**
+     Set retry count. If the task finishes with error, task will be added to the queue
+     again until retry count becomes zero.
+     
+     - Parameter times: Number of times task should be retried if it finishes with error
+     
+     - Returns: `Self`
+    */
     public func retry(times: Int) -> Self {
         retryCount = times
         return self
@@ -261,7 +277,7 @@ public class Task<T>: NSOperation {
     
     /**
      This method changes state of `self` to `Pending`. It is called when task is
-     added to the `TaskQueue`
+     added to the `TaskQueue`.
     */
     final func willEnqueue() {
         state = .Pending
@@ -393,17 +409,50 @@ enum RetryCountError: ErrorType {
     case CountIsZero
 }
 
+//MARK: Retry mechanisms
 
 extension Task {
+    
+    /// Returns true if task should be retried
     var shouldRetry: Bool {
-        return retryCount > 0
+        return internalRetryCount > 0
     }
     
+    /**
+     Decreases retry count. If retry count is 0, method will throw,
+     so it can be used in retry blocks safely.
+    */
     func decreaseRetryCount() throws {
         if retryCount > 0 {
             retryCount = retryCount - 1
         } else {
             throw RetryCountError.CountIsZero
         }
+    }
+}
+
+//MARK: Dependency helper methods
+
+extension Task {
+    
+    /**
+     Returns dependency instance from the task dependencies.
+     
+     - Parameter type: Dependency Task type
+     
+     - Returns: Optional `Task<T>` dependency instance
+     
+     ### Example
+     ```swift
+     let dependencyTask = SomeTask()
+     
+     if let dependency = task.dependency(SomeTask) {
+         print(dependency) // dependencyTask instance
+     }
+     ```
+    */
+    public func dependency<T>(type: Task<T>.Type) -> Task<T>? {
+        let filteredDependency = dependencies.filter { $0 as? Task<T> != nil }
+        return filteredDependency.first as? Task<T>
     }
 }
