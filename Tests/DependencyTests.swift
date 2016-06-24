@@ -16,12 +16,14 @@ class TestTask: Task<Int> {
 }
 
 class DependencyTests: XCTestCase {
-    func testCollectionTypeExtension() {
-        let simpleTask = SimpleTask()
-        let failableTask = FailableTask()
+    func testDependencyFromTask() {
         let testTask = TestTask()
+        let dependencyTask = SimpleTask()
         
-        testTask.addDependency(simpleTask)
+        testTask.addDependency(dependencyTask)
         
+        if testTask.dependency(SimpleTask) == nil {
+            XCTAssert(false, "Should return dependency")
+        }
     }
 }
