@@ -8,6 +8,99 @@
 
 import class Foundation.NSOperation
 
+/**
+ Provides thread-safe, concurrent and asynchronous execution of any task,
+ by utilizing `NSOperation` and `GCD` mechanisms. `Task` provides type-safe
+ execution by defining concrete type that will be task result object.
+ 
+ To execute the task you must add it to the `TaskQueue` queue which manages
+ task execution, task dependencies, retry operations and concurrency.
+ 
+ `Task` also provides method chaining and completion blocks that are executed 
+ depending on the task result. It also features retry mechanisms for tasks
+ which finished with errors.
+ 
+ Since `Task<T>` is an abstract class you should always create subclass or 
+ use concrete `TaskBlock` subclass. Subclassing `Task<T>` is simple operation. 
+ You are only required to override `run()` method that defines task execution 
+ point and call `finish(_:)` method to notify task that execution is finished.
+ **Example subclass**
+ 
+ ```swift
+ // Defines `CustomTask` subclass that exposes `Int` result
+ class CustomTask: Task<Int> {
+    override func run() {
+        asyncTask { result, error in
+            if error != nil {
+                finish(.Error(error!))
+            } else {
+                finish(.Value(resut as! Int))
+            }
+        }
+    }
+ }
+ ```
+ 
+ **Finishing task execution**
+ 
+ Since you can wrap any synchronous or asynchronous task inside `run()` method,
+ you must call `finish(_:)` method with `Result<T>` enum object to popuplate the 
+ task result and notify `TaskQueue` that the task finished with execution.
+ 
+ Task result is exposed as `Result<T>` enum which can have one of the following
+ cases:
+ 
+ * `Value(T)` - Value associated with the task returning type
+ * `Error(ErrorType)` - Error that may occur during task execution
+ 
+ After task finishes execution, you can access the result via `result` property.
+ 
+ - Note: You can access `result` object from any thread.
+ 
+ If the task is asynchronous, `result` instance may be `nil` since `finish(_:)`
+ method is not called yet. In that case you should use `onComplete(_:)` and `onError(_:)`
+ methods.
+ 
+ **Example**
+ 
+ ```swift
+ let task = CustomTask()
+ task
+     .onComplete { value in
+        print(value)
+     }. onError { error in 
+        prin(error)
+ }
+ 
+ TaskQueue.main.addTask(task)
+ ```
+ 
+ - Warning:
+ Calling `onComplete` and `onError` method after the task is added to the `TaskQueue`
+ may result in error, since the task may have already finished with result. To avoid
+ this behaviour, always call these methods before task is added to the `TaskQueue`.
+ 
+ **Dependencies**
+ You can use task dependencies to ensure correct task order execution. If task has 
+ any dependencies, `TaskQueue` will first execute them first and if they finish
+ without errors, parent task will be executed.
+ 
+ You can add dependencies by using `addDependency(_:)` method.
+ 
+ **Example dependency**
+ 
+ ```swift
+ let getDataTask = GetDataTask()
+ let parseJSONTask = ParseJSONTask()
+ 
+ parseJSONTask.addDependency(getDataTask)
+ TaskQueue.main.addTask(parseJSONTask)
+ ```
+ 
+ - Warning:
+ You should create dependency tree before task is added to the `TaskQueue`.
+ 
+*/
 public class Task<T>: NSOperation {
     
     /**
@@ -82,7 +175,12 @@ public class Task<T>: NSOperation {
         }
     }
     
-    /// Completion block that will be executed when the task finishes execution
+    /**
+     Completion block that will be executed when the task finishes execution.
+     
+     - Warning: **DEPRECATED**. Use `onComplete(_:)` method to set completion
+     block.
+    */
     @available(*, deprecated, message = "use onResult completion instead")
     public override var completionBlock: (() -> Void)? {
         get {
@@ -104,6 +202,8 @@ public class Task<T>: NSOperation {
             }
         }
     }
+    
+    //MARK: Completion methods
     
     /**
      Completion block that is executed when the task reaches `Finished` state and
@@ -161,23 +261,21 @@ public class Task<T>: NSOperation {
     
     /**
      Use this method to set completion block that will be executed when task
-     finishes execution.
+     finishes execution with `.Value(T)` result.
      
-     - Note: Completion block set will only be executed if the
-     task finishes with `.Value` result.
-     
-     If the task finishes with `.Error` result, onError completion will be called.
+     - Note: 
+     If the task finishes with `.Error` result, onError(_:) method will be called.
      
      - Warning: This method should only be called before the task state becomes `.Pending`.
      Calling this method after `.Pending` state may result in unexpected behaviour.
      
-     - Parameter completion: Completion block that should be executed. Takes only
-     one parameter `T` and no return type.
+     - Parameter completion: Completion block that should be executed. Takes `T` parameter
+     which is extracted from the `.Value(T)` result.
      
      - Returns: `Self`. This method will always return itself, so that it can be used
      in chain with other task methods.
      */
-    public final func onComplete(completion: ((T) -> ())) -> Self {
+    public final func onComplete(completion: ((T) -> Void)) -> Self {
         assert(state < .Executing, "On complete called after task is executed")
         onCompleteBlock = completion
         return self
@@ -207,10 +305,28 @@ public class Task<T>: NSOperation {
         return self
     }
     
+    //MARK: Retry mechanims
+    
+    /**
+     Set retry count. If the task finishes with error, task will be added to the queue
+     again until retry count becomes zero.
+     
+     - Parameter times: Number of times task should be retried if it finishes with error
+     
+     - Returns: `Self`
+     */
+    public func retry(times: Int) -> Self {
+        retryCount = times
+        return self
+    }
+    
+    //MARK: Task observers
+    
     /**
      Array of all task observers (read-only).
      
      Contains two observers by default:
+     
      1. `FinishBlockObserver` - used to notify TaskQueue that the task is finished
      2. `RetryTaskObserver` - used to notify TaskQueue that the task should retry execution
      
@@ -228,16 +344,35 @@ public class Task<T>: NSOperation {
     }
     
     /**
-     Set retry count. If the task finishes with error, task will be added to the queue
-     again until retry count becomes zero.
+     Adds observer to task observers
+    */
+    public final func addObserver(observer: TaskObserver) {
+        observers.append(observer)
+    }
+    
+    //MARK: State management
+    
+    /**
+     Finish execution of the task with result. Calling this method will change
+     task state to `Finished` and call neccesary completion blocks. If task finished
+     with `Value(T)`, `onCompleteBlock` will be executed. If task finished with
+     `Error(ErrorType)` result, `onErrorBlock` will be executed.
      
-     - Parameter times: Number of times task should be retried if it finishes with error
+     - Parameter result: Task result (`.Value(T)` or `.Error(ErrorType)`)
      
-     - Returns: `Self`
+     - Note:
+     Safe to call from any thread.
      */
-    public func retry(times: Int) -> Self {
-        retryCount = times
-        return self
+    public final func finish(result: Result<T>) {
+        self.result = result
+        moveToFinishedState()
+        
+        switch result {
+        case .Value(let value):
+            onCompleteBlock?(value)
+        case .Error(let error):
+            onErrorBlock?(error)
+        }
     }
     
     /**
@@ -284,7 +419,8 @@ public class Task<T>: NSOperation {
     }
     
     /**
-     Used to notify `NSOperation` superclass that task execution is asynchronus
+     Used to notify `NSOperation` superclass that task execution is asynchronous.
+     Defaults to `true`.
     */
     public final override var asynchronous: Bool {
         return true
@@ -333,33 +469,6 @@ public class Task<T>: NSOperation {
         state = .Ready
     }
     
-    public final func addObserver(observer: TaskObserver) {
-        observers.append(observer)
-    }
-    
-    /**
-     Finish execution of the task with result. Calling this method will change
-     task state to `Finished` and call neccesary completion blocks. If task finished
-     with `Value(T)`, `onCompleteBlock` will be executed. If task finished with
-     `Error(ErrorType)` result, `onErrorBlock` will be executed.
-     
-     - Parameter result: Task result (`.Value(T)` or `.Error(ErrorType)`)
-     
-     - Note:
-     Safe to call from any thread.
-     */
-    public final func finish(result: Result<T>) {
-        self.result = result
-        moveToFinishedState()
-        
-        switch result {
-        case .Value(let value):
-            onCompleteBlock?(value)
-        case .Error(let error):
-            onErrorBlock?(error)
-        }
-    }
-    
     /**
      Changes task state to `Finished`
      */
@@ -370,6 +479,8 @@ public class Task<T>: NSOperation {
             observer.taskDidFinishExecution(self)
         }
     }
+    
+    //MARK: Task execution
     
     /**
      Starts task execution process when task reaches `Ready` state.
@@ -472,9 +583,9 @@ extension Task {
     }
 }
 
-//MARK: Dependency helper methods
-
 extension Task {
+    
+    //MARK: Dependency management
     
     /**
      Returns dependency instance from the task dependencies.
@@ -486,13 +597,12 @@ extension Task {
      ### Example
      ```swift
      let dependencyTask = SomeTask()
-     
-     if let dependency = task.dependency(SomeTask) {
-     print(dependency) // dependencyTask instance
+     if let dependency = task.getDependency(SomeTask) {
+        print(dependency) // dependencyTask instance
      }
      ```
      */
-    public func dependency<T>(type: Task<T>.Type) -> Task<T>? {
+    public func getDependency<T>(type: Task<T>.Type) -> Task<T>? {
         let filteredDependency = dependencies.filter { $0 as? Task<T> != nil }
         return filteredDependency.first as? Task<T>
     }

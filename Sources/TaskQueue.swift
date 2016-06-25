@@ -9,8 +9,46 @@
 import class Foundation.NSOperation
 import class Foundation.NSOperationQueue
 
+/**
+ Provides `Task<T>` execution and manages dependencies and concurrency.
+ 
+ **Example**
+ 
+ ```swift
+ /// Create new instance of task queue
+ let queue = TaskQueue()
+ queue.addTask(task)
+ ```
+ 
+ ### Specific `NSQualityOfService`
+ If you want to perform task execution with defined quality of service class, 
+ you need to pass it to the initializer.
+ 
+ ```swift
+ /// Create background task queue
+ let queue = TaskQueue(qos: .Background)
+ ```
+ 
+ ### Performing work on main queue
+ To perform task execution on the main queue you can use `main` property of the
+ `TaskQueue`
+ 
+ ```swift
+ TaskQueue.main.addTask(task)
+ ```
+ 
+ */
 public class TaskQueue: NSOperationQueue {
     
+    /**
+     Returns queue associated with application main queue.
+     
+     ### Example:
+     ```swift
+     let task = SomeTask()
+     TaskQueue.main.addTask(task)
+     ```
+    */
     public static var main: TaskQueue = TaskQueue(qos: .UserInteractive)
     
     /// TaskQueue delegate object
@@ -71,14 +109,15 @@ public class TaskQueue: NSOperationQueue {
      - Parameter tasks: Array of `Task<T>`
      */
     public func addTasks<T>(tasks: [Task<T>]) {
-        for task in tasks {
-            // Create finish observer and setup completion block
-            addTask(task)
-        }
+        _ = tasks.map { addTask($0) }
     }
-}
-
-extension TaskQueue {
+    
+    /**
+     Retries task execution. Method will decrease task retry count, set task
+     state to `Initialized` and add it to the queue again.
+     
+     - Parameter task: Task to be retried
+    */
     func retry<T>(task task: Task<T>) {
         do {
             try task.decreaseRetryCount()
