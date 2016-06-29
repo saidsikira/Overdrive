@@ -9,10 +9,12 @@
 /**
  Provides helper synchronous task execution by finishing with result immediately
 */
-internal class SynchronousTask<T>: Task<T> {
+private class SynchronousTask<T>: Task<T> {
     override func run() {
         if let result = result {
             finish(result)
+        } else {
+            moveToFinishedState()
         }
     }
 }

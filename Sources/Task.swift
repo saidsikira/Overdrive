@@ -372,7 +372,7 @@ public class Task<T>: NSOperation {
      2. `RetryTaskObserver` - used to notify TaskQueue that the task should retry execution
      
      */
-    private(set) public var observers: [TaskObserver] {
+    internal(set) public var observers: [TaskObserver] {
         get {
             return Dispatch.sync(queue) { return self.internalObservers }
         }
@@ -513,7 +513,7 @@ public class Task<T>: NSOperation {
     /**
      Changes task state to `Finished`
      */
-    private final func moveToFinishedState() {
+    internal final func moveToFinishedState() {
         state = .Finished
         
         for observer in observers {
