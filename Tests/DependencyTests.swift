@@ -16,14 +16,29 @@ class TestTask: Task<Int> {
 }
 
 class DependencyTests: XCTestCase {
-    func testDependencyFromTask() {
+    
+    func testDependencyAdd() {
         let testTask = TestTask()
         let dependencyTask = SimpleTask()
         
         testTask.addDependency(dependencyTask)
         
-        if testTask.dependency(SimpleTask) == nil {
-            XCTAssert(false, "Should return dependency")
+        XCTAssert(testTask.dependencies.count == 1, "Dependencies count should be 1")
+        
+        TaskQueue.main.addTask(testTask)
+    }
+    
+    func testGetDependency() {
+        let testTask = TestTask()
+        let dependencyTask = SimpleTask()
+        dependencyTask.name = "DependencyTask"
+        
+        testTask.addDependency(dependencyTask)
+        
+        if let dependency = testTask.getDependency(SimpleTask) {
+            XCTAssert(dependency.name == "DependencyTask", "Incorrect dependency returned")
+        } else {
+            XCTAssert(false, "Dependency not returned")
         }
     }
 }

@@ -30,7 +30,6 @@ class TaskTests: XCTestCase {
     let queue = TaskQueue(qos: .Default)
     
     func testTaskState() {
-        print(NSOperationQueue.mainQueue().qualityOfService)
         let task = SimpleTask()
         let expectation = expectationWithDescription("Task state test")
         XCTAssert(task.state == .Initialized, "Task state should be: Initialized")
@@ -47,7 +46,7 @@ class TaskTests: XCTestCase {
         }
     }
     
-    func testCompletionBlocks() {
+    func testCompletionBlocksValue() {
         let task = SimpleTask()
         
         task
