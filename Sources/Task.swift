@@ -24,7 +24,9 @@ import class Foundation.NSOperation
  use concrete `TaskBlock` subclass. Subclassing `Task<T>` is simple operation. 
  You are only required to override `run()` method that defines task execution 
  point and call `finish(_:)` method to notify task that execution is finished.
- **Example subclass**
+ 
+ **Example task**
+ ---
  
  ```swift
  // Defines `CustomTask` subclass that exposes `Int` result
@@ -41,7 +43,8 @@ import class Foundation.NSOperation
  }
  ```
  
- **Finishing task execution**
+ ### **Finishing task execution**
+ ---
  
  Since you can wrap any synchronous or asynchronous task inside `run()` method,
  you must call `finish(_:)` method with `Result<T>` enum object to popuplate the 
@@ -66,9 +69,10 @@ import class Foundation.NSOperation
  ```swift
  let task = CustomTask()
  task
-     .onComplete { value in
+    .onComplete { value in
         print(value)
-     }. onError { error in 
+     }
+    .onError { error in
         prin(error)
  }
  
@@ -80,7 +84,9 @@ import class Foundation.NSOperation
  may result in error, since the task may have already finished with result. To avoid
  this behaviour, always call these methods before task is added to the `TaskQueue`.
  
- **Dependencies**
+ ### **Dependencies**
+ ---
+ 
  You can use task dependencies to ensure correct task order execution. If task has 
  any dependencies, `TaskQueue` will first execute them first and if they finish
  without errors, parent task will be executed.
@@ -141,6 +147,11 @@ public class Task<T>: NSOperation {
     private var internalObservers: [TaskObserver] = []
     
     /**
+     Internal task conditions
+    */
+    private var internalConditions: [TaskCondition] = []
+    
+    /**
      Internal number of retry counts
      */
     private var internalRetryCount: Int = 0
@@ -163,7 +174,7 @@ public class Task<T>: NSOperation {
      achieves `Finished` state. You can access the result value directly,
      or setup completion blocks that will execute when task finishes.
      */
-    private(set) public var result: Result<T>? {
+    internal(set) public var result: Result<T>? {
         get {
             return Dispatch.sync(queue) { return self.internalResult }
         }
@@ -215,7 +226,7 @@ public class Task<T>: NSOperation {
      Block should be set by using `onComplete:` method on `Self`.
      
      - Warning: Setting this property directly may result in unexpected behaviour.
-     Always use `onComplete:` method on `Self` to set the block.
+     Always use `onComplete(_:)` method on `Self` to set the block.
      */
     var onCompleteBlock: ((T) -> Void)? {
         get {
@@ -318,6 +329,36 @@ public class Task<T>: NSOperation {
     public func retry(times: Int) -> Self {
         retryCount = times
         return self
+    }
+    
+    //MARK: Task conditions
+    
+    /**
+     All task conditions
+    */
+    private(set) public var conditions: [TaskCondition] {
+        get {
+            return Dispatch.sync(queue) { return self.internalConditions }
+        }
+        
+        set(newConditions) {
+            Dispatch.sync(queue) {
+                self.internalConditions = newConditions
+            }
+        }
+    }
+    
+    /**
+     Add condition to the task.
+     
+     - parameter condition: `TaskCondition` to be added
+     
+     - warning: Task conditions should be added before task starts with execution. Otherwise,
+     assertion fail will occur.
+    */
+    public func addCondition(condition: TaskCondition) {
+        assert(state < .Executing, "Tried to add condition after task started with execution")
+        conditions.append(condition)
     }
     
     //MARK: Task observers
@@ -552,18 +593,6 @@ public class Task<T>: NSOperation {
     @objc class func keyPathsForValuesAffectingIsFinished() -> Set<NSObject> {
         return ["state"]
     }
-}
-
-//MARK: Retry mechanisms
-
-/**
- Defines errors that can be thrown in task retry process
- */
-enum RetryCountError: ErrorType {
-    case CountIsZero
-}
-
-extension Task {
     
     /// Returns true if task should be retried
     var shouldRetry: Bool {
@@ -581,11 +610,13 @@ extension Task {
             throw RetryCountError.CountIsZero
         }
     }
-}
-
-extension Task {
     
     //MARK: Dependency management
+    
+    public override func addDependency(operation: NSOperation) {
+        assert(state < .Executing)
+        super.addDependency(operation)
+    }
     
     /**
      Returns dependency instance from the task dependencies.
@@ -606,4 +637,15 @@ extension Task {
         let filteredDependency = dependencies.filter { $0 as? Task<T> != nil }
         return filteredDependency.first as? Task<T>
     }
+}
+
+public func == <T>(lhs: Task<T>, rhs: Task<T>) -> Bool {
+    return true
+}
+
+/**
+ Defines errors that can be thrown in task retry process
+ */
+enum RetryCountError: ErrorType {
+    case CountIsZero
 }
