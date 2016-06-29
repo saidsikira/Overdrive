@@ -9,11 +9,15 @@
 import XCTest
 @testable import Overdrive
 
+enum TaskCreateError: ErrorType {
+    case Fail
+}
+
 class CreateTests: XCTestCase {
     
-    func testTaskCreate() {
-        
-        let expecation = expectationWithDescription("test")
+    /// Tests `create(_:)` method with returned .Value(T)
+    func testTaskCreateValue() {
+        let expecation = expectationWithDescription("Task create with .Value(T) return")
         
         let someTask = Task<Int>.create {
             return .Value(1)
@@ -25,11 +29,42 @@ class CreateTests: XCTestCase {
                 if value == 1 {
                     expecation.fulfill()
                 }
+            }.onError {
+                error in
+                XCTAssert(false, "onError block should not be executed")
         }
         
         TaskQueue.main.addTask(someTask)
         
-        waitForExpectationsWithTimeout(1) { handlerError in
+        waitForExpectationsWithTimeout(0.2) { handlerError in
+            print(handlerError)
+        }
+    }
+    
+    /// Tests `create(_:)` method with returned .Value(T)
+    func testTaskCreateError() {
+        let expectation = expectationWithDescription("Task create with .Error(ErrorType) return")
+        
+        let someTask = Task<Int>.create {
+            return .Error(TaskCreateError.Fail)
+        }
+        
+        someTask
+            .onError {
+                error in
+                if error is TaskCreateError {
+                    expectation.fulfill()
+                } else {
+                    XCTAssert(false, "Wrong error type returned")
+                }
+            }.onComplete {
+                value in
+                XCTAssert(false, "onComplete block should not be executed")
+        }
+        
+        TaskQueue.main.addTask(someTask)
+        
+        waitForExpectationsWithTimeout(0.2) { handlerError in
             print(handlerError)
         }
     }
