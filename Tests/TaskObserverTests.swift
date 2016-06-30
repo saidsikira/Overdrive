@@ -7,29 +7,38 @@
 //
 
 import XCTest
+@testable import Overdrive
+
+class TestObserver: TaskObserver {
+}
 
 class TaskObserverTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testRemoveObserverInstance() {
+        let task = SimpleTask()
+        let observer = TestObserver()
+        task.addObserver(observer)
+        
+        XCTAssert(task.observers.count == 1, "Task observer count should be 1")
+        
+        let removeStatus = task.remove(observer: observer)
+        
+        XCTAssert(removeStatus == true, "remove(_:) method is not returning true for removed observer")
+        
+        XCTAssert(task.observers.count == 0, "Task observer count should be 1")
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    func testRemoveObserverOfType() {
+        let task = SimpleTask()
+        let observer = TestObserver()
+        task.addObserver(observer)
+        
+        XCTAssert(task.observers.count == 1, "Task observer count should be 1")
+        
+        let removeStatus = task.removeObserverOfType(TestObserver)
+        
+        XCTAssert(removeStatus == true, "remove(_:) method is not returning true for removed observer")
+        
+        XCTAssert(task.observers.count == 0, "Task observer count should be 1")
     }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
 }
