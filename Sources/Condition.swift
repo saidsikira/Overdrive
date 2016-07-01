@@ -34,6 +34,11 @@ public enum TaskConditionResult {
 public protocol TaskCondition {
     
     /**
+     Condition name. Defaults to conforming instance name
+    */
+    var conditionName: String { get }
+    
+    /**
      If task needs a dependency to execute first, you should return it in this method. For example,
      some tasks need OS premissions to execute. For example location services, photo retrieval,
      camera use etc. By using this method you can setup a dependency that can validate status of 
@@ -53,6 +58,12 @@ public protocol TaskCondition {
      to evaluate condition on the main thread, use `dispatch_async` call.
     */
     func evaluate<T>(forTask task: Task<T>, evaluationBlock: (TaskConditionResult -> Void))
+}
+
+extension TaskCondition {
+    public var conditionName: String {
+        return "\(self.dynamicType)"
+    }
 }
 
 struct TaskConditionEvaluator {
