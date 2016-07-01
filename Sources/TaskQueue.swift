@@ -14,30 +14,45 @@ import class Foundation.NSOperationQueue
  
  ### **Task execution**
  ---
- To schedule task for execution, add it to instance of `TaskQueue` by using `addTask(_:)` or `addTasks(_:)` method.
+ To schedule task for execution, add it to instance of `TaskQueue` by using
+ `addTask(_:)` or `addTasks(_:)` method.
  
  ```swift
  let queue = TaskQueue()
  queue.addTask(task)
  ```
  
- After the task is added to the `TaskQueue` complex process of task readiness evaluation begins. When the task reaches `ready` state, it is executed until it reaches `finished` state by calling `finish(_:)` method inside task.
+ After the task is added to the `TaskQueue` complex process of task readiness
+ evaluation begins. When the task reaches `ready` state, it is executed until it
+ reaches `finished` state by calling `finish(_:)` method inside task.
  
- If task has no conditions or dependencies, it becomes `ready` immediately. If task has dependencies or conditions, dependencies are executed first and conditions are evaluated after that.
+ If task has no conditions or dependencies, it becomes `ready` immediately. If
+ task has dependencies or conditions, dependencies are executed first and
+ conditions are evaluated after that.
  
  ### **Running tasks on specific queues**
  ---
  
- `TaskQueue` is queue aware, meaning that you can set up the `TaskQueue` object with specific dispatch queue so that any task execution performs on that defined queue.
+ `TaskQueue` is queue aware, meaning that you can set up the `TaskQueue` object
+ with specific dispatch queue so that any task execution performs on that
+ defined queue.
  
- There are two predefined `TaskQueue` instances already associated with main and background queues.
+ There are two predefined `TaskQueue` instances already associated with main
+ and background queues.
  
- - `TaskQueue.main` - Associated with main UI thread, suitable for execution tasks that application UI is dependent on.
- - `TaskQueue.background` - Associated with background queue. Any task that is added to this queue will be executed in the background.
+ - `TaskQueue.main` - Associated with main UI thread, suitable for execution
+ tasks that application UI is dependent on.
+ - `TaskQueue.background` - Associated with background queue. Any task that is
+ added to this queue will be executed in the background.
  
- In addition to the queue specification, you can also create [**Quality Of Service**](https://developer.apple.com/library/ios/documentation/Performance/Conceptual/EnergyGuide-iOS/PrioritizeWorkWithQoS.html) aware task queues by passing `NSQualityOfService` object to the initializer.
+ In addition to the queue specification, you can also create [**Quality Of
+ Service**](https://developer.apple.com/library/ios/documentation/Performance/Con
+ ceptual/EnergyGuide-iOS/PrioritizeWorkWithQoS.html) aware task queues by
+ passing `NSQualityOfService` object to the initializer.
  
- **Quality Of Service** class allows you to categorize type of work that is executed. For example `.UserInteractive` quality of service class is used for the work that is performed by the user and that should be executed immediately.
+ **Quality Of Service** class allows you to categorize type of work that is
+ executed. For example `.UserInteractive` quality of service class is used for
+ the work that is performed by the user and that should be executed immediately.
  
  To create `TaskQueue` with specific `QOS` class use designated initializer:
  
@@ -47,9 +62,13 @@ import class Foundation.NSOperationQueue
  
  ### **Concurrency**
  
- Task queue executes tasks concurrently by default and it's multicore aware meaning that it can use full hardware potential to execute work. Tasks do not execute one after another, rather they are executed concurrently when they reach `ready` state.
+ Task queue executes tasks concurrently by default and it's multicore aware
+ meaning that it can use full hardware potential to execute work. Tasks do not
+ execute one after another, rather they are executed concurrently when they
+ reach `ready` state.
  
- To specify maximum number of concurrent task executions use `maxConcurrentOperationCount` property.
+ To specify maximum number of concurrent task executions use
+ `maxConcurrentOperationCount` property.
  
  ```swift
  let queue = TaskQueue()
@@ -58,7 +77,9 @@ import class Foundation.NSOperationQueue
  
  ### **TaskQueueDelegate**
  
- `TaskQueue` has a custom delegate which can be used to monitor certain events in `TaskQueue` lifecycle. See `TaskQueueDelegate` for more information
+ `TaskQueue` has a custom delegate which can be used to monitor certain events
+ in `TaskQueue` lifecycle. See `TaskQueueDelegate` for more information
+
 */
 public class TaskQueue: NSOperationQueue {
     
