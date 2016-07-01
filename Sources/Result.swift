@@ -7,12 +7,13 @@
 //
 
 /**
- Task enum result definition.
+ Task result definition.
  
  **Example**
  
  ```swift
- let intResult: Result<Int> = .Value(10)
+ var intResult: Result<Int> = .Value(10)
+ intResult = .Error(someError)
  ```
 */
 public enum Result<T> {
@@ -30,9 +31,9 @@ extension Result: CustomStringConvertible {
     public var description: String {
         switch self {
         case .Value(let value):
-            return "Value \(value)"
+            return "\(value)"
         case .Error(let error):
-            return "Error \(error)"
+            return "\(error)"
         }
     }
 }

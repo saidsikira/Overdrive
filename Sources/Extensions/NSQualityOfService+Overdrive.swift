@@ -9,6 +9,8 @@
 import enum Foundation.NSQualityOfService
 
 extension NSQualityOfService: CustomStringConvertible {
+    
+    /// Returns textual representation of `self`
     public var description: String {
         switch self {
         case .Default:

@@ -8,8 +8,10 @@
 
 import Foundation
 
-
-class Dispatch {
+/**
+ Provides top-level interface for some `GCD` API calls.
+*/
+internal class Dispatch {
     
     /**
      Use this method to **synchronously** dispatch block of code to the
