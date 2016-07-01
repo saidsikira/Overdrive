@@ -14,6 +14,7 @@ class TestObserver: TaskObserver {
 
 class TaskObserverTests: XCTestCase {
     
+    /// Test `removeObserver(_:)` method
     func testRemoveObserverInstance() {
         let task = SimpleTask()
         let observer = TestObserver()
@@ -21,13 +22,14 @@ class TaskObserverTests: XCTestCase {
         
         XCTAssert(task.observers.count == 1, "Task observer count should be 1")
         
-        let removeStatus = task.remove(observer: observer)
+        let removeStatus = task.removeObserver(observer)
         
         XCTAssert(removeStatus == true, "remove(_:) method is not returning true for removed observer")
         
         XCTAssert(task.observers.count == 0, "Task observer count should be 1")
     }
     
+    /// Test `removeObserverOfType(_:)`
     func testRemoveObserverOfType() {
         let task = SimpleTask()
         let observer = TestObserver()

@@ -41,7 +41,7 @@ class CreateTests: XCTestCase {
         }
     }
     
-    /// Tests `create(_:)` method with returned .Value(T)
+    /// Tests `create(_:)` method with returned .Error(ErrorType)
     func testTaskCreateError() {
         let expectation = expectationWithDescription("Task create with .Error(ErrorType) return")
         

@@ -17,6 +17,7 @@ class TestTask: Task<Int> {
 
 class DependencyTests: XCTestCase {
     
+    /// Test `addDependency(_:)` method
     func testDependencyAdd() {
         let testTask = TestTask()
         let dependencyTask = SimpleTask()
@@ -28,6 +29,7 @@ class DependencyTests: XCTestCase {
         TaskQueue.main.addTask(testTask)
     }
     
+    /// Tests `getDependency(_:)` method
     func testGetDependency() {
         let testTask = TestTask()
         let dependencyTask = SimpleTask()
