@@ -43,7 +43,8 @@ public class TaskQueue: NSOperationQueue {
     /**
      Returns queue associated with application main queue.
      
-     ### Example:
+     **Example**
+     
      ```swift
      let task = SomeTask()
      TaskQueue.main.addTask(task)
@@ -52,6 +53,23 @@ public class TaskQueue: NSOperationQueue {
     public static var main: TaskQueue = {
         let queue = TaskQueue()
         queue.underlyingQueue = dispatch_get_main_queue()
+        return queue
+    }()
+    
+    /**
+     Returns queue associated with application background queue.
+     
+     **Example:**
+     
+     ```swift
+     let task = SomeTask()
+     TaskQueue.background.addTask(task)
+     ```
+    */
+    public static var background: TaskQueue = {
+        let queue = TaskQueue()
+        queue.name = "BackgroundTaskQueue"
+        queue.underlyingQueue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
         return queue
     }()
     
