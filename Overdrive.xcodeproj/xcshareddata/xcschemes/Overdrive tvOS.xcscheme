@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B3B72BB91D16EE810004A7C2"
-               BuildableName = "Tests tvOS.xctest"
+               BuildableName = "Tests.xctest"
                BlueprintName = "Tests tvOS"
                ReferencedContainer = "container:Overdrive.xcodeproj">
             </BuildableReference>
