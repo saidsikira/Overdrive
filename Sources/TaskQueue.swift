@@ -49,7 +49,11 @@ public class TaskQueue: NSOperationQueue {
      TaskQueue.main.addTask(task)
      ```
     */
-    public static var main: TaskQueue = TaskQueue(qos: .UserInteractive)
+    public static var main: TaskQueue = {
+        let queue = TaskQueue()
+        queue.underlyingQueue = dispatch_get_main_queue()
+        return queue
+    }()
     
     /// TaskQueue delegate object
     weak public var delegate: TaskQueueDelegate?
