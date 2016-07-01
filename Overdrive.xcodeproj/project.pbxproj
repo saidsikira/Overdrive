@@ -20,6 +20,8 @@
 		B322B0AA1D1ED314009DE006 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322B0A91D1ED314009DE006 /* Condition.swift */; };
 		B322B0AB1D1ED314009DE006 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322B0A91D1ED314009DE006 /* Condition.swift */; };
 		B322B0AC1D1ED314009DE006 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322B0A91D1ED314009DE006 /* Condition.swift */; };
+		B3A147CF1D26BFEE00BF971E /* TaskObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD65201D246250001F6C57 /* TaskObserverTests.swift */; };
+		B3A147D01D26BFEF00BF971E /* TaskObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD65201D246250001F6C57 /* TaskObserverTests.swift */; };
 		B3AD42761D1838B400348607 /* TaskObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD42751D1838B400348607 /* TaskObserver.swift */; };
 		B3AD42771D1838B400348607 /* TaskObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD42751D1838B400348607 /* TaskObserver.swift */; };
 		B3AD42781D1838B400348607 /* TaskObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD42751D1838B400348607 /* TaskObserver.swift */; };
@@ -103,7 +105,7 @@
 		B3B72B851D16EA330004A7C2 /* Overdrive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Overdrive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B72B971D16EAE70004A7C2 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B72BA81D16EE310004A7C2 /* Overdrive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Overdrive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3B72BBA1D16EE810004A7C2 /* Tests tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3B72BBA1D16EE810004A7C2 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3BB185C1D1C0D24002B1979 /* RetryTaskObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetryTaskObserver.swift; sourceTree = "<group>"; };
 		B3C5DF581D1C4F7200D79532 /* DependencyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyTests.swift; sourceTree = "<group>"; };
 		B3DD52DC1D16CBEB00EBF640 /* Overdrive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Overdrive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -205,7 +207,7 @@
 				B3B72B851D16EA330004A7C2 /* Overdrive.framework */,
 				B3B72B971D16EAE70004A7C2 /* Tests.xctest */,
 				B3B72BA81D16EE310004A7C2 /* Overdrive.framework */,
-				B3B72BBA1D16EE810004A7C2 /* Tests tvOS.xctest */,
+				B3B72BBA1D16EE810004A7C2 /* Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -342,7 +344,7 @@
 			);
 			name = "Tests tvOS";
 			productName = Teststv;
-			productReference = B3B72BBA1D16EE810004A7C2 /* Tests tvOS.xctest */;
+			productReference = B3B72BBA1D16EE810004A7C2 /* Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		B3DD52DB1D16CBEB00EBF640 /* Overdrive iOS */ = {
@@ -524,6 +526,7 @@
 				B3B72BA21D16EB340004A7C2 /* TaskTests.swift in Sources */,
 				B3AD651A1D245FCD001F6C57 /* TaskQueueDelegateTests.swift in Sources */,
 				B3AD651C1D245FD4001F6C57 /* DependencyTests.swift in Sources */,
+				B3A147D01D26BFEF00BF971E /* TaskObserverTests.swift in Sources */,
 				B3AD651E1D245FD7001F6C57 /* CreateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -555,6 +558,7 @@
 				B3B72BC51D16EED90004A7C2 /* TaskTests.swift in Sources */,
 				B3AD651B1D245FCE001F6C57 /* TaskQueueDelegateTests.swift in Sources */,
 				B3AD651D1D245FD4001F6C57 /* DependencyTests.swift in Sources */,
+				B3A147CF1D26BFEE00BF971E /* TaskObserverTests.swift in Sources */,
 				B3AD651F1D245FD8001F6C57 /* CreateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -726,7 +730,7 @@
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.swiftable.OverdriveTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Tests;
 				SDKROOT = appletvos;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
@@ -738,7 +742,7 @@
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.swiftable.OverdriveTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Tests;
 				SDKROOT = appletvos;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
