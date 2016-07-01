@@ -16,15 +16,34 @@ Task based API in Swift with focus on type-safety, concurrency, threading and st
 
 - iOS 8.0+ / Mac OS X 10.9+ / tvOS 9.0+ 
 - Xcode 7.3+
+- Swift 2.2 on Linux
 
 ## Installation
+You can use `Overdrive` in your project by using any of the following methods:
 
-* [Swift Package Manager](https://github.com)
-* [Carthage](https://github.com)
-* [Cocoa Pods](https://github.com)
-* [Manual Installation](https://github.com)
+#### Carthage
+Add following to the `Cartfile`:
+```
+github "Swiftable/Overdrive" >= 0.0.1
+```
+> Note that if you want to build Overdrive on only one platform you can pass it to the carthage platform option.
+For example `carthage update --platform iOS`
+
+#### Cocoa Pods
+To use `Overdrive` with Cocoa Pods add it to the `Podfile`
+```ruby
+platform :ios, '8.0'
+use_frameworks!
+
+target 'AppTarget' do
+    pod 'Overdrive'
+end
+```
 
 #### Swift Package Manager
+
+**Requiers Swift 2.2**
+
 To add `Overdrive` to your project using Swift Package Manager, add it to the package dependencies:
 ```swift
 import PackageDescription
@@ -37,20 +56,4 @@ let package = Package(
   ]
 )
 ```
-
-#### Carthage
-Add following to the `Cartfile`:
-```
-github "Swiftable/Overdrive"
-```
-
-#### Cocoa Pods
-You can also use Cocoa Pods to install `Overdrive` by adding it to the `Podfile`
-```ruby
-platform :ios, '8.0'
-use_frameworks!
-
-target 'AppTarget' do
-    pod 'Overdrive'
-end
-```
+Note that Swift Package Manager support is still experimental.
