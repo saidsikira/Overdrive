@@ -28,6 +28,15 @@ public enum TaskConditionResult {
 }
 
 /**
+ Defines errors that can be thrown when condition evaluation finishes
+*/
+public enum TaskConditionError: ErrorType {
+    
+    /// Combined errors
+    case Combined(errors: [ErrorType])
+}
+
+/**
  Defines protocol that can be used to define conditions that should be satisfied in order
  to run a task. Task conditions manage custom task dependencies and evaluation for the task.
 */
@@ -61,6 +70,12 @@ public protocol TaskCondition {
 }
 
 extension TaskCondition {
+    
+    /// Returns nil
+    func dependency<T, U>(forTask task: Task<T>) -> Task<U>? {
+        return nil
+    }
+    
     public var conditionName: String {
         return "\(self.dynamicType)"
     }

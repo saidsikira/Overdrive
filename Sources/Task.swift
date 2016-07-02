@@ -25,8 +25,10 @@ import class Foundation.NSOperation
  You are only required to override `run()` method that defines task execution 
  point and call `finish(_:)` method to notify task that execution is finished.
  
- **Example task**
+ ### **Example task**
  ---
+ 
+ Create subclass of `Task<Int>`
  
  ```swift
  // Defines `CustomTask` subclass that exposes `Int` result
@@ -41,6 +43,27 @@ import class Foundation.NSOperation
         }
     }
  }
+ ```
+ 
+ When you want to execute the task you add it to the `TaskQueue`
+ 
+ ```swift
+ let task = CustomTask()
+ TaskQueue.main.addTask(task)
+ ```
+ 
+ If you want to be informed when task finishes use `onComplete(_:)` 
+ and `onError(_:)` methods.
+ 
+ ```swift
+ task
+    .onComplete { value in
+        print(value)
+    }.onError { error in
+        print(error)
+ }
+ 
+ TaskQueue.main.addTask(task)
  ```
  
  ### **Finishing task execution**
@@ -155,6 +178,11 @@ public class Task<T>: NSOperation {
      Internal number of retry counts
      */
     private var internalRetryCount: Int = 0
+    
+    /**
+     Internal condition errors
+    */
+    private var internalConditionErrors = [ErrorType]()
     
     /**
      Private queue used in task state machine
@@ -344,6 +372,22 @@ public class Task<T>: NSOperation {
         set(newConditions) {
             Dispatch.sync(queue) {
                 self.internalConditions = newConditions
+            }
+        }
+    }
+    
+    /**
+     Any errors that occured during condition evaluation. If this array is populated
+     task will finish with execution.
+    */
+    var conditionErrors: [ErrorType] {
+        get {
+            return Dispatch.sync(queue) { return self.internalConditionErrors }
+        }
+        
+        set(newErrors) {
+            Dispatch.sync(queue) {
+                self.internalConditionErrors = newErrors
             }
         }
     }
@@ -608,7 +652,14 @@ public class Task<T>: NSOperation {
     final func evaluateConditions() {
         assert(state == .Pending && !cancelled, "evaluateConditions() was called out-of-order")
         
-        state = .Ready
+        if conditions.count > 0 {
+            TaskConditionEvaluator.evaluate(conditions, forTask: self) { errors in
+                self.conditionErrors = errors
+                self.state = .Ready
+            }
+        } else {
+            self.state = .Ready
+        }
     }
     
     /**
@@ -631,6 +682,8 @@ public class Task<T>: NSOperation {
     public override final func start() {
         if cancelled {
             moveToFinishedState()
+        } else if conditionErrors.count > 0 {
+            finish(.Error(TaskConditionError.Combined(errors: conditionErrors)))
         } else {
             main()
         }
