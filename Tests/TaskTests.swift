@@ -29,10 +29,14 @@ class TaskTests: XCTestCase {
     
     let queue = TaskQueue(qos: .Default)
     
-    func testTaskState() {
+    func testTaskIntializedState() {
         let task = SimpleTask()
-        let expectation = expectationWithDescription("Task state test")
         XCTAssert(task.state == .Initialized, "Task state should be: Initialized")
+    }
+    
+    func testTaskFinishedState() {
+        let task = SimpleTask()
+        let expectation = expectationWithDescription("Task finished state expecation")
         
         task.onComplete { value in
             XCTAssert(task.state == .Finished, "Task state should be: Finished")
@@ -40,13 +44,13 @@ class TaskTests: XCTestCase {
         }
         
         queue.addTask(task)
-
+        
         waitForExpectationsWithTimeout(0.1) { handlerError in
             print(handlerError)
         }
     }
     
-    func testCompletionBlocksValue() {
+    func testOnCompleteBlockValue() {
         let task = SimpleTask()
         
         task
@@ -54,6 +58,16 @@ class TaskTests: XCTestCase {
             .onError { _ in }
         
         XCTAssert(task.onCompleteBlock != nil, "onComplete block should be set")
+    }
+    
+    func testOnErrorBlocksValue() {
+        let task = SimpleTask()
+        
+        task
+            .onComplete { _ in }
+            .onError { _ in }
+        
+        
         XCTAssert(task.onErrorBlock != nil, "onError block should be set")
     }
     
