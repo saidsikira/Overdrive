@@ -187,7 +187,7 @@ public class Task<T>: NSOperation {
     /**
      Private queue used in task state machine
      */
-    let queue = dispatch_queue_create("io.overdrive.task", nil)
+    let queue = dispatch_queue_create("io.overdrive.task", DISPATCH_QUEUE_SERIAL)
     
     //MARK: Class properties
     
@@ -769,6 +769,7 @@ public class Task<T>: NSOperation {
     
     public override func addDependency(operation: NSOperation) {
         assert(state < .Executing)
+        
         super.addDependency(operation)
     }
     
