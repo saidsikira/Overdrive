@@ -55,9 +55,9 @@ public protocol TaskCondition {
      
      - Parameter forTask: That that conditions are being evaluated for
      
-     - Returns: `Task<U>` Any task instance
+     - Returns: Any `NSOperation` or instance of any `Task<T>`
     */
-    func dependency<T, U>(forTask task: Task<T>) -> Task<U>?
+    func dependency<T>(forTask task: Task<T>) -> NSOperation?
     
     /**
      Evaluates condition for the task. Evaluation can be any asynchronous process. When evaluation
@@ -71,8 +71,8 @@ public protocol TaskCondition {
 
 extension TaskCondition {
     
-    /// Returns nil
-    func dependency<T, U>(forTask task: Task<T>) -> Task<U>? {
+    /// Default implementation. Returns `nil`.
+    func dependency<T>(forTask task: Task<T>) -> NSOperation? {
         return nil
     }
     
