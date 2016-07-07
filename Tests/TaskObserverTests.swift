@@ -2,45 +2,43 @@
 //  TaskObserverTests.swift
 //  Overdrive
 //
-//  Created by Said Sikira on 6/29/16.
+//  Created by Said Sikira on 7/7/16.
 //  Copyright © 2016 Said Sikira. All rights reserved.
 //
 
 import XCTest
 @testable import Overdrive
 
-class TestObserver: TaskObserver {
-}
-
 class TaskObserverTests: XCTestCase {
     
-    /// Test `removeObserver(_:)` method
-    func testRemoveObserverInstance() {
-        let task = SimpleTask()
-        let observer = TestObserver()
-        task.addObserver(observer)
-        
-        XCTAssert(task.observers.count == 1, "Task observer count should be 1")
-        
-        let removeStatus = task.removeObserver(observer)
-        
-        XCTAssert(removeStatus == true, "remove(_:) method is not returning true for removed observer")
-        
-        XCTAssert(task.observers.count == 0, "Task observer count should be 1")
+    var startExecutionExpecation: XCTestExpectation?
+    var finishExecutionExpecation: XCTestExpectation?
+    
+    override func setUp() {
+        startExecutionExpecation = expectationWithDescription("Task started expecatation")
+        finishExecutionExpecation = expectationWithDescription("Task finished expecation")
     }
     
-    /// Test `removeObserverOfType(_:)`
-    func testRemoveObserverOfType() {
+    func testTaskObserver() {
         let task = SimpleTask()
-        let observer = TestObserver()
-        task.addObserver(observer)
+        let queue = TaskQueue()
         
-        XCTAssert(task.observers.count == 1, "Task observer count should be 1")
+        task.addObserver(self)
         
-        let removeStatus = task.removeObserverOfType(TestObserver)
+        queue.addTask(task)
         
-        XCTAssert(removeStatus == true, "remove(_:) method is not returning true for removed observer")
-        
-        XCTAssert(task.observers.count == 0, "Task observer count should be 1")
+        waitForExpectationsWithTimeout(0.2) { handlerError in
+            print(handlerError)
+        }
+    }
+}
+
+extension TaskObserverTests: TaskObserver {
+    func taskDidStartExecution<T>(task: Task<T>) {
+        startExecutionExpecation?.fulfill()
+    }
+    
+    func taskDidFinishExecution<T>(task: Task<T>) {
+        finishExecutionExpecation?.fulfill()
     }
 }

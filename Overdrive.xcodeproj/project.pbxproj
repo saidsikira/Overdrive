@@ -23,8 +23,17 @@
 		B391B48C1D2EA7E1000A7F78 /* NSOperation+Overdrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B391B48B1D2EA7E1000A7F78 /* NSOperation+Overdrive.swift */; };
 		B391B48D1D2EA7E1000A7F78 /* NSOperation+Overdrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B391B48B1D2EA7E1000A7F78 /* NSOperation+Overdrive.swift */; };
 		B391B48E1D2EA7E1000A7F78 /* NSOperation+Overdrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B391B48B1D2EA7E1000A7F78 /* NSOperation+Overdrive.swift */; };
-		B3A147CF1D26BFEE00BF971E /* TaskObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD65201D246250001F6C57 /* TaskObserverTests.swift */; };
-		B3A147D01D26BFEF00BF971E /* TaskObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD65201D246250001F6C57 /* TaskObserverTests.swift */; };
+		B391B4921D2ED4FD000A7F78 /* TaskObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B391B4911D2ED4FD000A7F78 /* TaskObserverTests.swift */; };
+		B391B4931D2EE167000A7F78 /* TaskConditionDependencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D302BE1D2D065200BA070A /* TaskConditionDependencyTests.swift */; };
+		B391B4941D2EE168000A7F78 /* TaskConditionDependencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D302BE1D2D065200BA070A /* TaskConditionDependencyTests.swift */; };
+		B391B4951D2EE170000A7F78 /* TaskConditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A147D11D27C58200BF971E /* TaskConditionTests.swift */; };
+		B391B4961D2EE171000A7F78 /* TaskConditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A147D11D27C58200BF971E /* TaskConditionTests.swift */; };
+		B391B4971D2EE177000A7F78 /* TaskObserverManagementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD65201D246250001F6C57 /* TaskObserverManagementTests.swift */; };
+		B391B4981D2EE17B000A7F78 /* TaskObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B391B4911D2ED4FD000A7F78 /* TaskObserverTests.swift */; };
+		B391B4991D2EE17C000A7F78 /* TaskObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B391B4911D2ED4FD000A7F78 /* TaskObserverTests.swift */; };
+		B391B49A1D2EE17F000A7F78 /* TaskQueueDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3174C871D1D9C0C000DF4F6 /* TaskQueueDelegateTests.swift */; };
+		B391B49B1D2EE180000A7F78 /* TaskQueueDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3174C871D1D9C0C000DF4F6 /* TaskQueueDelegateTests.swift */; };
+		B3A147CF1D26BFEE00BF971E /* TaskObserverManagementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD65201D246250001F6C57 /* TaskObserverManagementTests.swift */; };
 		B3A147D21D27C58200BF971E /* TaskConditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A147D11D27C58200BF971E /* TaskConditionTests.swift */; };
 		B3AD42761D1838B400348607 /* TaskObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD42751D1838B400348607 /* TaskObserver.swift */; };
 		B3AD42771D1838B400348607 /* TaskObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD42751D1838B400348607 /* TaskObserver.swift */; };
@@ -33,7 +42,7 @@
 		B3AD651D1D245FD4001F6C57 /* DependencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5DF581D1C4F7200D79532 /* DependencyTests.swift */; };
 		B3AD651E1D245FD7001F6C57 /* CreateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EF8F381D20521900064CC2 /* CreateTests.swift */; };
 		B3AD651F1D245FD8001F6C57 /* CreateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EF8F381D20521900064CC2 /* CreateTests.swift */; };
-		B3AD65211D246250001F6C57 /* TaskObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD65201D246250001F6C57 /* TaskObserverTests.swift */; };
+		B3AD65211D246250001F6C57 /* TaskObserverManagementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD65201D246250001F6C57 /* TaskObserverManagementTests.swift */; };
 		B3B1C8891D1929A200B6386A /* FinishBlockObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1C8881D1929A200B6386A /* FinishBlockObserver.swift */; };
 		B3B1C88A1D1929A200B6386A /* FinishBlockObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1C8881D1929A200B6386A /* FinishBlockObserver.swift */; };
 		B3B1C88B1D1929A200B6386A /* FinishBlockObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1C8881D1929A200B6386A /* FinishBlockObserver.swift */; };
@@ -103,9 +112,10 @@
 		B31CF99D1D189FCB003D4B2B /* NSQualityOfService+Overdrive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSQualityOfService+Overdrive.swift"; sourceTree = "<group>"; };
 		B322B0A91D1ED314009DE006 /* Condition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Condition.swift; sourceTree = "<group>"; };
 		B391B48B1D2EA7E1000A7F78 /* NSOperation+Overdrive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSOperation+Overdrive.swift"; sourceTree = "<group>"; };
+		B391B4911D2ED4FD000A7F78 /* TaskObserverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskObserverTests.swift; sourceTree = "<group>"; };
 		B3A147D11D27C58200BF971E /* TaskConditionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskConditionTests.swift; sourceTree = "<group>"; };
 		B3AD42751D1838B400348607 /* TaskObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskObserver.swift; sourceTree = "<group>"; };
-		B3AD65201D246250001F6C57 /* TaskObserverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskObserverTests.swift; sourceTree = "<group>"; };
+		B3AD65201D246250001F6C57 /* TaskObserverManagementTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskObserverManagementTests.swift; sourceTree = "<group>"; };
 		B3B1C8881D1929A200B6386A /* FinishBlockObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishBlockObserver.swift; sourceTree = "<group>"; };
 		B3B72B851D16EA330004A7C2 /* Overdrive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Overdrive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B72B971D16EAE70004A7C2 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -247,7 +257,8 @@
 				B3C5DF581D1C4F7200D79532 /* DependencyTests.swift */,
 				B3D302BE1D2D065200BA070A /* TaskConditionDependencyTests.swift */,
 				B3A147D11D27C58200BF971E /* TaskConditionTests.swift */,
-				B3AD65201D246250001F6C57 /* TaskObserverTests.swift */,
+				B3AD65201D246250001F6C57 /* TaskObserverManagementTests.swift */,
+				B391B4911D2ED4FD000A7F78 /* TaskObserverTests.swift */,
 				B3174C871D1D9C0C000DF4F6 /* TaskQueueDelegateTests.swift */,
 				B3DD52FC1D16D83200EBF640 /* TaskTests.swift */,
 			);
@@ -534,8 +545,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3B72BA21D16EB340004A7C2 /* TaskTests.swift in Sources */,
+				B391B4971D2EE177000A7F78 /* TaskObserverManagementTests.swift in Sources */,
+				B391B4981D2EE17B000A7F78 /* TaskObserverTests.swift in Sources */,
+				B391B4931D2EE167000A7F78 /* TaskConditionDependencyTests.swift in Sources */,
 				B3AD651C1D245FD4001F6C57 /* DependencyTests.swift in Sources */,
-				B3A147D01D26BFEF00BF971E /* TaskObserverTests.swift in Sources */,
+				B391B49A1D2EE17F000A7F78 /* TaskQueueDelegateTests.swift in Sources */,
+				B391B4951D2EE170000A7F78 /* TaskConditionTests.swift in Sources */,
 				B3AD651E1D245FD7001F6C57 /* CreateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -567,7 +582,11 @@
 			files = (
 				B3B72BC51D16EED90004A7C2 /* TaskTests.swift in Sources */,
 				B3AD651D1D245FD4001F6C57 /* DependencyTests.swift in Sources */,
-				B3A147CF1D26BFEE00BF971E /* TaskObserverTests.swift in Sources */,
+				B391B4991D2EE17C000A7F78 /* TaskObserverTests.swift in Sources */,
+				B391B4941D2EE168000A7F78 /* TaskConditionDependencyTests.swift in Sources */,
+				B3A147CF1D26BFEE00BF971E /* TaskObserverManagementTests.swift in Sources */,
+				B391B49B1D2EE180000A7F78 /* TaskQueueDelegateTests.swift in Sources */,
+				B391B4961D2EE171000A7F78 /* TaskConditionTests.swift in Sources */,
 				B3AD651F1D245FD8001F6C57 /* CreateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -597,10 +616,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B391B4921D2ED4FD000A7F78 /* TaskObserverTests.swift in Sources */,
 				B3DD52FD1D16D83200EBF640 /* TaskTests.swift in Sources */,
 				B3174C881D1D9C0C000DF4F6 /* TaskQueueDelegateTests.swift in Sources */,
 				B3C5DF591D1C4F7200D79532 /* DependencyTests.swift in Sources */,
-				B3AD65211D246250001F6C57 /* TaskObserverTests.swift in Sources */,
+				B3AD65211D246250001F6C57 /* TaskObserverManagementTests.swift in Sources */,
 				B3A147D21D27C58200BF971E /* TaskConditionTests.swift in Sources */,
 				B3D302C01D2D065900BA070A /* TaskConditionDependencyTests.swift in Sources */,
 				B3EF8F391D20521900064CC2 /* CreateTests.swift in Sources */,

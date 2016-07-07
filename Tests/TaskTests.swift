@@ -50,7 +50,7 @@ class TaskTests: XCTestCase {
         }
     }
     
-    func testOnCompleteBlockValue() {
+    func testOnCompleteCompletionBlockValue() {
         let task = SimpleTask()
         
         task
@@ -60,7 +60,7 @@ class TaskTests: XCTestCase {
         XCTAssert(task.onCompleteBlock != nil, "onComplete block should be set")
     }
     
-    func testOnErrorBlocksValue() {
+    func testOnErrorCompletionBlockValue() {
         let task = SimpleTask()
         
         task
@@ -71,7 +71,7 @@ class TaskTests: XCTestCase {
         XCTAssert(task.onErrorBlock != nil, "onError block should be set")
     }
     
-    func testOnCompleteBlock() {
+    func testOnCompleteBlockExecution() {
         let task = SimpleTask()
         let expectation = expectationWithDescription("Task result value expecation")
         
@@ -87,7 +87,7 @@ class TaskTests: XCTestCase {
         }
     }
     
-    func testOnErrorBlock() {
+    func testOnErrorBlockExecution() {
         let task = FailableTask()
         let expectation = expectationWithDescription("Task result error expecation")
         

@@ -44,7 +44,7 @@ class TaskConditionDependencyTests: XCTestCase {
         queue.addTask(task)
         
         waitForExpectationsWithTimeout(1) { handlerError in
-            
+            print(handlerError)
         }
     }
 }
