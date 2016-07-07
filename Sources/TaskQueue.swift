@@ -161,6 +161,10 @@ public class TaskQueue: NSOperationQueue {
             task.addObserver(retryObserver)
         }
         
+        // Add all explicit dependencies
+        _ = task.dependencies.map { addOperation($0) }
+        
+        // Evaluate condition dependencies and add them to the queue
         _ = task
             .conditions
             .flatMap { $0.dependency(forTask: task) }
