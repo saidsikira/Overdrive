@@ -1,0 +1,25 @@
+custom_categories: 
+  - 
+    name: "Classes"
+    children: 
+      - "Task"
+      - "InlineTask"
+      - "TaskQueue"
+  -
+    name: "Protocols"
+    children:
+      - "TaskObserver"
+      - "TaskCondition"
+      - "TaskQueueDelegate"
+  -
+    name: "Enums"
+    children:
+      - "Result"
+      - "TaskConditionResult"
+      - "TaskConditionError"
+  -
+    name: "Extensions"
+    children:
+      - "CollectionType"
+      - "NSOperation"
+      - "NSQualityOfService"
