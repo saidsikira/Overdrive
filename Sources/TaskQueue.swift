@@ -93,7 +93,7 @@ public class TaskQueue: NSOperationQueue {
      TaskQueue.main.addTask(task)
      ```
      */
-    public static var main: TaskQueue = {
+    public static let main: TaskQueue = {
         let queue = TaskQueue()
         queue.underlyingQueue = dispatch_get_main_queue()
         return queue
@@ -109,7 +109,7 @@ public class TaskQueue: NSOperationQueue {
      TaskQueue.background.addTask(task)
      ```
      */
-    public static var background: TaskQueue = {
+    public static let background: TaskQueue = {
         let queue = TaskQueue()
         queue.name = "BackgroundTaskQueue"
         queue.underlyingQueue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
