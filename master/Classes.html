@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Classes  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+
+
+    <a title="Classes  Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="index.html">
+          Overdrive Docs
+        </a>
+         (91% documented)
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/swiftable/Overdrive">
+            <img class="header-icon" src="img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="index.html">Overdrive Reference</a>
+      <img class="carat" src="img/carat.png" />
+      Classes  Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/Task.html">Task</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/InlineTask.html">InlineTask</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/TaskQueue.html">TaskQueue</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/TaskObserver.html">TaskObserver</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/TaskCondition.html">TaskCondition</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/TaskQueueDelegate.html">TaskQueueDelegate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/Result.html">Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/TaskConditionResult.html">TaskConditionResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/TaskConditionError.html">TaskConditionError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/CollectionType.html">CollectionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/NSOperation.html">NSOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/NSQualityOfService.html">NSQualityOfService</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            <h1>Classes</h1>
+            
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:C9Overdrive4Task"></a>
+                    <a name="//apple_ref/swift/Class/Task" class="dashAnchor"></a>
+                    <a class="token" href="#/s:C9Overdrive4Task">Task</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provides thread-safe, concurrent and asynchronous execution of any task,
+by utilizing <code>NSOperation</code> and <code>GCD</code> mechanisms. <code>Task</code> provides type-safe
+execution by defining concrete type that will be task result object.</p>
+
+<p>To execute the task you must add it to the <code><a href="Classes/TaskQueue.html">TaskQueue</a></code> queue which manages
+task execution, task dependencies, retry operations and concurrency.</p>
+
+<p><code>Task</code> also provides method chaining and completion blocks that are executed 
+depending on the task result. It also features retry mechanisms for tasks
+which finished with errors.</p>
+
+<p>Since <code>Task&lt;T&gt;</code> is an abstract class you should always create subclass or 
+use concrete <code>TaskBlock</code> subclass. Subclassing <code>Task&lt;T&gt;</code> is simple operation. 
+You are only required to override <code>run()</code> method that defines task execution 
+point and call <code>finish(_:)</code> method to notify task that execution is finished.</p>
+
+<p><a href='#strong-example-task-strong' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='strong-example-task-strong'><strong>Example task</strong></h3></p>
+
+<p><hr></p>
+
+<p>Create subclass of <code>Task&lt;Int&gt;</code></p>
+
+<pre class="highlight swift"><code><span class="c1">// Defines `CustomTask` subclass that exposes `Int` result</span>
+<span class="kd">class</span> <span class="kt">CustomTask</span><span class="p">:</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span> <span class="p">{</span>
+   <span class="k">override</span> <span class="kd">func</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+       <span class="n">asyncTask</span> <span class="p">{</span> <span class="n">result</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+           <span class="k">if</span> <span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+               <span class="nf">finish</span><span class="p">(</span><span class="o">.</span><span class="kt">Error</span><span class="p">(</span><span class="n">error</span><span class="o">!</span><span class="p">))</span>
+           <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+               <span class="nf">finish</span><span class="p">(</span><span class="o">.</span><span class="kt">Value</span><span class="p">(</span><span class="n">resut</span> <span class="k">as!</span> <span class="kt">Int</span><span class="p">))</span>
+           <span class="p">}</span>
+       <span class="p">}</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>When you want to execute the task you add it to the <code><a href="Classes/TaskQueue.html">TaskQueue</a></code></p>
+
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">CustomTask</span><span class="p">()</span>
+<span class="kt">TaskQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="nf">addTask</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+</code></pre>
+
+<p>If you want to be informed when task finishes use <code>onComplete(_:)</code> 
+and <code>onError(_:)</code> methods.</p>
+
+<pre class="highlight swift"><code><span class="n">task</span>
+   <span class="o">.</span><span class="n">onComplete</span> <span class="p">{</span> <span class="n">value</span> <span class="k">in</span>
+       <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+   <span class="p">}</span><span class="o">.</span><span class="n">onError</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
+       <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kt">TaskQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="nf">addTask</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+</code></pre>
+
+<p><a href='#strong-finishing-task-execution-strong' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='strong-finishing-task-execution-strong'><strong>Finishing task execution</strong></h3></p>
+
+<p><hr></p>
+
+<p>Since you can wrap any synchronous or asynchronous task inside <code>run()</code> method,
+you must call <code>finish(_:)</code> method with <code><a href="Enums/Result.html">Result&lt;T&gt;</a></code> enum object to popuplate the 
+task result and notify <code><a href="Classes/TaskQueue.html">TaskQueue</a></code> that the task finished with execution.</p>
+
+<p>Task result is exposed as <code><a href="Enums/Result.html">Result&lt;T&gt;</a></code> enum which can have one of the following
+cases:</p>
+
+<ul>
+<li><code>Value(T)</code> - Value associated with the task returning type</li>
+<li><code>Error(ErrorType)</code> - Error that may occur during task execution</li>
+</ul>
+
+<p>After task finishes execution, you can access the result via <code>result</code> property.</p>
+
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    You can access <code>result</code> object from any thread.
+
+</div>
+
+<p>If the task is asynchronous, <code>result</code> instance may be <code>nil</code> since <code>finish(_:)</code>
+method is not called yet. In that case you should use <code>onComplete(_:)</code> and <code>onError(_:)</code>
+methods.</p>
+
+<p><strong>Example</strong></p>
+
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">CustomTask</span><span class="p">()</span>
+<span class="n">task</span>
+   <span class="o">.</span><span class="n">onComplete</span> <span class="p">{</span> <span class="n">value</span> <span class="k">in</span>
+       <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="p">}</span>
+   <span class="o">.</span><span class="n">onError</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
+       <span class="nf">prin</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kt">TaskQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="nf">addTask</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+</code></pre>
+
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    Calling <code>onComplete</code> and <code>onError</code> method after the task is added to the <code><a href="Classes/TaskQueue.html">TaskQueue</a></code>
+may result in error, since the task may have already finished with result. To avoid
+this behaviour, always call these methods before task is added to the <code><a href="Classes/TaskQueue.html">TaskQueue</a></code>.
+
+</div>
+
+<p><a href='#strong-dependencies-strong' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='strong-dependencies-strong'><strong>Dependencies</strong></h3></p>
+
+<p><hr></p>
+
+<p>You can use task dependencies to ensure correct task order execution. If task has 
+any dependencies, <code><a href="Classes/TaskQueue.html">TaskQueue</a></code> will first execute them first and if they finish
+without errors, parent task will be executed.</p>
+
+<p>You can add dependencies by using <code>addDependency(_:)</code> method.</p>
+
+<p><strong>Example dependency</strong></p>
+
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">getDataTask</span> <span class="o">=</span> <span class="kt">GetDataTask</span><span class="p">()</span>
+<span class="k">let</span> <span class="nv">parseJSONTask</span> <span class="o">=</span> <span class="kt">ParseJSONTask</span><span class="p">()</span>
+
+<span class="n">parseJSONTask</span><span class="o">.</span><span class="nf">addDependency</span><span class="p">(</span><span class="n">getDataTask</span><span class="p">)</span>
+<span class="kt">TaskQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="nf">addTask</span><span class="p">(</span><span class="n">parseJSONTask</span><span class="p">)</span>
+</code></pre>
+
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    You should create dependency tree before task is added to the <code><a href="Classes/TaskQueue.html">TaskQueue</a></code>.
+
+</div>
+
+                        <a href="Classes/Task.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">:</span> <span class="kt">NSOperation</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:C9Overdrive10InlineTask"></a>
+                    <a name="//apple_ref/swift/Class/InlineTask" class="dashAnchor"></a>
+                    <a class="token" href="#/s:C9Overdrive10InlineTask">InlineTask</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>InlineTask</code> provides interface for creating asynchronous taks that don&rsquo;t
+neccesarily finish with result. To create <code>InlineTask</code> you pass a closure to
+the initializer.</p>
+
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">InlineTask</span> <span class="p">{</span>
+<span class="nf">doWork</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Inline tasks behave same as any <code><a href="Classes/Task.html">Task&lt;T&gt;</a></code>. They can be added to the
+<code><a href="Classes/TaskQueue.html">TaskQueue</a></code> and you can use <code>onComplete(_:)</code> method to be notified when they
+are finished with execution.</p>
+
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <code>InlineTask</code> is most commonly used in UI interactions. For example,
+you can create <code>InlineTask</code> that presents view controller and add dependency
+task that retrieves data from the server.
+
+</div>
+
+                        <a href="Classes/InlineTask.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">InlineTask</span><span class="p">:</span> <span class="kt"><a href="Classes/Task.html">Task</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:C9Overdrive9TaskQueue"></a>
+                    <a name="//apple_ref/swift/Class/TaskQueue" class="dashAnchor"></a>
+                    <a class="token" href="#/s:C9Overdrive9TaskQueue">TaskQueue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provides interface for <code><a href="Classes/Task.html">Task&lt;T&gt;</a></code> execution and concurrency.</p>
+
+<p><a href='#strong-task-execution-strong' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='strong-task-execution-strong'><strong>Task execution</strong></h3></p>
+
+<p><hr></p>
+
+<p>To schedule task for execution, add it to instance of <code>TaskQueue</code> by using
+<code>addTask(_:)</code> or <code>addTasks(_:)</code> method.</p>
+
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">TaskQueue</span><span class="p">()</span>
+<span class="n">queue</span><span class="o">.</span><span class="nf">addTask</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+</code></pre>
+
+<p>After the task is added to the <code>TaskQueue</code> complex process of task readiness
+evaluation begins. When the task reaches <code>ready</code> state, it is executed until it
+reaches <code>finished</code> state by calling <code>finish(_:)</code> method inside task.</p>
+
+<p>If task has no conditions or dependencies, it becomes <code>ready</code> immediately. If
+task has dependencies or conditions, dependencies are executed first and
+conditions are evaluated after that.</p>
+
+<p><a href='#strong-running-tasks-on-specific-queues-strong' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='strong-running-tasks-on-specific-queues-strong'><strong>Running tasks on specific queues</strong></h3></p>
+
+<p><hr></p>
+
+<p><code>TaskQueue</code> is queue aware, meaning that you can set up the <code>TaskQueue</code> object
+with specific dispatch queue so that any task execution performs on that
+defined queue.</p>
+
+<p>There are two predefined <code>TaskQueue</code> instances already associated with main
+and background queues.</p>
+
+<ul>
+<li><code><a href="Classes/TaskQueue.html#/s:ZvC9Overdrive9TaskQueue4mainS0_">TaskQueue.main</a></code> - Associated with main UI thread, suitable for execution
+tasks that application UI is dependent on.</li>
+<li><code><a href="Classes/TaskQueue.html#/s:ZvC9Overdrive9TaskQueue10backgroundS0_">TaskQueue.background</a></code> - Associated with background queue. Any task that is
+added to this queue will be executed in the background.</li>
+</ul>
+
+<p>In addition to the queue specification, you can also create <a href="https://developer.apple.com/library/ios/documentation/Performance/Con%0Aceptual/EnergyGuide-iOS/PrioritizeWorkWithQoS.html"><strong>Quality Of
+Service</strong></a> aware task queues by
+passing <code>NSQualityOfService</code> object to the initializer.</p>
+
+<p><strong>Quality Of Service</strong> class allows you to categorize type of work that is
+executed. For example <code>.UserInteractive</code> quality of service class is used for
+the work that is performed by the user and that should be executed immediately.</p>
+
+<p>To create <code>TaskQueue</code> with specific <code>QOS</code> class use designated initializer:</p>
+
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">TaskQueue</span><span class="p">(</span><span class="nv">qos</span><span class="p">:</span> <span class="o">.</span><span class="kt">UserInteractive</span><span class="p">)</span>
+</code></pre>
+
+<p><a href='#strong-concurrency-strong' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='strong-concurrency-strong'><strong>Concurrency</strong></h3></p>
+
+<p>Task queue executes tasks concurrently by default and it&rsquo;s multicore aware
+meaning that it can use full hardware potential to execute work. Tasks do not
+execute one after another, rather they are executed concurrently when they
+reach <code>ready</code> state.</p>
+
+<p>To specify maximum number of concurrent task executions use
+<code>maxConcurrentOperationCount</code> property.</p>
+
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">TaskQueue</span><span class="p">()</span>
+<span class="n">queue</span><span class="o">.</span><span class="n">maxConcurrentOperationCount</span> <span class="o">=</span> <span class="mi">3</span>
+</code></pre>
+
+<p><a href='#strong-taskqueuedelegate-strong' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='strong-taskqueuedelegate-strong'><strong>TaskQueueDelegate</strong></h3></p>
+
+<p><code>TaskQueue</code> has a custom delegate which can be used to monitor certain events
+in <code>TaskQueue</code> lifecycle. See <code><a href="Protocols/TaskQueueDelegate.html">TaskQueueDelegate</a></code> for more information</p>
+
+                        <a href="Classes/TaskQueue.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">TaskQueue</span><span class="p">:</span> <span class="kt">NSOperationQueue</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2016 <a class="link" href="swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-07-09)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>

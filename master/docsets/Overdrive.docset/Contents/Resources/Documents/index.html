@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Overdrive  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+
+
+    <a title="Overdrive  Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="index.html">
+          Overdrive Docs
+        </a>
+         (91% documented)
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/swiftable/Overdrive">
+            <img class="header-icon" src="img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="index.html">Overdrive Reference</a>
+      <img class="carat" src="img/carat.png" />
+      Overdrive  Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/Task.html">Task</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/InlineTask.html">InlineTask</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/TaskQueue.html">TaskQueue</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/TaskObserver.html">TaskObserver</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/TaskCondition.html">TaskCondition</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/TaskQueueDelegate.html">TaskQueueDelegate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/Result.html">Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/TaskConditionResult.html">TaskConditionResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/TaskConditionError.html">TaskConditionError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/CollectionType.html">CollectionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/NSOperation.html">NSOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/NSQualityOfService.html">NSQualityOfService</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            
+            <a href='#overdrive' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='overdrive'>Overdrive</h1>
+
+<p>Task based API in Swift with focus on type-safety, concurrency, threading and stability.</p>
+
+<p><a href="https://travis-ci.org/arikis/Overdrive"><img src="https://travis-ci.org/arikis/Overdrive.svg?branch=master" alt="Build Status"></a>
+<img src="https://img.shields.io/badge/platform-linux%20%7C%20iOS%20%7C%20macOS%20%7C%20tvOS-lightgray.svg" alt="Plaforms">
+<a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage Compatible"></a>
+<a href="https://github.com/apple/swift-package-manager"><img src="https://img.shields.io/badge/Swift%20Package%20Manager-Compatible-brightgreen.svg" alt="Swift Package Manager Compatible"></a></p>
+<a href='#features' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='features'>Features:</h2>
+
+<ul>
+<li>Type-safety</li>
+<li>Concurrency</li>
+<li>Full threading capabilities</li>
+<li>Full documentation</li>
+<li>Extensive tests</li>
+</ul>
+<a href='#requirements' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='requirements'>Requirements</h2>
+
+<ul>
+<li>iOS 8.0+ / Mac OS X 10.11+ / tvOS 9.0+</li>
+<li>Xcode 7.3+</li>
+<li>Swift 2.2 on Linux</li>
+</ul>
+<a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>Installation</h2>
+
+<p>You can use <code>Overdrive</code> in your project by using any of the following package managers.</p>
+<a href='#carthage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='carthage'>Carthage</h4>
+
+<p>Add following to the <code>Cartfile</code>:
+<code>
+github &quot;arikis/Overdrive&quot; &gt;= 0.0.1
+</code></p>
+
+<blockquote>
+<p>Note that if you want to build Overdrive on only one platform you can pass it to the carthage platform option.
+For example <code>carthage update --platform iOS</code></p>
+</blockquote>
+<a href='#cocoa-pods' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='cocoa-pods'>Cocoa Pods</h4>
+
+<p>To use <code>Overdrive</code> with Cocoa Pods add it to the <code>Podfile</code>
+&ldquo;`ruby
+platform :ios, &lsquo;8.0&rsquo;
+use_frameworks!</p>
+
+<p>target &#39;AppTarget&rsquo; do
+    pod &#39;Overdrive&rsquo;
+end
+&rdquo;`</p>
+<a href='#swift-package-manager' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='swift-package-manager'>Swift Package Manager</h4>
+
+<p><strong>Requires Swift 2.2</strong></p>
+
+<p>To add <code>Overdrive</code> to your project using Swift Package Manager, add it to the package dependencies:
+&ldquo;`swift
+import PackageDescription</p>
+
+<p>let package = Package(
+  name: <q>ProjectName</q>,
+  targets: [],
+  dependencies: [
+    .Package(url: <q>https://github.com/arikis/Overdrive.git</q>, 
+    versions: <q>0.0.1</q>..&lt; Version.max)
+  ]
+)
+&rdquo;`</p>
+
+<blockquote>
+<p>Swift Package Manager support is still experimental.</p>
+</blockquote>
+<a href='#manual-installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='manual-installation'>Manual installation</h4>
+
+<p><code>Overdrive</code> can also be installed manualy by dragging the <code>Overdrive.xcodeproj</code> to your project and adding <code>Overdrive.framework</code> to the embedded libraries in project settings.</p>
+
+          </div>
+        </section>
+
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2016 <a class="link" href="swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-07-09)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
