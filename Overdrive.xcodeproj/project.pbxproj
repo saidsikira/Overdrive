@@ -262,13 +262,13 @@
 				B3DD52FE1D16D83200EBF640 /* Info.plist */,
 				B3EF8F381D20521900064CC2 /* CreateTests.swift */,
 				B3C5DF581D1C4F7200D79532 /* DependencyTests.swift */,
+				B31709961D304B6900BA3757 /* InlineTaskTests.swift */,
 				B3D302BE1D2D065200BA070A /* TaskConditionDependencyTests.swift */,
 				B3A147D11D27C58200BF971E /* TaskConditionTests.swift */,
 				B3AD65201D246250001F6C57 /* TaskObserverManagementTests.swift */,
 				B391B4911D2ED4FD000A7F78 /* TaskObserverTests.swift */,
 				B3174C871D1D9C0C000DF4F6 /* TaskQueueDelegateTests.swift */,
 				B3DD52FC1D16D83200EBF640 /* TaskTests.swift */,
-				B31709961D304B6900BA3757 /* InlineTaskTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
