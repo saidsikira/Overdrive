@@ -48,10 +48,9 @@ public protocol TaskCondition {
     var conditionName: String { get }
     
     /**
-     If task needs a dependency to execute first, you should return it in this method. For example,
-     some tasks need OS premissions to execute. For example location services, photo retrieval,
-     camera use etc. By using this method you can setup a dependency that can validate status of 
-     those premissions.
+     If task needs a dependency to execute, you should return it in this method. For example,
+     some tasks need OS permissions to do work (location services etc.) and requests for those
+     permissions can be exposed as dependencies.
      
      - Parameter forTask: That that conditions are being evaluated for
      
@@ -61,7 +60,7 @@ public protocol TaskCondition {
     
     /**
      Evaluates condition for the task. Evaluation can be any asynchronous process. When evaluation
-     process is done evaluationBlock callback should be called with appropriate `TaskConditionResult`.
+     process is done `evaluationBlock` callback should be called with appropriate `TaskConditionResult`.
      
      - Note: This method does not guarantee that evaluation will be done on the main thread. If you want
      to evaluate condition on the main thread, use `dispatch_async` call.
