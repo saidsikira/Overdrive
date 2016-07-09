@@ -7,7 +7,7 @@ env:
   global:
   - LC_CTYPE=en_US.UTF-8
   - LANG=en_US.UTF-8
-  - PROJECT=Overdrive.xcworkspace
+  - PROJECT=Overdrive.xcodeproj
   - IOS_FRAMEWORK_SCHEME="Overdrive iOS"
   - OSX_FRAMEWORK_SCHEME="Overdrive macOS"
   - TVOS_FRAMEWORK_SCHEME="Overdrive tvOS"
