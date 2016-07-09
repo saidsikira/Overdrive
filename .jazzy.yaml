@@ -1,3 +1,8 @@
+xcodebuild_arguments: 
+    - "-project"
+    - "Overdrive/Overdrive.xcodeproj"
+    - "-scheme"
+    - "Overdrive iOS"
 custom_categories: 
   - 
     name: "Classes"
