@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>TaskQueue Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    <meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="application-name" content="Overdrive">
+<meta name="description" content="Elegant task based API in Swift with focus on concurrency, multi-threading and type safety.">
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Class/TaskQueue" class="dashAnchor"></a>
+
+    <a title="TaskQueue Class Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          Overdrive Docs
+        </a>
+         (91% documented)
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/swiftable/Overdrive">
+            <img class="header-icon" src="../img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">Overdrive Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      TaskQueue Class Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Task.html">Task</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/InlineTask.html">InlineTask</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TaskQueue.html">TaskQueue</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TaskObserver.html">TaskObserver</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TaskCondition.html">TaskCondition</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TaskQueueDelegate.html">TaskQueueDelegate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/Result.html">Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/TaskConditionResult.html">TaskConditionResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/TaskConditionError.html">TaskConditionError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/CollectionType.html">CollectionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/NSOperation.html">NSOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/NSQualityOfService.html">NSQualityOfService</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            <h1>TaskQueue</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">TaskQueue</span><span class="p">:</span> <span class="kt">NSOperationQueue</span></code></pre>
+
+                </div>
+              </div>
+            <p>Provides interface for <code><a href="../Classes/Task.html">Task&lt;T&gt;</a></code> execution and concurrency.</p>
+
+<p><a href='#strong-task-execution-strong' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='strong-task-execution-strong'><strong>Task execution</strong></h3></p>
+
+<p><hr></p>
+
+<p>To schedule task for execution, add it to instance of <code>TaskQueue</code> by using
+<code>addTask(_:)</code> or <code>addTasks(_:)</code> method.</p>
+
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">TaskQueue</span><span class="p">()</span>
+<span class="n">queue</span><span class="o">.</span><span class="nf">addTask</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+</code></pre>
+
+<p>After the task is added to the <code>TaskQueue</code> complex process of task readiness
+evaluation begins. When the task reaches <code>ready</code> state, it is executed until it
+reaches <code>finished</code> state by calling <code>finish(_:)</code> method inside task.</p>
+
+<p>If task has no conditions or dependencies, it becomes <code>ready</code> immediately. If
+task has dependencies or conditions, dependencies are executed first and
+conditions are evaluated after that.</p>
+
+<p><a href='#strong-running-tasks-on-specific-queues-strong' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='strong-running-tasks-on-specific-queues-strong'><strong>Running tasks on specific queues</strong></h3></p>
+
+<p><hr></p>
+
+<p><code>TaskQueue</code> is queue aware, meaning that you can set up the <code>TaskQueue</code> object
+with specific dispatch queue so that any task execution performs on that
+defined queue.</p>
+
+<p>There are two predefined <code>TaskQueue</code> instances already associated with main
+and background queues.</p>
+
+<ul>
+<li><code><a href="../Classes/TaskQueue.html#/s:ZvC9Overdrive9TaskQueue4mainS0_">TaskQueue.main</a></code> - Associated with main UI thread, suitable for execution
+tasks that application UI is dependent on.</li>
+<li><code><a href="../Classes/TaskQueue.html#/s:ZvC9Overdrive9TaskQueue10backgroundS0_">TaskQueue.background</a></code> - Associated with background queue. Any task that is
+added to this queue will be executed in the background.</li>
+</ul>
+
+<p>In addition to the queue specification, you can also create <a href="https://developer.apple.com/library/ios/documentation/Performance/Con%0Aceptual/EnergyGuide-iOS/PrioritizeWorkWithQoS.html"><strong>Quality Of
+Service</strong></a> aware task queues by
+passing <code>NSQualityOfService</code> object to the initializer.</p>
+
+<p><strong>Quality Of Service</strong> class allows you to categorize type of work that is
+executed. For example <code>.UserInteractive</code> quality of service class is used for
+the work that is performed by the user and that should be executed immediately.</p>
+
+<p>To create <code>TaskQueue</code> with specific <code>QOS</code> class use designated initializer:</p>
+
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">TaskQueue</span><span class="p">(</span><span class="nv">qos</span><span class="p">:</span> <span class="o">.</span><span class="kt">UserInteractive</span><span class="p">)</span>
+</code></pre>
+
+<p><a href='#strong-concurrency-strong' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='strong-concurrency-strong'><strong>Concurrency</strong></h3></p>
+
+<p>Task queue executes tasks concurrently by default and it&rsquo;s multicore aware
+meaning that it can use full hardware potential to execute work. Tasks do not
+execute one after another, rather they are executed concurrently when they
+reach <code>ready</code> state.</p>
+
+<p>To specify maximum number of concurrent task executions use
+<code>maxConcurrentOperationCount</code> property.</p>
+
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">TaskQueue</span><span class="p">()</span>
+<span class="n">queue</span><span class="o">.</span><span class="n">maxConcurrentOperationCount</span> <span class="o">=</span> <span class="mi">3</span>
+</code></pre>
+
+<p><a href='#strong-taskqueuedelegate-strong' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='strong-taskqueuedelegate-strong'><strong>TaskQueueDelegate</strong></h3></p>
+
+<p><code>TaskQueue</code> has a custom delegate which can be used to monitor certain events
+in <code>TaskQueue</code> lifecycle. See <code><a href="../Protocols/TaskQueueDelegate.html">TaskQueueDelegate</a></code> for more information</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZvC9Overdrive9TaskQueue4mainS0_"></a>
+                    <a name="//apple_ref/swift/Variable/main" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvC9Overdrive9TaskQueue4mainS0_">main</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns queue associated with application main queue.</p>
+
+<p><strong>Example</strong></p>
+
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">SomeTask</span><span class="p">()</span>
+<span class="kt">TaskQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="nf">addTask</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">main</span><span class="p">:</span> <span class="kt">TaskQueue</span> <span class="o">=</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZvC9Overdrive9TaskQueue10backgroundS0_"></a>
+                    <a name="//apple_ref/swift/Variable/background" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvC9Overdrive9TaskQueue10backgroundS0_">background</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns queue associated with application background queue.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">SomeTask</span><span class="p">()</span>
+<span class="kt">TaskQueue</span><span class="o">.</span><span class="n">background</span><span class="o">.</span><span class="nf">addTask</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">background</span><span class="p">:</span> <span class="kt">TaskQueue</span> <span class="o">=</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC9Overdrive9TaskQueue8delegateXwGSqPS_17TaskQueueDelegate__"></a>
+                    <a name="//apple_ref/swift/Property/delegate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC9Overdrive9TaskQueue8delegateXwGSqPS_17TaskQueueDelegate__">delegate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>TaskQueue delegate object</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">weak</span> <span class="kd">public</span> <span class="k">var</span> <span class="nv">delegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TaskQueueDelegate.html">TaskQueueDelegate</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Init%20methods"></a>
+                <a name="//apple_ref/swift/Section/Init methods" class="dashAnchor"></a>
+                <a href="#/Init%20methods">
+                  <h3 class="section-name">Init methods</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9Overdrive9TaskQueuecFT_S0_"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9Overdrive9TaskQueuecFT_S0_">init()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates instance of <code>TaskQueue</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">override</span> <span class="nf">init</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9Overdrive9TaskQueuecFT3qosOSC18NSQualityOfService_S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(qos:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9Overdrive9TaskQueuecFT3qosOSC18NSQualityOfService_S0_">init(qos:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initilizes TaskQueue with specific <code>NSQualityOfService</code> class. Defining
+quality of service class will later determine how tasks are executed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">qos</span><span class="p">:</span> <span class="kt">NSQualityOfService</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Task%20management"></a>
+                <a name="//apple_ref/swift/Section/Task management" class="dashAnchor"></a>
+                <a href="#/Task%20management">
+                  <h3 class="section-name">Task management</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9Overdrive9TaskQueue7addTaskurFGCS_4Taskx_T_"></a>
+                    <a name="//apple_ref/swift/Method/addTask(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9Overdrive9TaskQueue7addTaskurFGCS_4Taskx_T_">addTask(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add task to the TaskQueue and starts execution. Method will call
+delegate method responsible for adding task.</p>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter task: Task<T> to be added
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">addTask</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">task</span><span class="p">:</span> <span class="kt"><a href="../Classes/Task.html">Task</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>task</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Task<T> to be added</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9Overdrive9TaskQueue12addOperationFCSo11NSOperationT_"></a>
+                    <a name="//apple_ref/swift/Method/addOperation(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9Overdrive9TaskQueue12addOperationFCSo11NSOperationT_">addOperation(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">TaskQueue</span><span class="p">:</span> <span class="kt">NSOperationQueue</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9Overdrive9TaskQueue8addTasksurFGSaGCS_4Taskx__T_"></a>
+                    <a name="//apple_ref/swift/Method/addTasks(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9Overdrive9TaskQueue8addTasksurFGSaGCS_4Taskx__T_">addTasks(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds array of tasks to the TaskQueue and starts execution. Method will
+call delegate method responsible for adding tasks.</p>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter tasks: Array of <code><a href="../Classes/Task.html">Task&lt;T&gt;</a></code>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">addTasks</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">tasks</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/Task.html">Task</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tasks</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Array of <code>Task&lt;T&gt;</code></p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2016 <a class="link" href="swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-07-10)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
