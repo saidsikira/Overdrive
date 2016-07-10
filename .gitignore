@@ -38,6 +38,7 @@ Temporary Items
 build/
 DerivedData/
 Overdrive/
+Overdrive
 ## Various settings
 *.pbxuser
 !default.pbxuser
