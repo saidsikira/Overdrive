@@ -2,7 +2,7 @@ language: objective-c
 osx_image: xcode7.3
 branches:
   only:
-    - master
+  - master
 env:
   global:
   - LC_CTYPE=en_US.UTF-8
@@ -14,32 +14,31 @@ env:
   - IOS_SDK=iphonesimulator9.3
   - OSX_SDK=macosx10.11
   - TVOS_SDK=appletvsimulator9.2
+  - secure: DufTZD4TY2C/oIapObDqJynC0GFQDO7HC5R3vLM2vUGot5jbkNwF82SGtwU3QJ4cXtyXyGF9/QgwMqM5DWJcUugpa85eg8Bgcn0Dyrym7Bcj2Hc6GO2ZbZURVfy7EkyJnhqj3Ocf6M7aAGbJl0hZdYb4u8d1VjkGwCcncoAqi2Glkx5WuMcYBJWWGfA31iEnt4pLod0a3Rh1hH11hHG2//yrR05cSP3egPfjQSuWbVzypvOsDaE03EDIFXc3ch9d6FTFR77biP0juyKH/Ya+ieZUZFBDgkAhKViMToUOTV9wK/PTr6dndlqOY8UnbSdvAyaj3qAVFZKg88I33uYo2jdJsgnABn509TmVm3v7BZXi/l7SgiwHqDDlb0Sz5aacCbymaI6QLYOv0GhkZeSo9asg4pwDBjfa7OuJKzUyeAQxdBb6tI8pajn05PvAqY3s9cZzJGzBN10ZN07ijchPGDlvHtiAy6Nw66CE6neOtRNkPJ8hEpOiRwr+ss7nN5rbCpsG0oreuzYvkECmUowvC0VaI3r56Xq4KOpMznWNkqVi9GdzXhPKH/eAk36eKY8RndNBVu3v/KE8xnYD0+R3HKhBlKFz1bE3MZo1e6/it+Wd24ey8qZlSgnV6eZv9a8wu0IZcgyAoc6CrEDlqqjXZeN+jAwjz3DkX1ZrdQWbuEY=
+  - secure: fidZM/LY4Sf/dKwuTDp7XCk3mceexLcWNrjNhkAbNCACxkQcMxn6mcwTOZmed18123QlPmtI4Q8uSwktzmQQL7yq25+Ryrbg9AtRDXgXRuvp1Mvcx9WkvRv859QIsS34J5oQ1Urbec9KVJsllcc8TP3L74uvw5wRJl5tco2YnQtHzRYJn0wsvJBdV43INJvHMl/G0gIR9h8vzmL2uK2k00DpI4fjMhuUWBLHLsoeRxQRPWaxGvO+Dn9xnigk+CeSo66MJJM1Th6yezU0eRrbvmIpgaoYVEs16y1De5EiOsoVMXj399v+VkD9IbDy+kEvCotZTqvgrPHkbqY+JWKIFN+LBWVxonVThV8y0wTiE+HHeOH75unV1LaJXILxdzeggbSJSmValzKcQkn4yxanFawhkSYvBt+VCSYpay1WKOt1cYEur0zLJD9Ah+f2USI7ixVjIYp8sE3V3gQnsqe/PsIh0DNRf/UlmhS4OAD71W++LIg1hhIdNFeZIU462umVYu00yQdJQe7r+Xp9UBj074jGvD77qZAj9FbisUaECm9QGKTCP2BvwPCH7UjbDaYg7QDjF/Wi5mWXeEaphKJ48/mmREsMskjw35zW9de0u7gsj1m5DARznfrZqCGG9cKAww/+uck5dniI0LPc+Ei4k6gpKWBmjliC5HId+jqwFnM=
+  - secure: Dr9Vx8smbY9PtVH3Rh1WlC/aTgpOuHBdiIYh80nYhoz0I3DlMJjtPyudrkYzxh27kpCJ74LpAb8lJRO3rupknaHx7z3sZQdbT6D2MwWNQEoWCMJEohi1r63MJcnbEJeCUDZMEUbzXCmy5Sqax89UM/wyt4+FHjIRh2i5H3vdyVH+gLQfl90QC/5Lz9nEuEBzGkL29hGkb6GSWaeXC2q2yWCknrPz8AhthGYOwvI3nC0GVkadu8moKkxCVLFjt/5ghDeZC1MCzCITw2TppVxnoxyvU+s/SO2rx23hgi3HSPTJK73F5JYkyztGcTxZZ4ljYMiGtfKgAdIKDr7UDVaEJXrLd6nE0Y7K362rxNHHXNg318NrGXa7ZNI191jelHGjU7ViJ7dSaSdiYwpheDuyhGdj3KMa5w20gr8AGHm0WlkiC5gObwiavMgFsJKv0IN1kzK7SQitVpHYaCk6PfiVyDEMn/fK8YE1YsaB/eUJ+Gs+6Tl6C3bil/Pa0wMxBhzUkvwYZpdjT89krAcR/HiiEl1bXfte8IXjgwIszk1p2v+M58mKC2k2zbmSeyted3FK7uw1ptgSpBv9zXbocVPl7YCR8jASpKPRANj/Hx/W3iApeSF+mP+LzMNfXJ80ujJcng26Vg566gkC+UCK82nt+eqG9VZOmkWm06k2sRgqXfg=
   matrix:
-    - DESTINATION="OS=8.1,name=iPhone 4S"          SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES"
-    - DESTINATION="OS=8.2,name=iPhone 5"           SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES"
-    - DESTINATION="OS=8.3,name=iPhone 5S"          SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES"
-    - DESTINATION="OS=8.4,name=iPhone 6"           SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES"
-    - DESTINATION="OS=9.0,name=iPhone 6"           SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES"
-    - DESTINATION="OS=9.1,name=iPhone 6 Plus"      SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES"
-    - DESTINATION="OS=9.2,name=iPhone 6S"          SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES"
-    - DESTINATION="OS=9.3,name=iPhone 6S Plus"     SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES"
-    - DESTINATION="arch=x86_64"                    SCHEME="$OSX_FRAMEWORK_SCHEME"     SDK="$OSX_SDK"     RUN_TESTS="YES"
-    - DESTINATION="OS=9.2,name=Apple TV 1080p"     SCHEME="$TVOS_FRAMEWORK_SCHEME"    SDK="$TVOS_SDK"    RUN_TESTS="YES"
+  - DESTINATION="OS=8.1,name=iPhone 4S"          SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES"
+  - DESTINATION="OS=8.2,name=iPhone 5"           SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES"
+  - DESTINATION="OS=8.3,name=iPhone 5S"          SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES"
+  - DESTINATION="OS=8.4,name=iPhone 6"           SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES"
+  - DESTINATION="OS=9.0,name=iPhone 6"           SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES"
+  - DESTINATION="OS=9.1,name=iPhone 6 Plus"      SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES"
+  - DESTINATION="OS=9.2,name=iPhone 6S"          SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES"
+  - DESTINATION="OS=9.3,name=iPhone 6S Plus"     SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES"
+  - DESTINATION="arch=x86_64"                    SCHEME="$OSX_FRAMEWORK_SCHEME"     SDK="$OSX_SDK"     RUN_TESTS="YES"
+  - DESTINATION="OS=9.2,name=Apple TV 1080p"     SCHEME="$TVOS_FRAMEWORK_SCHEME"    SDK="$TVOS_SDK"    RUN_TESTS="YES"
 script:
-  - set -o pipefail
-  - xcodebuild -version
-  - xcodebuild -showsdks
-
-  # Build Framework in Debug mode
-  - if [ $RUN_TESTS == "YES" ]; then
-      xcodebuild -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO test | xcpretty -c;
-    else
-      xcodebuild -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty -c;
-    fi
-
-  # Build Framework in Release mode
-  - if [ $RUN_TESTS == "YES" ]; then
-      xcodebuild -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Release ENABLE_TESTABILITY=YES ONLY_ACTIVE_ARCH=NO test | xcpretty -c;
-    else
-      xcodebuild -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Release ONLY_ACTIVE_ARCH=NO build | xcpretty -c;
-    fi
+- set -o pipefail
+- xcodebuild -version
+- xcodebuild -showsdks
+- if [ $RUN_TESTS == "YES" ]; then xcodebuild -project "$PROJECT" -scheme "$SCHEME"
+  -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO
+  test | xcpretty -c; else xcodebuild -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK"
+  -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty
+  -c; fi
+- if [ $RUN_TESTS == "YES" ]; then xcodebuild -project "$PROJECT" -scheme "$SCHEME"
+  -sdk "$SDK" -destination "$DESTINATION" -configuration Release ENABLE_TESTABILITY=YES
+  ONLY_ACTIVE_ARCH=NO test | xcpretty -c; else xcodebuild -project "$PROJECT" -scheme
+  "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Release ONLY_ACTIVE_ARCH=NO
+  build | xcpretty -c; fi
