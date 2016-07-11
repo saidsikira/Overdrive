@@ -9,126 +9,149 @@
 import class Foundation.NSOperation
 
 /**
- Provides thread-safe, concurrent and asynchronous execution of any task,
- by utilizing `NSOperation` and `GCD` mechanisms. `Task` provides type-safe
- execution by defining concrete type that will be task result object.
+ `Task<T>` is an abstract class that provides interface encapsuling any
+ asynchronous or synchronous operation. Abstract nature of the `Task<T>` enforces
+ you to create a subclass for any task you want to create. Subclassing `Task<T>`
+ is simple operation. You are only required to override `run()` method that
+ defines task execution point and call `finish(_:)` method to finish execution.
+ In order to execute any task you need to add it to the `TaskQueue` which
+ manages task execution, concurrency and threading mechanisms.
  
- To execute the task you must add it to the `TaskQueue` queue which manages
- task execution, task dependencies, retry operations and concurrency.
- 
- `Task` also provides method chaining and completion blocks that are executed 
+ `Task` also provides method chaining and completion blocks that are executed
  depending on the task result. It also features retry mechanisms for tasks
  which finished with errors.
  
- Since `Task<T>` is an abstract class you should always create subclass or 
- use concrete `TaskBlock` subclass. Subclassing `Task<T>` is simple operation. 
- You are only required to override `run()` method that defines task execution 
- point and call `finish(_:)` method to notify task that execution is finished.
+ There are several key aspects of the `Task<T>` that you need to understand:
  
- ### **Example task**
- ---
+ 1. **State machine** - `Task<T>` works with internal task state machine. State
+ of the task at any point can be:
  
- Create subclass of `Task<Int>`
+	* Initialized - Task instance is created
+	* Pending - Task is added to the `TaskQueue` and started process of
+	evaluating readiness
+	* Ready - Task is ready to execute.
+	* Executing - Task is executing
+	* Finished - Task finished with execution
+ 
+ 2. **Task execution point** - Task execution starts in `run()` method when state
+ reaches `Ready` state. You should always override this method in your subclass.
+ 
+ 3. **Finishing execution** - Task execution finishes when `finish(_:)` method is
+ called. You always finish execution with `Result<T>` object. `Result<T>` is an
+ enum with two cases:
+ 
+	* `Value(T)`
+	* `Error(ErrorType)`
+ 
+ After `finish(_:)` method is called, you can access result through `result`
+ property.
+ 
+ - note: You can access `result` object from any thread.
+ 
+ **Example subclass**
  
  ```swift
- // Defines `CustomTask` subclass that exposes `Int` result
- class CustomTask: Task<Int> {
-    override func run() {
-        asyncTask { result, error in
-            if error != nil {
+ class SomeTask: Task<Int> {
+     override func run() {
+         asyncOperation { data, error in
+             if error != nil {
                 finish(.Error(error!))
-            } else {
-                finish(.Value(resut as! Int))
-            }
-        }
-    }
+             } else {
+                finish(.Value(data as! Int))
+             }
+         }
+     }
  }
+ 
+ let queue = TaskQueue()
+ let task = SomeTask()
+ queue.addTask(task)
  ```
  
- When you want to execute the task you add it to the `TaskQueue`
+ ### **Completion blocks**
+ ---
+ You can use one of the defined completion blocks that are executed when task
+ finished with execution.
+ 
+ 1. `onComplete` - executed when task finishes with `Value(T)`
+ 2. `onError` - executed when task finishes with `Error(ErrorType)`
  
  ```swift
- let task = CustomTask()
- TaskQueue.main.addTask(task)
- ```
+ let task = SomeTask()
  
- If you want to be informed when task finishes use `onComplete(_:)` 
- and `onError(_:)` methods.
- 
- ```swift
  task
     .onComplete { value in
         print(value)
     }.onError { error in
         print(error)
  }
- 
- TaskQueue.main.addTask(task)
  ```
  
- ### **Finishing task execution**
- ---
+ - note: Many of the `Task` methods can be chained to enable simple setup
  
- Since you can wrap any synchronous or asynchronous task inside `run()` method,
- you must call `finish(_:)` method with `Result<T>` enum object to popuplate the 
- task result and notify `TaskQueue` that the task finished with execution.
- 
- Task result is exposed as `Result<T>` enum which can have one of the following
- cases:
- 
- * `Value(T)` - Value associated with the task returning type
- * `Error(ErrorType)` - Error that may occur during task execution
- 
- After task finishes execution, you can access the result via `result` property.
- 
- - Note: You can access `result` object from any thread.
- 
- If the task is asynchronous, `result` instance may be `nil` since `finish(_:)`
- method is not called yet. In that case you should use `onComplete(_:)` and `onError(_:)`
- methods.
- 
- **Example**
- 
- ```swift
- let task = CustomTask()
- task
-    .onComplete { value in
-        print(value)
-     }
-    .onError { error in
-        prin(error)
- }
- 
- TaskQueue.main.addTask(task)
- ```
- 
- - Warning:
- Calling `onComplete` and `onError` method after the task is added to the `TaskQueue`
- may result in error, since the task may have already finished with result. To avoid
- this behaviour, always call these methods before task is added to the `TaskQueue`.
+ - warning: Calling `onComplete` and `onError` methods after the task is added
+ to the `TaskQueue` may result in error, since the task may have already finished
+ with execution. To avoid this behaviour, always call these methods before task
+ is added to the `TaskQueue`.
  
  ### **Dependencies**
  ---
  
- You can use task dependencies to ensure correct task order execution. If task has 
- any dependencies, `TaskQueue` will first execute them first and if they finish
- without errors, parent task will be executed.
- 
- You can add dependencies by using `addDependency(_:)` method.
- 
- **Example dependency**
+ Complex tasks should be always divided into several smaller tasks. To make sure
+ that tasks are executed in the correct order you can use dependencies. To add
+ dependency use `addDependency(_:)` method.
  
  ```swift
- let getDataTask = GetDataTask()
- let parseJSONTask = ParseJSONTask()
+ let task = SomeTask()
+ let otherTask = OtherTask()
  
- parseJSONTask.addDependency(getDataTask)
- TaskQueue.main.addTask(parseJSONTask)
+ task.addDependency(otherTask)
  ```
  
- - Warning:
- You should create dependency tree before task is added to the `TaskQueue`.
+ When task with dependencies is added to the `TaskQueue`, dependencies will be
+ executed first.
  
+ - note: You can access all task dependencies with `dependencies` property.
+ 
+ ### **Conditions**
+ ---
+ 
+ In some cases, tasks need conditions to be satisfed in order to be executed.
+ 
+ One example would be location retrieval. In order to get location from the
+ device you need to make sure that user granted permissions for location
+ services. Granting permissions can be exposed as task condition. You can create conditions using `TaskCondition` protocol and add them to the task by using
+ `addCondition(_:)` method.
+ 
+ ### **Observers**
+ ---
+ 
+ In addition to the `onComplete` and `onError` completion methods, you can use
+ `TaskObserver` protocol to be notified when task starts and finishes with
+ execution.
+ 
+ Classic example would be creating observer that manages `UIActivityIndicator`
+ based on the task execution state.
+ 
+ ### **Retry**
+ ---
+ 
+ If the task finishes execution with error, it's execution can be retried. To
+ specify maximum number of retry operations use `retry(_:)` method.
+ 
+ ```swift
+ let task = SomeTask()
+ 
+ task
+    .retry(3)
+    .onComplete { value in
+        print(value)
+    }.onError { error in
+        print(error)
+    }
+ ```
+ 
+ - note: `retry(_:)` method can be chained with other task methods
 */
 public class Task<T>: NSOperation {
     
