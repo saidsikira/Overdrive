@@ -24,14 +24,13 @@ You can use `Overdrive` in your project by using any of the following package ma
 
 #### Carthage
 Add following to the `Cartfile`:
-```
+
+```shell
 github "arikis/Overdrive" >= 0.0.1
 ```
-> Note that if you want to build Overdrive on only one platform you can pass it to the carthage platform option.
-For example `carthage update --platform iOS`
 
 #### Cocoa Pods
-To use `Overdrive` with Cocoa Pods add it to the `Podfile`
+
 ```ruby
 platform :ios, '8.0'
 use_frameworks!
@@ -43,9 +42,6 @@ end
 
 #### Swift Package Manager
 
-**Requires Swift 2.2**
-
-To add `Overdrive` to your project using Swift Package Manager, add it to the package dependencies:
 ```swift
 import PackageDescription
 
@@ -63,3 +59,56 @@ let package = Package(
 
 #### Manual installation
 `Overdrive` can also be installed manualy by dragging the `Overdrive.xcodeproj` to your project and adding `Overdrive.framework` to the embedded libraries in project settings.
+
+## Usage
+
+Overdrive features two main classes:
+
+### `Task<T>`
+`Task<T>` is an abstract class that provides interface encapsuling any
+ asynchronous or synchronous operation. Abstract nature of the `Task<T>` enforces
+ you to create a subclass for any task you want to create. Subclassing `Task<T>`
+ is simple operation. You are only required to override `run()` method that
+ defines task execution point and call `finish(_:)` method to finish execution.
+ In order to execute any task you need to add it to the `TaskQueue` which
+ manages task execution, concurrency and threading mechanisms.
+
+ **Example subclass for networking operation**
+
+ ```swift
+ class NetworkTask: Task<NSData> {
+    let URL: NSURL
+    
+    init(URL: NSURL) {
+        self.URL = URL
+    }
+    
+    override func run() {
+        let request = NSURLRequest(URL: URL)
+        
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            data, response, error in
+            if error != nil {
+                self.finish(.Error(error!))
+            } else {
+                self.finish(.Value(data!))
+            }
+        }
+        
+        task.resume()
+    }
+}
+```
+
+To setup completion blocks, you use `onComplete()` and `onError()` methods:
+
+```swift
+let task = NetworkTask(URL: NSURL(string: "https://google.com")!)
+
+task
+    .onComplete { data in
+    	print(data)
+    }.onError { error in
+        print(error)
+}
+```
