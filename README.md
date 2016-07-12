@@ -88,34 +88,34 @@ Overdrive features two main classes:
 4. Create instance of subclass
 5. Add it to the `TaskQueue` when you want to start execution
 
- **Example subclass for networking operation**
+Example `Task<NSData>` subclass for network operation:
 
- ```swift
- // Create subclass of `Task<NSData>`
- class NetworkTask: Task<NSData> {
-    let URL: NSURL
-    
-    init(URL: NSURL) {
-        self.URL = URL
-    }
-    
-    // Override run() method
-    override func run() {
-        let request = NSURLRequest(URL: URL)
-        
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
-            data, response, error in
-            if error != nil {
-            	// Finish with error if any
-                self.finish(.Error(error!))
-            } else {
-            	// Finish with value
-                self.finish(.Value(data!))
-            }
-        }
-        
-        task.resume()
-    }
+```swift
+// Create subclass of `Task<NSData>`
+class NetworkTask: Task<NSData> {
+	let URL: NSURL
+
+	init(URL: NSURL) {
+	    self.URL = URL
+	}
+
+	// Override run() method
+	override func run() {
+	    let request = NSURLRequest(URL: URL)
+	    
+	    let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+	        data, response, error in
+	        if error != nil {
+	        	// Finish with error if any
+	            self.finish(.Error(error!))
+	        } else {
+	        	// Finish with value
+	            self.finish(.Value(data!))
+	        }
+	    }
+	    
+	    task.resume()
+	}
 }
 ```
 
@@ -153,11 +153,11 @@ queue.maxConcurrentOperationCount = 3
 ## thread safety
 
 All task properties are thread-safe by default, meaning that you can access them
-from any thread and queue and not worry about locks and synchronizing.
+from any thread or queue and not worry about locks and access synchronization.
 
 ## inspiration
 
-Inpiration for the Overdrive came from several WWDC videos:
+Inspiration for the `Overdrive` framework came from several WWDC videos:
 
 * [Protocol Oriented Programming](https://developer.apple.com/videos/play/wwdc2015/408/)
 * [Advanced NSOperations](https://developer.apple.com/videos/play/wwdc2015/226/)
