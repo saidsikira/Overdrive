@@ -116,64 +116,63 @@
 <img src="https://img.shields.io/badge/platform-linux%20%7C%20iOS%20%7C%20macOS%20%7C%20tvOS-lightgray.svg" alt="Plaforms">
 <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage Compatible"></a>
 <a href="https://github.com/apple/swift-package-manager"><img src="https://img.shields.io/badge/Swift%20Package%20Manager-Compatible-brightgreen.svg" alt="Swift Package Manager Compatible"></a></p>
-<a href='#features' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='features'>Features:</h2>
+
+<p><strong>Contents:</strong></p>
 
 <ul>
-<li>Type-safety</li>
-<li>Concurrency</li>
-<li>Full threading capabilities</li>
-<li>Full documentation</li>
-<li>Extensive tests</li>
+<li><a href="#what-can-i-do-with-overdrive">what can I do with Overdrive?</a></li>
+<li><a href="#requirements">requirements</a></li>
+<li><a href="#usage">usage</a></li>
+<li><a href="#concurrency">concurrency</a></li>
+<li><a href="#thread-safety">thread safety</a></li>
+<li><a href="#inspiration">inspiration</a></li>
 </ul>
-<a href='#requirements' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='requirements'>Requirements</h2>
+<a href='#what-can-i-do-with-overdrive' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='what-can-i-do-with-overdrive'>what can I do with Overdrive?</h2>
+
+<ul>
+<li>execute tasks concurrently</li>
+<li>utilize multi-core capabilities to ensure faster execution</li>
+<li>easily defer task execution to custom thread or queue</li>
+<li>ensure that multiple tasks are executed in the correct order</li>
+<li>express custom conditions under which tasks can be executed</li>
+<li>enforce testability</li>
+<li>move logic from view controllers to simple modular units</li>
+<li>retry tasks that finished with errors</li>
+<li>don’t worry about thread-safety</li>
+</ul>
+<a href='#requirements' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='requirements'>requirements</h2>
 
 <ul>
 <li>iOS 8.0+ / Mac OS X 10.11+ / tvOS 9.0+</li>
 <li>Xcode 7.3+</li>
 <li>Swift 2.2 on Linux</li>
 </ul>
-<a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>Installation</h2>
+<a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>installation</h2>
+<a href='#a-href-https-github-com-carthage-carthage-carthage-a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='a-href-https-github-com-carthage-carthage-carthage-a'><a href="https://github.com/Carthage/Carthage">Carthage</a></h4>
 
-<p>You can use <code>Overdrive</code> in your project by using any of the following package managers.</p>
-<a href='#carthage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='carthage'>Carthage</h4>
+<p>Add following to the <code>Cartfile</code>:</p>
+<pre class="highlight shell"><code>github <span class="s2">"arikis/Overdrive"</span> &gt;<span class="o">=</span> 0.0.1
+</code></pre>
+<a href='#a-href-https-github-com-cocoapods-cocoapods-cocoa-pods-a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='a-href-https-github-com-cocoapods-cocoapods-cocoa-pods-a'><a href="https://github.com/CocoaPods/CocoaPods">Cocoa Pods</a></h4>
+<pre class="highlight ruby"><code><span class="n">platform</span> <span class="ss">:ios</span><span class="p">,</span> <span class="s1">'8.0'</span>
+<span class="n">use_frameworks!</span>
 
-<p>Add following to the <code>Cartfile</code>:
-<code>
-github &quot;arikis/Overdrive&quot; &gt;= 0.0.1
-</code></p>
+<span class="n">target</span> <span class="s1">'AppTarget'</span> <span class="k">do</span>
+    <span class="n">pod</span> <span class="s1">'Overdrive'</span>
+<span class="k">end</span>
+</code></pre>
+<a href='#a-href-https-github-com-apple-swift-package-manager-swift-package-manager-a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='a-href-https-github-com-apple-swift-package-manager-swift-package-manager-a'><a href="https://github.com/apple/swift-package-manager">Swift Package Manager</a></h4>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">PackageDescription</span>
 
-<blockquote>
-<p>Note that if you want to build Overdrive on only one platform you can pass it to the carthage platform option.
-For example <code>carthage update --platform iOS</code></p>
-</blockquote>
-<a href='#cocoa-pods' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='cocoa-pods'>Cocoa Pods</h4>
-
-<p>To use <code>Overdrive</code> with Cocoa Pods add it to the <code>Podfile</code>
-&ldquo;`ruby
-platform :ios, &lsquo;8.0&rsquo;
-use_frameworks!</p>
-
-<p>target &#39;AppTarget&rsquo; do
-    pod &#39;Overdrive&rsquo;
-end
-&rdquo;`</p>
-<a href='#swift-package-manager' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='swift-package-manager'>Swift Package Manager</h4>
-
-<p><strong>Requires Swift 2.2</strong></p>
-
-<p>To add <code>Overdrive</code> to your project using Swift Package Manager, add it to the package dependencies:
-&ldquo;`swift
-import PackageDescription</p>
-
-<p>let package = Package(
-  name: <q>ProjectName</q>,
-  targets: [],
-  dependencies: [
-    .Package(url: <q>https://github.com/arikis/Overdrive.git</q>, 
-    versions: <q>0.0.1</q>..&lt; Version.max)
-  ]
-)
-&rdquo;`</p>
+<span class="k">let</span> <span class="nv">package</span> <span class="o">=</span> <span class="kt">Package</span><span class="p">(</span>
+  <span class="nv">name</span><span class="p">:</span> <span class="s">"ProjectName"</span><span class="p">,</span>
+  <span class="nv">targets</span><span class="p">:</span> <span class="p">[],</span>
+  <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
+    <span class="o">.</span><span class="kt">Package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/arikis/Overdrive.git"</span><span class="p">,</span> 
+    <span class="nv">versions</span><span class="p">:</span> <span class="s">"0.0.1"</span><span class="o">..&lt;</span> <span class="kt">Version</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
+  <span class="p">]</span>
+<span class="p">)</span>
+</code></pre>
 
 <blockquote>
 <p>Swift Package Manager support is still experimental.</p>
@@ -181,6 +180,95 @@ import PackageDescription</p>
 <a href='#manual-installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='manual-installation'>Manual installation</h4>
 
 <p><code>Overdrive</code> can also be installed manualy by dragging the <code>Overdrive.xcodeproj</code> to your project and adding <code>Overdrive.framework</code> to the embedded libraries in project settings.</p>
+<a href='#usage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='usage'>usage</h2>
+
+<p>Overdrive features two main classes:</p>
+
+<ul>
+<li><code>Task&lt;T&gt;</code> - used to define task <a href="https://arikis.github.io/Overdrive/latest/Classes/Task.html">documentation</a></li>
+<li><code>TaskQueue</code> - used to execute tasks and manage concurrency and multi threading <a href="https://arikis.github.io/Overdrive/latest/Classes/TaskQueue.html">documentation</a></li>
+</ul>
+
+<p><strong>Workflow:</strong></p>
+
+<ol>
+<li>Create subclass of <code>Task&lt;T&gt;</code></li>
+<li>Override <code>run()</code> method and encapsulate any synchronous or asynchronous operation</li>
+<li>Finish execution with value(<code>T</code>) or error by using <code>finish(_:)</code> method</li>
+<li>Create instance of subclass</li>
+<li>Add it to the <code>TaskQueue</code> when you want to start execution</li>
+</ol>
+
+<p>Example <code>Task&lt;NSData&gt;</code> subclass for network operation:</p>
+<pre class="highlight swift"><code><span class="c1">// Create subclass of `Task&lt;NSData&gt;`</span>
+<span class="kd">class</span> <span class="kt">NetworkTask</span><span class="p">:</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">NSData</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">URL</span><span class="p">:</span> <span class="kt">NSURL</span>
+
+    <span class="nf">init</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="kt">URL</span> <span class="o">=</span> <span class="kt">URL</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Override run() method</span>
+    <span class="k">override</span> <span class="kd">func</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span>
+
+        <span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">NSURLSession</span><span class="o">.</span><span class="nf">sharedSession</span><span class="p">()</span><span class="o">.</span><span class="nf">dataTaskWithRequest</span><span class="p">(</span><span class="n">request</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">data</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+            <span class="k">if</span> <span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+                <span class="c1">// Finish with error if any</span>
+                <span class="k">self</span><span class="o">.</span><span class="nf">finish</span><span class="p">(</span><span class="o">.</span><span class="kt">Error</span><span class="p">(</span><span class="n">error</span><span class="o">!</span><span class="p">))</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">// Finish with value</span>
+                <span class="k">self</span><span class="o">.</span><span class="nf">finish</span><span class="p">(</span><span class="o">.</span><span class="kt">Value</span><span class="p">(</span><span class="n">data</span><span class="o">!</span><span class="p">))</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="n">task</span><span class="o">.</span><span class="nf">resume</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>To setup completion blocks, you use <code>onValue()</code> and <code>onError()</code> methods:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">NetworkTask</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://google.com"</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
+
+<span class="n">task</span>
+    <span class="o">.</span><span class="n">onValue</span> <span class="p">{</span> <span class="n">data</span> <span class="k">in</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="p">}</span><span class="o">.</span><span class="n">onError</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>To execute the task add it to the <code>TaskQueue</code></p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">TaskQueue</span><span class="p">()</span>
+<span class="n">queue</span><span class="o">.</span><span class="nf">addTask</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+</code></pre>
+<a href='#concurrency' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='concurrency'>concurrency</h2>
+
+<p><code>TaskQueue</code> executes tasks concurrently by default. Maximum number of concurrent
+operations is defined by the current system conditions. If you want to limit the
+number of maximum concurrent operations use <code>maxConcurrentOperationCount</code> property.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">TaskQueue</span><span class="p">()</span>
+<span class="n">queue</span><span class="o">.</span><span class="n">maxConcurrentOperationCount</span> <span class="o">=</span> <span class="mi">3</span>
+</code></pre>
+<a href='#thread-safety' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='thread-safety'>thread safety</h2>
+
+<p>All task properties are thread-safe by default, meaning that you can access them
+from any thread or queue and not worry about locks and access synchronization.</p>
+<a href='#inspiration' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='inspiration'>inspiration</h2>
+
+<p>Inspiration for the <code>Overdrive</code> framework came from several WWDC videos:</p>
+
+<ul>
+<li><a href="https://developer.apple.com/videos/play/wwdc2015/408/">Protocol Oriented Programming</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2015/226/">Advanced NSOperations</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2016/419/">Protocol and Value Oriented Programming</a></li>
+</ul>
+
+<blockquote>
+<p><code>Overdrive</code> name comes from overdrive guitar pedals that drive amp tubes and create
+louder, distorted sound</p>
+</blockquote>
 
           </div>
         </section>
@@ -189,7 +277,7 @@ import PackageDescription</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2016 <a class="link" href="swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-07-10)</p>
+      <p>&copy; 2016 <a class="link" href="swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-07-12)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
