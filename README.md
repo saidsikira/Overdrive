@@ -11,6 +11,8 @@ Task based API in Swift with focus on type-safety, concurrency, threading and st
 * [what can I do with Overdrive?](#what-can-i-do-with-overdrive)
 * [requirements](#requirements)
 * [usage](#usage)
+* [concurrency](#concurrency)
+* [thread safety](#thread-safety)
 
 ## what can I do with Overdrive?
 
@@ -31,16 +33,15 @@ Task based API in Swift with focus on type-safety, concurrency, threading and st
 - Swift 2.2 on Linux
 
 ## installation
-You can use `Overdrive` in your project by using any of the following package managers.
 
-#### Carthage
+#### [Carthage](https://github.com/Carthage/Carthage)
 Add following to the `Cartfile`:
 
 ```shell
 github "arikis/Overdrive" >= 0.0.1
 ```
 
-#### Cocoa Pods
+#### [Cocoa Pods](https://github.com/CocoaPods/CocoaPods)
 
 ```ruby
 platform :ios, '8.0'
@@ -51,7 +52,7 @@ target 'AppTarget' do
 end
 ```
 
-#### Swift Package Manager
+#### [Swift Package Manager](https://github.com/apple/swift-package-manager)
 
 ```swift
 import PackageDescription
@@ -75,14 +76,10 @@ let package = Package(
 
 Overdrive features two main classes:
 
+- `Task<T>` - this class is used to define task
+- `TaskQueue` - this class is used to execute tasks
+
 ### `Task<T>`
-`Task<T>` is an abstract class that provides interface encapsuling any
- asynchronous or synchronous operation. Abstract nature of the `Task<T>` enforces
- you to create a subclass for any task you want to create. Subclassing `Task<T>`
- is simple operation. You are only required to override `run()` method that
- defines task execution point and call `finish(_:)` method to finish execution.
- In order to execute any task you need to add it to the `TaskQueue` which
- manages task execution, concurrency and threading mechanisms.
 
  **Example subclass for networking operation**
 
