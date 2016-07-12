@@ -13,6 +13,7 @@ Task based API in Swift with focus on type-safety, concurrency, threading and st
 * [usage](#usage)
 * [concurrency](#concurrency)
 * [thread safety](#thread-safety)
+* [inspiration](#inspiration)
 
 ## what can I do with Overdrive?
 
@@ -76,10 +77,10 @@ let package = Package(
 
 Overdrive features two main classes:
 
-- `Task<T>` - this class is used to define task [documentation](https://arikis.github.io/Overdrive/latest/Classes/Task.html)
-- `TaskQueue` - this class is used to execute tasks [documentation](https://arikis.github.io/Overdrive/latest/Classes/TaskQueue.html)
+- `Task<T>` - used to define task [documentation](https://arikis.github.io/Overdrive/latest/Classes/Task.html)
+- `TaskQueue` - used to execute tasks and manage concurrency and multi threading [documentation](https://arikis.github.io/Overdrive/latest/Classes/TaskQueue.html)
 
-**Workflow**
+**Workflow:**
 
 1. Create subclass of `Task<T>`
 2. Override `run()` method and encapsulate any synchronous or asynchronous operation
@@ -118,7 +119,7 @@ Overdrive features two main classes:
 }
 ```
 
-To setup completion blocks, you use `onComplete()` and `onError()` methods:
+To setup completion blocks, you use `onValue()` and `onError()` methods:
 
 ```swift
 let task = NetworkTask(URL: NSURL(string: "https://google.com")!)
@@ -137,3 +138,30 @@ To execute the task add it to the `TaskQueue`
 let queue = TaskQueue()
 queue.addTask(task)
 ```
+
+## concurrency
+
+`TaskQueue` executes tasks concurrently by default. Maximum number of concurrent
+operations is defined by the current system conditions. If you want to limit the
+number of maximum concurrent operations use `maxConcurrentOperationCount` property.
+
+```swift
+let queue = TaskQueue()
+queue.maxConcurrentOperationCount = 3
+```
+
+## thread safety
+
+All task properties are thread-safe by default, meaning that you can access them
+from any thread and queue and not worry about locks and synchronizing.
+
+## inspiration
+
+Inpiration for the Overdrive came from several WWDC videos:
+
+* [Protocol Oriented Programming](https://developer.apple.com/videos/play/wwdc2015/408/)
+* [Advanced NSOperations](https://developer.apple.com/videos/play/wwdc2015/226/)
+* [Protocol and Value Oriented Programming](https://developer.apple.com/videos/play/wwdc2016/419/)
+
+> `Overdrive` name comes from overdrive guitar pedals that drive amp tubes and create
+louder, distorted sound
