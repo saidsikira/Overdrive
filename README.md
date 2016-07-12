@@ -76,14 +76,21 @@ let package = Package(
 
 Overdrive features two main classes:
 
-- `Task<T>` - this class is used to define task
-- `TaskQueue` - this class is used to execute tasks
+- `Task<T>` - this class is used to define task [documentation](https://arikis.github.io/Overdrive/latest/Classes/Task.html)
+- `TaskQueue` - this class is used to execute tasks [documentation](https://arikis.github.io/Overdrive/latest/Classes/TaskQueue.html)
 
-### `Task<T>`
+**Workflow**
+
+1. Create subclass of `Task<T>`
+2. Override `run()` method and encapsulate any synchronous or asynchronous operation
+3. Finish execution with value(`T`) or error by using `finish(_:)` method
+4. Create instance of subclass
+5. Add it to the `TaskQueue` when you want to start execution
 
  **Example subclass for networking operation**
 
  ```swift
+ // Create subclass of `Task<NSData>`
  class NetworkTask: Task<NSData> {
     let URL: NSURL
     
@@ -91,14 +98,17 @@ Overdrive features two main classes:
         self.URL = URL
     }
     
+    // Override run() method
     override func run() {
         let request = NSURLRequest(URL: URL)
         
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
             data, response, error in
             if error != nil {
+            	// Finish with error if any
                 self.finish(.Error(error!))
             } else {
+            	// Finish with value
                 self.finish(.Value(data!))
             }
         }
@@ -114,9 +124,16 @@ To setup completion blocks, you use `onComplete()` and `onError()` methods:
 let task = NetworkTask(URL: NSURL(string: "https://google.com")!)
 
 task
-    .onComplete { data in
+    .onValue { data in
     	print(data)
     }.onError { error in
         print(error)
 }
+```
+
+To execute the task add it to the `TaskQueue`
+
+```swift
+let queue = TaskQueue()
+queue.addTask(task)
 ```
