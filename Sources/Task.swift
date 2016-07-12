@@ -73,14 +73,14 @@ import class Foundation.NSOperation
  You can use one of the defined completion blocks that are executed when task
  finished with execution.
  
- 1. `onComplete` - executed when task finishes with `Value(T)`
+ 1. `onValue` - executed when task finishes with `Value(T)`
  2. `onError` - executed when task finishes with `Error(ErrorType)`
  
  ```swift
  let task = SomeTask()
  
  task
-    .onComplete { value in
+    .onValue { value in
         print(value)
     }.onError { error in
         print(error)
@@ -89,7 +89,7 @@ import class Foundation.NSOperation
  
  - note: Many of the `Task` methods can be chained to enable simple setup
  
- - warning: Calling `onComplete` and `onError` methods after the task is added
+ - warning: Calling `onValue` and `onError` methods after the task is added
  to the `TaskQueue` may result in error, since the task may have already finished
  with execution. To avoid this behaviour, always call these methods before task
  is added to the `TaskQueue`.
@@ -126,7 +126,7 @@ import class Foundation.NSOperation
  ### **Observers**
  ---
  
- In addition to the `onComplete` and `onError` completion methods, you can use
+ In addition to the `onValue` and `onError` completion methods, you can use
  `TaskObserver` protocol to be notified when task starts and finishes with
  execution.
  
@@ -144,7 +144,7 @@ import class Foundation.NSOperation
  
  task
     .retry(3)
-    .onComplete { value in
+    .onValue { value in
         print(value)
     }.onError { error in
         print(error)
@@ -175,9 +175,9 @@ public class Task<T>: NSOperation {
      Internal completion block
      
      - Warning: Accessing this property directly will result in unexpected behavior.
-     Use `onCompleteBlock` instead.
+     Use `onValueBlock` instead.
      */
-    private var internalOnCompleteBlock: ((T) -> Void)?
+    private var internalonValueBlock: ((T) -> Void)?
     
     /**
      Internal error completion block
@@ -240,7 +240,7 @@ public class Task<T>: NSOperation {
     /**
      Completion block that will be executed when the task finishes execution.
      
-     - Warning: **DEPRECATED**. Use `onComplete(_:)` method to set completion
+     - Warning: **DEPRECATED**. Use `onValue(_:)` method to set completion
      block.
     */
     @available(*, deprecated, message = "use onResult completion instead")
@@ -249,7 +249,7 @@ public class Task<T>: NSOperation {
             return nil
         }
         set {
-            assert(false, "Use onComplete method to define the behaviour")
+            assert(false, "Use onValue method to define the behaviour")
         }
     }
     
@@ -274,22 +274,22 @@ public class Task<T>: NSOperation {
      
      See `Result<T>`.
      
-     Block should be set by using `onComplete:` method on `Self`.
+     Block should be set by using `onValue:` method on `Self`.
      
      - Warning: Setting this property directly may result in unexpected behaviour.
-     Always use `onComplete(_:)` method on `Self` to set the block.
+     Always use `onValue(_:)` method on `Self` to set the block.
      */
-    var onCompleteBlock: ((T) -> Void)? {
+    var onValueBlock: ((T) -> Void)? {
         get {
             return Dispatch.sync(queue) {
-                return self.internalOnCompleteBlock
+                return self.internalonValueBlock
             }
         }
         
         set(newBlock) {
             if newBlock != nil {
                 Dispatch.sync(queue) {
-                    self.internalOnCompleteBlock = newBlock
+                    self.internalonValueBlock = newBlock
                 }
             }
         }
@@ -337,9 +337,9 @@ public class Task<T>: NSOperation {
      - Returns: `Self`. This method will always return itself, so that it can be used
      in chain with other task methods.
      */
-    public final func onComplete(completion: ((T) -> Void)) -> Self {
+    public final func onValue(completion: ((T) -> Void)) -> Self {
         assert(state < .Executing, "On complete called after task is executed")
-        onCompleteBlock = completion
+        onValueBlock = completion
         return self
     }
     
@@ -350,7 +350,7 @@ public class Task<T>: NSOperation {
      - Note: Completion block set will only be executed if the
      task finishes with `.Error` result.
      
-     If the task finishes with `.Value` result, onComplete completion will be called.
+     If the task finishes with `.Value` result, onValue completion will be called.
      
      - Warning: This method should only be called before the task state becomes `.Pending`.
      Calling this method after `.Pending` state may result in unexpected behaviour.
@@ -564,7 +564,7 @@ public class Task<T>: NSOperation {
     /**
      Finish execution of the task with result. Calling this method will change
      task state to `Finished` and call neccesary completion blocks. If task finished
-     with `Value(T)`, `onCompleteBlock` will be executed. If task finished with
+     with `Value(T)`, `onValueBlock` will be executed. If task finished with
      `Error(ErrorType)` result, `onErrorBlock` will be executed.
      
      - Parameter result: Task result (`.Value(T)` or `.Error(ErrorType)`)
@@ -578,7 +578,7 @@ public class Task<T>: NSOperation {
         
         switch result {
         case .Value(let value):
-            onCompleteBlock?(value)
+            onValueBlock?(value)
         case .Error(let error):
             onErrorBlock?(error)
         }

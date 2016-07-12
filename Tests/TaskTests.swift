@@ -38,7 +38,7 @@ class TaskTests: XCTestCase {
         let task = SimpleTask()
         let expectation = expectationWithDescription("Task finished state expecation")
         
-        task.onComplete { value in
+        task.onValue { value in
             XCTAssert(task.state == .Finished, "Task state should be: Finished")
             expectation.fulfill()
         }
@@ -50,32 +50,32 @@ class TaskTests: XCTestCase {
         }
     }
     
-    func testOnCompleteCompletionBlockValue() {
+    func testOnValueCompletionBlockValue() {
         let task = SimpleTask()
         
         task
-            .onComplete { _ in }
+            .onValue { _ in }
             .onError { _ in }
         
-        XCTAssert(task.onCompleteBlock != nil, "onComplete block should be set")
+        XCTAssert(task.onValueBlock != nil, "onValue block should be set")
     }
     
     func testOnErrorCompletionBlockValue() {
         let task = SimpleTask()
         
         task
-            .onComplete { _ in }
+            .onValue { _ in }
             .onError { _ in }
         
         
         XCTAssert(task.onErrorBlock != nil, "onError block should be set")
     }
     
-    func testOnCompleteBlockExecution() {
+    func testOnValueBlockExecution() {
         let task = SimpleTask()
         let expectation = expectationWithDescription("Task result value expecation")
         
-        task.onComplete { value in
+        task.onValue { value in
             XCTAssert(value == 10, "Task result value should be 10")
             expectation.fulfill()
         }
@@ -94,8 +94,8 @@ class TaskTests: XCTestCase {
         task
             .onError { error in
                 expectation.fulfill()
-            }.onComplete { _ in
-                XCTFail("onComplete block should not be executed")
+            }.onValue { _ in
+                XCTFail("onValue block should not be executed")
         }
         
         queue.addTask(task)

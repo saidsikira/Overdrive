@@ -18,7 +18,7 @@
  ```
  
  Inline tasks behave same as any `Task<T>`. They can be added to the
- `TaskQueue` and you can use `onComplete(_:)` method to be notified when they
+ `TaskQueue` and you can use `onValue(_:)` method to be notified when they
  are finished with execution.
  
  - Note: `InlineTask` is most commonly used in UI interactions. For example,

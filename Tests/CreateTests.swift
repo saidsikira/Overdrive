@@ -24,7 +24,7 @@ class CreateTests: XCTestCase {
         }
         
         someTask
-            .onComplete {
+            .onValue {
                 value in
                 if value == 1 {
                     expecation.fulfill()
@@ -57,9 +57,9 @@ class CreateTests: XCTestCase {
                 } else {
                     XCTAssert(false, "Wrong error type returned")
                 }
-            }.onComplete {
+            }.onValue {
                 value in
-                XCTAssert(false, "onComplete block should not be executed")
+                XCTAssert(false, "onValue block should not be executed")
         }
         
         TaskQueue.main.addTask(someTask)

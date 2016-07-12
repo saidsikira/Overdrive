@@ -25,7 +25,7 @@ class InlineTaskTests: XCTestCase {
             print("do work")
         }
         
-        task.onComplete {
+        task.onValue {
             value in
             finishExpecation.fulfill()
         }

@@ -37,8 +37,8 @@ class TaskConditionTests: XCTestCase {
         let expectation = expectationWithDescription("Task failed condition expecation")
         
         task
-            .onComplete { value in
-                XCTAssert(false, "onComplete block should not be executed")
+            .onValue { value in
+                XCTAssert(false, "onValue block should not be executed")
             }.onError { error in
                 XCTAssert(task.conditionErrors.count == 1, "Condition error count should be 1")
                 expectation.fulfill()
@@ -64,7 +64,7 @@ class TaskConditionTests: XCTestCase {
         let expectation = expectationWithDescription("Satisfied condition expecation")
         
         task
-            .onComplete { value in
+            .onValue { value in
                 XCTAssert(task.conditionErrors.count == 0, "Condition error count should be 1")
                 expectation.fulfill()
             }.onError { error in
