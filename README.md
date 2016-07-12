@@ -6,20 +6,31 @@ Task based API in Swift with focus on type-safety, concurrency, threading and st
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Swift Package Manager Compatible](https://img.shields.io/badge/Swift%20Package%20Manager-Compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
 
-## Features:
-* Type-safety
-* Concurrency
-* Full threading capabilities
-* Full documentation
-* Extensive tests
+**Contents:**
 
-## Requirements
+* [what can I do with Overdrive?](#what-can-i-do-with-overdrive)
+* [requirements](#requirements)
+* [usage](#usage)
+
+## what can I do with Overdrive?
+
+* execute tasks concurrently 
+* utilize multi-core capabilities to ensure faster execution
+* easily defer task execution to custom thread or queue
+* ensure that multiple tasks are executed in the correct order
+* express custom conditions under which tasks can be executed
+* enforce testability
+* move logic from view controllers to simple modular units
+* retry tasks that finished with errors
+* don’t worry about thread-safety
+
+## requirements
 
 - iOS 8.0+ / Mac OS X 10.11+ / tvOS 9.0+ 
 - Xcode 7.3+
 - Swift 2.2 on Linux
 
-## Installation
+## installation
 You can use `Overdrive` in your project by using any of the following package managers.
 
 #### Carthage
@@ -60,7 +71,7 @@ let package = Package(
 #### Manual installation
 `Overdrive` can also be installed manualy by dragging the `Overdrive.xcodeproj` to your project and adding `Overdrive.framework` to the embedded libraries in project settings.
 
-## Usage
+## usage
 
 Overdrive features two main classes:
 
