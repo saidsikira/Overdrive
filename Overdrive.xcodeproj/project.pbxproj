@@ -71,6 +71,10 @@
 		B3BB185E1D1C0D24002B1979 /* RetryTaskObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB185C1D1C0D24002B1979 /* RetryTaskObserver.swift */; };
 		B3BB185F1D1C0D24002B1979 /* RetryTaskObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB185C1D1C0D24002B1979 /* RetryTaskObserver.swift */; };
 		B3C5DF591D1C4F7200D79532 /* DependencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5DF581D1C4F7200D79532 /* DependencyTests.swift */; };
+		B3D030CB1D3BECEE00A216ED /* ThreadSafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B399F77A1D3B87C000EEFBBB /* ThreadSafetyTests.swift */; };
+		B3D030CC1D3BFF1A00A216ED /* ThreadSafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B399F77A1D3B87C000EEFBBB /* ThreadSafetyTests.swift */; };
+		B3D030CD1D3BFF7700A216ED /* InlineTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31709961D304B6900BA3757 /* InlineTaskTests.swift */; };
+		B3D030CE1D3BFF7800A216ED /* InlineTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31709961D304B6900BA3757 /* InlineTaskTests.swift */; };
 		B3D302C01D2D065900BA070A /* TaskConditionDependencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D302BE1D2D065200BA070A /* TaskConditionDependencyTests.swift */; };
 		B3DD52EB1D16CC0000EBF640 /* Overdrive.h in Headers */ = {isa = PBXBuildFile; fileRef = B3DD52E91D16CC0000EBF640 /* Overdrive.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B3DD52ED1D16CC4300EBF640 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DD52EC1D16CC4300EBF640 /* Result.swift */; };
@@ -563,7 +567,9 @@
 				B391B4931D2EE167000A7F78 /* TaskConditionDependencyTests.swift in Sources */,
 				B3AD651C1D245FD4001F6C57 /* DependencyTests.swift in Sources */,
 				B391B49A1D2EE17F000A7F78 /* TaskQueueDelegateTests.swift in Sources */,
+				B3D030CD1D3BFF7700A216ED /* InlineTaskTests.swift in Sources */,
 				B391B4951D2EE170000A7F78 /* TaskConditionTests.swift in Sources */,
+				B3D030CC1D3BFF1A00A216ED /* ThreadSafetyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -600,7 +606,9 @@
 				B3A147CF1D26BFEE00BF971E /* TaskObserverManagementTests.swift in Sources */,
 				B391B49B1D2EE180000A7F78 /* TaskQueueDelegateTests.swift in Sources */,
 				B391B4961D2EE171000A7F78 /* TaskConditionTests.swift in Sources */,
+				B3D030CE1D3BFF7800A216ED /* InlineTaskTests.swift in Sources */,
 				B3AD651F1D245FD8001F6C57 /* CreateTests.swift in Sources */,
+				B3D030CB1D3BECEE00A216ED /* ThreadSafetyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -678,7 +686,7 @@
 				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = io.swiftable.Overdrive;
 				PRODUCT_NAME = Overdrive;
 				SDKROOT = macosx;
@@ -700,7 +708,7 @@
 				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = io.swiftable.Overdrive;
 				PRODUCT_NAME = Overdrive;
 				SDKROOT = macosx;

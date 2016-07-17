@@ -38,4 +38,28 @@ class ThreadSafetyTests: XCTestCase {
             print(handlerError)
         }
     }
+    
+    func testExecutionOnCustomQueue() {
+        let backgroundQueueExpecation = expectationWithDescription("Execution on background queue")
+        
+        let customDispatchQueue = dispatch_queue_create("io.overdrive.queue", nil)
+        let backgroundDispatchQueue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
+        
+        let task = Dispatch.sync(customDispatchQueue) {
+            return SimpleTask()
+        }
+        
+        task.onValue { value in
+            Dispatch.async(backgroundDispatchQueue) {
+                XCTAssert(value == 10, "Incorrect value on background queue")
+                backgroundQueueExpecation.fulfill()
+            }
+        }
+        
+        let queue = TaskQueue()
+        queue.underlyingQueue = dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0)
+        queue.addTask(task)
+        
+        waitForExpectationsWithTimeout(0.4) { _ in }
+    }
 }
