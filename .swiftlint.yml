@@ -3,3 +3,4 @@ disabled_rules:
   - valid_docs
   - file_length
   - line_length
+  - type_body_length
