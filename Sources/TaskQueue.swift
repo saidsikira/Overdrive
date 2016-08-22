@@ -95,7 +95,7 @@ public class TaskQueue: NSOperationQueue {
      */
     public static let main: TaskQueue = {
         let queue = TaskQueue()
-        queue.underlyingQueue = dispatch_get_main_queue()
+        queue.underlyingQueue = NSOperationQueue.mainQueue().underlyingQueue
         return queue
     }()
     
@@ -132,7 +132,18 @@ public class TaskQueue: NSOperationQueue {
      */
     public init(qos: NSQualityOfService) {
         super.init()
-        self.qualityOfService = qos
+        super.qualityOfService = qos
+    }
+    
+    /**
+     Initializes TaskQueue with specific dispatch queue.
+     
+     - note: Setting underlying queue for the TaskQueue will override any
+     Quality Of Service setting on TaskQueue.
+    */
+    public init(queue: dispatch_queue_t) {
+        super.init()
+        super.underlyingQueue = queue
     }
     
     //MARK: Task management
