@@ -21,6 +21,9 @@
 		B322B0AA1D1ED314009DE006 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322B0A91D1ED314009DE006 /* Condition.swift */; };
 		B322B0AB1D1ED314009DE006 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322B0A91D1ED314009DE006 /* Condition.swift */; };
 		B322B0AC1D1ED314009DE006 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322B0A91D1ED314009DE006 /* Condition.swift */; };
+		B325F69F1D70915500A3A170 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F69E1D70915500A3A170 /* ResultTests.swift */; };
+		B325F6A01D70923E00A3A170 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F69E1D70915500A3A170 /* ResultTests.swift */; };
+		B325F6A11D70923E00A3A170 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F69E1D70915500A3A170 /* ResultTests.swift */; };
 		B35FF1B81D6B5A860048C676 /* DispatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35FF1B71D6B5A860048C676 /* DispatchTests.swift */; };
 		B35FF1B91D6B5AFF0048C676 /* ThreadSafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B399F77A1D3B87C000EEFBBB /* ThreadSafetyTests.swift */; };
 		B35FF1BA1D6B5B000048C676 /* ThreadSafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B399F77A1D3B87C000EEFBBB /* ThreadSafetyTests.swift */; };
@@ -124,6 +127,7 @@
 		B31CF9981D185B44003D4B2B /* TaskQueueDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskQueueDelegate.swift; sourceTree = "<group>"; };
 		B31CF99D1D189FCB003D4B2B /* NSQualityOfService+Overdrive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSQualityOfService+Overdrive.swift"; sourceTree = "<group>"; };
 		B322B0A91D1ED314009DE006 /* Condition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Condition.swift; sourceTree = "<group>"; };
+		B325F69E1D70915500A3A170 /* ResultTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultTests.swift; sourceTree = "<group>"; };
 		B35FF1B71D6B5A860048C676 /* DispatchTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispatchTests.swift; sourceTree = "<group>"; };
 		B391B48B1D2EA7E1000A7F78 /* NSOperation+Overdrive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSOperation+Overdrive.swift"; sourceTree = "<group>"; };
 		B391B4911D2ED4FD000A7F78 /* TaskObserverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskObserverTests.swift; sourceTree = "<group>"; };
@@ -281,6 +285,7 @@
 				B3DD52FC1D16D83200EBF640 /* TaskTests.swift */,
 				B399F77A1D3B87C000EEFBBB /* ThreadSafetyTests.swift */,
 				B35FF1B71D6B5A860048C676 /* DispatchTests.swift */,
+				B325F69E1D70915500A3A170 /* ResultTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -571,6 +576,7 @@
 				B35FF1BB1D6B5B030048C676 /* DispatchTests.swift in Sources */,
 				B391B4981D2EE17B000A7F78 /* TaskObserverTests.swift in Sources */,
 				B391B4A11D2F7CCB000A7F78 /* CreateTests.swift in Sources */,
+				B325F6A01D70923E00A3A170 /* ResultTests.swift in Sources */,
 				B391B4931D2EE167000A7F78 /* TaskConditionDependencyTests.swift in Sources */,
 				B3AD651C1D245FD4001F6C57 /* DependencyTests.swift in Sources */,
 				B391B49A1D2EE17F000A7F78 /* TaskQueueDelegateTests.swift in Sources */,
@@ -611,6 +617,7 @@
 				B35FF1BC1D6B5B040048C676 /* DispatchTests.swift in Sources */,
 				B391B4991D2EE17C000A7F78 /* TaskObserverTests.swift in Sources */,
 				B391B4941D2EE168000A7F78 /* TaskConditionDependencyTests.swift in Sources */,
+				B325F6A11D70923E00A3A170 /* ResultTests.swift in Sources */,
 				B3A147CF1D26BFEE00BF971E /* TaskObserverManagementTests.swift in Sources */,
 				B391B49B1D2EE180000A7F78 /* TaskQueueDelegateTests.swift in Sources */,
 				B391B4961D2EE171000A7F78 /* TaskConditionTests.swift in Sources */,
@@ -651,6 +658,7 @@
 				B35FF1B81D6B5A860048C676 /* DispatchTests.swift in Sources */,
 				B3174C881D1D9C0C000DF4F6 /* TaskQueueDelegateTests.swift in Sources */,
 				B3C5DF591D1C4F7200D79532 /* DependencyTests.swift in Sources */,
+				B325F69F1D70915500A3A170 /* ResultTests.swift in Sources */,
 				B31709971D304B6900BA3757 /* InlineTaskTests.swift in Sources */,
 				B3AD65211D246250001F6C57 /* TaskObserverManagementTests.swift in Sources */,
 				B3A147D21D27C58200BF971E /* TaskConditionTests.swift in Sources */,

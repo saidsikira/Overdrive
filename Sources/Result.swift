@@ -23,6 +23,34 @@ public enum Result<T> {
     
     /// Error case with associated `ErrorType`
     case Error(ErrorType)
+    
+    /// Returns value `T`
+    public var value: T? {
+        if case .Value(let value) = self {
+            return value
+        }
+        return nil
+    }
+    
+    /// Returns error value
+    public var error: ErrorType? {
+        if case .Error(let error) = self {
+            return error
+        }
+        return nil
+    }
+}
+
+extension Result {
+    
+    public func map<U>(transform: (T) -> U) -> Result<U> {
+        switch self {
+        case .Value(let value):
+            return Result<U>.Value(transform(value))
+        case .Error(let error):
+            return Result<U>.Error(error)
+        }
+    }
 }
 
 extension Result: CustomStringConvertible {
