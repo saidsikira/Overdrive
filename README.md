@@ -8,14 +8,14 @@ Task based API in Swift with focus on type-safety, concurrency, threading and st
 
 **Contents:**
 
-* [what can I do with Overdrive?](#what-can-i-do-with-overdrive)
-* [requirements](#requirements)
-* [usage](#usage)
-* [concurrency](#concurrency)
-* [thread safety](#thread-safety)
-* [inspiration](#inspiration)
+* [What can I do with Overdrive?](#what-can-i-do-with-overdrive)
+* [Requirements](#requirements)
+* [Usage](#usage)
+* [Concurrency](#concurrency)
+* [Thread safety](#thread-safety)
+* [Inspiration](#inspiration)
 
-## what can I do with Overdrive?
+## What can I do with Overdrive?
 
 * execute tasks concurrently 
 * utilize multi-core capabilities to ensure faster execution
@@ -27,13 +27,13 @@ Task based API in Swift with focus on type-safety, concurrency, threading and st
 * retry tasks that finished with errors
 * don’t worry about thread-safety
 
-## requirements
+## Requirements
 
 - iOS 8.0+ / Mac OS X 10.11+ / tvOS 9.0+ 
 - Xcode 7.3+
 - Swift 2.2 on Linux
 
-## installation
+## Installation
 
 #### [Carthage](https://github.com/Carthage/Carthage)
 Add following to the `Cartfile`:
@@ -73,7 +73,7 @@ let package = Package(
 #### Manual installation
 `Overdrive` can also be installed manualy by dragging the `Overdrive.xcodeproj` to your project and adding `Overdrive.framework` to the embedded libraries in project settings.
 
-## usage
+## Usage
 
 Overdrive features two main classes:
 
@@ -139,7 +139,7 @@ let queue = TaskQueue()
 queue.addTask(task)
 ```
 
-## concurrency
+## Concurrency
 
 `TaskQueue` executes tasks concurrently by default. Maximum number of concurrent
 operations is defined by the current system conditions. If you want to limit the
@@ -150,12 +150,12 @@ let queue = TaskQueue()
 queue.maxConcurrentOperationCount = 3
 ```
 
-## thread safety
+## Thread safety
 
 All task properties are thread-safe by default, meaning that you can access them
 from any thread or queue and not worry about locks and access synchronization.
 
-## inspiration
+## Inspiration
 
 Inspiration for the `Overdrive` framework came from several WWDC videos:
 
