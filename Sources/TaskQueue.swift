@@ -163,15 +163,6 @@ public class TaskQueue: NSOperationQueue {
         
         task.addObserver(finishObserver)
         
-        if task.shouldRetry {
-            let retryObserver = RetryTaskObserver { [weak self] in
-                if let queue = self {
-                    queue.retry(task: task)
-                }
-            }
-            task.addObserver(retryObserver)
-        }
-        
         // Add all explicit dependencies
         _ = task.dependencies.map { addOperation($0) }
         

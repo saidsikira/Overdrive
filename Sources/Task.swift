@@ -382,6 +382,11 @@ public class Task<T>: NSOperation {
         return self
     }
     
+    private func attemptRetry() {
+        _ = try? decreaseRetryCount()
+        run()
+    }
+    
     //MARK: Task conditions
     
     /**
@@ -573,14 +578,19 @@ public class Task<T>: NSOperation {
      Safe to call from any thread.
      */
     public final func finish(result: Result<T>) {
-        self.result = result
-        moveToFinishedState()
-        
-        switch result {
-        case .Value(let value):
-            onValueBlock?(value)
-        case .Error(let error):
-            onErrorBlock?(error)
+        if shouldRetry {
+            attemptRetry()
+        } else {
+            self.result = result
+            
+            moveToFinishedState()
+            
+            switch result {
+            case .Value(let value):
+                onValueBlock?(value)
+            case .Error(let error):
+                onErrorBlock?(error)
+            }
         }
     }
     

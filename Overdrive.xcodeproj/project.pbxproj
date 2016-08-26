@@ -24,6 +24,7 @@
 		B325F69F1D70915500A3A170 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F69E1D70915500A3A170 /* ResultTests.swift */; };
 		B325F6A01D70923E00A3A170 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F69E1D70915500A3A170 /* ResultTests.swift */; };
 		B325F6A11D70923E00A3A170 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F69E1D70915500A3A170 /* ResultTests.swift */; };
+		B325F6A31D70B76B00A3A170 /* RetryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F6A21D70B76B00A3A170 /* RetryTests.swift */; };
 		B35FF1B81D6B5A860048C676 /* DispatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35FF1B71D6B5A860048C676 /* DispatchTests.swift */; };
 		B35FF1B91D6B5AFF0048C676 /* ThreadSafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B399F77A1D3B87C000EEFBBB /* ThreadSafetyTests.swift */; };
 		B35FF1BA1D6B5B000048C676 /* ThreadSafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B399F77A1D3B87C000EEFBBB /* ThreadSafetyTests.swift */; };
@@ -75,9 +76,6 @@
 		B3B72BB51D16EE720004A7C2 /* TaskQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DD52F41D16D7A800EBF640 /* TaskQueue.swift */; };
 		B3B72BBF1D16EE820004A7C2 /* Overdrive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3B72BA81D16EE310004A7C2 /* Overdrive.framework */; };
 		B3B72BC51D16EED90004A7C2 /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DD52FC1D16D83200EBF640 /* TaskTests.swift */; };
-		B3BB185D1D1C0D24002B1979 /* RetryTaskObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB185C1D1C0D24002B1979 /* RetryTaskObserver.swift */; };
-		B3BB185E1D1C0D24002B1979 /* RetryTaskObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB185C1D1C0D24002B1979 /* RetryTaskObserver.swift */; };
-		B3BB185F1D1C0D24002B1979 /* RetryTaskObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB185C1D1C0D24002B1979 /* RetryTaskObserver.swift */; };
 		B3C5DF591D1C4F7200D79532 /* DependencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5DF581D1C4F7200D79532 /* DependencyTests.swift */; };
 		B3D030CD1D3BFF7700A216ED /* InlineTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31709961D304B6900BA3757 /* InlineTaskTests.swift */; };
 		B3D030CE1D3BFF7800A216ED /* InlineTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31709961D304B6900BA3757 /* InlineTaskTests.swift */; };
@@ -128,6 +126,7 @@
 		B31CF99D1D189FCB003D4B2B /* NSQualityOfService+Overdrive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSQualityOfService+Overdrive.swift"; sourceTree = "<group>"; };
 		B322B0A91D1ED314009DE006 /* Condition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Condition.swift; sourceTree = "<group>"; };
 		B325F69E1D70915500A3A170 /* ResultTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultTests.swift; sourceTree = "<group>"; };
+		B325F6A21D70B76B00A3A170 /* RetryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetryTests.swift; sourceTree = "<group>"; };
 		B35FF1B71D6B5A860048C676 /* DispatchTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispatchTests.swift; sourceTree = "<group>"; };
 		B391B48B1D2EA7E1000A7F78 /* NSOperation+Overdrive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSOperation+Overdrive.swift"; sourceTree = "<group>"; };
 		B391B4911D2ED4FD000A7F78 /* TaskObserverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskObserverTests.swift; sourceTree = "<group>"; };
@@ -141,7 +140,6 @@
 		B3B72B971D16EAE70004A7C2 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B72BA81D16EE310004A7C2 /* Overdrive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Overdrive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B72BBA1D16EE810004A7C2 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3BB185C1D1C0D24002B1979 /* RetryTaskObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetryTaskObserver.swift; sourceTree = "<group>"; };
 		B3C5DF581D1C4F7200D79532 /* DependencyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyTests.swift; sourceTree = "<group>"; };
 		B3D302BE1D2D065200BA070A /* TaskConditionDependencyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskConditionDependencyTests.swift; sourceTree = "<group>"; };
 		B3DD52DC1D16CBEB00EBF640 /* Overdrive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Overdrive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -222,7 +220,6 @@
 			isa = PBXGroup;
 			children = (
 				B3B1C8881D1929A200B6386A /* FinishBlockObserver.swift */,
-				B3BB185C1D1C0D24002B1979 /* RetryTaskObserver.swift */,
 			);
 			path = Observers;
 			sourceTree = "<group>";
@@ -276,7 +273,10 @@
 				B3DD52FE1D16D83200EBF640 /* Info.plist */,
 				B3EF8F381D20521900064CC2 /* CreateTests.swift */,
 				B3C5DF581D1C4F7200D79532 /* DependencyTests.swift */,
+				B35FF1B71D6B5A860048C676 /* DispatchTests.swift */,
 				B31709961D304B6900BA3757 /* InlineTaskTests.swift */,
+				B325F69E1D70915500A3A170 /* ResultTests.swift */,
+				B325F6A21D70B76B00A3A170 /* RetryTests.swift */,
 				B3D302BE1D2D065200BA070A /* TaskConditionDependencyTests.swift */,
 				B3A147D11D27C58200BF971E /* TaskConditionTests.swift */,
 				B3AD65201D246250001F6C57 /* TaskObserverManagementTests.swift */,
@@ -284,8 +284,6 @@
 				B3174C871D1D9C0C000DF4F6 /* TaskQueueDelegateTests.swift */,
 				B3DD52FC1D16D83200EBF640 /* TaskTests.swift */,
 				B399F77A1D3B87C000EEFBBB /* ThreadSafetyTests.swift */,
-				B35FF1B71D6B5A860048C676 /* DispatchTests.swift */,
-				B325F69E1D70915500A3A170 /* ResultTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -561,7 +559,6 @@
 				B391B48D1D2EA7E1000A7F78 /* NSOperation+Overdrive.swift in Sources */,
 				B31CF99F1D189FCB003D4B2B /* NSQualityOfService+Overdrive.swift in Sources */,
 				B322B0AB1D1ED314009DE006 /* Condition.swift in Sources */,
-				B3BB185E1D1C0D24002B1979 /* RetryTaskObserver.swift in Sources */,
 				B3B72B8F1D16EA880004A7C2 /* State.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -602,7 +599,6 @@
 				B391B48E1D2EA7E1000A7F78 /* NSOperation+Overdrive.swift in Sources */,
 				B31CF9A01D189FCB003D4B2B /* NSQualityOfService+Overdrive.swift in Sources */,
 				B322B0AC1D1ED314009DE006 /* Condition.swift in Sources */,
-				B3BB185F1D1C0D24002B1979 /* RetryTaskObserver.swift in Sources */,
 				B3B72BB21D16EE6B0004A7C2 /* State.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -643,7 +639,6 @@
 				B391B48C1D2EA7E1000A7F78 /* NSOperation+Overdrive.swift in Sources */,
 				B31CF99E1D189FCB003D4B2B /* NSQualityOfService+Overdrive.swift in Sources */,
 				B322B0AA1D1ED314009DE006 /* Condition.swift in Sources */,
-				B3BB185D1D1C0D24002B1979 /* RetryTaskObserver.swift in Sources */,
 				B3DD52EF1D16CC7F00EBF640 /* State.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -658,6 +653,7 @@
 				B35FF1B81D6B5A860048C676 /* DispatchTests.swift in Sources */,
 				B3174C881D1D9C0C000DF4F6 /* TaskQueueDelegateTests.swift in Sources */,
 				B3C5DF591D1C4F7200D79532 /* DependencyTests.swift in Sources */,
+				B325F6A31D70B76B00A3A170 /* RetryTests.swift in Sources */,
 				B325F69F1D70915500A3A170 /* ResultTests.swift in Sources */,
 				B31709971D304B6900BA3757 /* InlineTaskTests.swift in Sources */,
 				B3AD65211D246250001F6C57 /* TaskObserverManagementTests.swift in Sources */,
