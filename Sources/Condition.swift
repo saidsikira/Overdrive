@@ -6,6 +6,8 @@
 //  Copyright © 2016 Said Sikira. All rights reserved.
 //
 
+//MARK: - TaskConditionResult enum
+
 /**
  Defines task condition result that is returned in the process of evaluating
  conditions. Can be `Satisfied` or `Failed(ErrorType)`
@@ -27,6 +29,8 @@ public enum TaskConditionResult {
     }
 }
 
+//MARK: - TaskConditionError enum
+
 /**
  Defines errors that can be thrown when condition evaluation finishes
 */
@@ -35,6 +39,8 @@ public enum TaskConditionError: ErrorType {
     /// Combined errors
     case Combined(errors: [ErrorType])
 }
+
+//MARK: - TaskCondition protocol
 
 /**
  Defines protocol that can be used to define conditions that should be satisfied in order
@@ -80,7 +86,21 @@ extension TaskCondition {
     }
 }
 
+//MARK: - Task Condition Evaluator
+
+/**
+ `TaskConditionEvaluator` is used to evaluate task conditions for specific task.
+*/
 struct TaskConditionEvaluator {
+    
+    /**
+     Evaluates conditions for defined task. This method will report evaluation process results with
+     completion block.
+     
+     - parameter conditions: Array of `TaskCondition` instances
+     - parameter forTask: Task for which conditions are evaluated for
+     - parameter completion: Completion block that runs after conditions are evaluated.
+    */
     static func evaluate<T>(conditions: [TaskCondition], forTask task: Task<T>, completion: (([ErrorType]) -> Void)) {
         let conditionGroup = dispatch_group_create()
         
