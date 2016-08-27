@@ -76,10 +76,26 @@ case "$COMMAND" in
 		exit 0;
 	;;
 
-
 	"--test-iOS")
-		xcodebuild clean -project $PROJECT -scheme "${IOS_SCHEME}" -sdk "${IOS_SDK}" -destination "${IOS_DESTINATION}" -configuration Debug ONLY_ACTIVE_ARCH=NO test | xcpretty -c
+		xcodebuild clean -project $PROJECT -scheme "${IOS_SCHEME}" -sdk "${IOS_SDK}" -destination "${IOS_DESTINATION}" -configuration Debug ONLY_ACTIVE_ARCH=YES test | xcpretty -c
 		exit 0;
 	;;
+
+    "--test-macOS")
+    xcodebuild clean -project $PROJECT -scheme "${MACOS_SCHEME}" -sdk "${MACOS_SDK}" -destination "${MACOS_DESTINATION}" -configuration Debug ONLY_ACTIVE_ARCH=YES test | xcpretty -c
+    exit 0;
+    ;;
+
+    "--test-tvOS")
+    xcodebuild clean -project $PROJECT -scheme "${TVOS_SCHEME}" -sdk "${TVOS_SDK}" -destination "${TVOS_DESTINATION}" -configuration Debug ONLY_ACTIVE_ARCH=YES test | xcpretty -c
+    exit 0;
+    ;;
+
+    "--test")
+        sh $0 --test-iOS
+        sh $0 --test-macOS
+        sh $0 --test-tvOS
+        exit 0;
+    ;;
 esac
 usage
