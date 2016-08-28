@@ -28,12 +28,4 @@ public protocol TaskQueueDelegate: class {
      - Parameter queue: Queue in which task was added
      */
     func didFinish<T>(task task: Task<T>, inQueue queue: TaskQueue)
-    
-    /**
-     Notifies reciever that the task did retry execution
-     
-     - Parameter task: Task that should retry execution
-     - Parameter queue: Queue in which task is added
-     */
-    func didRetry<T>(task task: Task<T>, inQueue queue: TaskQueue)
 }

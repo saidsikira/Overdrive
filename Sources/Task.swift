@@ -153,7 +153,11 @@ import class Foundation.NSOperation
  
  - note: `retry(_:)` method can be chained with other task methods
 */
-public class Task<T>: NSOperation {
+
+/// Typealias for `NSOperation`
+public typealias TaskBase = NSOperation
+
+public class Task<T>: TaskBase {
     
     /**
      Internal result object
@@ -177,7 +181,7 @@ public class Task<T>: NSOperation {
      - Warning: Accessing this property directly will result in unexpected behavior.
      Use `onValueBlock` instead.
      */
-    private var internalonValueBlock: ((T) -> Void)?
+    private var internalOnValueBlock: ((T) -> Void)?
     
     /**
      Internal error completion block
@@ -282,14 +286,14 @@ public class Task<T>: NSOperation {
     var onValueBlock: ((T) -> Void)? {
         get {
             return Dispatch.sync(queue) {
-                return self.internalonValueBlock
+                return self.internalOnValueBlock
             }
         }
         
         set(newBlock) {
             if newBlock != nil {
                 Dispatch.sync(queue) {
-                    self.internalonValueBlock = newBlock
+                    self.internalOnValueBlock = newBlock
                 }
             }
         }
@@ -377,14 +381,35 @@ public class Task<T>: NSOperation {
      
      - Returns: `Self`
      */
-    public func retry(times: Int) -> Self {
+    public func retry(times: Int = 1) -> Self {
         retryCount = times
         return self
     }
     
+    /// Attempts to retry execution
     private func attemptRetry() {
-        _ = try? decreaseRetryCount()
-        run()
+        if let _ = try? decreaseRetryCount() {
+            run()
+        } else {
+            moveToFinishedState()
+        }
+    }
+    
+    /// Returns true if task should be retried
+    var shouldRetry: Bool {
+        return internalRetryCount > 0
+    }
+    
+    /**
+     Decreases retry count. If retry count is 0, method will throw,
+     so it can be used in retry blocks safely.
+     */
+    func decreaseRetryCount() throws {
+        if retryCount > 0 {
+            retryCount = retryCount - 1
+        } else {
+            throw RetryCountError.CountIsZero
+        }
     }
     
     //MARK: Task conditions
@@ -779,23 +804,6 @@ public class Task<T>: NSOperation {
      */
     @objc class func keyPathsForValuesAffectingIsFinished() -> Set<NSObject> {
         return ["state"]
-    }
-    
-    /// Returns true if task should be retried
-    var shouldRetry: Bool {
-        return internalRetryCount > 0
-    }
-    
-    /**
-     Decreases retry count. If retry count is 0, method will throw,
-     so it can be used in retry blocks safely.
-     */
-    func decreaseRetryCount() throws {
-        if retryCount > 0 {
-            retryCount = retryCount - 1
-        } else {
-            throw RetryCountError.CountIsZero
-        }
     }
     
     //MARK: Dependency management

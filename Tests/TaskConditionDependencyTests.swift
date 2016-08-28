@@ -11,9 +11,9 @@ import XCTest
 
 class DependencyTestCondition: TaskCondition {
     func dependency<T>(forTask task: Task<T>) -> NSOperation? {
-        return Task.create {
-            return .Value(10)
-        }
+        let task = SimpleTask()
+        
+        return task
     }
     
     func evaluate<T>(forTask task: Task<T>, evaluationBlock: (TaskConditionResult -> Void)) {

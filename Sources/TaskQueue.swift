@@ -163,9 +163,6 @@ public class TaskQueue: NSOperationQueue {
         
         task.addObserver(finishObserver)
         
-        // Add all explicit dependencies
-        _ = task.dependencies.map { addOperation($0) }
-        
         // Evaluate condition dependencies and add them to the queue
         _ = task
             .conditions
@@ -193,23 +190,5 @@ public class TaskQueue: NSOperationQueue {
      */
     public func addTasks<T>(tasks: [Task<T>]) {
         _ = tasks.map { addTask($0) }
-    }
-
-    /**
-     Retries task execution. Method will decrease task retry count, set task
-     state to `Initialized` and add it to the queue again.
-     
-     - Parameter task: Task to be retried
-     */
-    func retry<T>(task task: Task<T>) {
-        do {
-            try task.decreaseRetryCount()
-            task.state = .Initialized
-            addOperation(task)
-            task.willEnqueue()
-            delegate?.didRetry(task: task, inQueue: self)
-        } catch {
-            
-        }
     }
 }

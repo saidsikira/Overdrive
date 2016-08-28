@@ -25,6 +25,17 @@
 		B325F6A01D70923E00A3A170 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F69E1D70915500A3A170 /* ResultTests.swift */; };
 		B325F6A11D70923E00A3A170 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F69E1D70915500A3A170 /* ResultTests.swift */; };
 		B325F6A31D70B76B00A3A170 /* RetryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F6A21D70B76B00A3A170 /* RetryTests.swift */; };
+		B325F6A41D719D4200A3A170 /* RetryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F6A21D70B76B00A3A170 /* RetryTests.swift */; };
+		B325F6A51D719D4300A3A170 /* RetryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F6A21D70B76B00A3A170 /* RetryTests.swift */; };
+		B325F6AA1D72EDF500A3A170 /* SimpleTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F6A91D72EDF500A3A170 /* SimpleTask.swift */; };
+		B325F6AC1D72EE9F00A3A170 /* TaskError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F6AB1D72EE9F00A3A170 /* TaskError.swift */; };
+		B325F6AD1D72EE9F00A3A170 /* TaskError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F6AB1D72EE9F00A3A170 /* TaskError.swift */; };
+		B325F6AE1D72EE9F00A3A170 /* TaskError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F6AB1D72EE9F00A3A170 /* TaskError.swift */; };
+		B325F6B01D72EF3D00A3A170 /* FailableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F6AF1D72EF3D00A3A170 /* FailableTask.swift */; };
+		B325F6B11D72EF3D00A3A170 /* FailableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F6AF1D72EF3D00A3A170 /* FailableTask.swift */; };
+		B325F6B21D72EF3D00A3A170 /* FailableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F6AF1D72EF3D00A3A170 /* FailableTask.swift */; };
+		B325F6B31D72EFEC00A3A170 /* SimpleTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F6A91D72EDF500A3A170 /* SimpleTask.swift */; };
+		B325F6B41D72EFED00A3A170 /* SimpleTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F6A91D72EDF500A3A170 /* SimpleTask.swift */; };
 		B35FF1B81D6B5A860048C676 /* DispatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35FF1B71D6B5A860048C676 /* DispatchTests.swift */; };
 		B35FF1B91D6B5AFF0048C676 /* ThreadSafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B399F77A1D3B87C000EEFBBB /* ThreadSafetyTests.swift */; };
 		B35FF1BA1D6B5B000048C676 /* ThreadSafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B399F77A1D3B87C000EEFBBB /* ThreadSafetyTests.swift */; };
@@ -46,7 +57,6 @@
 		B391B49D1D2F0232000A7F78 /* InlineTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B391B49C1D2F0232000A7F78 /* InlineTask.swift */; };
 		B391B49E1D2F0232000A7F78 /* InlineTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B391B49C1D2F0232000A7F78 /* InlineTask.swift */; };
 		B391B49F1D2F0232000A7F78 /* InlineTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B391B49C1D2F0232000A7F78 /* InlineTask.swift */; };
-		B391B4A11D2F7CCB000A7F78 /* CreateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EF8F381D20521900064CC2 /* CreateTests.swift */; };
 		B399F77B1D3B87C000EEFBBB /* ThreadSafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B399F77A1D3B87C000EEFBBB /* ThreadSafetyTests.swift */; };
 		B3A147CF1D26BFEE00BF971E /* TaskObserverManagementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD65201D246250001F6C57 /* TaskObserverManagementTests.swift */; };
 		B3A147D21D27C58200BF971E /* TaskConditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A147D11D27C58200BF971E /* TaskConditionTests.swift */; };
@@ -55,7 +65,6 @@
 		B3AD42781D1838B400348607 /* TaskObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD42751D1838B400348607 /* TaskObserver.swift */; };
 		B3AD651C1D245FD4001F6C57 /* DependencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5DF581D1C4F7200D79532 /* DependencyTests.swift */; };
 		B3AD651D1D245FD4001F6C57 /* DependencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5DF581D1C4F7200D79532 /* DependencyTests.swift */; };
-		B3AD651F1D245FD8001F6C57 /* CreateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EF8F381D20521900064CC2 /* CreateTests.swift */; };
 		B3AD65211D246250001F6C57 /* TaskObserverManagementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD65201D246250001F6C57 /* TaskObserverManagementTests.swift */; };
 		B3B1C8891D1929A200B6386A /* FinishBlockObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1C8881D1929A200B6386A /* FinishBlockObserver.swift */; };
 		B3B1C88A1D1929A200B6386A /* FinishBlockObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1C8881D1929A200B6386A /* FinishBlockObserver.swift */; };
@@ -91,7 +100,6 @@
 		B3EF8F351D20423500064CC2 /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EF8F341D20423500064CC2 /* Create.swift */; };
 		B3EF8F361D20423500064CC2 /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EF8F341D20423500064CC2 /* Create.swift */; };
 		B3EF8F371D20423500064CC2 /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EF8F341D20423500064CC2 /* Create.swift */; };
-		B3EF8F391D20521900064CC2 /* CreateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EF8F381D20521900064CC2 /* CreateTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +135,9 @@
 		B322B0A91D1ED314009DE006 /* Condition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Condition.swift; sourceTree = "<group>"; };
 		B325F69E1D70915500A3A170 /* ResultTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultTests.swift; sourceTree = "<group>"; };
 		B325F6A21D70B76B00A3A170 /* RetryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetryTests.swift; sourceTree = "<group>"; };
+		B325F6A91D72EDF500A3A170 /* SimpleTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTask.swift; sourceTree = "<group>"; };
+		B325F6AB1D72EE9F00A3A170 /* TaskError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskError.swift; sourceTree = "<group>"; };
+		B325F6AF1D72EF3D00A3A170 /* FailableTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailableTask.swift; sourceTree = "<group>"; };
 		B35FF1B71D6B5A860048C676 /* DispatchTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispatchTests.swift; sourceTree = "<group>"; };
 		B391B48B1D2EA7E1000A7F78 /* NSOperation+Overdrive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSOperation+Overdrive.swift"; sourceTree = "<group>"; };
 		B391B4911D2ED4FD000A7F78 /* TaskObserverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskObserverTests.swift; sourceTree = "<group>"; };
@@ -154,7 +165,6 @@
 		B3DD52FC1D16D83200EBF640 /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TaskTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B3DD52FE1D16D83200EBF640 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3EF8F341D20423500064CC2 /* Create.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
-		B3EF8F381D20521900064CC2 /* CreateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CreateTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +226,16 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		B325F6A81D72EDE300A3A170 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				B325F6A91D72EDF500A3A170 /* SimpleTask.swift */,
+				B325F6AB1D72EE9F00A3A170 /* TaskError.swift */,
+				B325F6AF1D72EF3D00A3A170 /* FailableTask.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
 		B3B1C8871D19299300B6386A /* Observers */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,7 +291,6 @@
 			isa = PBXGroup;
 			children = (
 				B3DD52FE1D16D83200EBF640 /* Info.plist */,
-				B3EF8F381D20521900064CC2 /* CreateTests.swift */,
 				B3C5DF581D1C4F7200D79532 /* DependencyTests.swift */,
 				B35FF1B71D6B5A860048C676 /* DispatchTests.swift */,
 				B31709961D304B6900BA3757 /* InlineTaskTests.swift */,
@@ -284,6 +303,7 @@
 				B3174C871D1D9C0C000DF4F6 /* TaskQueueDelegateTests.swift */,
 				B3DD52FC1D16D83200EBF640 /* TaskTests.swift */,
 				B399F77A1D3B87C000EEFBBB /* ThreadSafetyTests.swift */,
+				B325F6A81D72EDE300A3A170 /* Support */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -567,12 +587,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B325F6B11D72EF3D00A3A170 /* FailableTask.swift in Sources */,
+				B325F6B31D72EFEC00A3A170 /* SimpleTask.swift in Sources */,
 				B3B72BA21D16EB340004A7C2 /* TaskTests.swift in Sources */,
 				B35FF1B91D6B5AFF0048C676 /* ThreadSafetyTests.swift in Sources */,
+				B325F6AD1D72EE9F00A3A170 /* TaskError.swift in Sources */,
 				B391B4971D2EE177000A7F78 /* TaskObserverManagementTests.swift in Sources */,
 				B35FF1BB1D6B5B030048C676 /* DispatchTests.swift in Sources */,
 				B391B4981D2EE17B000A7F78 /* TaskObserverTests.swift in Sources */,
-				B391B4A11D2F7CCB000A7F78 /* CreateTests.swift in Sources */,
+				B325F6A41D719D4200A3A170 /* RetryTests.swift in Sources */,
 				B325F6A01D70923E00A3A170 /* ResultTests.swift in Sources */,
 				B391B4931D2EE167000A7F78 /* TaskConditionDependencyTests.swift in Sources */,
 				B3AD651C1D245FD4001F6C57 /* DependencyTests.swift in Sources */,
@@ -607,18 +630,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B325F6B21D72EF3D00A3A170 /* FailableTask.swift in Sources */,
+				B325F6B41D72EFED00A3A170 /* SimpleTask.swift in Sources */,
 				B3B72BC51D16EED90004A7C2 /* TaskTests.swift in Sources */,
 				B35FF1BA1D6B5B000048C676 /* ThreadSafetyTests.swift in Sources */,
+				B325F6AE1D72EE9F00A3A170 /* TaskError.swift in Sources */,
 				B3AD651D1D245FD4001F6C57 /* DependencyTests.swift in Sources */,
 				B35FF1BC1D6B5B040048C676 /* DispatchTests.swift in Sources */,
 				B391B4991D2EE17C000A7F78 /* TaskObserverTests.swift in Sources */,
 				B391B4941D2EE168000A7F78 /* TaskConditionDependencyTests.swift in Sources */,
+				B325F6A51D719D4300A3A170 /* RetryTests.swift in Sources */,
 				B325F6A11D70923E00A3A170 /* ResultTests.swift in Sources */,
 				B3A147CF1D26BFEE00BF971E /* TaskObserverManagementTests.swift in Sources */,
 				B391B49B1D2EE180000A7F78 /* TaskQueueDelegateTests.swift in Sources */,
 				B391B4961D2EE171000A7F78 /* TaskConditionTests.swift in Sources */,
 				B3D030CE1D3BFF7800A216ED /* InlineTaskTests.swift in Sources */,
-				B3AD651F1D245FD8001F6C57 /* CreateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -649,6 +675,9 @@
 			files = (
 				B391B4921D2ED4FD000A7F78 /* TaskObserverTests.swift in Sources */,
 				B399F77B1D3B87C000EEFBBB /* ThreadSafetyTests.swift in Sources */,
+				B325F6AA1D72EDF500A3A170 /* SimpleTask.swift in Sources */,
+				B325F6B01D72EF3D00A3A170 /* FailableTask.swift in Sources */,
+				B325F6AC1D72EE9F00A3A170 /* TaskError.swift in Sources */,
 				B3DD52FD1D16D83200EBF640 /* TaskTests.swift in Sources */,
 				B35FF1B81D6B5A860048C676 /* DispatchTests.swift in Sources */,
 				B3174C881D1D9C0C000DF4F6 /* TaskQueueDelegateTests.swift in Sources */,
@@ -659,7 +688,6 @@
 				B3AD65211D246250001F6C57 /* TaskObserverManagementTests.swift in Sources */,
 				B3A147D21D27C58200BF971E /* TaskConditionTests.swift in Sources */,
 				B3D302C01D2D065900BA070A /* TaskConditionDependencyTests.swift in Sources */,
-				B3EF8F391D20521900064CC2 /* CreateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

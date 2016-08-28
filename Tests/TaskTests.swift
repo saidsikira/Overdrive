@@ -9,22 +9,6 @@
 import XCTest
 @testable import Overdrive
 
-class SimpleTask: Task<Int> {
-    override func run() {
-        finish(.Value(10))
-    }
-}
-
-class FailableTask: Task<Int> {
-    enum TaskError: ErrorType {
-        case TaskFail
-    }
-    
-    override func run() {
-        finish(.Error(TaskError.TaskFail))
-    }
-}
-
 class TaskTests: XCTestCase {
     
     let queue = TaskQueue(qos: .Default)

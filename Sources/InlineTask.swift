@@ -13,7 +13,7 @@
  
  ```swift
  let task = InlineTask {
- doWork()
+    doWork()
  }
  ```
  
@@ -25,7 +25,10 @@
  you can create `InlineTask` that presents view controller and add dependency
  task that retrieves data from the server.
 */
-public class InlineTask: Task<Void> {
+
+public typealias InlineTaskBase = Task<Void>
+
+public class InlineTask: InlineTaskBase {
     
     private var internalTaskBlock: ((Void -> Void) -> Void)?
     
