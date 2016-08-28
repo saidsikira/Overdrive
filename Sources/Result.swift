@@ -7,7 +7,15 @@
 //
 
 /**
- Task result definition.
+ Task result definition. `Result<T>` is one of the fundamental concepts in
+ Task execution. To finish execution of any task, you need to pass the Result
+ to the `finish(_:)` method.
+ 
+ `Result<T>` enum definition defines two cases:
+ 
+ * `Value(T)`
+ * `Error(ErrorType)`
+ 
  
  **Example**
  
