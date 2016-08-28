@@ -12,19 +12,19 @@
 enum State: Int, Comparable {
     
     /// Task state is `Initialized`
-    case Initialized
+    case initialized
     
     /// Task state is `Pending` and ready to evaluate conditions
-    case Pending
+    case pending
     
     /// Task is ready to execute
-    case Ready
+    case ready
     
     /// Task is executing
-    case Executing
+    case executing
     
     /// Task is finished
-    case Finished
+    case finished
     
     /**
      Check if current state can be changed to other state. 
@@ -37,17 +37,17 @@ enum State: Int, Comparable {
     */
     func canTransitionToState(state: State, shouldRetry: Bool = false) -> Bool {
         switch (self, state) {
-        case (.Initialized, .Pending):
+        case (.initialized, .pending):
             return true
-        case (.Pending, .Ready):
+        case (.pending, .ready):
             return true
-        case (.Ready, .Executing):
+        case (.ready, .executing):
             return true
-        case (.Ready, .Finished):
+        case (.ready, .finished):
             return true
-        case (.Executing, .Finished):
+        case (.executing, .finished):
             return true
-        case (.Finished, .Initialized) where shouldRetry:
+        case (.finished, .initialized) where shouldRetry:
             return true
         default:
             return false

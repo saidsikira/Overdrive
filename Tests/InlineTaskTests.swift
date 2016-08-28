@@ -15,7 +15,7 @@ class InlineTaskTests: XCTestCase {
         let task = InlineTask {
         }
         
-        XCTAssert(task.state == .Initialized, "Task state should be Initialized")
+        XCTAssert(task.state == .initialized, "Task state should be Initialized")
     }
     
     func testInlineTaskExecution() {

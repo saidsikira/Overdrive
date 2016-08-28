@@ -173,7 +173,7 @@ public class Task<T>: TaskBase {
      in unexpected behaviour. Use the `state` property to set and retrieve
      current state.
      */
-    private var internalState: State = .Initialized
+    private var internalState: State = .initialized
     
     /**
      Internal completion block
@@ -342,7 +342,7 @@ public class Task<T>: TaskBase {
      in chain with other task methods.
      */
     public final func onValue(completion: ((T) -> Void)) -> Self {
-        assert(state < .Executing, "On complete called after task is executed")
+        assert(state < .executing, "On complete called after task is executed")
         onValueBlock = completion
         return self
     }
@@ -366,7 +366,7 @@ public class Task<T>: TaskBase {
      in chain with other task methods.
      */
     public final func onError(completion: ((ErrorType) -> ())) -> Self {
-        assert(state < .Executing, "On complete called after task is executed")
+        assert(state < .executing, "On complete called after task is executed")
         onErrorBlock = completion
         return self
     }
@@ -454,7 +454,7 @@ public class Task<T>: TaskBase {
      assertion fail will occur.
     */
     public func addCondition(condition: TaskCondition) {
-        assert(state < .Executing, "Tried to add condition after task started with execution")
+        assert(state < .executing, "Tried to add condition after task started with execution")
         conditions.append(condition)
     }
     
@@ -466,7 +466,7 @@ public class Task<T>: TaskBase {
      - returns: Boolean indicating whether condition was removed
     */
     public func removeCondition(condition: TaskCondition) -> Bool {
-        assert(state < .Executing, "Tried to remove condition after task started with execution")
+        assert(state < .executing, "Tried to remove condition after task started with execution")
         let index = conditions.indexOf { $0.conditionName == condition.conditionName }
         if let index = index {
             conditions.removeAtIndex(index)
@@ -484,7 +484,7 @@ public class Task<T>: TaskBase {
      - returns: Boolean indicating whether condition was removed
     */
     public func removeConditionOfType<T: TaskCondition>(type: T.Type) -> Bool {
-        assert(state < .Executing, "Tried to remove condition after task started with execution")
+        assert(state < .executing, "Tried to remove condition after task started with execution")
         var index = [Int]()
         
         for (i, conditionElement) in conditions.enumerate() {
@@ -529,7 +529,7 @@ public class Task<T>: TaskBase {
      - parameter observer: observer to be added
     */
     public final func addObserver(observer: TaskObserver) {
-        assert(state < .Executing, "Observer added after task started with execution")
+        assert(state < .executing, "Observer added after task started with execution")
         observers.append(observer)
     }
     
@@ -543,7 +543,7 @@ public class Task<T>: TaskBase {
      - Warning: Observer removal should be done before task is added to the `TaskQueue`
      */
     public func removeObserver(observer: TaskObserver) -> Bool {
-        assert(state < .Executing, "Observer removed after task is added to the task queue")
+        assert(state < .executing, "Observer removed after task is added to the task queue")
         let indexOfObserver = observers.indexOf { $0.observerName == observer.observerName }
         guard indexOfObserver != nil else {
             return false
@@ -573,7 +573,7 @@ public class Task<T>: TaskBase {
      ```
      */
     public func removeObserverOfType<T: TaskObserver>(type: T.Type) -> Bool {
-        assert(state < .Executing, "Observer removed after task is added to the task queue")
+        assert(state < .executing, "Observer removed after task is added to the task queue")
         var index = [Int]()
         
         for (i, observerElement) in observers.enumerate() {
@@ -659,7 +659,7 @@ public class Task<T>: TaskBase {
      added to the `TaskQueue`.
      */
     final func willEnqueue() {
-        state = .Pending
+        state = .pending
     }
     
     /**
@@ -675,9 +675,9 @@ public class Task<T>: TaskBase {
     */
     public final override var ready: Bool {
         switch state {
-        case .Initialized:
+        case .initialized:
             return cancelled
-        case .Pending:
+        case .pending:
             guard !cancelled else {
                 return true
             }
@@ -686,7 +686,7 @@ public class Task<T>: TaskBase {
                 evaluateConditions()
             }
             return false
-        case .Ready:
+        case .ready:
             return super.ready || cancelled
         default:
             return false
@@ -697,26 +697,26 @@ public class Task<T>: TaskBase {
      Boolean value indicating Task execution status.
     */
     public final override var executing: Bool {
-        return state == .Executing
+        return state == .executing
     }
     
     /**
      Boolean value indicating if task finished with execution.
      */
     public final override var finished: Bool {
-        return state == .Finished
+        return state == .finished
     }
     
     final func evaluateConditions() {
-        assert(state == .Pending && !cancelled, "evaluateConditions() was called out-of-order")
+        assert(state == .pending && !cancelled, "evaluateConditions() was called out-of-order")
         
         if conditions.count > 0 {
             TaskConditionEvaluator.evaluate(conditions, forTask: self) { errors in
                 self.conditionErrors = errors
-                self.state = .Ready
+                self.state = .ready
             }
         } else {
-            self.state = .Ready
+            self.state = .ready
         }
     }
     
@@ -724,7 +724,7 @@ public class Task<T>: TaskBase {
      Changes task state to `Finished`
      */
     internal final func moveToFinishedState() {
-        state = .Finished
+        state = .finished
         
         for observer in observers {
             observer.taskDidFinishExecution(self)
@@ -753,8 +753,8 @@ public class Task<T>: TaskBase {
      Non-overridable.
     */
     public override final func main() {
-        assert(state == .Ready, "Task must be performed on TaskQueue")
-        state = .Executing
+        assert(state == .ready, "Task must be performed on TaskQueue")
+        state = .executing
         
         for observer in observers {
             observer.taskDidStartExecution(self)
@@ -809,7 +809,7 @@ public class Task<T>: TaskBase {
     //MARK: Dependency management
     
     public override func addDependency(operation: NSOperation) {
-        assert(state < .Executing)
+        assert(state < .executing)
         
         super.addDependency(operation)
     }

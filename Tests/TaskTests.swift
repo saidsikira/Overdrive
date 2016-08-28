@@ -15,7 +15,7 @@ class TaskTests: XCTestCase {
     
     func testIntializedState() {
         let task = SimpleTask()
-        XCTAssert(task.state == .Initialized, "Task state should be: Initialized")
+        XCTAssert(task.state == .initialized, "Task state should be: Initialized")
     }
     
     func testFinishedState() {
@@ -23,7 +23,7 @@ class TaskTests: XCTestCase {
         let expectation = expectationWithDescription("Task finished state expecation")
         
         task.onValue { value in
-            XCTAssert(task.state == .Finished, "Task state should be: Finished")
+            XCTAssert(task.state == .finished, "Task state should be: Finished")
             expectation.fulfill()
         }
         
