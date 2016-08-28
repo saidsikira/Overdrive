@@ -8,6 +8,9 @@
 
 import class Foundation.NSOperation
 
+/// Typealias for `NSOperation`
+public typealias TaskBase = NSOperation
+
 /**
  `Task<T>` is an abstract class that provides interface encapsuling any
  asynchronous or synchronous operation. Abstract nature of the `Task<T>` enforces
@@ -26,15 +29,15 @@ import class Foundation.NSOperation
  1. **State machine** - `Task<T>` works with internal task state machine. State
  of the task at any point can be:
  
-	* Initialized - Task instance is created
-	* Pending - Task is added to the `TaskQueue` and started process of
+	* initialized - Task instance is created
+	* pending - Task is added to the `TaskQueue` and started process of
 	evaluating readiness
-	* Ready - Task is ready to execute.
-	* Executing - Task is executing
-	* Finished - Task finished with execution
+	* ready - Task is ready to execute.
+	* executing - Task is executing
+	* finished - Task finished with execution
  
  2. **Task execution point** - Task execution starts in `run()` method when state
- reaches `Ready` state. You should always override this method in your subclass.
+ reaches `ready` state. You should always override this method in your subclass.
  
  3. **Finishing execution** - Task execution finishes when `finish(_:)` method is
  called. You always finish execution with `Result<T>` object. `Result<T>` is an
@@ -153,10 +156,6 @@ import class Foundation.NSOperation
  
  - note: `retry(_:)` method can be chained with other task methods
 */
-
-/// Typealias for `NSOperation`
-public typealias TaskBase = NSOperation
-
 public class Task<T>: TaskBase {
     
     /**
