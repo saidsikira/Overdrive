@@ -17,7 +17,7 @@ class DependencyTestCondition: TaskCondition {
     }
     
     func evaluate<T>(forTask task: Task<T>, evaluationBlock: (TaskConditionResult -> Void)) {
-        evaluationBlock(.Satisfied)
+        evaluationBlock(.satisfied)
     }
 }
 

@@ -15,13 +15,13 @@ class TaskConditionTests: XCTestCase {
     
     class FailedTestCondition: TaskCondition {
         func evaluate<T>(forTask task: Task<T>, evaluationBlock: (TaskConditionResult -> Void)) {
-            evaluationBlock(.Failed(TaskError.Fail("Condition not satisfied")))
+            evaluationBlock(.failed(TaskError.Fail("Condition not satisfied")))
         }
     }
     
     class SatisfiedTestCondition: TaskCondition {
         func evaluate<T>(forTask task: Task<T>, evaluationBlock: (TaskConditionResult -> Void)) {
-            evaluationBlock(.Satisfied)
+            evaluationBlock(.satisfied)
         }
     }
     

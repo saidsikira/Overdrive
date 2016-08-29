@@ -14,8 +14,8 @@ import Foundation
 enum TaskError: ErrorType {
     
     /// Regular error with message
-    case Fail(String )
+    case fail(String )
     
     /// Type erased combined errors
-    case Combined([ErrorType])
+    case combined([ErrorType])
 }

@@ -22,7 +22,7 @@ class RetryTestTask: Task<Int> {
             finish(.Value(1))
         } else {
             failCount -= 1
-            finish(.Error(TaskError.Fail("Failed with retry count \(failCount)")))
+            finish(.Error(TaskError.fail("Failed with retry count \(failCount)")))
         }
     }
 }

@@ -15,14 +15,14 @@
 public enum TaskConditionResult {
     
     /// Task conditions is satisfied
-    case Satisfied
+    case satisfied
     
     /// Task condition failed with error
-    case Failed(ErrorType)
+    case failed(ErrorType)
     
     /// If result is failed, associated error will be returned
     var error: ErrorType? {
-        if case .Failed(let error) = self {
+        if case .failed(let error) = self {
             return error
         }
         return nil
