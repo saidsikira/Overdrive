@@ -10,10 +10,8 @@ import XCTest
 @testable import Overdrive
 
 class DependencyTestCondition: TaskCondition {
-    func dependency<T>(forTask task: Task<T>) -> NSOperation? {
-        let task = SimpleTask()
-        
-        return task
+    func dependencies<T>(forTask task: Task<T>) -> [NSOperation] {
+        return [SimpleTask()]
     }
     
     func evaluate<T>(forTask task: Task<T>, evaluationBlock: (TaskConditionResult -> Void)) {

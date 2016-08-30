@@ -15,7 +15,7 @@ class TaskConditionTests: XCTestCase {
     
     class FailedTestCondition: TaskCondition {
         func evaluate<T>(forTask task: Task<T>, evaluationBlock: (TaskConditionResult -> Void)) {
-            evaluationBlock(.failed(TaskError.Fail("Condition not satisfied")))
+            evaluationBlock(.failed(TaskError.fail("Condition not satisfied")))
         }
     }
     

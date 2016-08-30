@@ -166,7 +166,7 @@ public class TaskQueue: NSOperationQueue {
         // Evaluate condition dependencies and add them to the queue
         _ = task
             .conditions
-            .flatMap { $0.dependency(forTask: task) }
+            .flatMap { $0.dependencies(forTask: task) }
             .map { task.addDependency($0); addOperation($0) }
         
         delegate?.didAdd(task: task, toQueue: self)
