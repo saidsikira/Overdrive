@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B3DD52DB1D16CBEB00EBF640"
+               BlueprintIdentifier = "B3422DC41D84A64C00B337AD"
                BuildableName = "Overdrive.framework"
-               BlueprintName = "Overdrive iOS"
+               BlueprintName = "Overdrive"
                ReferencedContainer = "container:Overdrive.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B3DD52F91D16D83200EBF640"
+               BlueprintIdentifier = "B3422DDD1D84A88800B337AD"
                BuildableName = "Tests.xctest"
-               BlueprintName = "Tests iOS"
+               BlueprintName = "Tests"
                ReferencedContainer = "container:Overdrive.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -42,9 +42,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B3DD52DB1D16CBEB00EBF640"
+            BlueprintIdentifier = "B3422DC41D84A64C00B337AD"
             BuildableName = "Overdrive.framework"
-            BlueprintName = "Overdrive iOS"
+            BlueprintName = "Overdrive"
             ReferencedContainer = "container:Overdrive.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -64,9 +64,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B3DD52DB1D16CBEB00EBF640"
+            BlueprintIdentifier = "B3422DC41D84A64C00B337AD"
             BuildableName = "Overdrive.framework"
-            BlueprintName = "Overdrive iOS"
+            BlueprintName = "Overdrive"
             ReferencedContainer = "container:Overdrive.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -82,9 +82,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B3DD52DB1D16CBEB00EBF640"
+            BlueprintIdentifier = "B3422DC41D84A64C00B337AD"
             BuildableName = "Overdrive.framework"
-            BlueprintName = "Overdrive iOS"
+            BlueprintName = "Overdrive"
             ReferencedContainer = "container:Overdrive.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
