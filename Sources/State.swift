@@ -35,7 +35,7 @@ enum State: Int, Comparable {
      
      - Returns: Boolean value indicating whether state change is possible
     */
-    func canTransitionToState(state: State, shouldRetry: Bool = false) -> Bool {
+    func canTransitionToState(_ state: State, shouldRetry: Bool = false) -> Bool {
         switch (self, state) {
         case (.initialized, .pending):
             return true

@@ -10,7 +10,7 @@ import XCTest
 @testable import Overdrive
 
 class RetryTestTask: Task<Int> {
-    private(set) var failCount: Int
+    fileprivate(set) var failCount: Int
     
     init(failCount: Int) {
         self.failCount = failCount
@@ -52,7 +52,7 @@ class RetryTests: XCTestCase {
     }
     
     func testRetry() {
-        let retryExpectation = expectationWithDescription("Task should be retried")
+        let retryExpectation = expectation(description: "Task should be retried")
         
         let retryTestTask = RetryTestTask(failCount: 5)
         
@@ -69,9 +69,9 @@ class RetryTests: XCTestCase {
                 XCTFail("Task should not fail with error \(error)")
         }
         
-        TaskQueue.main.addTask(retryTestTask)
+        TaskQueue(qos: .default).addTask(retryTestTask)
         
-        waitForExpectationsWithTimeout(0.2) { handlerError in
+        waitForExpectations(timeout: 0.2) { handlerError in
             print(handlerError)
         }
     }

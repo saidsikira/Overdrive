@@ -81,7 +81,7 @@ import class Foundation.NSOperationQueue
  in `TaskQueue` lifecycle. See `TaskQueueDelegate` for more information
  
  */
-public class TaskQueue: NSOperationQueue {
+open class TaskQueue: OperationQueue {
     
     /**
      Returns queue associated with application main queue.
@@ -93,9 +93,9 @@ public class TaskQueue: NSOperationQueue {
      TaskQueue.main.addTask(task)
      ```
      */
-    public static let main: TaskQueue = {
+    open static let mainx: TaskQueue = {
         let queue = TaskQueue()
-        queue.underlyingQueue = NSOperationQueue.mainQueue().underlyingQueue
+        queue.underlyingQueue = OperationQueue.main.underlyingQueue
         return queue
     }()
     
@@ -109,15 +109,15 @@ public class TaskQueue: NSOperationQueue {
      TaskQueue.background.addTask(task)
      ```
      */
-    public static let background: TaskQueue = {
+    open static let background: TaskQueue = {
         let queue = TaskQueue()
         queue.name = "BackgroundTaskQueue"
-        queue.underlyingQueue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
+        queue.underlyingQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
         return queue
     }()
     
     /// TaskQueue delegate object
-    weak public var delegate: TaskQueueDelegate?
+    weak open var delegate: TaskQueueDelegate?
     
     //MARK: Init methods
     
@@ -130,7 +130,7 @@ public class TaskQueue: NSOperationQueue {
      Initilizes TaskQueue with specific `NSQualityOfService` class. Defining
      quality of service class will later determine how tasks are executed.
      */
-    public init(qos: NSQualityOfService) {
+    public init(qos: QualityOfService) {
         super.init()
         super.qualityOfService = qos
     }
@@ -141,7 +141,7 @@ public class TaskQueue: NSOperationQueue {
      - note: Setting underlying queue for the TaskQueue will override any
      Quality Of Service setting on TaskQueue.
     */
-    public init(queue: dispatch_queue_t) {
+    public init(queue: DispatchQueue) {
         super.init()
         super.underlyingQueue = queue
     }
@@ -154,7 +154,7 @@ public class TaskQueue: NSOperationQueue {
      
      - Parameter task: Task<T> to be added
      */
-    public func addTask<T>(task: Task<T>) {
+    open func addTask<T>(_ task: Task<T>) {
         let finishObserver = FinishBlockObserver { [weak self] in
             if let queue = self {
                 queue.delegate?.didFinish(task: task, inQueue: queue)
@@ -174,11 +174,11 @@ public class TaskQueue: NSOperationQueue {
         addOperation(task)
     }
     
-    public override func addOperation(operation: NSOperation) {
+    open override func addOperation(_ operation: Operation) {
         super.addOperation(operation)
         
-        if operation.respondsToSelector(#selector(Task<Any>.willEnqueue)) {
-            operation.performSelector(#selector(Task<Any>.willEnqueue))
+        if operation.responds(to: #selector(Task<Any>.willEnqueue)) {
+            operation.perform(#selector(Task<Any>.willEnqueue))
         }
     }
     
@@ -188,7 +188,7 @@ public class TaskQueue: NSOperationQueue {
      
      - Parameter tasks: Array of `Task<T>`
      */
-    public func addTasks<T>(tasks: [Task<T>]) {
+    open func addTasks<T>(_ tasks: [Task<T>]) {
         _ = tasks.map { addTask($0) }
     }
 }

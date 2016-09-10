@@ -12,9 +12,9 @@ import XCTest
 class DispatchTests: XCTestCase {
     
     func testDispatchSync() {
-        let queue = dispatch_queue_create("io.overdrive.queue", nil)
+        let queue = DispatchQueue(label: "io.overdrive.queue", attributes: [])
         
-        let value = Dispatch.sync(queue) {
+        let value = queue.sync {
             return 10
         }
         

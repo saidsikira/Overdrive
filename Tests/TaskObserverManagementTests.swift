@@ -43,7 +43,7 @@ class TaskObserverManagementTests: XCTestCase {
         let observer = SimpleObserver()
         task.addObserver(observer)
         
-        let removeStatus = task.removeObserverOfType(SimpleObserver)
+        let removeStatus = task.removeObserverOfType(SimpleObserver.self)
         
         XCTAssert(removeStatus == true, "remove(_:) method is not returning true for removed observer")
         

@@ -30,7 +30,7 @@ public enum Result<T> {
     case Value(T)
     
     /// Error case with associated `ErrorType`
-    case Error(ErrorType)
+    case Error(Error)
     
     //MARK: Init methods
     
@@ -38,7 +38,7 @@ public enum Result<T> {
         self = .Value(value)
     }
     
-    init(_ error: ErrorType) {
+    init(_ error: Error) {
         self = .Error(error)
     }
     
@@ -53,7 +53,7 @@ public enum Result<T> {
     }
     
     /// Returns error value
-    public var error: ErrorType? {
+    public var error: Error? {
         if case .Error(let error) = self {
             return error
         }
@@ -66,8 +66,8 @@ extension Result {
     /**
      Returns transformed Result<U>
     */
-    @warn_unused_result
-    public func map<U>(@noescape transform: (T) -> U) -> Result<U> {
+    
+    public func map<U>(_ transform: (T) -> U) -> Result<U> {
         switch self {
         case .Value(let value):
             return Result<U>.Value(transform(value))

@@ -10,11 +10,11 @@ import XCTest
 @testable import Overdrive
 
 class DependencyTestCondition: TaskCondition {
-    func dependencies<T>(forTask task: Task<T>) -> [NSOperation] {
+    func dependencies<T>(forTask task: Task<T>) -> [Operation] {
         return [SimpleTask()]
     }
     
-    func evaluate<T>(forTask task: Task<T>, evaluationBlock: (TaskConditionResult -> Void)) {
+    func evaluate<T>(forTask task: Task<T>, evaluationBlock: ((TaskConditionResult) -> Void)) {
         evaluationBlock(.satisfied)
     }
 }
@@ -25,8 +25,8 @@ class TaskConditionDependencyTests: XCTestCase {
     var finishExpecation: XCTestExpectation?
     
     func testConditionWithDelegate() {
-        addExpecation = expectationWithDescription("Task added to the queue expecation")
-        finishExpecation = expectationWithDescription("Task finished with execution expecation")
+        addExpecation = expectation(description: "Task added to the queue expecation")
+        finishExpecation = expectation(description: "Task finished with execution expecation")
         
         let queue = TaskQueue()
         queue.delegate = self
@@ -41,23 +41,23 @@ class TaskConditionDependencyTests: XCTestCase {
         
         queue.addTask(task)
         
-        waitForExpectationsWithTimeout(1) { handlerError in
+        waitForExpectations(timeout: 1) { handlerError in
             print(handlerError)
         }
     }
 }
 
 extension TaskConditionDependencyTests: TaskQueueDelegate {
-    func didAdd<T>(task task: Task<T>, toQueue queue: TaskQueue) {
+    func didAdd<T>(task: Task<T>, toQueue queue: TaskQueue) {
         XCTAssert(task.dependencies.count == 1, "Task dependency count should be equal to 1")
         addExpecation?.fulfill()
     }
     
-    func didFinish<T>(task task: Task<T>, inQueue queue: TaskQueue) {
+    func didFinish<T>(task: Task<T>, inQueue queue: TaskQueue) {
         finishExpecation?.fulfill()
     }
     
-    func didRetry<T>(task task: Task<T>, inQueue queue: TaskQueue) {
+    func didRetry<T>(_ task: Task<T>, inQueue queue: TaskQueue) {
         XCTAssert(false, "didRetry method should not be called")
     }
 }

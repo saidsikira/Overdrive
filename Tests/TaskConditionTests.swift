@@ -11,16 +11,16 @@ import XCTest
 
 class TaskConditionTests: XCTestCase {
     
-    let queue = TaskQueue(qos: .Default)
+    let queue = TaskQueue(qos: .default)
     
     class FailedTestCondition: TaskCondition {
-        func evaluate<T>(forTask task: Task<T>, evaluationBlock: (TaskConditionResult -> Void)) {
+        func evaluate<T>(forTask task: Task<T>, evaluationBlock: ((TaskConditionResult) -> Void)) {
             evaluationBlock(.failed(TaskError.fail("Condition not satisfied")))
         }
     }
     
     class SatisfiedTestCondition: TaskCondition {
-        func evaluate<T>(forTask task: Task<T>, evaluationBlock: (TaskConditionResult -> Void)) {
+        func evaluate<T>(forTask task: Task<T>, evaluationBlock: ((TaskConditionResult) -> Void)) {
             evaluationBlock(.satisfied)
         }
     }
@@ -34,7 +34,7 @@ class TaskConditionTests: XCTestCase {
         XCTAssert(task.conditions.count == 1, "Task condition count is not 1")
         XCTAssert(task.conditionErrors.count == 0, "Task condition error count should be 0")
         
-        let expectation = expectationWithDescription("Task failed condition expecation")
+        let expectation = self.expectation(description: "Task failed condition expecation")
         
         task
             .onValue { value in
@@ -44,9 +44,9 @@ class TaskConditionTests: XCTestCase {
                 expectation.fulfill()
         }
         
-        TaskQueue.main.addTask(task)
+        TaskQueue(qos: .default).addTask(task)
         
-        waitForExpectationsWithTimeout(1) {
+        waitForExpectations(timeout: 1) {
             handlerError in
             print(handlerError)
         }
@@ -61,7 +61,7 @@ class TaskConditionTests: XCTestCase {
         XCTAssert(task.conditions.count == 1, "Task condition count is not 1")
         XCTAssert(task.conditionErrors.count == 0, "Task condition error count should be 0")
         
-        let expectation = expectationWithDescription("Satisfied condition expecation")
+        let expectation = self.expectation(description: "Satisfied condition expecation")
         
         task
             .onValue { value in
@@ -71,9 +71,9 @@ class TaskConditionTests: XCTestCase {
                 XCTAssert(false, "onError block should not be executed")
         }
         
-        TaskQueue.main.addTask(task)
+        TaskQueue(qos: .default).addTask(task)
         
-        waitForExpectationsWithTimeout(1) {
+        waitForExpectations(timeout: 1) {
             handlerError in
             print(handlerError)
         }

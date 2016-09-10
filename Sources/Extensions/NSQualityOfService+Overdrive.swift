@@ -8,20 +8,20 @@
 
 import enum Foundation.NSQualityOfService
 
-extension NSQualityOfService: CustomStringConvertible {
+extension QualityOfService: CustomStringConvertible {
     
     /// Returns textual representation of `self`
     public var description: String {
         switch self {
-        case .Default:
+        case .default:
             return "Default"
-        case .UserInitiated:
+        case .userInitiated:
             return "UserInitiated"
-        case .Utility:
+        case .utility:
             return "Utility"
-        case .UserInteractive:
+        case .userInteractive:
             return "UserInteractive"
-        case .Background:
+        case .background:
             return "Background"
         }
     }

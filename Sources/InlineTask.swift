@@ -28,18 +28,18 @@
 
 public typealias InlineTaskBase = Task<Void>
 
-public class InlineTask: InlineTaskBase {
+open class InlineTask: InlineTaskBase {
     
-    private var internalTaskBlock: ((Void -> Void) -> Void)?
+    fileprivate var internalTaskBlock: (((Void) -> ()) -> ())?
     
-    var taskBlock: ((Void -> ()) -> ())? {
-        get { return Dispatch.sync(queue) { return self.internalTaskBlock } }
-        
-        set(newBlock) {
-            Dispatch.sync(queue) {
-                self.internalTaskBlock = newBlock
-            }
+    fileprivate func set(taskBlock: @escaping ((Void) -> (Void)) -> Void) {
+        queue.sync {
+            internalTaskBlock = taskBlock
         }
+    }
+    
+    var taskBlock: (((Void) -> ()) -> ())? {
+        get { return queue.sync { return internalTaskBlock } }
     }
     
     /**
@@ -47,16 +47,16 @@ public class InlineTask: InlineTaskBase {
      
      - Parameter taskBlock: block that will be executed when task is added to the TaskQueue.
     */
-    public init(_ taskBlock: Void -> ()) {
+    public init(_ taskBlock: @escaping (Void) -> ()) {
         super.init()
-        self.taskBlock = { void in
+        set(taskBlock: { void in
             taskBlock()
             void()
-        }
+        })
     }
     
     /// Starts execution of the task
-    public override func run() {
+    open override func run() {
         taskBlock? { void in
             self.finish(.Value(void))
         }

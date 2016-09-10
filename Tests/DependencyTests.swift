@@ -26,7 +26,7 @@ class DependencyTests: XCTestCase {
         
         XCTAssert(testTask.dependencies.count == 1, "Dependencies count should be 1")
         
-        TaskQueue.main.addTask(testTask)
+        TaskQueue(qos: .default).addTask(testTask)
     }
     
     /// Tests `getDependency(_:)` method
@@ -37,7 +37,7 @@ class DependencyTests: XCTestCase {
         
         testTask.addDependency(dependencyTask)
         
-        if let dependency = testTask.getDependency(SimpleTask) {
+        if let dependency = testTask.getDependency(SimpleTask.self) {
             XCTAssert(dependency.name == "DependencyTask", "Incorrect dependency returned")
         } else {
             XCTAssert(false, "Dependency not returned")

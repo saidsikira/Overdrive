@@ -14,50 +14,50 @@ class ThreadSafetyTests: XCTestCase {
     func testResultOnDispatchQueue() {
         let task = SimpleTask()
         
-        let customQueueExpecation = expectationWithDescription("Value on custom dispatch queue")
-        let backgroundQueueExpecation = expectationWithDescription("Value on background queue")
+        let customQueueExpecation = expectation(description: "Value on custom dispatch queue")
+        let backgroundQueueExpecation = expectation(description: "Value on background queue")
         
-        let customDispatchQueue = dispatch_queue_create("io.overdrive.queue", nil)
-        let backgroundDispatchQueue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
+        let customDispatchQueue = DispatchQueue(label: "io.overdrive.queue", attributes: [])
+        let backgroundDispatchQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
         
         task.onValue { value in
-            Dispatch.async(customDispatchQueue) {
+            customDispatchQueue.async {
                 XCTAssert(value == 10, "Incorrect value on custom queue")
                 customQueueExpecation.fulfill()
             }
             
-            Dispatch.async(backgroundDispatchQueue) {
+            backgroundDispatchQueue.async {
                 XCTAssert(value == 10, "Incorrect value on background queue")
                 backgroundQueueExpecation.fulfill()
             }
         }
         
-        TaskQueue.main.addTask(task)
+        TaskQueue(qos: .default).addTask(task)
         
-        waitForExpectationsWithTimeout(0.4) { handlerError in
+        waitForExpectations(timeout: 0.4) { handlerError in
             print(handlerError)
         }
     }
     
     func testExecutionOnCustomQueue() {
-        let backgroundQueueExpecation = expectationWithDescription("Execution on background queue")
+        let backgroundQueueExpecation = expectation(description: "Execution on background queue")
         
-        let backgroundDispatchQueue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
+        let backgroundDispatchQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
         
         let task = SimpleTask()
         
         task.onValue { value in
-            Dispatch.async(backgroundDispatchQueue) {
+            backgroundDispatchQueue.async {
                 XCTAssert(value == 10, "Incorrect value on background queue")
                 backgroundQueueExpecation.fulfill()
             }
         }
         
         let queue = TaskQueue()
-        queue.underlyingQueue = dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0)
+        queue.underlyingQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive)
         queue.addTask(task)
         
-        waitForExpectationsWithTimeout(0.4) { handlerError in
+        waitForExpectations(timeout: 0.4) { handlerError in
             print(handlerError)
         }
     }

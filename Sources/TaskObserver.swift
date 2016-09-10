@@ -19,14 +19,14 @@ public protocol TaskObserver {
      
      - Parameter task: Task that started execution
     */
-    func taskDidStartExecution<T>(task: Task<T>)
+    func taskDidStartExecution<T>(_ task: Task<T>)
     
     /**
      Notifies reciever that task finished execution
      
      - Parameter task: Task that finished execution
     */
-    func taskDidFinishExecution<T>(task: Task<T>)
+    func taskDidFinishExecution<T>(_ task: Task<T>)
 }
 
 //MARK: - TaskObserver default implementations
@@ -35,12 +35,12 @@ extension TaskObserver {
     
     /// Observer name, returns conforming type name (read-only)
     public var observerName: String {
-        return String(self.dynamicType)
+        return String(describing: type(of: self))
     }
     
-    public func taskDidStartExecution<T>(task: Task<T>) {
+    public func taskDidStartExecution<T>(_ task: Task<T>) {
     }
     
-    public func taskDidFinishExecution<T>(task: Task<T>) {
+    public func taskDidFinishExecution<T>(_ task: Task<T>) {
     }
 }

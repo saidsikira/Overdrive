@@ -25,7 +25,7 @@ extension Task {
      
      - Returns: InlineTask instance
     */
-    public class func create(taskBlock: (Void -> Void)) -> InlineTask {
+    public class func create(_ taskBlock: @escaping ((Void) -> Void)) -> InlineTask {
         return InlineTask {
             taskBlock()
         }

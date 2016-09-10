@@ -9,7 +9,7 @@
 import class Foundation.NSOperation
 
 /// Typealias for `NSOperation`
-public typealias TaskBase = NSOperation
+public typealias TaskBase = Operation
 
 /**
  `Task<T>` is an abstract class that provides interface encapsuling any
@@ -156,14 +156,14 @@ public typealias TaskBase = NSOperation
  
  - note: `retry(_:)` method can be chained with other task methods
 */
-public class Task<T>: TaskBase {
+open class Task<T>: TaskBase {
     
     /**
      Internal result object
      
      - Warning: Should never be set directly, only via `result` property
      */
-    private var internalResult: Result<T>?
+    fileprivate var internalResult: Result<T>?
     
     /**
      Internal task state
@@ -172,7 +172,7 @@ public class Task<T>: TaskBase {
      in unexpected behaviour. Use the `state` property to set and retrieve
      current state.
      */
-    private var internalState: State = .initialized
+    fileprivate var internalState: State = .initialized
     
     /**
      Internal completion block
@@ -180,7 +180,7 @@ public class Task<T>: TaskBase {
      - Warning: Accessing this property directly will result in unexpected behavior.
      Use `onValueBlock` instead.
      */
-    private var internalOnValueBlock: ((T) -> Void)?
+    fileprivate var internalOnValueBlock: ((T) -> Void)?
     
     /**
      Internal error completion block
@@ -188,32 +188,32 @@ public class Task<T>: TaskBase {
      - Warning: Accessing this property directly will result in unexpected behavior.
      Use `onErrorBlock` instead.
      */
-    private var internalOnErrorBlock: ((ErrorType) -> Void)?
+    fileprivate var internalOnErrorBlock: ((Error) -> Void)?
     
     /**
      Internal task observers
      */
-    private var internalObservers: [TaskObserver] = []
+    fileprivate var internalObservers: [TaskObserver] = []
     
     /**
      Internal task conditions
     */
-    private var internalConditions: [TaskCondition] = []
+    fileprivate var internalConditions: [TaskCondition] = []
     
     /**
      Internal number of retry counts
      */
-    private var internalRetryCount: Int = 0
+    fileprivate var internalRetryCount: Int = 0
     
     /**
      Internal condition errors
     */
-    private var internalConditionErrors = [ErrorType]()
+    fileprivate var internalConditionErrors = [Error]()
     
     /**
      Private queue used in task state machine
      */
-    let queue = dispatch_queue_create("io.overdrive.task", DISPATCH_QUEUE_SERIAL)
+    let queue = DispatchQueue(label: "io.overdrive.task", attributes: [])
     
     //MARK: Class properties
     
@@ -228,14 +228,14 @@ public class Task<T>: TaskBase {
      achieves `Finished` state. You can access the result value directly,
      or setup completion blocks that will execute when task finishes.
      */
-    internal(set) public var result: Result<T>? {
+    internal(set) open var result: Result<T>? {
         get {
-            return Dispatch.sync(queue) { return self.internalResult }
+            return queue.sync { return internalResult }
         }
         
         set(newResult) {
-            Dispatch.sync(queue) {
-                self.internalResult = newResult
+            queue.sync {
+                internalResult = newResult
             }
         }
     }
@@ -246,8 +246,8 @@ public class Task<T>: TaskBase {
      - Warning: **DEPRECATED**. Use `onValue(_:)` method to set completion
      block.
     */
-    @available(*, deprecated, message = "use onResult completion instead")
-    public override var completionBlock: (() -> Void)? {
+    @available(*, deprecated, message : "use onResult completion instead")
+    open override var completionBlock: (() -> Void)? {
         get {
             return nil
         }
@@ -258,12 +258,12 @@ public class Task<T>: TaskBase {
     
     var retryCount: Int {
         get {
-            return Dispatch.sync(queue) { return self.internalRetryCount }
+            return queue.sync { return internalRetryCount }
         }
         
         set(newCount) {
-            Dispatch.sync(queue) {
-                self.internalRetryCount = newCount
+            queue.sync {
+                internalRetryCount = newCount
             }
         }
     }
@@ -284,15 +284,15 @@ public class Task<T>: TaskBase {
      */
     var onValueBlock: ((T) -> Void)? {
         get {
-            return Dispatch.sync(queue) {
-                return self.internalOnValueBlock
+            return queue.sync {
+                return internalOnValueBlock
             }
         }
         
         set(newBlock) {
             if newBlock != nil {
-                Dispatch.sync(queue) {
-                    self.internalOnValueBlock = newBlock
+                queue.sync {
+                    internalOnValueBlock = newBlock
                 }
             }
         }
@@ -308,17 +308,17 @@ public class Task<T>: TaskBase {
      - Warning: Setting this property directly may result in unexpected behaviour.
      Always use `onError:` method on `Self` to set the block.
      */
-    var onErrorBlock: ((ErrorType) -> Void)? {
+    var onErrorBlock: ((Error) -> Void)? {
         get {
-            return Dispatch.sync(queue) {
-                return self.internalOnErrorBlock
+            return queue.sync {
+                return internalOnErrorBlock
             }
         }
         
         set(newBlock) {
             if newBlock != nil {
-                Dispatch.sync(queue) {
-                    self.internalOnErrorBlock = newBlock
+                queue.sync {
+                    internalOnErrorBlock = newBlock
                 }
             }
         }
@@ -340,7 +340,8 @@ public class Task<T>: TaskBase {
      - Returns: `Self`. This method will always return itself, so that it can be used
      in chain with other task methods.
      */
-    public final func onValue(completion: ((T) -> Void)) -> Self {
+    @discardableResult
+    public final func onValue(_ completion: @escaping ((T) -> Void)) -> Self {
         assert(state < .executing, "On complete called after task is executed")
         onValueBlock = completion
         return self
@@ -364,7 +365,8 @@ public class Task<T>: TaskBase {
      - Returns: `Self`. This method will always return itself, so that it can be used
      in chain with other task methods.
      */
-    public final func onError(completion: ((ErrorType) -> ())) -> Self {
+    @discardableResult
+    public final func onError(_ completion: @escaping ((Error) -> ())) -> Self {
         assert(state < .executing, "On complete called after task is executed")
         onErrorBlock = completion
         return self
@@ -380,13 +382,14 @@ public class Task<T>: TaskBase {
      
      - Returns: `Self`
      */
-    public func retry(times: Int = 1) -> Self {
+    @discardableResult
+    public final func retry(_ times: Int = 1) -> Self {
         retryCount = times
         return self
     }
     
     /// Attempts to retry execution
-    private func attemptRetry() {
+    fileprivate func attemptRetry() {
         if let _ = try? decreaseRetryCount() {
             run()
         } else {
@@ -407,7 +410,7 @@ public class Task<T>: TaskBase {
         if retryCount > 0 {
             retryCount = retryCount - 1
         } else {
-            throw RetryCountError.CountIsZero
+            throw RetryCountError.countIsZero
         }
     }
     
@@ -416,14 +419,14 @@ public class Task<T>: TaskBase {
     /**
      All task conditions
     */
-    private(set) public var conditions: [TaskCondition] {
+    fileprivate(set) open var conditions: [TaskCondition] {
         get {
-            return Dispatch.sync(queue) { return self.internalConditions }
+            return queue.sync { return internalConditions }
         }
         
         set(newConditions) {
-            Dispatch.sync(queue) {
-                self.internalConditions = newConditions
+            queue.sync {
+                internalConditions = newConditions
             }
         }
     }
@@ -432,14 +435,14 @@ public class Task<T>: TaskBase {
      Any errors that occured during condition evaluation. If this array is populated
      task will finish with execution.
     */
-    var conditionErrors: [ErrorType] {
+    var conditionErrors: [Error] {
         get {
-            return Dispatch.sync(queue) { return self.internalConditionErrors }
+            return queue.sync { return internalConditionErrors }
         }
         
         set(newErrors) {
-            Dispatch.sync(queue) {
-                self.internalConditionErrors = newErrors
+            queue.sync {
+                internalConditionErrors = newErrors
             }
         }
     }
@@ -452,7 +455,7 @@ public class Task<T>: TaskBase {
      - warning: Task conditions should be added before task starts with execution. Otherwise,
      assertion fail will occur.
     */
-    public func addCondition(condition: TaskCondition) {
+    open func addCondition(_ condition: TaskCondition) {
         assert(state < .executing, "Tried to add condition after task started with execution")
         conditions.append(condition)
     }
@@ -464,11 +467,11 @@ public class Task<T>: TaskBase {
      
      - returns: Boolean indicating whether condition was removed
     */
-    public func removeCondition(condition: TaskCondition) -> Bool {
+    open func removeCondition(_ condition: TaskCondition) -> Bool {
         assert(state < .executing, "Tried to remove condition after task started with execution")
-        let index = conditions.indexOf { $0.conditionName == condition.conditionName }
+        let index = conditions.index { $0.conditionName == condition.conditionName }
         if let index = index {
-            conditions.removeAtIndex(index)
+            conditions.remove(at: index)
             return true
         }
         
@@ -482,17 +485,17 @@ public class Task<T>: TaskBase {
      
      - returns: Boolean indicating whether condition was removed
     */
-    public func removeConditionOfType<T: TaskCondition>(type: T.Type) -> Bool {
+    open func removeConditionOfType<T: TaskCondition>(_ type: T.Type) -> Bool {
         assert(state < .executing, "Tried to remove condition after task started with execution")
         var index = [Int]()
         
-        for (i, conditionElement) in conditions.enumerate() {
-            if conditionElement.dynamicType is T.Type {
+        for (i, conditionElement) in conditions.enumerated() {
+            if type(of: conditionElement) is T.Type {
                 index.append(i)
             }
         }
         if index.count > 0 {
-            _ = index.map { conditions.removeAtIndex($0) }
+            _ = index.map { conditions.remove(at: $0) }
             return true
         } else {
             return false
@@ -510,14 +513,14 @@ public class Task<T>: TaskBase {
      2. `RetryTaskObserver` - used to notify TaskQueue that the task should retry execution
      
      */
-    internal(set) public var observers: [TaskObserver] {
+    internal(set) open var observers: [TaskObserver] {
         get {
-            return Dispatch.sync(queue) { return self.internalObservers }
+            return queue.sync { return internalObservers }
         }
         
         set {
-            Dispatch.sync(queue) {
-                self.internalObservers = newValue
+            queue.sync {
+                internalObservers = newValue
             }
         }
     }
@@ -527,7 +530,7 @@ public class Task<T>: TaskBase {
      
      - parameter observer: observer to be added
     */
-    public final func addObserver(observer: TaskObserver) {
+    public final func addObserver(_ observer: TaskObserver) {
         assert(state < .executing, "Observer added after task started with execution")
         observers.append(observer)
     }
@@ -541,13 +544,13 @@ public class Task<T>: TaskBase {
      
      - Warning: Observer removal should be done before task is added to the `TaskQueue`
      */
-    public func removeObserver(observer: TaskObserver) -> Bool {
+    open func removeObserver(_ observer: TaskObserver) -> Bool {
         assert(state < .executing, "Observer removed after task is added to the task queue")
-        let indexOfObserver = observers.indexOf { $0.observerName == observer.observerName }
+        let indexOfObserver = observers.index { $0.observerName == observer.observerName }
         guard indexOfObserver != nil else {
             return false
         }
-        observers.removeAtIndex(indexOfObserver!)
+        observers.remove(at: indexOfObserver!)
         return true
     }
     
@@ -571,18 +574,18 @@ public class Task<T>: TaskBase {
      task.removeObserverOfType(CustomObserver)
      ```
      */
-    public func removeObserverOfType<T: TaskObserver>(type: T.Type) -> Bool {
+    open func removeObserverOfType<T: TaskObserver>(_ type: T.Type) -> Bool {
         assert(state < .executing, "Observer removed after task is added to the task queue")
         var index = [Int]()
         
-        for (i, observerElement) in observers.enumerate() {
-            if observerElement.dynamicType is T.Type {
+        for (i, observerElement) in observers.enumerated() {
+            if type(of: observerElement) is T.Type {
                 index.append(i)
             }
         }
         
         if index.count > 0 {
-            _ = index.map { observers.removeAtIndex($0) }
+            _ = index.map { observers.remove(at: $0) }
             return true
         }
         return false
@@ -601,7 +604,7 @@ public class Task<T>: TaskBase {
      - Note:
      Safe to call from any thread.
      */
-    public final func finish(result: Result<T>) {
+    public final func finish(_ result: Result<T>) {
         if shouldRetry {
             attemptRetry()
         } else {
@@ -634,22 +637,22 @@ public class Task<T>: TaskBase {
      */
     var state: State {
         get {
-            return Dispatch.sync(queue) { return self.internalState }
+            return queue.sync { return internalState }
         }
         
         set(newState) {
             
             // Notify internal `NSOperation` observers that state will be changed
-            willChangeValueForKey("state")
+            willChangeValue(forKey: "state")
             
-            Dispatch.sync(queue) {
-                assert(self.internalState.canTransitionToState(newState, shouldRetry: self.shouldRetry),
+            queue.sync {
+                assert(internalState.canTransitionToState(newState, shouldRetry: shouldRetry),
                        "Invalid state transformation")
-                self.internalState = newState
+                internalState = newState
             }
             
             // Notifity internal `NSOperation` observers that state is changed
-            didChangeValueForKey("state")
+            didChangeValue(forKey: "state")
         }
     }
     
@@ -665,28 +668,28 @@ public class Task<T>: TaskBase {
      Used to notify `NSOperation` superclass that task execution is asynchronous.
      Defaults to `true`.
     */
-    public final override var asynchronous: Bool {
+    public final override var isAsynchronous: Bool {
         return true
     }
     
     /**
      Boolean value indicating Task readiness value
     */
-    public final override var ready: Bool {
+    public final override var isReady: Bool {
         switch state {
         case .initialized:
-            return cancelled
+            return isCancelled
         case .pending:
-            guard !cancelled else {
+            guard !isCancelled else {
                 return true
             }
             
-            if super.ready {
+            if super.isReady {
                 evaluateConditions()
             }
             return false
         case .ready:
-            return super.ready || cancelled
+            return super.isReady || isCancelled
         default:
             return false
         }
@@ -695,19 +698,19 @@ public class Task<T>: TaskBase {
     /**
      Boolean value indicating Task execution status.
     */
-    public final override var executing: Bool {
+    public final override var isExecuting: Bool {
         return state == .executing
     }
     
     /**
      Boolean value indicating if task finished with execution.
      */
-    public final override var finished: Bool {
+    public final override var isFinished: Bool {
         return state == .finished
     }
     
     final func evaluateConditions() {
-        assert(state == .pending && !cancelled, "evaluateConditions() was called out-of-order")
+        assert(state == .pending && !isCancelled, "evaluateConditions() was called out-of-order")
         
         if conditions.count > 0 {
             TaskConditionEvaluator.evaluate(conditions, forTask: self) { errors in
@@ -737,10 +740,10 @@ public class Task<T>: TaskBase {
      Non-overridable.
     */
     public override final func start() {
-        if cancelled {
+        if isCancelled {
             moveToFinishedState()
         } else if conditionErrors.count > 0 {
-            finish(.Error(TaskConditionError.Combined(errors: conditionErrors)))
+            finish(.Error(TaskConditionError.combined(errors: conditionErrors)))
         } else {
             main()
         }
@@ -759,7 +762,7 @@ public class Task<T>: TaskBase {
             observer.taskDidStartExecution(self)
         }
         
-        if !cancelled {
+        if !isCancelled {
             run()
         } else {
             moveToFinishedState()
@@ -771,8 +774,8 @@ public class Task<T>: TaskBase {
      task. In order to notify task that the task execution finished, call `finish(_:)`
      method on self.
     */
-    public func run() {
-        assertionFailure("run() method should be overrided in \(self.dynamicType)")
+    open func run() {
+        assertionFailure("run() method should be overrided in \(type(of: self))")
     }
     
     /**
@@ -788,26 +791,26 @@ public class Task<T>: TaskBase {
      Called by `NSOperation` KVO mechanisms to check if task is ready
     */
     @objc class func keyPathsForValuesAffectingIsReady() -> Set<NSObject> {
-        return ["state"]
+        return ["state" as NSObject]
     }
     
     /**
      Called by `NSOperation` KVO mechanisms to check if task is executing
      */
     @objc class func keyPathsForValuesAffectingIsExecuting() -> Set<NSObject> {
-        return ["state"]
+        return ["state" as NSObject]
     }
     
     /**
      Called by `NSOperation` KVO mechanisms to check if task is finished
      */
     @objc class func keyPathsForValuesAffectingIsFinished() -> Set<NSObject> {
-        return ["state"]
+        return ["state" as NSObject]
     }
     
     //MARK: Dependency management
     
-    public override func addDependency(operation: NSOperation) {
+    open override func addDependency(_ operation: Operation) {
         assert(state < .executing)
         
         super.addDependency(operation)
@@ -828,7 +831,7 @@ public class Task<T>: TaskBase {
      }
      ```
      */
-    public func getDependency<T>(type: Task<T>.Type) -> Task<T>? {
+    open func getDependency<T>(_ type: Task<T>.Type) -> Task<T>? {
         let filteredDependency = dependencies.filter { $0 as? Task<T> != nil }
         return filteredDependency.first as? Task<T>
     }
@@ -837,6 +840,6 @@ public class Task<T>: TaskBase {
 /**
  Defines errors that can be thrown in task retry process
  */
-enum RetryCountError: ErrorType {
-    case CountIsZero
+enum RetryCountError: Error {
+    case countIsZero
 }

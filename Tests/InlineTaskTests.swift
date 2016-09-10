@@ -19,7 +19,7 @@ class InlineTaskTests: XCTestCase {
     }
     
     func testInlineTaskExecution() {
-        let finishExpecation = expectationWithDescription("Inline task finish expectation")
+        let finishExpecation = expectation(description: "Inline task finish expectation")
         
         let task = InlineTask {
             print("do work")
@@ -29,9 +29,9 @@ class InlineTaskTests: XCTestCase {
             finishExpecation.fulfill()
         }
         
-        TaskQueue.main.addTask(task)
+        TaskQueue(qos: .default).addTask(task)
         
-        waitForExpectationsWithTimeout(0.2) { handlerError in
+        waitForExpectations(timeout: 0.2) { handlerError in
             print(handlerError)
         }
     }

@@ -11,11 +11,11 @@ import Foundation
 /*
  Defines errors that can be used in test environment
 */
-enum TaskError: ErrorType {
+enum TaskError: Error {
     
     /// Regular error with message
     case fail(String )
     
     /// Type erased combined errors
-    case combined([ErrorType])
+    case combined([Error])
 }

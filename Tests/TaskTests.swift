@@ -11,7 +11,7 @@ import XCTest
 
 class TaskTests: XCTestCase {
     
-    let queue = TaskQueue(qos: .Default)
+    let queue = TaskQueue(qos: .default)
     
     func testIntializedState() {
         let task = SimpleTask()
@@ -20,7 +20,7 @@ class TaskTests: XCTestCase {
     
     func testFinishedState() {
         let task = SimpleTask()
-        let expectation = expectationWithDescription("Task finished state expecation")
+        let expectation = self.expectation(description: "Task finished state expecation")
         
         task.onValue { value in
             XCTAssert(task.state == .finished, "Task state should be: Finished")
@@ -29,7 +29,7 @@ class TaskTests: XCTestCase {
         
         queue.addTask(task)
         
-        waitForExpectationsWithTimeout(0.3) { handlerError in
+        waitForExpectations(timeout: 0.3) { handlerError in
             print(handlerError)
         }
     }
@@ -57,7 +57,7 @@ class TaskTests: XCTestCase {
     
     func testOnValueBlockExecution() {
         let task = SimpleTask()
-        let expectation = expectationWithDescription("Task result value expecation")
+        let expectation = self.expectation(description: "Task result value expecation")
         
         task.onValue { value in
             XCTAssert(value == 10, "Task result value should be 10")
@@ -66,14 +66,14 @@ class TaskTests: XCTestCase {
         
         queue.addTask(task)
         
-        waitForExpectationsWithTimeout(0.1) { handlerError in
+        waitForExpectations(timeout: 0.1) { handlerError in
             print(handlerError)
         }
     }
     
     func testOnErrorBlockExecution() {
         let task = FailableTask()
-        let expectation = expectationWithDescription("Task result error expecation")
+        let expectation = self.expectation(description: "Task result error expecation")
         
         task
             .onError { error in
@@ -84,7 +84,7 @@ class TaskTests: XCTestCase {
         
         queue.addTask(task)
         
-        waitForExpectationsWithTimeout(0.1) { handlerError in
+        waitForExpectations(timeout: 0.1) { handlerError in
             print(handlerError)
         }
     }

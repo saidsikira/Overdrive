@@ -8,7 +8,7 @@
 
 import class Foundation.NSOperation
 
-extension CollectionType where Generator.Element: NSOperation {
+extension Collection where Iterator.Element: Operation {
     
     /**
      Cancel all tasks in collection.

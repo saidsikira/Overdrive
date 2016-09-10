@@ -8,8 +8,8 @@
 
 import class Foundation.NSOperation
 
-extension NSOperation {
-    public override var description: String {
-        return String(self.dynamicType)
+extension Operation {
+    open override var description: String {
+        return String(describing: type(of: self))
     }
 }

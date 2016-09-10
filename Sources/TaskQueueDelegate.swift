@@ -19,7 +19,7 @@ public protocol TaskQueueDelegate: class {
      - Parameter task: Task that was added
      - Parameter queue: Queue in which task was added
     */
-    func didAdd<T>(task task: Task<T>, toQueue queue: TaskQueue)
+    func didAdd<T>(task: Task<T>, toQueue queue: TaskQueue)
     
     /**
      Notifies reciever that the task finished with execution
@@ -27,5 +27,5 @@ public protocol TaskQueueDelegate: class {
      - Parameter task: Task that finished execution
      - Parameter queue: Queue in which task was added
      */
-    func didFinish<T>(task task: Task<T>, inQueue queue: TaskQueue)
+    func didFinish<T>(task: Task<T>, inQueue queue: TaskQueue)
 }

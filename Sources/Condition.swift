@@ -18,10 +18,10 @@ public enum TaskConditionResult {
     case satisfied
     
     /// Task condition failed with error
-    case failed(ErrorType)
+    case failed(Error)
     
     /// If result is failed, associated error will be returned
-    var error: ErrorType? {
+    var error: Error? {
         if case .failed(let error) = self {
             return error
         }
@@ -34,10 +34,10 @@ public enum TaskConditionResult {
 /**
  Defines errors that can be thrown when condition evaluation finishes
 */
-public enum TaskConditionError: ErrorType {
+public enum TaskConditionError: Error {
     
     /// Combined errors
-    case Combined(errors: [ErrorType])
+    case combined(errors: [Error])
 }
 
 //MARK: - TaskCondition protocol
@@ -62,7 +62,7 @@ public protocol TaskCondition {
      
      - Returns: Any `NSOperation` or instance of any `Task<T>`
     */
-    func dependencies<T>(forTask task: Task<T>) -> [NSOperation]
+    func dependencies<T>(forTask task: Task<T>) -> [Operation]
     
     /**
      Evaluates condition for the task. Evaluation can be any asynchronous process. When evaluation
@@ -71,18 +71,18 @@ public protocol TaskCondition {
      - Note: This method does not guarantee that evaluation will be done on the main thread. If you want
      to evaluate condition on the main thread, use `dispatch_async` call.
     */
-    func evaluate<T>(forTask task: Task<T>, evaluationBlock: (TaskConditionResult -> Void))
+    func evaluate<T>(forTask task: Task<T>, evaluationBlock: ((TaskConditionResult) -> Void))
 }
 
 extension TaskCondition {
     
     /// Default implementation. Returns `nil`.
-    func dependencies<T>(forTask task: Task<T>) -> [NSOperation] {
+    func dependencies<T>(forTask task: Task<T>) -> [Operation] {
         return []
     }
     
     public var conditionName: String {
-        return "\(self.dynamicType)"
+        return "\(type(of: self))"
     }
 }
 
@@ -101,21 +101,21 @@ struct TaskConditionEvaluator {
      - parameter forTask: Task for which conditions are evaluated for
      - parameter completion: Completion block that runs after conditions are evaluated.
     */
-    static func evaluate<T>(conditions: [TaskCondition], forTask task: Task<T>, completion: (([ErrorType]) -> Void)) {
-        let conditionGroup = dispatch_group_create()
+    static func evaluate<T>(_ conditions: [TaskCondition], forTask task: Task<T>, completion: @escaping (([Error]) -> Void)) {
+        let conditionGroup = DispatchGroup()
         
-        var results = [TaskConditionResult?](count: conditions.count, repeatedValue: nil)
+        var results = [TaskConditionResult?](repeating: nil, count: conditions.count)
         
-        for (index, condition) in conditions.enumerate() {
-            dispatch_group_enter(conditionGroup)
+        for (index, condition) in conditions.enumerated() {
+            conditionGroup.enter()
             condition.evaluate(forTask: task) {
                 result in
                 results[index] = result
-                dispatch_group_leave(conditionGroup)
+                conditionGroup.leave()
             }
         }
         
-        dispatch_group_notify(conditionGroup, dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0)) {
+        conditionGroup.notify(queue: DispatchQueue.global(qos: DispatchQoS.QoSClass.default)) {
             let failures = results.flatMap { $0?.error }
             
             completion(failures)
