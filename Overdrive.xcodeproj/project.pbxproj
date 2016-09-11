@@ -388,6 +388,7 @@
 				SUPPORTED_PLATFORMS = "appletvsimulator appletvos watchos watchsimulator iphoneos iphonesimulator macosx";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2,3,4";
 			};
 			name = Debug;
 		};
@@ -414,6 +415,7 @@
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "appletvsimulator appletvos watchos watchsimulator iphoneos iphonesimulator macosx";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2,3,4";
 			};
 			name = Release;
 		};
@@ -562,6 +564,7 @@
 				B3422DCB1D84A64C00B337AD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B3422DE61D84A88800B337AD /* Build configuration list for PBXNativeTarget "Tests" */ = {
 			isa = XCConfigurationList;
@@ -570,6 +573,7 @@
 				B3422DE81D84A88800B337AD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B3DD52D61D16CBEB00EBF640 /* Build configuration list for PBXProject "Overdrive" */ = {
 			isa = XCConfigurationList;

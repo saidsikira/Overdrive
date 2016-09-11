@@ -5,17 +5,15 @@ set -o errtrace
 set -o pipefail
 
 PROJECT="Overdrive.xcodeproj"
-IOS_SCHEME="Overdrive iOS"
-MACOS_SCHEME="Overdrive macOS"
-TVOS_SCHEME="Overdrive tvOS"
+SCHEME="Overdrive"
 
 IOS_SDK="iphonesimulator10.0"
 OSX_SDK="macosx10.11"
-TVOS_SDK="appletvsimulator9.2"
+TVOS_SDK="appletvsimulator10.0"
 
 IOS_DESTINATION="OS=10.0,name=iPhone 6S"
 MACOS_DESTINATION="arch=x86_64"
-TVOS_DESTINATION="OS=9.2,name=Apple TV 1080p"
+TVOS_DESTINATION="OS=10.0,name=Apple TV 1080p"
 
 usage() {
 cat << EOF
@@ -55,17 +53,17 @@ case "$COMMAND" in
 	;;
 
 	"--iOS")
-		xcodebuild clean -project $PROJECT -scheme "${IOS_SCHEME}" -sdk "${IOS_SDK}" -destination "${IOS_DESTINATION}" -configuration Debug ONLY_ACTIVE_ARCH=YES build | xcpretty -c
+		xcodebuild clean -project $PROJECT -scheme "${SCHEME}" -sdk "${IOS_SDK}" -destination "${IOS_DESTINATION}" -configuration Debug ONLY_ACTIVE_ARCH=YES build | xcpretty -c
 		exit 0;
 	;;
 	
 	"--macOS")
-		xcodebuild clean -project $PROJECT -scheme "${MACOS_SCHEME}" -sdk "${MACOS_SDK}" -destination "${MACOS_DESTINATION}" -configuration Debug ONLY_ACTIVE_ARCH=YES build | xcpretty -c
+		xcodebuild clean -project $PROJECT -scheme "${SCHEME}" -sdk "${MACOS_SDK}" -destination "${MACOS_DESTINATION}" -configuration Debug ONLY_ACTIVE_ARCH=YES build | xcpretty -c
 		exit 0;
 	;;
 
 	"--tvOS")
-		xcodebuild clean -project $PROJECT -scheme "${TVOS_SCHEME}" -sdk "${TVOS_SDK}" -destination "${TVOS_DESTINATION}" -configuration Debug ONLY_ACTIVE_ARCH=YES build | xcpretty -c
+		xcodebuild clean -project $PROJECT -scheme "${SCHEME}" -sdk "${TVOS_SDK}" -destination "${TVOS_DESTINATION}" -configuration Debug ONLY_ACTIVE_ARCH=YES build | xcpretty -c
 		exit 0;
 	;;
 
