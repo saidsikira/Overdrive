@@ -65,8 +65,6 @@
 		B325F6AB1D72EE9F00A3A170 /* TaskError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskError.swift; sourceTree = "<group>"; };
 		B325F6AF1D72EF3D00A3A170 /* FailableTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailableTask.swift; sourceTree = "<group>"; };
 		B3422DC51D84A64C00B337AD /* Overdrive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Overdrive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3422DC71D84A64C00B337AD /* Overdrive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Overdrive.h; sourceTree = "<group>"; };
-		B3422DC81D84A64C00B337AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3422DDE1D84A88800B337AD /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B35FF1B71D6B5A860048C676 /* DispatchTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispatchTests.swift; sourceTree = "<group>"; };
 		B391B48B1D2EA7E1000A7F78 /* NSOperation+Overdrive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSOperation+Overdrive.swift"; sourceTree = "<group>"; };
@@ -132,15 +130,6 @@
 			path = Support;
 			sourceTree = "<group>";
 		};
-		B3422DC61D84A64C00B337AD /* Overdrive */ = {
-			isa = PBXGroup;
-			children = (
-				B3422DC71D84A64C00B337AD /* Overdrive.h */,
-				B3422DC81D84A64C00B337AD /* Info.plist */,
-			);
-			path = Overdrive;
-			sourceTree = "<group>";
-		};
 		B39ACA2B1D85D8A500606563 /* Support */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,7 +150,6 @@
 		B3DD52D21D16CBEB00EBF640 = {
 			isa = PBXGroup;
 			children = (
-				B3422DC61D84A64C00B337AD /* Overdrive */,
 				B3DD52DD1D16CBEB00EBF640 /* Products */,
 				B3DD52E71D16CC0000EBF640 /* Sources */,
 				B3DD52FB1D16D83200EBF640 /* Tests */,
