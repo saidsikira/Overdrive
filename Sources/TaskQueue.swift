@@ -90,10 +90,10 @@ open class TaskQueue: OperationQueue {
      
      ```swift
      let task = SomeTask()
-     TaskQueue.main.addTask(task)
+     TaskQueue.uiQueue.addTask(task)
      ```
      */
-    open static let mainx: TaskQueue = {
+    open static let uiQueue: TaskQueue = {
         let queue = TaskQueue()
         queue.underlyingQueue = OperationQueue.main.underlyingQueue
         return queue
