@@ -34,7 +34,7 @@
 		B3422DF71D84AAE000B337AD /* SimpleTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F6A91D72EDF500A3A170 /* SimpleTask.swift */; };
 		B3422DF81D84AAE300B337AD /* TaskError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F6AB1D72EE9F00A3A170 /* TaskError.swift */; };
 		B3422DF91D84AAE600B337AD /* FailableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F6AF1D72EF3D00A3A170 /* FailableTask.swift */; };
-		B39ACA1E1D85C54900606563 /* NSQualityOfService+Overdrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31CF99D1D189FCB003D4B2B /* NSQualityOfService+Overdrive.swift */; };
+		B37A87291D85DF940094E9AE /* NSQualityOfService+Overdrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31CF99D1D189FCB003D4B2B /* NSQualityOfService+Overdrive.swift */; };
 		B39ACA201D85C56B00606563 /* NSOperation+Overdrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B391B48B1D2EA7E1000A7F78 /* NSOperation+Overdrive.swift */; };
 		B39ACA221D85C6EF00606563 /* TaskBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39ACA211D85C6EF00606563 /* TaskBase.swift */; };
 		B39ACA281D85D2C800606563 /* Dependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39ACA271D85D2C800606563 /* Dependency.swift */; };
@@ -338,6 +338,7 @@
 				B3422DD41D84A6E900B337AD /* TaskQueue.swift in Sources */,
 				B3422DD01D84A6DF00B337AD /* Result.swift in Sources */,
 				B3422DD61D84A75C00B337AD /* FinishBlockObserver.swift in Sources */,
+				B37A87291D85DF940094E9AE /* NSQualityOfService+Overdrive.swift in Sources */,
 				B39ACA201D85C56B00606563 /* NSOperation+Overdrive.swift in Sources */,
 				B3422DD11D84A6E100B337AD /* State.swift in Sources */,
 				B3422DD51D84A6EC00B337AD /* TaskQueueDelegate.swift in Sources */,
@@ -360,7 +361,6 @@
 				B3422DF91D84AAE600B337AD /* FailableTask.swift in Sources */,
 				B3422DF81D84AAE300B337AD /* TaskError.swift in Sources */,
 				B3422DEB1D84AA2100B337AD /* InlineTaskTests.swift in Sources */,
-				B39ACA1E1D85C54900606563 /* NSQualityOfService+Overdrive.swift in Sources */,
 				B3422DEC1D84AA6900B337AD /* ResultTests.swift in Sources */,
 				B3422DF11D84AA7900B337AD /* TaskObserverTests.swift in Sources */,
 				B3422DF41D84AA8100B337AD /* ThreadSafetyTests.swift in Sources */,
@@ -389,10 +389,10 @@
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = UMX462F87M;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -420,10 +420,10 @@
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = UMX462F87M;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
