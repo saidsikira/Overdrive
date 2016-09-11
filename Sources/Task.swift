@@ -8,9 +8,6 @@
 
 import class Foundation.NSOperation
 
-/// Typealias for `NSOperation`
-public typealias TaskBase = Operation
-
 /**
  `Task<T>` is an abstract class that provides interface encapsuling any
  asynchronous or synchronous operation. Abstract nature of the `Task<T>` enforces
@@ -166,15 +163,6 @@ open class Task<T>: TaskBase {
     fileprivate var internalResult: Result<T>?
     
     /**
-     Internal task state
-     
-     - Warning: Setting the state directly using this property will result
-     in unexpected behaviour. Use the `state` property to set and retrieve
-     current state.
-     */
-    fileprivate var internalState: State = .initialized
-    
-    /**
      Internal completion block
      
      - Warning: Accessing this property directly will result in unexpected behavior.
@@ -210,11 +198,6 @@ open class Task<T>: TaskBase {
     */
     fileprivate var internalConditionErrors = [Error]()
     
-    /**
-     Private queue used in task state machine
-     */
-    let queue = DispatchQueue(label: "io.overdrive.task", attributes: [])
-    
     //MARK: Class properties
     
     /**
@@ -237,22 +220,6 @@ open class Task<T>: TaskBase {
             queue.sync {
                 internalResult = newResult
             }
-        }
-    }
-    
-    /**
-     Completion block that will be executed when the task finishes execution.
-     
-     - Warning: **DEPRECATED**. Use `onValue(_:)` method to set completion
-     block.
-    */
-    @available(*, deprecated, message : "use onResult completion instead")
-    open override var completionBlock: (() -> Void)? {
-        get {
-            return nil
-        }
-        set {
-            assert(false, "Use onValue method to define the behaviour")
         }
     }
     
@@ -591,7 +558,7 @@ open class Task<T>: TaskBase {
         return false
     }
     
-    //MARK: State management
+    //MARK: Finishing Task execution
     
     /**
      Finish execution of the task with result. Calling this method will change
@@ -619,49 +586,6 @@ open class Task<T>: TaskBase {
                 onErrorBlock?(error)
             }
         }
-    }
-    
-    /**
-     Main task state object. Any state change triggers internal `NSOperation` observers.
-     
-     State can be one of the following:
-     
-     * `Initialized`
-     * `Pending`
-     * `Ready`
-     * `Executing`
-     * `Finished`
-     
-     - Note:
-     You can change state from any thread.
-     */
-    var state: State {
-        get {
-            return queue.sync { return internalState }
-        }
-        
-        set(newState) {
-            
-            // Notify internal `NSOperation` observers that state will be changed
-            willChangeValue(forKey: "state")
-            
-            queue.sync {
-                assert(internalState.canTransitionToState(newState, shouldRetry: shouldRetry),
-                       "Invalid state transformation")
-                internalState = newState
-            }
-            
-            // Notifity internal `NSOperation` observers that state is changed
-            didChangeValue(forKey: "state")
-        }
-    }
-    
-    /**
-     This method changes state of `self` to `Pending`. It is called when task is
-     added to the `TaskQueue`.
-     */
-    final func willEnqueue() {
-        state = .pending
     }
     
     /**
@@ -834,6 +758,10 @@ open class Task<T>: TaskBase {
     open func getDependency<T>(_ type: Task<T>.Type) -> Task<T>? {
         let filteredDependency = dependencies.filter { $0 as? Task<T> != nil }
         return filteredDependency.first as? Task<T>
+    }
+    
+    open subscript(type: Task<T>.Type) -> Task<T>? {
+        return getDependency(type)
     }
 }
 

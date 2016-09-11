@@ -112,7 +112,7 @@ open class TaskQueue: OperationQueue {
     open static let background: TaskQueue = {
         let queue = TaskQueue()
         queue.name = "BackgroundTaskQueue"
-        queue.underlyingQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
+        queue.underlyingQueue = DispatchQueue.global(qos: .background)
         return queue
     }()
     

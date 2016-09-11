@@ -24,7 +24,7 @@ class DependencyTests: XCTestCase {
         
         testTask.addDependency(dependencyTask)
         
-        XCTAssert(testTask.dependencies.count == 1, "Dependencies count should be 1")
+        XCTAssertEqual(testTask.dependencies.count, 1)
         
         TaskQueue(qos: .default).addTask(testTask)
     }
@@ -42,5 +42,18 @@ class DependencyTests: XCTestCase {
         } else {
             XCTAssert(false, "Dependency not returned")
         }
+    }
+    
+    func testDependencySubscript() {
+        let testTask = TestTask()
+        let dependencyTask = SimpleTask()
+        dependencyTask.name = "DependencyTask"
+        
+        testTask.addDependency(dependencyTask)
+        
+        let dependency = testTask[SimpleTask.self]
+
+        XCTAssertNotNil(dependency, "Should retrurn dependency")
+        XCTAssertEqual(dependency?.name, "DependencyTask")
     }
 }

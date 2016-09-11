@@ -18,8 +18,6 @@
 		B3422DD51D84A6EC00B337AD /* TaskQueueDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31CF9981D185B44003D4B2B /* TaskQueueDelegate.swift */; };
 		B3422DD61D84A75C00B337AD /* FinishBlockObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1C8881D1929A200B6386A /* FinishBlockObserver.swift */; };
 		B3422DD71D84A76300B337AD /* CollectionType+Overdrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B304B27C1D19765200845F2D /* CollectionType+Overdrive.swift */; };
-		B3422DD81D84A76600B337AD /* NSQualityOfService+Overdrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31CF99D1D189FCB003D4B2B /* NSQualityOfService+Overdrive.swift */; };
-		B3422DD91D84A76900B337AD /* NSOperation+Overdrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B391B48B1D2EA7E1000A7F78 /* NSOperation+Overdrive.swift */; };
 		B3422DE31D84A88800B337AD /* Overdrive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3422DC51D84A64C00B337AD /* Overdrive.framework */; };
 		B3422DE91D84AA1C00B337AD /* DependencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5DF581D1C4F7200D79532 /* DependencyTests.swift */; };
 		B3422DEA1D84AA1E00B337AD /* DispatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35FF1B71D6B5A860048C676 /* DispatchTests.swift */; };
@@ -33,10 +31,15 @@
 		B3422DF21D84AA7B00B337AD /* TaskQueueDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3174C871D1D9C0C000DF4F6 /* TaskQueueDelegateTests.swift */; };
 		B3422DF31D84AA7E00B337AD /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DD52FC1D16D83200EBF640 /* TaskTests.swift */; };
 		B3422DF41D84AA8100B337AD /* ThreadSafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B399F77A1D3B87C000EEFBBB /* ThreadSafetyTests.swift */; };
-		B3422DF61D84AA9500B337AD /* Overdrive.h in Headers */ = {isa = PBXBuildFile; fileRef = B3DD52E91D16CC0000EBF640 /* Overdrive.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B3422DF71D84AAE000B337AD /* SimpleTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F6A91D72EDF500A3A170 /* SimpleTask.swift */; };
 		B3422DF81D84AAE300B337AD /* TaskError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F6AB1D72EE9F00A3A170 /* TaskError.swift */; };
 		B3422DF91D84AAE600B337AD /* FailableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325F6AF1D72EF3D00A3A170 /* FailableTask.swift */; };
+		B39ACA1E1D85C54900606563 /* NSQualityOfService+Overdrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31CF99D1D189FCB003D4B2B /* NSQualityOfService+Overdrive.swift */; };
+		B39ACA201D85C56B00606563 /* NSOperation+Overdrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B391B48B1D2EA7E1000A7F78 /* NSOperation+Overdrive.swift */; };
+		B39ACA221D85C6EF00606563 /* TaskBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39ACA211D85C6EF00606563 /* TaskBase.swift */; };
+		B39ACA281D85D2C800606563 /* Dependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39ACA271D85D2C800606563 /* Dependency.swift */; };
+		B39ACA2A1D85D3A000606563 /* Retry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39ACA291D85D3A000606563 /* Retry.swift */; };
+		B39ACA2F1D85D8A500606563 /* Overdrive.h in Headers */ = {isa = PBXBuildFile; fileRef = B39ACA2D1D85D8A500606563 /* Overdrive.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,14 +73,17 @@
 		B391B4911D2ED4FD000A7F78 /* TaskObserverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskObserverTests.swift; sourceTree = "<group>"; };
 		B391B49C1D2F0232000A7F78 /* InlineTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = InlineTask.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B399F77A1D3B87C000EEFBBB /* ThreadSafetyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadSafetyTests.swift; sourceTree = "<group>"; };
+		B39ACA211D85C6EF00606563 /* TaskBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskBase.swift; sourceTree = "<group>"; };
+		B39ACA271D85D2C800606563 /* Dependency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dependency.swift; sourceTree = "<group>"; };
+		B39ACA291D85D3A000606563 /* Retry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Retry.swift; sourceTree = "<group>"; };
+		B39ACA2C1D85D8A500606563 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B39ACA2D1D85D8A500606563 /* Overdrive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Overdrive.h; sourceTree = "<group>"; };
 		B3A147D11D27C58200BF971E /* TaskConditionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TaskConditionTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B3AD42751D1838B400348607 /* TaskObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskObserver.swift; sourceTree = "<group>"; };
 		B3AD65201D246250001F6C57 /* TaskObserverManagementTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskObserverManagementTests.swift; sourceTree = "<group>"; };
 		B3B1C8881D1929A200B6386A /* FinishBlockObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishBlockObserver.swift; sourceTree = "<group>"; };
 		B3C5DF581D1C4F7200D79532 /* DependencyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyTests.swift; sourceTree = "<group>"; };
 		B3D302BE1D2D065200BA070A /* TaskConditionDependencyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskConditionDependencyTests.swift; sourceTree = "<group>"; };
-		B3DD52E81D16CC0000EBF640 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B3DD52E91D16CC0000EBF640 /* Overdrive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Overdrive.h; sourceTree = "<group>"; };
 		B3DD52EC1D16CC4300EBF640 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		B3DD52EE1D16CC7F00EBF640 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		B3DD52F01D16CCA300EBF640 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Task.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -135,6 +141,15 @@
 			path = Overdrive;
 			sourceTree = "<group>";
 		};
+		B39ACA2B1D85D8A500606563 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				B39ACA2C1D85D8A500606563 /* Info.plist */,
+				B39ACA2D1D85D8A500606563 /* Overdrive.h */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
 		B3B1C8871D19299300B6386A /* Observers */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,19 +180,21 @@
 		B3DD52E71D16CC0000EBF640 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				B3DD52E91D16CC0000EBF640 /* Overdrive.h */,
-				B3DD52E81D16CC0000EBF640 /* Info.plist */,
 				B322B0A91D1ED314009DE006 /* Condition.swift */,
 				B3EF8F341D20423500064CC2 /* Create.swift */,
+				B39ACA271D85D2C800606563 /* Dependency.swift */,
 				B391B49C1D2F0232000A7F78 /* InlineTask.swift */,
 				B3DD52EC1D16CC4300EBF640 /* Result.swift */,
+				B39ACA291D85D3A000606563 /* Retry.swift */,
 				B3DD52EE1D16CC7F00EBF640 /* State.swift */,
 				B3DD52F01D16CCA300EBF640 /* Task.swift */,
+				B39ACA211D85C6EF00606563 /* TaskBase.swift */,
 				B3AD42751D1838B400348607 /* TaskObserver.swift */,
 				B3DD52F41D16D7A800EBF640 /* TaskQueue.swift */,
 				B31CF9981D185B44003D4B2B /* TaskQueueDelegate.swift */,
 				B31CF99C1D189FB9003D4B2B /* Extensions */,
 				B3B1C8871D19299300B6386A /* Observers */,
+				B39ACA2B1D85D8A500606563 /* Support */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -210,7 +227,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3422DF61D84AA9500B337AD /* Overdrive.h in Headers */,
+				B39ACA2F1D85D8A500606563 /* Overdrive.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,18 +333,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3422DCF1D84A6DC00B337AD /* InlineTask.swift in Sources */,
+				B39ACA221D85C6EF00606563 /* TaskBase.swift in Sources */,
 				B3422DCD1D84A6D600B337AD /* Condition.swift in Sources */,
 				B3422DD41D84A6E900B337AD /* TaskQueue.swift in Sources */,
 				B3422DD01D84A6DF00B337AD /* Result.swift in Sources */,
 				B3422DD61D84A75C00B337AD /* FinishBlockObserver.swift in Sources */,
+				B39ACA201D85C56B00606563 /* NSOperation+Overdrive.swift in Sources */,
 				B3422DD11D84A6E100B337AD /* State.swift in Sources */,
-				B3422DD81D84A76600B337AD /* NSQualityOfService+Overdrive.swift in Sources */,
 				B3422DD51D84A6EC00B337AD /* TaskQueueDelegate.swift in Sources */,
 				B3422DD31D84A6E700B337AD /* TaskObserver.swift in Sources */,
+				B39ACA2A1D85D3A000606563 /* Retry.swift in Sources */,
 				B3422DD71D84A76300B337AD /* CollectionType+Overdrive.swift in Sources */,
 				B3422DD21D84A6E400B337AD /* Task.swift in Sources */,
+				B39ACA281D85D2C800606563 /* Dependency.swift in Sources */,
 				B3422DCE1D84A6D900B337AD /* Create.swift in Sources */,
-				B3422DD91D84A76900B337AD /* NSOperation+Overdrive.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +360,7 @@
 				B3422DF91D84AAE600B337AD /* FailableTask.swift in Sources */,
 				B3422DF81D84AAE300B337AD /* TaskError.swift in Sources */,
 				B3422DEB1D84AA2100B337AD /* InlineTaskTests.swift in Sources */,
+				B39ACA1E1D85C54900606563 /* NSQualityOfService+Overdrive.swift in Sources */,
 				B3422DEC1D84AA6900B337AD /* ResultTests.swift in Sources */,
 				B3422DF11D84AA7900B337AD /* TaskObserverTests.swift in Sources */,
 				B3422DF41D84AA8100B337AD /* ThreadSafetyTests.swift in Sources */,
@@ -377,10 +397,11 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = Sources/Support/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = io.swiftable.Overdrive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = "";
@@ -389,6 +410,8 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2,3,4";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -405,10 +428,11 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = Sources/Support/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = io.swiftable.Overdrive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = "";
@@ -416,6 +440,8 @@
 				SUPPORTED_PLATFORMS = "appletvsimulator appletvos watchos watchsimulator iphoneos iphonesimulator macosx";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2,3,4";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
