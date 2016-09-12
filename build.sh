@@ -121,7 +121,7 @@ case "$COMMAND" in
     -destination "${IOS_DESTINATION}" \
     -configuration Release \
     ONLY_ACTIVE_ARCH=YES \
-    CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
+    CODE_SIGNING_REQUIRED=NO \
     ENABLE_TESTABILITY=YES \
     test
     exit 0;
@@ -135,7 +135,7 @@ case "$COMMAND" in
     -destination "${MACOS_DESTINATION}" \
     -configuration Release \
     ONLY_ACTIVE_ARCH=YES \
-    CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
+    CODE_SIGNING_REQUIRED=NO \
     ENABLE_TESTABILITY=YES \
     test
     exit 0;
@@ -149,7 +149,7 @@ case "$COMMAND" in
     -destination "${TVOS_DESTINATION}" \
     -configuration Release \
     ONLY_ACTIVE_ARCH=YES \
-    CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
+    CODE_SIGNING_REQUIRED=NO \
     ENABLE_TESTABILITY=YES \
     test
     exit 0;
