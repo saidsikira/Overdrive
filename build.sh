@@ -123,7 +123,7 @@ case "$COMMAND" in
     ONLY_ACTIVE_ARCH=YES \
     CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
     ENABLE_TESTABILITY=YES \
-    test | xcpretty -c
+    test
     exit 0;
   ;;
 
@@ -137,7 +137,7 @@ case "$COMMAND" in
     ONLY_ACTIVE_ARCH=YES \
     CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
     ENABLE_TESTABILITY=YES \
-    test | xcpretty -c
+    test
     exit 0;
   ;;
 
@@ -151,7 +151,7 @@ case "$COMMAND" in
     ONLY_ACTIVE_ARCH=YES \
     CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
     ENABLE_TESTABILITY=YES \
-    test | xcpretty -c
+    test
     exit 0;
   ;;
 
