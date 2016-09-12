@@ -69,6 +69,7 @@ case "$COMMAND" in
     -sdk "${IOS_SDK}" \
     -destination "${IOS_DESTINATION}" \
     -configuration Debug ONLY_ACTIVE_ARCH=YES \
+    CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
     build | xcpretty -c
     exit 0;
   ;;
@@ -118,7 +119,10 @@ case "$COMMAND" in
     -scheme "${SCHEME}" \
     -sdk "${IOS_SDK}" \
     -destination "${IOS_DESTINATION}" \
-    -configuration Debug ONLY_ACTIVE_ARCH=YES \
+    -configuration Release \
+    ONLY_ACTIVE_ARCH=YES \
+    CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
+    ENABLE_TESTABILITY=YES \
     test | xcpretty -c
     exit 0;
   ;;
@@ -129,7 +133,10 @@ case "$COMMAND" in
     -scheme "${SCHEME}" \
     -sdk "${MACOS_SDK}" \
     -destination "${MACOS_DESTINATION}" \
-    -configuration Debug ONLY_ACTIVE_ARCH=YES \
+    -configuration Release \
+    ONLY_ACTIVE_ARCH=YES \
+    CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
+    ENABLE_TESTABILITY=YES \
     test | xcpretty -c
     exit 0;
   ;;
@@ -140,7 +147,10 @@ case "$COMMAND" in
     -scheme "${SCHEME}" \
     -sdk "${TVOS_SDK}" \
     -destination "${TVOS_DESTINATION}" \
-    -configuration Debug ONLY_ACTIVE_ARCH=YES \
+    -configuration Release \
+    ONLY_ACTIVE_ARCH=YES \
+    CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
+    ENABLE_TESTABILITY=YES \
     test | xcpretty -c
     exit 0;
   ;;
