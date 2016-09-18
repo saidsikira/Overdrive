@@ -25,7 +25,7 @@
         <a class="header-link" href="../index.html">
           Overdrive Docs
         </a>
-         (91% documented)
+         (92% documented)
       </p>
     
         <p class="header-col header-col--secondary">
@@ -89,16 +89,32 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <a class="nav-group-name-link" href="../Other Classes.html">Other Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/CollectionType.html">CollectionType</a>
+                <a class="nav-group-task-link" href="../Classes/TaskBase.html">TaskBase</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other Extensions.html">Other Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Collection.html">Collection</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/NSOperation.html">NSOperation</a>
+                <a class="nav-group-task-link" href="../Extensions/Operation.html">Operation</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/NSQualityOfService.html">NSQualityOfService</a>
+                <a class="nav-group-task-link" href="../Extensions/QualityOfService.html">QualityOfService</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other Typealiases.html">Other Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other Typealiases.html#/s:9Overdrive14InlineTaskBase">InlineTaskBase</a>
               </li>
             </ul>
           </li>
@@ -111,7 +127,7 @@
             <h1>Task</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">:</span> <span class="kt">NSOperation</span></code></pre>
+                  <pre class="highlight"><code><span class="n">open</span> <span class="kd">class</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="../Classes/TaskBase.html">TaskBase</a></span></code></pre>
 
                 </div>
               </div>
@@ -135,17 +151,17 @@ of the task at any point can be:</li>
 </ol>
 
 <ul>
-<li>Initialized - Task instance is created</li>
-<li>Pending - Task is added to the <code><a href="../Classes/TaskQueue.html">TaskQueue</a></code> and started process of
+<li>initialized - Task instance is created</li>
+<li>pending - Task is added to the <code><a href="../Classes/TaskQueue.html">TaskQueue</a></code> and started process of
 evaluating readiness</li>
-<li>Ready - Task is ready to execute.</li>
-<li>Executing - Task is executing</li>
-<li>Finished - Task finished with execution</li>
+<li>ready - Task is ready to execute.</li>
+<li>executing - Task is executing</li>
+<li>finished - Task finished with execution</li>
 </ul>
 
 <ol>
 <li><p><strong>Task execution point</strong> - Task execution starts in <code>run()</code> method when state
-reaches <code>Ready</code> state. You should always override this method in your subclass.</p></li>
+reaches <code>ready</code> state. You should always override this method in your subclass.</p></li>
 <li><p><strong>Finishing execution</strong> - Task execution finishes when <code>finish(_:)</code> method is
 called. You always finish execution with <code><a href="../Enums/Result.html">Result&lt;T&gt;</a></code> object. <code><a href="../Enums/Result.html">Result&lt;T&gt;</a></code> is an
 enum with two cases:</p></li>
@@ -332,41 +348,7 @@ or setup completion blocks that will execute when task finishes.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">internal(set)</span> <span class="kd">public</span> <span class="k">var</span> <span class="nv">result</span><span class="p">:</span> <span class="kt"><a href="../Enums/Result.html">Result</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:vC9Overdrive4Task15completionBlockGSqFT_T__"></a>
-                    <a name="//apple_ref/swift/Property/completionBlock" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC9Overdrive4Task15completionBlockGSqFT_T__">completionBlock</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Completion block that will be executed when the task finishes execution.</p>
-
-<div class="aside aside-warning">
-    <p class="aside-title">Warning</p>
-    <strong>DEPRECATED</strong>. Use <code><a href="../Classes/Task.html#/s:FC9Overdrive4Task7onValueFFxT_DGS0_x_">onValue(_:)</a></code> method to set completion
-block.
-
-</div>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">override</span> <span class="k">var</span> <span class="nv">completionBlock</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">internal(set)</span> <span class="n">open</span> <span class="k">var</span> <span class="nv">result</span><span class="p">:</span> <span class="kt"><a href="../Enums/Result.html">Result</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -432,7 +414,7 @@ in chain with other task methods.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">func</span> <span class="nf">onValue</span><span class="p">(</span><span class="nv">completion</span><span class="p">:</span> <span class="p">((</span><span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">func</span> <span class="nf">onValue</span><span class="p">(</span><span class="n">_</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">((</span><span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
                       </div>
@@ -467,9 +449,9 @@ in chain with other task methods.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC9Overdrive4Task7onErrorFFPs9ErrorType_T_DGS0_x_"></a>
+                    <a name="/s:FC9Overdrive4Task7onErrorFFPs5Error_T_DGS0_x_"></a>
                     <a name="//apple_ref/swift/Method/onError(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC9Overdrive4Task7onErrorFFPs9ErrorType_T_DGS0_x_">onError(_:)</a>
+                    <a class="token" href="#/s:FC9Overdrive4Task7onErrorFFPs5Error_T_DGS0_x_">onError(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -515,7 +497,7 @@ in chain with other task methods.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">func</span> <span class="nf">onError</span><span class="p">(</span><span class="nv">completion</span><span class="p">:</span> <span class="p">((</span><span class="kt">ErrorType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">()))</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">func</span> <span class="nf">onError</span><span class="p">(</span><span class="n">_</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">()))</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
                       </div>
@@ -591,7 +573,7 @@ again until retry count becomes zero.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">retry</span><span class="p">(</span><span class="nv">times</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">func</span> <span class="nf">retry</span><span class="p">(</span><span class="n">_</span> <span class="nv">times</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
                       </div>
@@ -654,7 +636,7 @@ again until retry count becomes zero.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">private(set)</span> <span class="kd">public</span> <span class="k">var</span> <span class="nv">conditions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/TaskCondition.html">TaskCondition</a></span><span class="p">]</span></code></pre>
+                          <pre class="highlight"><code><span class="nf">fileprivate</span><span class="p">(</span><span class="k">set</span><span class="p">)</span> <span class="n">open</span> <span class="k">var</span> <span class="nv">conditions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/TaskCondition.html">TaskCondition</a></span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -688,7 +670,7 @@ assertion fail will occur.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addCondition</span><span class="p">(</span><span class="nv">condition</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TaskCondition.html">TaskCondition</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">addCondition</span><span class="p">(</span><span class="n">_</span> <span class="nv">condition</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TaskCondition.html">TaskCondition</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -735,7 +717,7 @@ assertion fail will occur.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">removeCondition</span><span class="p">(</span><span class="nv">condition</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TaskCondition.html">TaskCondition</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">removeCondition</span><span class="p">(</span><span class="n">_</span> <span class="nv">condition</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TaskCondition.html">TaskCondition</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -787,7 +769,7 @@ assertion fail will occur.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">removeConditionOfType</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TaskCondition.html">TaskCondition</a></span><span class="o">&gt;</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">T</span><span class="o">.</span><span class="k">Type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="n">removeConditionOfType</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TaskCondition.html">TaskCondition</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">T</span><span class="o">.</span><span class="k">Type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -857,7 +839,7 @@ assertion fail will occur.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">internal(set)</span> <span class="kd">public</span> <span class="k">var</span> <span class="nv">observers</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/TaskObserver.html">TaskObserver</a></span><span class="p">]</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">internal(set)</span> <span class="n">open</span> <span class="k">var</span> <span class="nv">observers</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/TaskObserver.html">TaskObserver</a></span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -884,7 +866,7 @@ assertion fail will occur.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">func</span> <span class="nf">addObserver</span><span class="p">(</span><span class="nv">observer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TaskObserver.html">TaskObserver</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">func</span> <span class="nf">addObserver</span><span class="p">(</span><span class="n">_</span> <span class="nv">observer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TaskObserver.html">TaskObserver</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -949,7 +931,7 @@ assertion fail will occur.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">removeObserver</span><span class="p">(</span><span class="nv">observer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TaskObserver.html">TaskObserver</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">removeObserver</span><span class="p">(</span><span class="n">_</span> <span class="nv">observer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TaskObserver.html">TaskObserver</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -1029,7 +1011,7 @@ observer will be removed.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">removeObserverOfType</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TaskObserver.html">TaskObserver</a></span><span class="o">&gt;</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">T</span><span class="o">.</span><span class="k">Type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="n">removeObserverOfType</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TaskObserver.html">TaskObserver</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">T</span><span class="o">.</span><span class="k">Type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -1065,10 +1047,10 @@ observer will be removed.</p>
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/State%20management"></a>
-                <a name="//apple_ref/swift/Section/State management" class="dashAnchor"></a>
-                <a href="#/State%20management">
-                  <h3 class="section-name">State management</h3>
+                <a name="/Finishing%20Task%20execution"></a>
+                <a name="//apple_ref/swift/Section/Finishing Task execution" class="dashAnchor"></a>
+                <a href="#/Finishing%20Task%20execution">
+                  <h3 class="section-name">Finishing Task execution</h3>
                 </a>
               </div>
               <ul class="item-container">
@@ -1107,7 +1089,7 @@ with <code>Value(T)</code>, <code>onValueBlock</code> will be executed. If task 
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">func</span> <span class="nf">finish</span><span class="p">(</span><span class="nv">result</span><span class="p">:</span> <span class="kt"><a href="../Enums/Result.html">Result</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">func</span> <span class="nf">finish</span><span class="p">(</span><span class="n">_</span> <span class="nv">result</span><span class="p">:</span> <span class="kt"><a href="../Enums/Result.html">Result</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1137,9 +1119,9 @@ with <code>Value(T)</code>, <code>onValueBlock</code> will be executed. If task 
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC9Overdrive4Task12asynchronousSb"></a>
-                    <a name="//apple_ref/swift/Property/asynchronous" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC9Overdrive4Task12asynchronousSb">asynchronous</a>
+                    <a name="/s:vC9Overdrive4Task14isAsynchronousSb"></a>
+                    <a name="//apple_ref/swift/Property/isAsynchronous" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC9Overdrive4Task14isAsynchronousSb">isAsynchronous</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1155,7 +1137,7 @@ Defaults to <code>true</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="k">override</span> <span class="k">var</span> <span class="nv">asynchronous</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="k">override</span> <span class="k">var</span> <span class="nv">isAsynchronous</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -1165,9 +1147,9 @@ Defaults to <code>true</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC9Overdrive4Task5readySb"></a>
-                    <a name="//apple_ref/swift/Property/ready" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC9Overdrive4Task5readySb">ready</a>
+                    <a name="/s:vC9Overdrive4Task7isReadySb"></a>
+                    <a name="//apple_ref/swift/Property/isReady" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC9Overdrive4Task7isReadySb">isReady</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1182,7 +1164,7 @@ Defaults to <code>true</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="k">override</span> <span class="k">var</span> <span class="nv">ready</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="k">override</span> <span class="k">var</span> <span class="nv">isReady</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -1192,9 +1174,9 @@ Defaults to <code>true</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC9Overdrive4Task9executingSb"></a>
-                    <a name="//apple_ref/swift/Property/executing" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC9Overdrive4Task9executingSb">executing</a>
+                    <a name="/s:vC9Overdrive4Task11isExecutingSb"></a>
+                    <a name="//apple_ref/swift/Property/isExecuting" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC9Overdrive4Task11isExecutingSb">isExecuting</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1209,7 +1191,7 @@ Defaults to <code>true</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="k">override</span> <span class="k">var</span> <span class="nv">executing</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="k">override</span> <span class="k">var</span> <span class="nv">isExecuting</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -1219,9 +1201,9 @@ Defaults to <code>true</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC9Overdrive4Task8finishedSb"></a>
-                    <a name="//apple_ref/swift/Property/finished" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC9Overdrive4Task8finishedSb">finished</a>
+                    <a name="/s:vC9Overdrive4Task10isFinishedSb"></a>
+                    <a name="//apple_ref/swift/Property/isFinished" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC9Overdrive4Task10isFinishedSb">isFinished</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1236,7 +1218,7 @@ Defaults to <code>true</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="k">override</span> <span class="k">var</span> <span class="nv">finished</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="k">override</span> <span class="k">var</span> <span class="nv">isFinished</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -1333,7 +1315,7 @@ method on self.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span><span class="p">()</span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">run</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -1381,9 +1363,9 @@ method on self.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC9Overdrive4Task13addDependencyFCSo11NSOperationT_"></a>
+                    <a name="/s:FC9Overdrive4Task13addDependencyFCSo9OperationT_"></a>
                     <a name="//apple_ref/swift/Method/addDependency(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC9Overdrive4Task13addDependencyFCSo11NSOperationT_">addDependency(_:)</a>
+                    <a class="token" href="#/s:FC9Overdrive4Task13addDependencyFCSo9OperationT_">addDependency(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1398,7 +1380,7 @@ method on self.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">:</span> <span class="kt">NSOperation</span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">class</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="../Classes/TaskBase.html">TaskBase</a></span></code></pre>
 
                         </div>
                       </div>
@@ -1444,7 +1426,7 @@ method on self.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">getDependency</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;.</span><span class="k">Type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">?</span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="n">getDependency</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;.</span><span class="k">Type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -1490,9 +1472,9 @@ method on self.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:ZFC9Overdrive4Task6createFFT_GOS_6Resultx_GS0_x_"></a>
+                    <a name="/s:ZFC9Overdrive4Task6createFFT_T_CS_10InlineTask"></a>
                     <a name="//apple_ref/swift/Method/create(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZFC9Overdrive4Task6createFFT_GOS_6Resultx_GS0_x_">create(_:)</a>
+                    <a class="token" href="#/s:ZFC9Overdrive4Task6createFFT_T_CS_10InlineTask">create(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1500,25 +1482,24 @@ method on self.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Create inline synchronus task by returning result in the completion block.</p>
+                        <p>Create inline task with completion block</p>
 
 <p><strong>Example:</strong></p>
 
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">inlineTask</span> <span class="o">=</span> <span class="kt">Task</span><span class="o">.</span><span class="n">create</span> <span class="p">{</span>
-   <span class="k">return</span> <span class="o">.</span><span class="kt">Value</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+   <span class="nf">doWork</span><span class="p">()</span>
 <span class="p">}</span>
 </code></pre>
 
 <div class="aside aside-parameter">
     <p class="aside-title">Parameter</p>
-    <p>Parameter resultBlock: Block in which task is executed. To finish execution,
-you must return from the completion block with <code><a href="../Enums/Result.html">Result&lt;T&gt;</a></code>.</p>
+    <p>Parameter taskBlock: Block in which task is executed.</p>
 
 </div>
 
 <div class="aside aside-returns">
     <p class="aside-title">Returns</p>
-    <p><code>Task&lt;T&gt;</code> instance</p>
+    <p>InlineTask instance</p>
 
 </div>
 
@@ -1527,7 +1508,7 @@ you must return from the completion block with <code><a href="../Enums/Result.ht
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">create</span><span class="p">(</span><span class="kd">@noescape</span> <span class="nv">resultBlock</span><span class="p">:</span> <span class="p">(</span><span class="kt">Void</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Enums/Result.html">Result</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">create</span><span class="p">(</span><span class="n">_</span> <span class="nv">taskBlock</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">((</span><span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/InlineTask.html">InlineTask</a></span></code></pre>
 
                         </div>
                       </div>
@@ -1538,12 +1519,12 @@ you must return from the completion block with <code><a href="../Enums/Result.ht
                             <tr>
                               <td>
                                 <code>
-                                <em>resultBlock</em>
+                                <em>taskBlock</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>Block in which task is executed. To finish execution, you must return from the completion block with <code>Result&lt;T&gt;</code>.</p>
+                                  <p>Block in which task is executed.</p>
 
                                 </div>
                               </td>
@@ -1553,7 +1534,7 @@ you must return from the completion block with <code><a href="../Enums/Result.ht
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p><code>Task&lt;T&gt;</code> instance</p>
+                        <p>InlineTask instance</p>
 
                       </div>
                     </section>
@@ -1567,8 +1548,8 @@ you must return from the completion block with <code><a href="../Enums/Result.ht
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2016 <a class="link" href="swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-07-12)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2016 <a class="link" href="swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-09-18)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

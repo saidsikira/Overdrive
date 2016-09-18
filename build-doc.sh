@@ -27,13 +27,12 @@ LATEST_TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
 
 # Checkout to the latest tag
 echo "[GIT]   Checking out $LATEST_TAG"
-git checkout $LATEST_TAG &>build.log
+# git checkout $LATEST_TAG &>build.log
 
 echo "[JAZZY] Generating documentation . . ."
 # Generate documentation with jazzy
 jazzy \
 		--clean \
-		--swift-version 2.2 \
 		--output ../latest \
 		--author "Swiftable" \
 		--author_url "swiftable.io" \

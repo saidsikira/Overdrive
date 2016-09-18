@@ -24,7 +24,7 @@
         <a class="header-link" href="index.html">
           Overdrive Docs
         </a>
-         (91% documented)
+         (92% documented)
       </p>
     
         <p class="header-col header-col--secondary">
@@ -88,16 +88,32 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
+            <a class="nav-group-name-link" href="Other Classes.html">Other Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/CollectionType.html">CollectionType</a>
+                <a class="nav-group-task-link" href="Classes/TaskBase.html">TaskBase</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Other Extensions.html">Other Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Collection.html">Collection</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/NSOperation.html">NSOperation</a>
+                <a class="nav-group-task-link" href="Extensions/Operation.html">Operation</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/NSQualityOfService.html">NSQualityOfService</a>
+                <a class="nav-group-task-link" href="Extensions/QualityOfService.html">QualityOfService</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Other Typealiases.html">Other Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other Typealiases.html#/s:9Overdrive14InlineTaskBase">InlineTaskBase</a>
               </li>
             </ul>
           </li>
@@ -149,17 +165,17 @@ of the task at any point can be:</li>
 </ol>
 
 <ul>
-<li>Initialized - Task instance is created</li>
-<li>Pending - Task is added to the <code><a href="Classes/TaskQueue.html">TaskQueue</a></code> and started process of
+<li>initialized - Task instance is created</li>
+<li>pending - Task is added to the <code><a href="Classes/TaskQueue.html">TaskQueue</a></code> and started process of
 evaluating readiness</li>
-<li>Ready - Task is ready to execute.</li>
-<li>Executing - Task is executing</li>
-<li>Finished - Task finished with execution</li>
+<li>ready - Task is ready to execute.</li>
+<li>executing - Task is executing</li>
+<li>finished - Task finished with execution</li>
 </ul>
 
 <ol>
 <li><p><strong>Task execution point</strong> - Task execution starts in <code>run()</code> method when state
-reaches <code>Ready</code> state. You should always override this method in your subclass.</p></li>
+reaches <code>ready</code> state. You should always override this method in your subclass.</p></li>
 <li><p><strong>Finishing execution</strong> - Task execution finishes when <code>finish(_:)</code> method is
 called. You always finish execution with <code><a href="Enums/Result.html">Result&lt;T&gt;</a></code> object. <code><a href="Enums/Result.html">Result&lt;T&gt;</a></code> is an
 enum with two cases:</p></li>
@@ -310,7 +326,7 @@ specify maximum number of retry operations use <code>retry(_:)</code> method.</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">:</span> <span class="kt">NSOperation</span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">class</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="Classes/TaskBase.html">TaskBase</a></span></code></pre>
 
                         </div>
                       </div>
@@ -334,36 +350,9 @@ specify maximum number of retry operations use <code>retry(_:)</code> method.</p
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p><code>InlineTask</code> provides interface for creating asynchronous taks that don&rsquo;t
-neccesarily finish with result. To create <code>InlineTask</code> you pass a closure to
-the initializer.</p>
-
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">InlineTask</span> <span class="p">{</span>
-<span class="nf">doWork</span><span class="p">()</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>Inline tasks behave same as any <code><a href="Classes/Task.html">Task&lt;T&gt;</a></code>. They can be added to the
-<code><a href="Classes/TaskQueue.html">TaskQueue</a></code> and you can use <code>onValue(_:)</code> method to be notified when they
-are finished with execution.</p>
-
-<div class="aside aside-note">
-    <p class="aside-title">Note</p>
-    <code>InlineTask</code> is most commonly used in UI interactions. For example,
-you can create <code>InlineTask</code> that presents view controller and add dependency
-task that retrieves data from the server.
-
-</div>
+                        <p>Undocumented</p>
 
                         <a href="Classes/InlineTask.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">InlineTask</span><span class="p">:</span> <span class="kt"><a href="Classes/Task.html">Task</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span></code></pre>
-
-                        </div>
                       </div>
                     </section>
                   </div>
@@ -418,7 +407,7 @@ defined queue.</p>
 and background queues.</p>
 
 <ul>
-<li><code><a href="Classes/TaskQueue.html#/s:ZvC9Overdrive9TaskQueue4mainS0_">TaskQueue.main</a></code> - Associated with main UI thread, suitable for execution
+<li><code>TaskQueue.main</code> - Associated with main UI thread, suitable for execution
 tasks that application UI is dependent on.</li>
 <li><code><a href="Classes/TaskQueue.html#/s:ZvC9Overdrive9TaskQueue10backgroundS0_">TaskQueue.background</a></code> - Associated with background queue. Any task that is
 added to this queue will be executed in the background.</li>
@@ -462,7 +451,7 @@ in <code>TaskQueue</code> lifecycle. See <code><a href="Protocols/TaskQueueDeleg
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">TaskQueue</span><span class="p">:</span> <span class="kt">NSOperationQueue</span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">class</span> <span class="kt">TaskQueue</span><span class="p">:</span> <span class="kt">OperationQueue</span></code></pre>
 
                         </div>
                       </div>
@@ -477,8 +466,8 @@ in <code>TaskQueue</code> lifecycle. See <code><a href="Protocols/TaskQueueDeleg
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2016 <a class="link" href="swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-07-12)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2016 <a class="link" href="swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-09-18)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

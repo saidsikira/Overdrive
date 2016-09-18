@@ -24,7 +24,7 @@
         <a class="header-link" href="index.html">
           Overdrive Docs
         </a>
-         (91% documented)
+         (92% documented)
       </p>
     
         <p class="header-col header-col--secondary">
@@ -88,16 +88,32 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
+            <a class="nav-group-name-link" href="Other Classes.html">Other Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/CollectionType.html">CollectionType</a>
+                <a class="nav-group-task-link" href="Classes/TaskBase.html">TaskBase</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Other Extensions.html">Other Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Collection.html">Collection</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/NSOperation.html">NSOperation</a>
+                <a class="nav-group-task-link" href="Extensions/Operation.html">Operation</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/NSQualityOfService.html">NSQualityOfService</a>
+                <a class="nav-group-task-link" href="Extensions/QualityOfService.html">QualityOfService</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Other Typealiases.html">Other Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other Typealiases.html#/s:9Overdrive14InlineTaskBase">InlineTaskBase</a>
               </li>
             </ul>
           </li>
@@ -129,7 +145,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Task result definition.</p>
+                        <p>Task result definition. <code>Result&lt;T&gt;</code> is one of the fundamental concepts in
+Task execution. To finish execution of any task, you need to pass the Result
+to the <code>finish(_:)</code> method.</p>
+
+<p><code>Result&lt;T&gt;</code> enum definition defines two cases:</p>
+
+<ul>
+<li><code>Value(T)</code></li>
+<li><code>Error(ErrorType)</code></li>
+</ul>
 
 <p><strong>Example</strong></p>
 
@@ -153,6 +178,13 @@
               </ul>
             </div>
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/TaskConditionResult%20enum"></a>
+                <a name="//apple_ref/swift/Section/TaskConditionResult enum" class="dashAnchor"></a>
+                <a href="#/TaskConditionResult%20enum">
+                  <h3 class="section-name">TaskConditionResult enum</h3>
+                </a>
+              </div>
               <ul class="item-container">
                 <li class="item">
                   <div>
@@ -183,6 +215,17 @@ conditions. Can be <code>Satisfied</code> or <code>Failed(ErrorType)</code></p>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/TaskConditionError%20enum"></a>
+                <a name="//apple_ref/swift/Section/TaskConditionError enum" class="dashAnchor"></a>
+                <a href="#/TaskConditionError%20enum">
+                  <h3 class="section-name">TaskConditionError enum</h3>
+                </a>
+              </div>
+              <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
@@ -204,7 +247,7 @@ conditions. Can be <code>Satisfied</code> or <code>Failed(ErrorType)</code></p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">TaskConditionError</span><span class="p">:</span> <span class="kt">ErrorType</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">TaskConditionError</span><span class="p">:</span> <span class="kt">Error</span></code></pre>
 
                         </div>
                       </div>
@@ -219,8 +262,8 @@ conditions. Can be <code>Satisfied</code> or <code>Failed(ErrorType)</code></p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2016 <a class="link" href="swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-07-12)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2016 <a class="link" href="swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-09-18)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

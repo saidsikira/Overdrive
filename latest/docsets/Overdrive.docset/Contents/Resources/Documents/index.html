@@ -24,7 +24,7 @@
         <a class="header-link" href="index.html">
           Overdrive Docs
         </a>
-         (91% documented)
+         (92% documented)
       </p>
     
         <p class="header-col header-col--secondary">
@@ -88,16 +88,32 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
+            <a class="nav-group-name-link" href="Other Classes.html">Other Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/CollectionType.html">CollectionType</a>
+                <a class="nav-group-task-link" href="Classes/TaskBase.html">TaskBase</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Other Extensions.html">Other Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Collection.html">Collection</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/NSOperation.html">NSOperation</a>
+                <a class="nav-group-task-link" href="Extensions/Operation.html">Operation</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/NSQualityOfService.html">NSQualityOfService</a>
+                <a class="nav-group-task-link" href="Extensions/QualityOfService.html">QualityOfService</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Other Typealiases.html">Other Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other Typealiases.html#/s:9Overdrive14InlineTaskBase">InlineTaskBase</a>
               </li>
             </ul>
           </li>
@@ -113,21 +129,21 @@
 <p>Task based API in Swift with focus on type-safety, concurrency, threading and stability.</p>
 
 <p><a href="https://travis-ci.org/arikis/Overdrive"><img src="https://travis-ci.org/arikis/Overdrive.svg?branch=master" alt="Build Status"></a>
-<img src="https://img.shields.io/badge/platform-linux%20%7C%20iOS%20%7C%20macOS%20%7C%20tvOS-lightgray.svg" alt="Plaforms">
+<img src="https://img.shields.io/badge/platform-%20iOS%20%7C%20macOS%20%7C%20tvOS%20%7C%20linux-lightgray.svg" alt="Plaforms">
 <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage Compatible"></a>
-<a href="https://github.com/apple/swift-package-manager"><img src="https://img.shields.io/badge/Swift%20Package%20Manager-Compatible-brightgreen.svg" alt="Swift Package Manager Compatible"></a></p>
+<a href="https://github.com/apple/swift-package-manager"><img src="https://img.shields.io/badge/SPM-Compatible-brightgreen.svg" alt="Swift Package Manager Compatible"></a></p>
 
 <p><strong>Contents:</strong></p>
 
 <ul>
-<li><a href="#what-can-i-do-with-overdrive">what can I do with Overdrive?</a></li>
-<li><a href="#requirements">requirements</a></li>
-<li><a href="#usage">usage</a></li>
-<li><a href="#concurrency">concurrency</a></li>
-<li><a href="#thread-safety">thread safety</a></li>
-<li><a href="#inspiration">inspiration</a></li>
+<li><a href="#what-can-i-do-with-overdrive">What can I do with Overdrive?</a></li>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#concurrency">Concurrency</a></li>
+<li><a href="#thread-safety">Thread safety</a></li>
+<li><a href="#inspiration">Inspiration</a></li>
 </ul>
-<a href='#what-can-i-do-with-overdrive' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='what-can-i-do-with-overdrive'>what can I do with Overdrive?</h2>
+<a href='#what-can-i-do-with-overdrive' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='what-can-i-do-with-overdrive'>What can I do with Overdrive?</h2>
 
 <ul>
 <li>execute tasks concurrently</li>
@@ -140,14 +156,14 @@
 <li>retry tasks that finished with errors</li>
 <li>don’t worry about thread-safety</li>
 </ul>
-<a href='#requirements' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='requirements'>requirements</h2>
+<a href='#requirements' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='requirements'>Requirements</h2>
 
 <ul>
 <li>iOS 8.0+ / Mac OS X 10.11+ / tvOS 9.0+</li>
 <li>Xcode 7.3+</li>
 <li>Swift 2.2 on Linux</li>
 </ul>
-<a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>installation</h2>
+<a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>Installation</h2>
 <a href='#a-href-https-github-com-carthage-carthage-carthage-a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='a-href-https-github-com-carthage-carthage-carthage-a'><a href="https://github.com/Carthage/Carthage">Carthage</a></h4>
 
 <p>Add following to the <code>Cartfile</code>:</p>
@@ -180,7 +196,7 @@
 <a href='#manual-installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='manual-installation'>Manual installation</h4>
 
 <p><code>Overdrive</code> can also be installed manualy by dragging the <code>Overdrive.xcodeproj</code> to your project and adding <code>Overdrive.framework</code> to the embedded libraries in project settings.</p>
-<a href='#usage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='usage'>usage</h2>
+<a href='#usage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='usage'>Usage</h2>
 
 <p>Overdrive features two main classes:</p>
 
@@ -243,7 +259,7 @@
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">TaskQueue</span><span class="p">()</span>
 <span class="n">queue</span><span class="o">.</span><span class="nf">addTask</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
 </code></pre>
-<a href='#concurrency' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='concurrency'>concurrency</h2>
+<a href='#concurrency' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='concurrency'>Concurrency</h2>
 
 <p><code>TaskQueue</code> executes tasks concurrently by default. Maximum number of concurrent
 operations is defined by the current system conditions. If you want to limit the
@@ -251,11 +267,11 @@ number of maximum concurrent operations use <code>maxConcurrentOperationCount</c
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">TaskQueue</span><span class="p">()</span>
 <span class="n">queue</span><span class="o">.</span><span class="n">maxConcurrentOperationCount</span> <span class="o">=</span> <span class="mi">3</span>
 </code></pre>
-<a href='#thread-safety' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='thread-safety'>thread safety</h2>
+<a href='#thread-safety' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='thread-safety'>Thread safety</h2>
 
 <p>All task properties are thread-safe by default, meaning that you can access them
 from any thread or queue and not worry about locks and access synchronization.</p>
-<a href='#inspiration' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='inspiration'>inspiration</h2>
+<a href='#inspiration' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='inspiration'>Inspiration</h2>
 
 <p>Inspiration for the <code>Overdrive</code> framework came from several WWDC videos:</p>
 
@@ -277,8 +293,8 @@ louder, distorted sound</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2016 <a class="link" href="swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-07-12)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2016 <a class="link" href="swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-09-18)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

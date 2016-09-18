@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Extensions  Reference</title>
+    <title>Other Typealiases  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
     <meta charset="utf-8">
@@ -17,14 +17,14 @@
   <body>
 
 
-    <a title="Extensions  Reference"></a>
+    <a title="Other Typealiases  Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
         <a class="header-link" href="index.html">
           Overdrive Docs
         </a>
-         (91% documented)
+         (92% documented)
       </p>
     
         <p class="header-col header-col--secondary">
@@ -39,7 +39,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="index.html">Overdrive Reference</a>
       <img class="carat" src="img/carat.png" />
-      Extensions  Reference
+      Other Typealiases  Reference
     </p>
 
     <div class="content-wrapper">
@@ -88,16 +88,32 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
+            <a class="nav-group-name-link" href="Other Classes.html">Other Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/CollectionType.html">CollectionType</a>
+                <a class="nav-group-task-link" href="Classes/TaskBase.html">TaskBase</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Other Extensions.html">Other Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Collection.html">Collection</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/NSOperation.html">NSOperation</a>
+                <a class="nav-group-task-link" href="Extensions/Operation.html">Operation</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/NSQualityOfService.html">NSQualityOfService</a>
+                <a class="nav-group-task-link" href="Extensions/QualityOfService.html">QualityOfService</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Other Typealiases.html">Other Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other Typealiases.html#/s:9Overdrive14InlineTaskBase">InlineTaskBase</a>
               </li>
             </ul>
           </li>
@@ -107,8 +123,9 @@
 
         <section class="section">
           <div class="section-content">
-            <h1>Extensions</h1>
-            
+            <h1>Other Typealiases</h1>
+            <p>The following typealiases are available globally.</p>
+
           </div>
         </section>
 
@@ -119,9 +136,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:Ps14CollectionType"></a>
-                    <a name="//apple_ref/swift/Extension/CollectionType" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Ps14CollectionType">CollectionType</a>
+                    <a name="/s:9Overdrive14InlineTaskBase"></a>
+                    <a name="//apple_ref/swift/Alias/InlineTaskBase" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9Overdrive14InlineTaskBase">InlineTaskBase</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -129,64 +146,35 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
-                        <a href="Extensions/CollectionType.html" class="slightly-smaller">See more</a>
+                        <p><code><a href="Classes/InlineTask.html">InlineTask</a></code> provides interface for creating asynchronous taks that don&rsquo;t
+neccesarily finish with result. To create <code><a href="Classes/InlineTask.html">InlineTask</a></code> you pass a closure to
+the initializer.</p>
+
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">InlineTask</span> <span class="p">{</span>
+   <span class="nf">doWork</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Inline tasks behave same as any <code><a href="Classes/Task.html">Task&lt;T&gt;</a></code>. They can be added to the
+<code><a href="Classes/TaskQueue.html">TaskQueue</a></code> and you can use <code>onValue(_:)</code> method to be notified when they
+are finished with execution.</p>
+
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <code><a href="Classes/InlineTask.html">InlineTask</a></code> is most commonly used in UI interactions. For example,
+you can create <code><a href="Classes/InlineTask.html">InlineTask</a></code> that presents view controller and add dependency
+task that retrieves data from the server.
+
+</div>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">CollectionType</span> <span class="p">:</span> <span class="kt">Indexable</span><span class="p">,</span> <span class="kt">SequenceType</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">InlineTaskBase</span> <span class="o">=</span> <span class="kt"><a href="Classes/Task.html">Task</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span></code></pre>
 
                         </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:objc(cs)NSOperation"></a>
-                    <a name="//apple_ref/swift/Extension/NSOperation" class="dashAnchor"></a>
-                    <a class="token" href="#/c:objc(cs)NSOperation">NSOperation</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                        <a href="Extensions/NSOperation.html" class="slightly-smaller">See more</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@E@NSQualityOfService"></a>
-                    <a name="//apple_ref/swift/Extension/NSQualityOfService" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@E@NSQualityOfService">NSQualityOfService</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                        <a href="Extensions/NSQualityOfService.html" class="slightly-smaller">See more</a>
                       </div>
                     </section>
                   </div>
@@ -199,8 +187,8 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2016 <a class="link" href="swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-07-12)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2016 <a class="link" href="swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-09-18)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

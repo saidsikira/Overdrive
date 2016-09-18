@@ -25,7 +25,7 @@
         <a class="header-link" href="../index.html">
           Overdrive Docs
         </a>
-         (91% documented)
+         (92% documented)
       </p>
     
         <p class="header-col header-col--secondary">
@@ -89,16 +89,32 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <a class="nav-group-name-link" href="../Other Classes.html">Other Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/CollectionType.html">CollectionType</a>
+                <a class="nav-group-task-link" href="../Classes/TaskBase.html">TaskBase</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other Extensions.html">Other Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Collection.html">Collection</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/NSOperation.html">NSOperation</a>
+                <a class="nav-group-task-link" href="../Extensions/Operation.html">Operation</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/NSQualityOfService.html">NSQualityOfService</a>
+                <a class="nav-group-task-link" href="../Extensions/QualityOfService.html">QualityOfService</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other Typealiases.html">Other Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other Typealiases.html#/s:9Overdrive14InlineTaskBase">InlineTaskBase</a>
               </li>
             </ul>
           </li>
@@ -163,9 +179,9 @@ to run a task. Task conditions manage custom task dependencies and evaluation fo
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FP9Overdrive13TaskCondition10dependencyurFT7forTaskGCS_4Taskqd____GSqCSo11NSOperation_"></a>
-                    <a name="//apple_ref/swift/Method/dependency(forTask:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FP9Overdrive13TaskCondition10dependencyurFT7forTaskGCS_4Taskqd____GSqCSo11NSOperation_">dependency(forTask:)</a>
+                    <a name="/s:FP9Overdrive13TaskCondition12dependenciesurFT7forTaskGCS_4Taskqd____GSaCSo9Operation_"></a>
+                    <a name="//apple_ref/swift/Method/dependencies(forTask:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP9Overdrive13TaskCondition12dependenciesurFT7forTaskGCS_4Taskqd____GSaCSo9Operation_">dependencies(forTask:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -194,7 +210,7 @@ permissions can be exposed as dependencies.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">func</span> <span class="n">dependency</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">forTask</span> <span class="nv">task</span><span class="p">:</span> <span class="kt"><a href="../Classes/Task.html">Task</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">NSOperation</span><span class="p">?</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="n">dependencies</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">forTask</span> <span class="nv">task</span><span class="p">:</span> <span class="kt"><a href="../Classes/Task.html">Task</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Operation</span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -254,7 +270,7 @@ to evaluate condition on the main thread, use <code>dispatch_async</code> call.
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">func</span> <span class="n">evaluate</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">forTask</span> <span class="nv">task</span><span class="p">:</span> <span class="kt"><a href="../Classes/Task.html">Task</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">evaluationBlock</span><span class="p">:</span> <span class="p">(</span><span class="kt"><a href="../Enums/TaskConditionResult.html">TaskConditionResult</a></span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">))</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="n">evaluate</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">forTask</span> <span class="nv">task</span><span class="p">:</span> <span class="kt"><a href="../Classes/Task.html">Task</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">evaluationBlock</span><span class="p">:</span> <span class="p">((</span><span class="kt"><a href="../Enums/TaskConditionResult.html">TaskConditionResult</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">))</span></code></pre>
 
                         </div>
                       </div>
@@ -269,8 +285,8 @@ to evaluate condition on the main thread, use <code>dispatch_async</code> call.
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2016 <a class="link" href="swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-07-12)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2016 <a class="link" href="swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-09-18)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>
