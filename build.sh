@@ -38,26 +38,24 @@ Usage: sh $0 command
 
   [Docs]
 
-  --docs          Build documentation using jazzy
+  docs          Build documentation using jazzy
 EOF
 }
 
 COMMAND="$1"
   
 case "$COMMAND" in
-  "--clean")
+  "clean")
     find . -type d -name build -exec rm -r "{}" +\;
     exit 0;
   ;;
 
-  "--docs")
+  "docs")
     jazzy \
-    --clean \
     --author "Swiftable" \
     --author_url "swiftable.io" \
     --theme fullwidth \
-    --swift-version 2.2 \
-    --github_url "https://github.com/swiftable/Overdrive" \
+    --github_url "https://github.com/arikis/Overdrive" \
     --readme "./README.md"
     exit 0;
   ;;
@@ -123,7 +121,7 @@ case "$COMMAND" in
     ONLY_ACTIVE_ARCH=YES \
     CODE_SIGNING_REQUIRED=NO \
     ENABLE_TESTABILITY=YES \
-    test
+    test | xcpretty -c
     exit 0;
   ;;
 
@@ -137,7 +135,7 @@ case "$COMMAND" in
     ONLY_ACTIVE_ARCH=YES \
     CODE_SIGNING_REQUIRED=NO \
     ENABLE_TESTABILITY=YES \
-    test
+    test | xcpretty -c
     exit 0;
   ;;
 
@@ -151,7 +149,7 @@ case "$COMMAND" in
     ONLY_ACTIVE_ARCH=YES \
     CODE_SIGNING_REQUIRED=NO \
     ENABLE_TESTABILITY=YES \
-    test
+    test | xcpretty -c
     exit 0;
   ;;
 
