@@ -39,7 +39,7 @@
         <a class="header-link" href="../index.html">
           Overdrive Docs
         </a>
-         (92% documented)
+         (97% documented)
       </p>
     
         <p class="header-col header-col--secondary">
@@ -106,7 +106,7 @@
             <a class="nav-group-name-link" href="../Other Classes.html">Other Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/TaskBase.html">TaskBase</a>
+                <a class="nav-group-task-link" href="../Other Classes.html#/s:C9Overdrive8TaskBase">TaskBase</a>
               </li>
             </ul>
           </li>
@@ -121,14 +121,6 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/QualityOfService.html">QualityOfService</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Other Typealiases.html">Other Typealiases</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Other Typealiases.html#/s:9Overdrive14InlineTaskBase">InlineTaskBase</a>
               </li>
             </ul>
           </li>
@@ -176,7 +168,7 @@ to run a task. Task conditions manage custom task dependencies and evaluation fo
                       </div>
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
-                        <p>Undocumented</p>
+                        <p>Returns condition name</p>
 
                       </div>
                       <div class="declaration">
@@ -206,18 +198,6 @@ to run a task. Task conditions manage custom task dependencies and evaluation fo
                         <p>If task needs a dependency to execute, you should return it in this method. For example,
 some tasks need OS permissions to do work (location services etc.) and requests for those
 permissions can be exposed as dependencies.</p>
-
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    <p>Parameter forTask: That that conditions are being evaluated for</p>
-
-</div>
-
-<div class="aside aside-returns">
-    <p class="aside-title">Returns</p>
-    <p>Any <code>NSOperation</code> or instance of any <code><a href="../Classes/Task.html">Task&lt;T&gt;</a></code></p>
-
-</div>
 
                       </div>
                       <div class="declaration">
@@ -269,13 +249,14 @@ permissions can be exposed as dependencies.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Evaluates condition for the task. Evaluation can be any asynchronous process. When evaluation
-process is done <code>evaluationBlock</code> callback should be called with appropriate <code><a href="../Enums/TaskConditionResult.html">TaskConditionResult</a></code>.</p>
+                        <p>Evaluates condition for the task. When evaluation process is finished
+call <code>evaluationBlock</code> with appropriate <code><a href="../Enums/TaskConditionResult.html">TaskConditionResult</a></code>.</p>
 
 <div class="aside aside-note">
     <p class="aside-title">Note</p>
-    This method does not guarantee that evaluation will be done on the main thread. If you want
-to evaluate condition on the main thread, use <code>dispatch_async</code> call.
+    This method does not guarantee that evaluation will be done on the main thread.
+If you want to evaluate condition on the main thread, use 
+<code>DispatchQueue.main.async {}</code> call.
 
 </div>
 

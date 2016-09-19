@@ -1,38 +1,10 @@
 {
   "warnings": [
     {
-      "file": "/Users/said/Developer/Framework/Overdrive/Overdrive/Sources/Condition.swift",
-      "line": 84,
-      "symbol": "TaskCondition.conditionName",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/said/Developer/Framework/Overdrive/Overdrive/Sources/Extensions/NSOperation+Overdrive.swift",
       "line": 12,
       "symbol": "Operation.description",
       "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/said/Developer/Framework/Overdrive/Overdrive/Sources/InlineTask.swift",
-      "line": 31,
-      "symbol": "InlineTask",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/said/Developer/Framework/Overdrive/Overdrive/Sources/Task.swift",
-      "line": 737,
-      "symbol": "Task.addDependency(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/said/Developer/Framework/Overdrive/Overdrive/Sources/TaskBase.swift",
-      "line": 11,
-      "symbol": "TaskBase",
-      "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {

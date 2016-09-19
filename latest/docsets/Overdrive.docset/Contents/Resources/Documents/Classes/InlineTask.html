@@ -39,7 +39,7 @@
         <a class="header-link" href="../index.html">
           Overdrive Docs
         </a>
-         (92% documented)
+         (97% documented)
       </p>
     
         <p class="header-col header-col--secondary">
@@ -106,7 +106,7 @@
             <a class="nav-group-name-link" href="../Other Classes.html">Other Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/TaskBase.html">TaskBase</a>
+                <a class="nav-group-task-link" href="../Other Classes.html#/s:C9Overdrive8TaskBase">TaskBase</a>
               </li>
             </ul>
           </li>
@@ -124,14 +124,6 @@
               </li>
             </ul>
           </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Other Typealiases.html">Other Typealiases</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Other Typealiases.html#/s:9Overdrive14InlineTaskBase">InlineTaskBase</a>
-              </li>
-            </ul>
-          </li>
         </ul>
       </nav>
       <article class="main-content">
@@ -139,7 +131,32 @@
         <section class="section">
           <div class="section-content">
             <h1>InlineTask</h1>
-            <p>Undocumented</p>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="n">open</span> <span class="kd">class</span> <span class="kt">InlineTask</span><span class="p">:</span> <span class="kt">InlineTaskBase</span></code></pre>
+
+                </div>
+              </div>
+            <p><code>InlineTask</code> provides interface for creating asynchronous taks that don&rsquo;t
+neccesarily finish with result. To create <code>InlineTask</code> you pass a closure to
+the initializer.</p>
+
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">InlineTask</span> <span class="p">{</span>
+   <span class="nf">doWork</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Inline tasks behave same as any <code><a href="../Classes/Task.html">Task&lt;T&gt;</a></code>. They can be added to the
+<code><a href="../Classes/TaskQueue.html">TaskQueue</a></code> and you can use <code>onValue(_:)</code> method to be notified when they
+are finished with execution.</p>
+
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <code>InlineTask</code> is most commonly used in UI interactions. For example,
+you can create <code>InlineTask</code> that presents view controller and add dependency
+task that retrieves data from the server.
+
+</div>
 
           </div>
         </section>
@@ -161,7 +178,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Initializes <code>InlineTask</code> with closure block. </p>
+                        <p>Initializes <code>InlineTask</code> with closure block.</p>
 
 <div class="aside aside-parameter">
     <p class="aside-title">Parameter</p>
