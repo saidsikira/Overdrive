@@ -1,5 +1,4 @@
-# Overdrive
-Task based API in Swift with focus on type-safety, concurrency, threading and stability.
+<img src="http://i.imgur.com/pp7QHRW.png" width="40%" height="40%"/>
 
 [![Build Status](https://travis-ci.org/arikis/Overdrive.svg?branch=master)](https://travis-ci.org/arikis/Overdrive)
 ![Plaforms](https://img.shields.io/badge/platform- iOS | macOS | tvOS | linux-lightgray.svg)
@@ -17,7 +16,7 @@ Task based API in Swift with focus on type-safety, concurrency, threading and st
 
 ## What can I do with Overdrive?
 
-* execute tasks concurrently 
+* execute tasks concurrently
 * utilize multi-core capabilities to ensure faster execution
 * easily defer task execution to custom thread or queue
 * ensure that multiple tasks are executed in the correct order
@@ -29,7 +28,7 @@ Task based API in Swift with focus on type-safety, concurrency, threading and st
 
 ## Requirements
 
-- iOS 8.0+ / Mac OS X 10.11+ / tvOS 9.0+ 
+- iOS 8.0+ / Mac OS X 10.11+ / tvOS 9.0+
 - Xcode 7.3+
 - Swift 2.2 on Linux
 
@@ -62,7 +61,7 @@ let package = Package(
   name: "ProjectName",
   targets: [],
   dependencies: [
-    .Package(url: "https://github.com/arikis/Overdrive.git", 
+    .Package(url: "https://github.com/arikis/Overdrive.git",
     versions: "0.0.1"..< Version.max)
   ]
 )
@@ -102,7 +101,7 @@ class NetworkTask: Task<NSData> {
 	// Override run() method
 	override func run() {
 	    let request = NSURLRequest(URL: URL)
-	    
+
 	    let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
 	        data, response, error in
 	        if error != nil {
@@ -113,7 +112,7 @@ class NetworkTask: Task<NSData> {
 	            self.finish(.Value(data!))
 	        }
 	    }
-	    
+
 	    task.resume()
 	}
 }
