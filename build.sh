@@ -15,6 +15,7 @@ WATCHOS_SDK="watchsimulator3.0"
 IOS_DESTINATION="OS=10.0,name=iPhone 6S"
 MACOS_DESTINATION="arch=x86_64"
 TVOS_DESTINATION="OS=10.0,name=Apple TV 1080p"
+WATCHOS_DESTINATION="OS=10.0,name=iPhone 6S"
 
 usage() {
 cat << EOF
@@ -43,7 +44,7 @@ EOF
 }
 
 COMMAND="$1"
-  
+
 case "$COMMAND" in
   "clean")
     find . -type d -name build -exec rm -r "{}" +\;
@@ -145,6 +146,19 @@ case "$COMMAND" in
     -scheme "${SCHEME}" \
     -sdk "${TVOS_SDK}" \
     -destination "${TVOS_DESTINATION}" \
+    -configuration Release \
+    ONLY_ACTIVE_ARCH=YES \
+    CODE_SIGNING_REQUIRED=NO \
+    ENABLE_TESTABILITY=YES \
+    test | xcpretty -c
+    exit 0;
+  ;;
+
+  "--test-watchOS" | "test-watchos")
+    xcodebuild clean \
+    -project $PROJECT \
+    -scheme "${SCHEME}" \
+    -destination "${WATCHOS_DESTINATION}" \
     -configuration Release \
     ONLY_ACTIVE_ARCH=YES \
     CODE_SIGNING_REQUIRED=NO \
