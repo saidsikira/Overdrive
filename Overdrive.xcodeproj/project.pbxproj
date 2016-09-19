@@ -37,8 +37,6 @@
 		B37A87291D85DF940094E9AE /* NSQualityOfService+Overdrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31CF99D1D189FCB003D4B2B /* NSQualityOfService+Overdrive.swift */; };
 		B39ACA201D85C56B00606563 /* NSOperation+Overdrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B391B48B1D2EA7E1000A7F78 /* NSOperation+Overdrive.swift */; };
 		B39ACA221D85C6EF00606563 /* TaskBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39ACA211D85C6EF00606563 /* TaskBase.swift */; };
-		B39ACA281D85D2C800606563 /* Dependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39ACA271D85D2C800606563 /* Dependency.swift */; };
-		B39ACA2A1D85D3A000606563 /* Retry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39ACA291D85D3A000606563 /* Retry.swift */; };
 		B39ACA2F1D85D8A500606563 /* Overdrive.h in Headers */ = {isa = PBXBuildFile; fileRef = B39ACA2D1D85D8A500606563 /* Overdrive.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -72,8 +70,6 @@
 		B391B49C1D2F0232000A7F78 /* InlineTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = InlineTask.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B399F77A1D3B87C000EEFBBB /* ThreadSafetyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadSafetyTests.swift; sourceTree = "<group>"; };
 		B39ACA211D85C6EF00606563 /* TaskBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskBase.swift; sourceTree = "<group>"; };
-		B39ACA271D85D2C800606563 /* Dependency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dependency.swift; sourceTree = "<group>"; };
-		B39ACA291D85D3A000606563 /* Retry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Retry.swift; sourceTree = "<group>"; };
 		B39ACA2C1D85D8A500606563 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B39ACA2D1D85D8A500606563 /* Overdrive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Overdrive.h; sourceTree = "<group>"; };
 		B3A147D11D27C58200BF971E /* TaskConditionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TaskConditionTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -84,7 +80,7 @@
 		B3D302BE1D2D065200BA070A /* TaskConditionDependencyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskConditionDependencyTests.swift; sourceTree = "<group>"; };
 		B3DD52EC1D16CC4300EBF640 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		B3DD52EE1D16CC7F00EBF640 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
-		B3DD52F01D16CCA300EBF640 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Task.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		B3DD52F01D16CCA300EBF640 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Task.swift; sourceTree = "<group>"; wrapsLines = 0; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B3DD52F41D16D7A800EBF640 /* TaskQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskQueue.swift; sourceTree = "<group>"; };
 		B3DD52FC1D16D83200EBF640 /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TaskTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B3DD52FE1D16D83200EBF640 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -170,10 +166,8 @@
 			children = (
 				B322B0A91D1ED314009DE006 /* Condition.swift */,
 				B3EF8F341D20423500064CC2 /* Create.swift */,
-				B39ACA271D85D2C800606563 /* Dependency.swift */,
 				B391B49C1D2F0232000A7F78 /* InlineTask.swift */,
 				B3DD52EC1D16CC4300EBF640 /* Result.swift */,
-				B39ACA291D85D3A000606563 /* Retry.swift */,
 				B3DD52EE1D16CC7F00EBF640 /* State.swift */,
 				B3DD52F01D16CCA300EBF640 /* Task.swift */,
 				B39ACA211D85C6EF00606563 /* TaskBase.swift */,
@@ -331,10 +325,8 @@
 				B3422DD11D84A6E100B337AD /* State.swift in Sources */,
 				B3422DD51D84A6EC00B337AD /* TaskQueueDelegate.swift in Sources */,
 				B3422DD31D84A6E700B337AD /* TaskObserver.swift in Sources */,
-				B39ACA2A1D85D3A000606563 /* Retry.swift in Sources */,
 				B3422DD71D84A76300B337AD /* CollectionType+Overdrive.swift in Sources */,
 				B3422DD21D84A6E400B337AD /* Task.swift in Sources */,
-				B39ACA281D85D2C800606563 /* Dependency.swift in Sources */,
 				B3422DCE1D84A6D900B337AD /* Create.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

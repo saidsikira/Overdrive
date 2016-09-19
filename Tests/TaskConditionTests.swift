@@ -29,7 +29,7 @@ class TaskConditionTests: XCTestCase {
     func testFailedCondition() {
         let task = SimpleTask()
         let condition = FailedTestCondition()
-        task.addCondition(condition)
+        task.add(condition: condition)
         
         XCTAssert(task.conditions.count == 1, "Task condition count is not 1")
         XCTAssert(task.conditionErrors.count == 0, "Task condition error count should be 0")
@@ -56,7 +56,7 @@ class TaskConditionTests: XCTestCase {
     func testSatisfiedCondition() {
         let task = SimpleTask()
         let condition = SatisfiedTestCondition()
-        task.addCondition(condition)
+        task.add(condition: condition)
         
         XCTAssert(task.conditions.count == 1, "Task condition count is not 1")
         XCTAssert(task.conditionErrors.count == 0, "Task condition error count should be 0")

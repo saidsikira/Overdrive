@@ -23,7 +23,7 @@ class TaskObserverTests: XCTestCase {
         let task = SimpleTask()
         let queue = TaskQueue()
         
-        task.addObserver(self)
+        task.add(observer: self)
         
         queue.addTask(task)
         

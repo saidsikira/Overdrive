@@ -161,7 +161,7 @@ open class TaskQueue: OperationQueue {
             }
         }
         
-        task.addObserver(finishObserver)
+        task.add(observer: finishObserver)
         
         // Evaluate condition dependencies and add them to the queue
         _ = task

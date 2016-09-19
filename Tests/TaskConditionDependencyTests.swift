@@ -34,7 +34,7 @@ class TaskConditionDependencyTests: XCTestCase {
         let task = SimpleTask()
         let condition = DependencyTestCondition()
         
-        task.addCondition(condition)
+        task.add(condition: condition)
         
         XCTAssert(task.conditions.count == 1, "Task condition count should be equal to 1")
         XCTAssert(task.dependencies.count == 0, "Task dependency count should be equal to 0")

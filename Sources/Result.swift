@@ -32,7 +32,7 @@ public enum Result<T> {
     /// Error case with associated `ErrorType`
     case Error(Error)
     
-    //MARK: Init methods
+    // MARK: Init methods
     
     init(_ value: T) {
         self = .Value(value)
@@ -42,7 +42,7 @@ public enum Result<T> {
         self = .Error(error)
     }
     
-    //MARK: Associated values
+    // MARK: Associated values
     
     /// Returns value `T`
     public var value: T? {
@@ -63,10 +63,11 @@ public enum Result<T> {
 
 extension Result {
     
-    /**
-     Returns transformed Result<U>
-    */
-    
+    /// Maps over result
+    ///
+    /// - parameter transform: transform block
+    ///
+    /// - returns: `Result<T>`
     public func map<U>(_ transform: (T) -> U) -> Result<U> {
         switch self {
         case .Value(let value):

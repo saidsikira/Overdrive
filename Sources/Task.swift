@@ -9,9 +9,8 @@
 import class Foundation.NSOperation
 
 /**
- `Task<T>` is an abstract class that provides interface encapsuling any
- asynchronous or synchronous operation. Abstract nature of the `Task<T>` enforces
- you to create a subclass for any task you want to create. Subclassing `Task<T>`
+ `Task<T>` is an abstract class that provides interface for encapsuling any
+ asynchronous or synchronous operation. Subclassing `Task<T>`
  is simple operation. You are only required to override `run()` method that
  defines task execution point and call `finish(_:)` method to finish execution.
  In order to execute any task you need to add it to the `TaskQueue` which
@@ -155,62 +154,52 @@ import class Foundation.NSOperation
 */
 open class Task<T>: TaskBase {
     
-    /**
-     Internal result object
-     
-     - Warning: Should never be set directly, only via `result` property
-     */
+    //MARK: Internal properties
+    
+    /// Internal result object
+    ///
+    /// - warning: Should never be set directly, only via `result` property
     fileprivate var internalResult: Result<T>?
     
-    /**
-     Internal completion block
-     
-     - Warning: Accessing this property directly will result in unexpected behavior.
-     Use `onValueBlock` instead.
-     */
+    /// Internal completion block
+    ///
+    /// - warning: Accessing this property directly will result in unexpected behavior.
+    /// Use `onValueBlock` instead.
     fileprivate var internalOnValueBlock: ((T) -> Void)?
     
-    /**
-     Internal error completion block
-     
-     - Warning: Accessing this property directly will result in unexpected behavior.
-     Use `onErrorBlock` instead.
-     */
+    /// Internal error completion block
+    ///
+    /// - warning: Accessing this property directly will result in unexpected behavior.
+    /// Use `onErrorBlock` instead.
+    ///
     fileprivate var internalOnErrorBlock: ((Error) -> Void)?
     
-    /**
-     Internal task observers
-     */
+    /// Internal task observers
     fileprivate var internalObservers: [TaskObserver] = []
     
-    /**
-     Internal task conditions
-    */
+    /// Internal task conditions
     fileprivate var internalConditions: [TaskCondition] = []
     
-    /**
-     Internal number of retry counts
-     */
+    /// Internal number of retry counts
     fileprivate var internalRetryCount: Int = 0
     
-    /**
-     Internal condition errors
-    */
+    /// Internal condition errors
     fileprivate var internalConditionErrors = [Error]()
     
     //MARK: Class properties
     
-    /**
-     Task result. Result can contain either value or error.
-     
-     `Value(T)`: value of type defined by the Task
-     
-     `Error(ErrorType)`: error that may have occured
-     
-     This object is not goint to be populated with result until task
-     achieves `Finished` state. You can access the result value directly,
-     or setup completion blocks that will execute when task finishes.
-     */
+    ///
+    /// Task result. Result can contain either value or error.
+    ///
+    /// `Value(T)`: value of type defined by the Task
+    ///
+    /// `Error(Error)`: error that may have occured
+    ///
+    /// This object will not be populated with result until task
+    /// achieves `finished` state. You can access the result value directly,
+    /// or setup completion blocks that will execute when task finishes.
+    ///
+    /// - seealso: `onValue(_: )`, `onError(_: )`
     internal(set) open var result: Result<T>? {
         get {
             return queue.sync { return internalResult }
@@ -223,6 +212,7 @@ open class Task<T>: TaskBase {
         }
     }
     
+    /// Returns current retry count
     var retryCount: Int {
         get {
             return queue.sync { return internalRetryCount }
@@ -237,44 +227,38 @@ open class Task<T>: TaskBase {
     
     //MARK: Completion methods
     
-    /**
-     Completion block that is executed when the task reaches `Finished` state and
-     `.Value` is passed to the `finish:` method. Completion block takes one
-     argument `T`, which is `.Value` component from the task result.
-     
-     See `Result<T>`.
-     
-     Block should be set by using `onValue:` method on `Self`.
-     
-     - Warning: Setting this property directly may result in unexpected behaviour.
-     Always use `onValue(_:)` method on `Self` to set the block.
-     */
+    ///
+    /// Completion block that is executed when the task reaches `Finished` state and
+    /// `.Value` is passed to the `finish:` method. Completion block takes one
+    /// argument `T`, which is `.Value` component from the task result.
+    ///
+    /// See `Result<T>`.
+    ///
+    /// Block should be set by using `onValue:` method on `Self`.
+    ///
+    /// - Warning: Setting this property directly may result in unexpected behaviour.
+    /// Always use `onValue(_:)` method on `Self` to set the block.
     var onValueBlock: ((T) -> Void)? {
-        get {
-            return queue.sync {
+        get { return queue.sync {
                 return internalOnValueBlock
             }
         }
         
         set(newBlock) {
-            if newBlock != nil {
                 queue.sync {
                     internalOnValueBlock = newBlock
-                }
             }
         }
     }
     
-    /**
-     Completion block that is executed when the task reaches `Finished` state and
-     error is passed to the `finish:` method. Completion block has one argument,
-     `ErrorType` and no return type. `ErrorType`.
-     
-     Block should be set by using `onError:` method on `Self`.
-     
-     - Warning: Setting this property directly may result in unexpected behaviour.
-     Always use `onError:` method on `Self` to set the block.
-     */
+    /// Completion block that is executed when the task reaches `Finished` state and
+    /// error is passed to the `finish:` method. Completion block has one argument,
+    /// `ErrorType` and no return type. `ErrorType`.
+    ///
+    /// Block should be set by using `onError:` method on `Self`.
+    ///
+    /// - Warning: Setting this property directly may result in unexpected behaviour,
+    /// always use `onError:` method on `Self` to set the block.
     var onErrorBlock: ((Error) -> Void)? {
         get {
             return queue.sync {
@@ -291,22 +275,20 @@ open class Task<T>: TaskBase {
         }
     }
     
-    /**
-     Use this method to set completion block that will be executed when task
-     finishes execution with `.Value(T)` result.
-     
-     - Note: 
-     If the task finishes with `.Error` result, onError(_:) method will be called.
-     
-     - Warning: This method should only be called before the task state becomes `.Pending`.
-     Calling this method after `.Pending` state may result in unexpected behaviour.
-     
-     - Parameter completion: Completion block that should be executed. Takes `T` parameter
-     which is extracted from the `.Value(T)` result.
-     
-     - Returns: `Self`. This method will always return itself, so that it can be used
-     in chain with other task methods.
-     */
+    /// Use this method to set completion block that will be executed when task
+    /// finishes execution with `.Value(T)` result.
+    ///
+    /// - note:
+    /// If the task finishes with `.Error` result, onError(_:) method will be called.
+    ///
+    /// - warning: This method should only be called before the task state becomes `.Pending`.
+    /// Calling this method after `.Pending` state may result in unexpected behaviour.
+    ///
+    /// - parameter completion: Completion block that should be executed. Takes `T` parameter
+    /// which is extracted from the `.Value(T)` result.
+    ///
+    /// - returns: `Self`. This method will always return itself, so that it can be used
+    /// in chain with other task methods.
     @discardableResult
     public final func onValue(_ completion: @escaping ((T) -> Void)) -> Self {
         assert(state < .executing, "On complete called after task is executed")
@@ -314,24 +296,23 @@ open class Task<T>: TaskBase {
         return self
     }
     
-    /**
-     Use this method to set completion block that will be executed when task
-     finishes with error.
-     
-     - Note: Completion block set will only be executed if the
-     task finishes with `.Error` result.
-     
-     If the task finishes with `.Value` result, onValue completion will be called.
-     
-     - Warning: This method should only be called before the task state becomes `.Pending`.
-     Calling this method after `.Pending` state may result in unexpected behaviour.
-     
-     - Parameter completion: Completion block that should be executed. Takes only
-     one parameter `ErrorType` and no return type.
-     
-     - Returns: `Self`. This method will always return itself, so that it can be used
-     in chain with other task methods.
-     */
+    /// Use this method to set completion block that will be executed when task
+    /// finishes with error.
+    ///
+    /// - note: Completion block set will only be executed if the
+    /// task finishes with `.Error` result.
+    ///
+    /// If the task finishes with `.Value` result, onValue completion will be called.
+    ///
+    /// - warning: This method should only be called before the task state becomes `.Pending`.
+    /// Calling this method after `.Pending` state may result in unexpected behaviour.
+    ///
+    /// - parameter completion: Completion block that should be executed. Takes only
+    /// one parameter `ErrorType` and no return type.
+    ///
+    /// - returns: `Self`. This method will always return itself, so that it can be used
+    /// in chain with other task methods.
+    /// */
     @discardableResult
     public final func onError(_ completion: @escaping ((Error) -> ())) -> Self {
         assert(state < .executing, "On complete called after task is executed")
@@ -339,16 +320,25 @@ open class Task<T>: TaskBase {
         return self
     }
     
-    //MARK: Retry mechanims
+    /// Completion block that will be executed when the task finishes execution.
+    ///
+    /// - warning: **DEPRECATED**. Use `onValue(_:)` method to set completion
+    /// block.
+    @available(*, deprecated, message : "use onValue completion instead")
+    open override var completionBlock: (() -> Void)? {
+        get { return super.completionBlock }
+        set(newBlock) { super.completionBlock = newBlock }
+    }
     
-    /**
-     Set retry count. If the task finishes with error, task will be added to the queue
-     again until retry count becomes zero.
-     
-     - Parameter times: Number of times task should be retried if it finishes with error
-     
-     - Returns: `Self`
-     */
+    // MARK: Retry mechanims
+    
+    
+    /// Set retry count. If the task finishes with error, it will be executed
+    /// again until retry count becomes zero.
+    ///
+    /// - parameter times: Number of times task should be retried if it finishes with error
+    ///
+    /// - returns: `self`
     @discardableResult
     public final func retry(_ times: Int = 1) -> Self {
         retryCount = times
@@ -369,10 +359,10 @@ open class Task<T>: TaskBase {
         return internalRetryCount > 0
     }
     
-    /**
-     Decreases retry count. If retry count is 0, method will throw,
-     so it can be used in retry blocks safely.
-     */
+    /// Decreases retry count by 1 if task requested rety. 
+    /// If retry count is 0, method will throw.
+    ///
+    /// - throws: RetryError.countIsZero
     func decreaseRetryCount() throws {
         if retryCount > 0 {
             retryCount = retryCount - 1
@@ -381,11 +371,9 @@ open class Task<T>: TaskBase {
         }
     }
     
-    //MARK: Task conditions
+    // MARK: Task conditions
     
-    /**
-     All task conditions
-    */
+    /// All task conditions
     fileprivate(set) open var conditions: [TaskCondition] {
         get {
             return queue.sync { return internalConditions }
@@ -398,10 +386,8 @@ open class Task<T>: TaskBase {
         }
     }
     
-    /**
-     Any errors that occured during condition evaluation. If this array is populated
-     task will finish with execution.
-    */
+    /// Returns ny errors that occured during condition evaluation. If this 
+    /// array contains errors after evalutation, task will finish execution
     var conditionErrors: [Error] {
         get {
             return queue.sync { return internalConditionErrors }
@@ -414,27 +400,23 @@ open class Task<T>: TaskBase {
         }
     }
     
-    /**
-     Add condition to the task.
-     
-     - parameter condition: `TaskCondition` to be added
-     
-     - warning: Task conditions should be added before task starts with execution. Otherwise,
-     assertion fail will occur.
-    */
-    open func addCondition(_ condition: TaskCondition) {
+    /// Adds condition to the task.
+    ///
+    /// - parameter condition: `TaskCondition` to be added
+    ///
+    /// - warning: Task conditions should be added before task starts with execution. Otherwise,
+    /// assertion will occur.
+    open func add(condition: TaskCondition) {
         assert(state < .executing, "Tried to add condition after task started with execution")
         conditions.append(condition)
     }
     
-    /**
-     Removes condition from the task.
-     
-     - parameter condition: condition to be removed
-     
-     - returns: Boolean indicating whether condition was removed
-    */
-    open func removeCondition(_ condition: TaskCondition) -> Bool {
+    /// Removes condition from the task.
+    ///
+    /// - parameter condition: condition to be removed
+    ///
+    /// - returns: Boolean indicating whether condition was removed
+    open func remove(condition: TaskCondition) -> Bool {
         assert(state < .executing, "Tried to remove condition after task started with execution")
         let index = conditions.index { $0.conditionName == condition.conditionName }
         if let index = index {
@@ -445,41 +427,35 @@ open class Task<T>: TaskBase {
         return false
     }
     
-    /**
-     Removes all conditions of given type.
-     
-     - parameter type: Type conforming to the `TaskCondition` protocol
-     
-     - returns: Boolean indicating whether condition was removed
-    */
-    open func removeConditionOfType<T: TaskCondition>(_ type: T.Type) -> Bool {
+    /// Removes all conditions of given type.
+    ///
+    /// - parameter type: Type conforming to the `TaskCondition` protocol
+    ///
+    /// - returns: Boolean indicating whether condition was removed
+    open func remove<T: TaskCondition>(conditionWithType type: T.Type) -> Bool {
         assert(state < .executing, "Tried to remove condition after task started with execution")
-        var index = [Int]()
         
-        for (i, conditionElement) in conditions.enumerated() {
-            if type(of: conditionElement) is T.Type {
-                index.append(i)
+        let indexes = conditions
+            .enumerated()
+            .flatMap { offset, condition -> Int? in
+                if type(of: condition) is T.Type { return offset }
+                return nil
             }
-        }
-        if index.count > 0 {
-            _ = index.map { conditions.remove(at: $0) }
+        
+        if indexes.count > 0 {
+            _ = indexes.map { conditions.remove(at: $0) }
             return true
-        } else {
-            return false
         }
+        
+        return false
     }
     
-    //MARK: Task observers
+    // MARK: Task observers
     
-    /**
-     Array of all task observers (read-only).
-     
-     Contains two observers by default:
-     
-     1. `FinishBlockObserver` - used to notify TaskQueue that the task is finished
-     2. `RetryTaskObserver` - used to notify TaskQueue that the task should retry execution
-     
-     */
+    /// Array of all task observers (read-only).
+    ///
+    /// Default implementation contains `FinishBlockObserver` which is used to notify
+    /// TaskQueue that the task finished with execution
     internal(set) open var observers: [TaskObserver] {
         get {
             return queue.sync { return internalObservers }
@@ -492,27 +468,24 @@ open class Task<T>: TaskBase {
         }
     }
     
-    /**
-     Adds observer to the task
-     
-     - parameter observer: observer to be added
-    */
-    public final func addObserver(_ observer: TaskObserver) {
+    /// Adds observer to the task.
+    ///
+    /// - parameter observer: observer to be added
+    public final func add(observer: TaskObserver) {
         assert(state < .executing, "Observer added after task started with execution")
         observers.append(observer)
     }
     
-    /**
-     Removes task observer from the task observers.
-     
-     - Parameter observer: Task observer instance to be removed
-     
-     - Returns: Boolean indicating whether observer is removed
-     
-     - Warning: Observer removal should be done before task is added to the `TaskQueue`
-     */
-    open func removeObserver(_ observer: TaskObserver) -> Bool {
+    /// Removes task observer from the task observers.
+    ///
+    /// - parameter observer: Task observer instance to be removed
+    ///
+    /// - returns: Boolean indicating whether observer is removed
+    ///
+    /// - warning: Observer removal should be done before task is added to the `TaskQueue`
+    open func remove(observer: TaskObserver) -> Bool {
         assert(state < .executing, "Observer removed after task is added to the task queue")
+        
         let indexOfObserver = observers.index { $0.observerName == observer.observerName }
         guard indexOfObserver != nil else {
             return false
@@ -521,56 +494,52 @@ open class Task<T>: TaskBase {
         return true
     }
     
-    /**
-     Remove all task observers of the defined TaskObserver type. This method will enumerate
-     through all task observers, check their type and if the type matches the passed type,
-     observer will be removed.
-     
-     - Parameter type: TaskObserver type
-     
-     - Returns: Boolean indicating whether observer is removed
-     
-     - Warning: Observer removal should be done before task is added to the `TaskQueue`
-     
-     **Example**
-     
-     ```swift
-     let myObserver = CustomObserver()
-     task.addObserver(myObserver)
-     
-     task.removeObserverOfType(CustomObserver)
-     ```
-     */
-    open func removeObserverOfType<T: TaskObserver>(_ type: T.Type) -> Bool {
+    /// Remove all task observers of the defined TaskObserver type. This method will enumerate
+    /// through all task observers, check their type and if the type matches the passed type,
+    /// observer will be removed.
+    ///
+    /// - Parameter type: TaskObserver type
+    ///
+    /// - Returns: Boolean indicating whether observer is removed
+    ///
+    /// - Warning: Observer removal should be done before task is added to the `TaskQueue`
+    ///
+    /// **Example**
+    ///
+    /// ```swift
+    /// let myObserver = CustomObserver()
+    /// task.addObserver(myObserver)
+    ///
+    /// task.removeObserverOfType(CustomObserver)
+    /// ```
+    open func remove<T: TaskObserver>(observerWithType type: T.Type) -> Bool {
         assert(state < .executing, "Observer removed after task is added to the task queue")
-        var index = [Int]()
-        
-        for (i, observerElement) in observers.enumerated() {
-            if type(of: observerElement) is T.Type {
-                index.append(i)
+
+        let indexes = observers
+            .enumerated()
+            .flatMap { offset, observer -> Int? in
+                if type(of: observer) is T.Type { return offset }
+                return nil
             }
-        }
         
-        if index.count > 0 {
-            _ = index.map { observers.remove(at: $0) }
+        if indexes.count > 0 {
+            _ = indexes.map { observers.remove(at: $0) }
             return true
         }
+
         return false
     }
     
-    //MARK: Finishing Task execution
+    // MARK: Finishing Task execution
     
-    /**
-     Finish execution of the task with result. Calling this method will change
-     task state to `Finished` and call neccesary completion blocks. If task finished
-     with `Value(T)`, `onValueBlock` will be executed. If task finished with
-     `Error(ErrorType)` result, `onErrorBlock` will be executed.
-     
-     - Parameter result: Task result (`.Value(T)` or `.Error(ErrorType)`)
-     
-     - Note:
-     Safe to call from any thread.
-     */
+    /// Finish execution of the task with result. Calling this method will change
+    /// task state to `Finished` and call neccesary completion blocks. If task finished
+    /// with `Value(T)`, `onValueBlock` will be executed. If task finished with
+    /// `Error(Error)` result, `onErrorBlock` will be executed.
+    ///
+    /// - parameter result: Task result (`.Value(T)` or `.Error(ErrorType)`)
+    ///
+    /// - note: Safe to call from any thread.
     public final func finish(_ result: Result<T>) {
         if shouldRetry {
             attemptRetry()
@@ -588,17 +557,12 @@ open class Task<T>: TaskBase {
         }
     }
     
-    /**
-     Used to notify `NSOperation` superclass that task execution is asynchronous.
-     Defaults to `true`.
-    */
+    /// Defines if task should handle state automatically. Defaults to true.
     public final override var isAsynchronous: Bool {
         return true
     }
     
-    /**
-     Boolean value indicating Task readiness value
-    */
+    /// Boolean value indicating Task readiness value
     public final override var isReady: Bool {
         switch state {
         case .initialized:
@@ -619,20 +583,26 @@ open class Task<T>: TaskBase {
         }
     }
     
-    /**
-     Boolean value indicating Task execution status.
-    */
+    /// Boolean value indicating Task execution status.
     public final override var isExecuting: Bool {
         return state == .executing
     }
     
-    /**
-     Boolean value indicating if task finished with execution.
-     */
+    /// Boolean value indicating if task finished with execution.
     public final override var isFinished: Bool {
         return state == .finished
     }
     
+    
+    /// This method changes state to `Pending`.
+    ///
+    /// - note: This method should be called as a final step in adding task to the
+    /// `TaskQueue`.
+    final func willEnqueue() {
+        state = .pending
+    }
+    
+    /// Evaluates all task conditions
     final func evaluateConditions() {
         assert(state == .pending && !isCancelled, "evaluateConditions() was called out-of-order")
         
@@ -646,9 +616,7 @@ open class Task<T>: TaskBase {
         }
     }
     
-    /**
-     Changes task state to `Finished`
-     */
+    /// Changes task state to `finished`
     internal final func moveToFinishedState() {
         state = .finished
         
@@ -659,10 +627,7 @@ open class Task<T>: TaskBase {
     
     //MARK: Task execution
     
-    /**
-     Starts task execution process when task reaches `Ready` state.
-     Non-overridable.
-    */
+    /// Starts task execution process when task reaches `ready` state.
     public override final func start() {
         if isCancelled {
             moveToFinishedState()
@@ -673,13 +638,10 @@ open class Task<T>: TaskBase {
         }
     }
     
-    /**
-     Starts task execution. Called by the `start()` method. If the task is
-     cancelled it will move to finished state.
-     Non-overridable.
-    */
+    /// Starts task execution by being called from the `start()` method. If the task is
+    /// cancelled it will move to finished state.
     public override final func main() {
-        assert(state == .ready, "Task must be performed on TaskQueue")
+        assert(state == .ready, "Task must be performed on the TaskQueue")
         state = .executing
         
         for observer in observers {
@@ -693,81 +655,80 @@ open class Task<T>: TaskBase {
         }
     }
     
-    /**
-     You must override this method in order to provide execution point for the
-     task. In order to notify task that the task execution finished, call `finish(_:)`
-     method on self.
-    */
+    /// You must override this method in order to provide execution point for the
+    /// task. In order to notify task that the task execution finished, call `finish(_:)`
+    /// method on self.
     open func run() {
         assertionFailure("run() method should be overrided in \(type(of: self))")
     }
     
-    /**
-     Creates new instance of `Task<T>`
-    */
+    // MARK: Init methods
+    
+    /// Create new instance of `Task<T>`
     public override init() {
         super.init()
     }
     
-    //MARK: KVO mechanisms
+    // MARK: Key value observation
     
-    /**
-     Called by `NSOperation` KVO mechanisms to check if task is ready
-    */
+    /// Called by `Foundation.Operation` KVO mechanisms to check if task is ready
     @objc class func keyPathsForValuesAffectingIsReady() -> Set<NSObject> {
         return ["state" as NSObject]
     }
     
-    /**
-     Called by `NSOperation` KVO mechanisms to check if task is executing
-     */
+    /// Called by `Foundation.NSOperation` KVO mechanisms to check if task is executing
     @objc class func keyPathsForValuesAffectingIsExecuting() -> Set<NSObject> {
         return ["state" as NSObject]
     }
     
-    /**
-     Called by `NSOperation` KVO mechanisms to check if task is finished
-     */
+    /// Called by `NSOperation` KVO mechanisms to check if task is finished
     @objc class func keyPathsForValuesAffectingIsFinished() -> Set<NSObject> {
         return ["state" as NSObject]
     }
     
-    //MARK: Dependency management
+    // MARK: Dependency management
     
+    
+    /// Makes the task dependant on completion of specific task. 
+    /// Dependencies can be excuted on arbitary task queues.
+    ///
+    /// - parameter operation: Dependency task
     open override func addDependency(_ operation: Operation) {
         assert(state < .executing)
         
         super.addDependency(operation)
     }
     
-    /**
-     Returns dependency instance from the task dependencies.
-     
-     - Parameter type: Dependency Task type
-     
-     - Returns: Optional `Task<T>` dependency instance
-     
-     ### Example
-     ```swift
-     let dependencyTask = SomeTask()
-     if let dependency = task.getDependency(SomeTask) {
-        print(dependency) // dependencyTask instance
-     }
-     ```
-     */
-    open func getDependency<T>(_ type: Task<T>.Type) -> Task<T>? {
+    /// Returns dependency instance from the task dependencies.
+    ///
+    /// - parameter type: Dependency task type
+    ///
+    /// - returns: Optional `Task<T>` dependency instance
+    ///
+    /// ### Example
+    /// ```swift
+    /// let dependencyTask = SomeTask()
+    /// if let dependency = task.getDependency(SomeTask) {
+    ///    print(dependency) // dependencyTask instance
+    /// }
+    /// ```
+    open func get<T>(dependencyWithType type: Task<T>.Type) -> Task<T>? {
         let filteredDependency = dependencies.filter { $0 as? Task<T> != nil }
         return filteredDependency.first as? Task<T>
     }
     
+    
+    /// Return dependency instance
+    ///
+    /// - parameter type: Dependency task type
+    ///
+    /// - returns: Optional `Task<T>` dependency instance
     open subscript(type: Task<T>.Type) -> Task<T>? {
-        return getDependency(type)
+        return get(dependencyWithType: type)
     }
 }
 
-/**
- Defines errors that can be thrown in task retry process
- */
+/// Defines errors that can be thrown in task retry process
 enum RetryCountError: Error {
     case countIsZero
 }

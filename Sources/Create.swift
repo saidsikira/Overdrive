@@ -8,23 +8,22 @@
 
 extension Task {
     
-    //MARK: Task creation
+    // MARK: Inline task creation
     
-    /**
-     Create inline task with completion block
-     
-     **Example:**
-     
-     ```swift
-     let inlineTask = Task.create {
-        doWork()
-     }
-     ```
-     
-     - Parameter taskBlock: Block in which task is executed.
-     
-     - Returns: InlineTask instance
-    */
+    
+    /// Create inline task with completion block
+    ///
+    /// **Example:**
+    ///
+    /// ```swift
+    /// let inlineTask = Task.create {
+    ///    doWork()
+    /// }
+    /// ```
+    ///
+    /// - parameter taskBlock: Block in which task is executed.
+    ///
+    /// - returns: InlineTask instance
     public class func create(_ taskBlock: @escaping ((Void) -> Void)) -> InlineTask {
         return InlineTask {
             taskBlock()
