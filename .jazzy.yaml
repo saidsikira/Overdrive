@@ -1,0 +1,26 @@
+---
+xcodebuild_arguments:
+  - "-project"
+  - Overdrive/Overdrive.xcodeproj
+  - "-scheme"
+  - Overdrive
+custom_categories:
+  -
+    name: "Classes"
+    children:
+      - "Task"
+      - "TaskQueue"
+      - "InlineTask"
+      - "TaskBase"
+  -
+    name: "Protocols"
+    children:
+      - "TaskObserver"
+      - "TaskCondition"
+      - "TaskQueueDelegate"
+  -
+    name: "Enums"
+    children:
+      - "Result"
+      - "TaskConditionResult"
+      - "TaskConditionError"
