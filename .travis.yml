@@ -17,5 +17,5 @@ script:
 - set -o pipefail
 - xcodebuild -version
 - xcodebuild -showsdks
-- swift - version
+- swift -version
 - sh build.sh "$COMMAND"
