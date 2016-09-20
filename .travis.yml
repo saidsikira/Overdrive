@@ -12,8 +12,10 @@ env:
   - COMMAND="test-macos"
   - COMMAND="test-tvos"
   - COMMAND="test-watchos"
+  - COMMAND="test-native"
 script:
 - set -o pipefail
 - xcodebuild -version
 - xcodebuild -showsdks
+- swift - version
 - sh build.sh "$COMMAND"

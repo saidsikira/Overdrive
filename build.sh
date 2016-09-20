@@ -167,6 +167,13 @@ case "$COMMAND" in
     exit 0;
   ;;
 
+  "--test-native" | "test-native")
+    swift build --clean
+    swift build
+    swift test
+    exit 0;
+  ;;
+
   "test")
     sh $0 test-iOS
     sh $0 test-macOS
