@@ -1,12 +1,12 @@
 //
-//  NSQualityOfService+Overdrive.swift
+//  QualityOfService+Overdrive.swift
 //  Overdrive
 //
 //  Created by Said Sikira on 6/21/16.
 //  Copyright © 2016 Said Sikira. All rights reserved.
 //
 
-import enum Foundation.NSQualityOfService
+import enum Foundation.QualityOfService
 
 extension QualityOfService: CustomStringConvertible {
     

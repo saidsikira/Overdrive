@@ -11,8 +11,9 @@ import Overdrive
 /**
  `Task<Int>` subclass that always finishes with `Int` value
 */
-class SimpleTask: Task<Int> {
-    override func run() {
+public class SimpleTask: Task<Int> {
+    override public func run() {
         finish(.Value(10))
     }
 }
+

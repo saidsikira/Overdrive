@@ -6,7 +6,7 @@
 //  Copyright © 2016 Said Sikira. All rights reserved.
 //
 
-import class Foundation.NSOperation
+import Foundation
 
 /**
  `Task<T>` is an abstract class that provides interface for encapsuling any

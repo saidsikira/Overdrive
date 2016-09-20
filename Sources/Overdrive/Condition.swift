@@ -6,6 +6,10 @@
 //  Copyright © 2016 Said Sikira. All rights reserved.
 //
 
+import class Foundation.Operation
+import class Foundation.DispatchQueue
+import class Foundation.DispatchGroup
+
 // MARK: - TaskConditionResult enum
 
 ///Defines task condition result that is returned in the process of evaluating
@@ -103,7 +107,7 @@ struct TaskConditionEvaluator {
             }
         }
         
-        conditionGroup.notify(queue: DispatchQueue.global(qos: DispatchQoS.QoSClass.default)) {
+        conditionGroup.notify(queue: DispatchQueue.global(qos: .default)) {
             let failures = results.flatMap { $0?.error }
             
             completion(failures)

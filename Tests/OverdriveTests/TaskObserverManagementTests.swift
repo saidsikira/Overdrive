@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import TestSupport
 @testable import Overdrive
 
 class SimpleObserver: TaskObserver {

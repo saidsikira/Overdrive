@@ -3,7 +3,7 @@
    LastUpgradeVersion = "0800"
    version = "1.3">
    <BuildAction
-      parallelizeBuildables = "YES"
+      parallelizeBuildables = "NO"
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
          <BuildActionEntry
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B3422DC41D84A64C00B337AD"
+               BlueprintIdentifier = "B36FE4EE1D9080E8003C6A77"
                BuildableName = "Overdrive.framework"
                BlueprintName = "Overdrive"
                ReferencedContainer = "container:Overdrive.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B3422DDD1D84A88800B337AD"
+               BlueprintIdentifier = "B36FE5611D908387003C6A77"
                BuildableName = "Tests.xctest"
                BlueprintName = "Tests"
                ReferencedContainer = "container:Overdrive.xcodeproj">
@@ -42,7 +42,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B3422DC41D84A64C00B337AD"
+            BlueprintIdentifier = "B36FE4EE1D9080E8003C6A77"
             BuildableName = "Overdrive.framework"
             BlueprintName = "Overdrive"
             ReferencedContainer = "container:Overdrive.xcodeproj">
@@ -64,12 +64,19 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B3422DC41D84A64C00B337AD"
+            BlueprintIdentifier = "B36FE4EE1D9080E8003C6A77"
             BuildableName = "Overdrive.framework"
             BlueprintName = "Overdrive"
             ReferencedContainer = "container:Overdrive.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "OBJC_PRINT_CLASS_SETUP"
+            value = "YES"
+            isEnabled = "NO">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -82,7 +89,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B3422DC41D84A64C00B337AD"
+            BlueprintIdentifier = "B36FE4EE1D9080E8003C6A77"
             BuildableName = "Overdrive.framework"
             BlueprintName = "Overdrive"
             ReferencedContainer = "container:Overdrive.xcodeproj">

@@ -6,8 +6,11 @@
 //  Copyright © 2016 Said Sikira. All rights reserved.
 //
 
-import class Foundation.NSOperation
-import class Foundation.NSOperationQueue
+import class Foundation.Operation
+import class Foundation.OperationQueue
+import class Foundation.DispatchQueue
+import class Foundation.DispatchGroup
+import enum Foundation.QualityOfService
 
 /**
  Provides interface for `Task<T>` execution and concurrency.

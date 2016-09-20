@@ -7,6 +7,8 @@
 //
 
 import XCTest
+import TestSupport
+
 @testable import Overdrive
 
 class TestTask: Task<Int> {

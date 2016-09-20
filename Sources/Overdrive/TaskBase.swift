@@ -7,7 +7,7 @@
 //
 
 import class Foundation.Operation
-
+import class Foundation.DispatchQueue
 
 /// Base class of `Task<T>`. Responsible for state management.
 open class TaskBase: Operation {

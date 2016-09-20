@@ -11,8 +11,8 @@ import Overdrive
 /**
  `Task<Int>` subclass that always finishes with Error
  */
-class FailableTask: Task<Int> {
-    override func run() {
+public class FailableTask: Task<Int> {
+    override public func run() {
         finish(.Error(TaskError.fail("Failed")))
     }
 }

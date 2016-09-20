@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import enum Overdrive.Result
+@testable import Overdrive
 
 class ResultTests: XCTestCase {
     func testComputedProperties() {

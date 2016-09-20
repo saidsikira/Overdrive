@@ -6,6 +6,8 @@
 //  Copyright © 2016 Said Sikira. All rights reserved.
 //
 
+import Foundation
+
 /**
  Delegate of `TaskQueue` that can respond to certain `TaskQueue` events
 */
