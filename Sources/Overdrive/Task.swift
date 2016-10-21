@@ -154,18 +154,20 @@ import Foundation
 */
 open class Task<T>: TaskBase {
     
+    public typealias ResultType = T
+    
     //MARK: Internal properties
     
     /// Internal result object
     ///
     /// - warning: Should never be set directly, only via `result` property
-    fileprivate var internalResult: Result<T>?
+    fileprivate var internalResult: Result<ResultType>?
     
     /// Internal completion block
     ///
     /// - warning: Accessing this property directly will result in unexpected behavior.
     /// Use `onValueBlock` instead.
-    fileprivate var internalOnValueBlock: ((T) -> Void)?
+    fileprivate var internalOnValueBlock: ((ResultType) -> Void)?
     
     /// Internal error completion block
     ///
@@ -201,8 +203,8 @@ open class Task<T>: TaskBase {
     ///
     /// - seealso: `onValue(_: )`, `onError(_: )`
     internal(set) open var result: Result<T>? {
-        get {
-            return queue.sync { return internalResult }
+        get { return queue.sync {
+                return internalResult }
         }
         
         set(newResult) {
@@ -214,8 +216,8 @@ open class Task<T>: TaskBase {
     
     /// Returns current retry count
     var retryCount: Int {
-        get {
-            return queue.sync { return internalRetryCount }
+        get { return queue.sync {
+                return internalRetryCount }
         }
         
         set(newCount) {
@@ -225,7 +227,7 @@ open class Task<T>: TaskBase {
         }
     }
     
-    //MARK: Completion methods
+    // MARK: Completion methods
     
     ///
     /// Completion block that is executed when the task reaches `Finished` state and
@@ -244,9 +246,8 @@ open class Task<T>: TaskBase {
             }
         }
         
-        set(newBlock) {
-                queue.sync {
-                    internalOnValueBlock = newBlock
+        set(newBlock) { queue.sync {
+                internalOnValueBlock = newBlock
             }
         }
     }
@@ -260,8 +261,7 @@ open class Task<T>: TaskBase {
     /// - Warning: Setting this property directly may result in unexpected behaviour,
     /// always use `onError:` method on `Self` to set the block.
     var onErrorBlock: ((Error) -> Void)? {
-        get {
-            return queue.sync {
+        get { return queue.sync {
                 return internalOnErrorBlock
             }
         }
@@ -290,7 +290,7 @@ open class Task<T>: TaskBase {
     /// - returns: `Self`. This method will always return itself, so that it can be used
     /// in chain with other task methods.
     @discardableResult
-    public final func onValue(_ completion: @escaping ((T) -> Void)) -> Self {
+    public final func onValue(_ completion: @escaping ((ResultType) -> Void)) -> Self {
         assert(state < .executing, "On complete called after task is executed")
         onValueBlock = completion
         return self
@@ -375,8 +375,8 @@ open class Task<T>: TaskBase {
     
     /// All task conditions
     fileprivate(set) open var conditions: [TaskCondition] {
-        get {
-            return queue.sync { return internalConditions }
+        get { return queue.sync {
+                return internalConditions }
         }
         
         set(newConditions) {
@@ -386,11 +386,12 @@ open class Task<T>: TaskBase {
         }
     }
     
-    /// Returns ny errors that occured during condition evaluation. If this 
-    /// array contains errors after evalutation, task will finish execution
+    /// Returns any errors that occured during condition evaluation. If this
+    /// array contains errors after evalutation, task **will finish with execution**
+    /// and execute `onError:` method.
     var conditionErrors: [Error] {
-        get {
-            return queue.sync { return internalConditionErrors }
+        get { return queue.sync {
+                return internalConditionErrors }
         }
         
         set(newErrors) {
@@ -418,7 +419,8 @@ open class Task<T>: TaskBase {
     /// - returns: Boolean indicating whether condition was removed
     open func remove(condition: TaskCondition) -> Bool {
         assert(state < .executing, "Tried to remove condition after task started with execution")
-        let index = conditions.index { $0.conditionName == condition.conditionName }
+        let index = conditions.index(where: { $0.conditionName == condition.conditionName })
+        
         if let index = index {
             conditions.remove(at: index)
             return true
@@ -457,8 +459,8 @@ open class Task<T>: TaskBase {
     /// Default implementation contains `FinishBlockObserver` which is used to notify
     /// TaskQueue that the task finished with execution
     internal(set) open var observers: [TaskObserver] {
-        get {
-            return queue.sync { return internalObservers }
+        get { return queue.sync {
+                return internalObservers }
         }
         
         set {
@@ -540,7 +542,7 @@ open class Task<T>: TaskBase {
     /// - parameter result: Task result (`.Value(T)` or `.Error(ErrorType)`)
     ///
     /// - note: Safe to call from any thread.
-    public final func finish(_ result: Result<T>) {
+    public final func finish(_ result: Result<ResultType>) {
         if shouldRetry {
             attemptRetry()
         } else {
@@ -563,7 +565,7 @@ open class Task<T>: TaskBase {
     }
     
     /// Boolean value indicating Task readiness value
-    public final override var isReady: Bool {
+    open override var isReady: Bool {
         switch state {
         case .initialized:
             return isCancelled
@@ -592,7 +594,6 @@ open class Task<T>: TaskBase {
     public final override var isFinished: Bool {
         return state == .finished
     }
-    
     
     /// This method changes state to `Pending`.
     ///
@@ -669,7 +670,7 @@ open class Task<T>: TaskBase {
         super.init()
     }
     
-    // MARK: Key value observation
+    // MARK: `Foundation.Operation` Key value observation
     
     /// Called by `Foundation.Operation` KVO mechanisms to check if task is ready
     @objc class func keyPathsForValuesAffectingIsReady() -> Set<NSObject> {
