@@ -24,7 +24,7 @@ open class TaskBase: Operation {
     /// - warning: Setting the state directly using this property will result
     /// in unexpected behaviour. Use the `state` property to set and retrieve
     /// current state.
-    var internalState: State = .initialized
+    fileprivate var internalState: State = .initialized
     
     /// Main task state object. Any state change triggers internal `Foundation.Operation` observers.
     ///
@@ -44,7 +44,7 @@ open class TaskBase: Operation {
         
         set(newState) {
             
-            // Notify internal `NSOperation` observers that state will be changed
+            // Notify internal `Foundation.Operation` observers that task state will be changed
             willChangeValue(forKey: "state")
             
             queue.sync {
@@ -53,7 +53,7 @@ open class TaskBase: Operation {
                 internalState = newState
             }
             
-            // Notifity internal `NSOperation` observers that state is changed
+            // Notifity internal `Foundation.Operation` observers that task state is changed
             didChangeValue(forKey: "state")
         }
     }
