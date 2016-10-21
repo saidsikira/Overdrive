@@ -19,7 +19,6 @@ class RetryTestTask: Task<Int> {
     
     override func run() {
         if failCount == 0 {
-            NSLog("new fail count \(failCount)")
             finish(.Value(1))
         } else {
             failCount -= 1
@@ -33,11 +32,11 @@ class RetryTests: XCTestCase {
     func testRetryCount() {
         let retryTestTask = RetryTestTask(failCount: 5)
         
-        XCTAssert(retryTestTask.retryCount == 0, "retryCount should be 0")
+        XCTAssertEqual(retryTestTask.retryCount, 0)
         
         retryTestTask.retry(3)
         
-        XCTAssert(retryTestTask.retryCount == 3, "retryCount should be 0")
+        XCTAssertEqual(retryTestTask.retryCount, 3)
     }
     
     func testReduceRetryCount() {
@@ -46,7 +45,7 @@ class RetryTests: XCTestCase {
         
         do {
             try retryTestTask.decreaseRetryCount()
-            XCTAssert(retryTestTask.retryCount == 2, "Retry count after decreasing incorrect")
+            XCTAssertEqual(retryTestTask.retryCount, 2, "Retry count after decreasing incorrect")
         } catch {
             XCTFail("Decrease count failed with error \(error)")
         }
@@ -63,9 +62,8 @@ class RetryTests: XCTestCase {
         // Set onValue and onError
         retryTestTask
             .onValue { value in
-                XCTAssert(retryTestTask.retryCount == 0, "Retry count is not correct")
+                XCTAssertEqual(retryTestTask.retryCount, 0, "Retry count is not correct")
                 retryExpectation.fulfill()
-                
             }.onError { error in
                 XCTFail("Task should not fail with error \(error)")
         }

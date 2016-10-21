@@ -11,6 +11,8 @@ import TestSupport
 
 @testable import Overdrive
 
+// MARK: - DependencyTestCondition
+
 class DependencyTestCondition: TaskCondition {
     func dependencies<T>(forTask task: Task<T>) -> [Operation] {
         return [SimpleTask()]
@@ -20,6 +22,8 @@ class DependencyTestCondition: TaskCondition {
         evaluationBlock(.satisfied)
     }
 }
+
+// MARK: - Tests
 
 class TaskConditionDependencyTests: XCTestCase {
     
@@ -38,8 +42,8 @@ class TaskConditionDependencyTests: XCTestCase {
         
         task.add(condition: condition)
         
-        XCTAssert(task.conditions.count == 1, "Task condition count should be equal to 1")
-        XCTAssert(task.dependencies.count == 0, "Task dependency count should be equal to 0")
+        XCTAssertEqual(task.conditions.count, 1, "Task condition count should be equal to 1")
+        XCTAssertEqual(task.dependencies.count, 0, "Task dependency count should be equal to 0")
         
         queue.addTask(task)
         
@@ -49,9 +53,12 @@ class TaskConditionDependencyTests: XCTestCase {
     }
 }
 
+// MARK: - TaskQueueDelegate implementation
+
 extension TaskConditionDependencyTests: TaskQueueDelegate {
+    
     func didAdd<T>(task: Task<T>, toQueue queue: TaskQueue) {
-        XCTAssert(task.dependencies.count == 1, "Task dependency count should be equal to 1")
+        XCTAssertEqual(task.dependencies.count, 1, "Task dependency count should be equal to 1")
         addExpecation?.fulfill()
     }
     
@@ -60,6 +67,6 @@ extension TaskConditionDependencyTests: TaskQueueDelegate {
     }
     
     func didRetry<T>(_ task: Task<T>, inQueue queue: TaskQueue) {
-        XCTAssert(false, "didRetry method should not be called")
+        XCTFail("didRetry:task:inQueue: method should not be called")
     }
 }

@@ -29,7 +29,6 @@
 		B36FE55C1D9082F8003C6A77 /* Operation+Overdrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5251D9081E2003C6A77 /* Operation+Overdrive.swift */; };
 		B36FE55D1D9082F8003C6A77 /* QualityOfService+Overdrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5261D9081E2003C6A77 /* QualityOfService+Overdrive.swift */; };
 		B36FE5791D9083B5003C6A77 /* DependencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE56C1D9083A2003C6A77 /* DependencyTests.swift */; };
-		B36FE57A1D9083B5003C6A77 /* DispatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE56D1D9083A2003C6A77 /* DispatchTests.swift */; };
 		B36FE57B1D9083B5003C6A77 /* InlineTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE56E1D9083A2003C6A77 /* InlineTaskTests.swift */; };
 		B36FE57C1D9083B5003C6A77 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE56F1D9083A2003C6A77 /* ResultTests.swift */; };
 		B36FE57D1D9083B5003C6A77 /* RetryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5701D9083A2003C6A77 /* RetryTests.swift */; };
@@ -73,7 +72,6 @@
 		B36FE53E1D908291003C6A77 /* Overdrive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Overdrive.h; sourceTree = "<group>"; };
 		B36FE5621D908387003C6A77 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B36FE56C1D9083A2003C6A77 /* DependencyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyTests.swift; sourceTree = "<group>"; };
-		B36FE56D1D9083A2003C6A77 /* DispatchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchTests.swift; sourceTree = "<group>"; };
 		B36FE56E1D9083A2003C6A77 /* InlineTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineTaskTests.swift; sourceTree = "<group>"; };
 		B36FE56F1D9083A2003C6A77 /* ResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTests.swift; sourceTree = "<group>"; };
 		B36FE5701D9083A2003C6A77 /* RetryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetryTests.swift; sourceTree = "<group>"; };
@@ -224,7 +222,6 @@
 			isa = PBXGroup;
 			children = (
 				B36FE56C1D9083A2003C6A77 /* DependencyTests.swift */,
-				B36FE56D1D9083A2003C6A77 /* DispatchTests.swift */,
 				B36FE56E1D9083A2003C6A77 /* InlineTaskTests.swift */,
 				B36FE56F1D9083A2003C6A77 /* ResultTests.swift */,
 				B36FE5701D9083A2003C6A77 /* RetryTests.swift */,
@@ -465,7 +462,6 @@
 				B36FE57D1D9083B5003C6A77 /* RetryTests.swift in Sources */,
 				B36FE5791D9083B5003C6A77 /* DependencyTests.swift in Sources */,
 				B36FE57B1D9083B5003C6A77 /* InlineTaskTests.swift in Sources */,
-				B36FE57A1D9083B5003C6A77 /* DispatchTests.swift in Sources */,
 				B36FE57C1D9083B5003C6A77 /* ResultTests.swift in Sources */,
 				B36FE57E1D9083B5003C6A77 /* TaskConditionDependencyTests.swift in Sources */,
 				B36FE5821D9083B5003C6A77 /* TaskQueueDelegateTests.swift in Sources */,

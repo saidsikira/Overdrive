@@ -32,23 +32,22 @@ class TaskConditionTests: XCTestCase {
         let condition = FailedTestCondition()
         task.add(condition: condition)
         
-        XCTAssert(task.conditions.count == 1, "Task condition count is not 1")
-        XCTAssert(task.conditionErrors.count == 0, "Task condition error count should be 0")
+        XCTAssertEqual(task.conditions.count, 1)
+        XCTAssertEqual(task.conditionErrors.count, 0)
         
         let expectation = self.expectation(description: "Task failed condition expecation")
         
         task
             .onValue { value in
-                XCTAssert(false, "onValue block should not be executed")
+                XCTFail("onValue: block should not be executed")
             }.onError { error in
-                XCTAssert(task.conditionErrors.count == 1, "Condition error count should be 1")
+                XCTAssertEqual(task.conditionErrors.count, 1, "Condition error count should be 1")
                 expectation.fulfill()
         }
         
         TaskQueue(qos: .default).addTask(task)
         
-        waitForExpectations(timeout: 1) {
-            handlerError in
+        waitForExpectations(timeout: 1) { handlerError in
             print(handlerError)
         }
     }
@@ -59,17 +58,17 @@ class TaskConditionTests: XCTestCase {
         let condition = SatisfiedTestCondition()
         task.add(condition: condition)
         
-        XCTAssert(task.conditions.count == 1, "Task condition count is not 1")
-        XCTAssert(task.conditionErrors.count == 0, "Task condition error count should be 0")
+        XCTAssertEqual(task.conditions.count, 1)
+        XCTAssertEqual(task.conditionErrors.count, 0)
         
         let expectation = self.expectation(description: "Satisfied condition expecation")
         
         task
             .onValue { value in
-                XCTAssert(task.conditionErrors.count == 0, "Condition error count should be 1")
+                XCTAssertEqual(task.conditionErrors.count, 0)
                 expectation.fulfill()
             }.onError { error in
-                XCTAssert(false, "onError block should not be executed")
+                XCTFail("onError: block should not be executed")
         }
         
         TaskQueue(qos: .default).addTask(task)

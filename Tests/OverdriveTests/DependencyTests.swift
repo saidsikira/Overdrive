@@ -40,9 +40,9 @@ class DependencyTests: XCTestCase {
         testTask.addDependency(dependencyTask)
         
         if let dependency = testTask.get(dependencyWithType: SimpleTask.self) {
-            XCTAssert(dependency.name == "DependencyTask", "Incorrect dependency returned")
+            XCTAssertEqual(dependency.name, "DependencyTask")
         } else {
-            XCTAssert(false, "Dependency not returned")
+            XCTFail("Dependency not returned")
         }
     }
     

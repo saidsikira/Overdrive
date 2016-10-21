@@ -24,12 +24,12 @@ class ThreadSafetyTests: XCTestCase {
         
         task.onValue { value in
             customDispatchQueue.async {
-                XCTAssert(value == 10, "Incorrect value on custom queue")
+                XCTAssertEqual(value, 10, "Incorrect value on custom queue")
                 customQueueExpecation.fulfill()
             }
             
             backgroundDispatchQueue.async {
-                XCTAssert(value == 10, "Incorrect value on background queue")
+                XCTAssertEqual(value, 10, "Incorrect value on background queue")
                 backgroundQueueExpecation.fulfill()
             }
         }
@@ -50,13 +50,13 @@ class ThreadSafetyTests: XCTestCase {
         
         task.onValue { value in
             backgroundDispatchQueue.async {
-                XCTAssert(value == 10, "Incorrect value on background queue")
+                XCTAssertEqual(value, 10, "Incorrect value on background queue")
                 backgroundQueueExpecation.fulfill()
             }
         }
         
         let queue = TaskQueue()
-        queue.underlyingQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive)
+        queue.underlyingQueue = DispatchQueue.global(qos: .userInteractive)
         queue.addTask(task)
         
         waitForExpectations(timeout: 0.4) { handlerError in

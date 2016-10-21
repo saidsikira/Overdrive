@@ -12,10 +12,9 @@ import XCTest
 class InlineTaskTests: XCTestCase {
     
     func testInlineTaskState() {
-        let task = InlineTask {
-        }
+        let task = InlineTask {}
         
-        XCTAssert(task.state == .initialized, "Task state should be Initialized")
+        XCTAssertEqual(task.state, .initialized)
     }
     
     func testInlineTaskExecution() {

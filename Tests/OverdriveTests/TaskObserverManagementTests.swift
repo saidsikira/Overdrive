@@ -22,7 +22,7 @@ class TaskObserverManagementTests: XCTestCase {
         
         task.add(observer: observer)
         
-        XCTAssert(task.observers.count == 1, "Task observer count should be 1")
+        XCTAssertEqual(task.observers.count, 1)
     }
     
     /// Test `removeObserver(_:)` method
@@ -33,9 +33,9 @@ class TaskObserverManagementTests: XCTestCase {
         
         let removeStatus = task.remove(observer: observer)
         
-        XCTAssert(removeStatus == true, "remove(_:) method is not returning true for removed observer")
+        XCTAssertEqual(removeStatus, true, "remove(_:) method is not returning true for removed observer")
         
-        XCTAssert(task.observers.count == 0, "Task observer count should be 0")
+        XCTAssertEqual(task.observers.count, 0)
     }
     
     /// Test `removeObserverOfType(_:)`
@@ -46,8 +46,7 @@ class TaskObserverManagementTests: XCTestCase {
         
         let removeStatus = task.remove(observerWithType: SimpleObserver.self)
         
-        XCTAssert(removeStatus == true, "remove(_:) method is not returning true for removed observer")
-        
-        XCTAssert(task.observers.count == 0, "Task observer count should be 0")
+        XCTAssertEqual(removeStatus, true)
+        XCTAssertEqual(task.observers.count, 0)
     }
 }

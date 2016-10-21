@@ -17,7 +17,7 @@ class TaskTests: XCTestCase {
     
     func testIntializedState() {
         let task = SimpleTask()
-        XCTAssert(task.state == .initialized, "Task state should be: Initialized")
+        XCTAssertEqual(task.state, .initialized, "Task state should be: Initialized")
     }
     
     func testFinishedState() {
@@ -25,7 +25,7 @@ class TaskTests: XCTestCase {
         let expectation = self.expectation(description: "Task finished state expecation")
         
         task.onValue { value in
-            XCTAssert(task.state == .finished, "Task state should be: Finished")
+            XCTAssertEqual(task.state, .finished, "Task state should be: Finished")
             expectation.fulfill()
         }
         
@@ -43,7 +43,7 @@ class TaskTests: XCTestCase {
             .onValue { _ in }
             .onError { _ in }
         
-        XCTAssert(task.onValueBlock != nil, "onValue block should be set")
+        XCTAssertNotNil(task.onValueBlock, "onValue block should be set")
     }
     
     func testOnErrorCompletionBlockValue() {
@@ -54,7 +54,7 @@ class TaskTests: XCTestCase {
             .onError { _ in }
         
         
-        XCTAssert(task.onErrorBlock != nil, "onError block should be set")
+        XCTAssertNotNil(task.onErrorBlock, "onError block should be set")
     }
     
     func testOnValueBlockExecution() {
@@ -62,7 +62,7 @@ class TaskTests: XCTestCase {
         let expectation = self.expectation(description: "Task result value expecation")
         
         task.onValue { value in
-            XCTAssert(value == 10, "Task result value should be 10")
+            XCTAssertEqual(value, 10, "Task result value should be 10")
             expectation.fulfill()
         }
         
@@ -81,7 +81,7 @@ class TaskTests: XCTestCase {
             .onError { error in
                 expectation.fulfill()
             }.onValue { _ in
-                XCTFail("onValue block should not be executed")
+                XCTFail("onValue: block should not be executed")
         }
         
         queue.addTask(task)
