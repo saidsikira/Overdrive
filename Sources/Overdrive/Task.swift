@@ -478,6 +478,12 @@ open class Task<T>: TaskBase {
         observers.append(observer)
     }
     
+    public func contains<T: TaskObserver>(observer: T.Type) -> Bool {
+        let filteredObservers = observers.filter { type(of: $0) == observer }
+        if filteredObservers.count > 0 { return true }
+        return false
+    }
+    
     /// Removes task observer from the task observers.
     ///
     /// - parameter observer: Task observer instance to be removed

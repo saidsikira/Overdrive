@@ -49,4 +49,13 @@ class TaskObserverManagementTests: XCTestCase {
         XCTAssertEqual(removeStatus, true)
         XCTAssertEqual(task.observers.count, 0)
     }
+    
+    func testContainsObserver() {
+        let task = SimpleTask()
+        let observer = SimpleObserver()
+        
+        task.add(observer: observer)
+        
+        XCTAssertTrue(task.contains(observer: SimpleObserver.self))
+    }
 }
