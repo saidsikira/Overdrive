@@ -1,9 +1,9 @@
 <img src="http://i.imgur.com/pp7QHRW.png" width="40%" height="40%"/>
 
 [![Build Status](https://travis-ci.org/arikis/Overdrive.svg?branch=master)](https://travis-ci.org/arikis/Overdrive)
-![Plaforms](https://img.shields.io/badge/platform- iOS | macOS | tvOS | linux-lightgray.svg)
+![Plaforms](https://img.shields.io/badge/platform- iOS | macOS | tvOS | linux-gray.svg)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Swift Package Manager Compatible](https://img.shields.io/badge/SPM-Compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
+[![Swift Package Manager Compatible](https://img.shields.io/badge/SwiftPM-Compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
 
 **Contents:**
 
@@ -28,9 +28,9 @@
 
 ## Requirements
 
-- iOS 8.0+ / Mac OS X 10.11+ / tvOS 9.0+
-- Xcode 7.3+
-- Swift 2.2 on Linux
+- iOS 8.0+ / Mac OS X 10.11+ / tvOS 9.0+ / watchOS 2.0+
+- Xcode 8.0+
+- Swift 3
 
 ## Installation
 
@@ -66,8 +66,6 @@ let package = Package(
   ]
 )
 ```
-
-> Swift Package Manager support is still experimental.
 
 #### Manual installation
 `Overdrive` can also be installed manualy by dragging the `Overdrive.xcodeproj` to your project and adding `Overdrive.framework` to the embedded libraries in project settings.
