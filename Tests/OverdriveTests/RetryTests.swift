@@ -68,7 +68,7 @@ class RetryTests: XCTestCase {
                 XCTFail("Task should not fail with error \(error)")
         }
         
-        TaskQueue(qos: .default).addTask(retryTestTask)
+        TaskQueue(qos: .default).add(task: retryTestTask)
         
         waitForExpectations(timeout: 0.2) { handlerError in
             print(handlerError)

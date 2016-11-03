@@ -45,7 +45,7 @@ class TaskConditionTests: XCTestCase {
                 expectation.fulfill()
         }
         
-        TaskQueue(qos: .default).addTask(task)
+        TaskQueue(qos: .default).add(task: task)
         
         waitForExpectations(timeout: 1) { handlerError in
             print(handlerError)
@@ -71,7 +71,7 @@ class TaskConditionTests: XCTestCase {
                 XCTFail("onError: block should not be executed")
         }
         
-        TaskQueue(qos: .default).addTask(task)
+        TaskQueue(qos: .default).add(task: task)
         
         waitForExpectations(timeout: 1) {
             handlerError in

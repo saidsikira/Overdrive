@@ -478,6 +478,10 @@ open class Task<T>: TaskBase {
         observers.append(observer)
     }
     
+    /// Checks if task constains observer of specific `TaskObserver` type
+    ///
+    /// - Parameter observer: `TaskObserver` type
+    /// - Returns: Boolean value indicating if task contains observer
     public func contains<T: TaskObserver>(observer: T.Type) -> Bool {
         let filteredObservers = observers.filter { type(of: $0) == observer }
         if filteredObservers.count > 0 { return true }
@@ -592,21 +596,13 @@ open class Task<T>: TaskBase {
     }
     
     /// Boolean value indicating Task execution status.
-    public final override var isExecuting: Bool {
+    open override var isExecuting: Bool {
         return state == .executing
     }
     
     /// Boolean value indicating if task finished with execution.
-    public final override var isFinished: Bool {
+    open override var isFinished: Bool {
         return state == .finished
-    }
-    
-    /// This method changes state to `Pending`.
-    ///
-    /// - note: This method should be called as a final step in adding task to the
-    /// `TaskQueue`.
-    final func willEnqueue() {
-        state = .pending
     }
     
     /// Evaluates all task conditions
@@ -723,7 +719,6 @@ open class Task<T>: TaskBase {
         let filteredDependency = dependencies.filter { $0 as? Task<T> != nil }
         return filteredDependency.first as? Task<T>
     }
-    
     
     /// Return dependency instance
     ///

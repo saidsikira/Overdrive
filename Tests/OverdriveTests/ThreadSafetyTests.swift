@@ -34,9 +34,10 @@ class ThreadSafetyTests: XCTestCase {
             }
         }
         
-        TaskQueue(qos: .default).addTask(task)
+        TaskQueue(qos: .default).add(task: task)
         
         waitForExpectations(timeout: 0.4) { handlerError in
+
             print(handlerError)
         }
     }
@@ -55,9 +56,8 @@ class ThreadSafetyTests: XCTestCase {
             }
         }
         
-        let queue = TaskQueue()
-        queue.underlyingQueue = DispatchQueue.global(qos: .userInteractive)
-        queue.addTask(task)
+        let queue = TaskQueue(queue: DispatchQueue.global(qos: .background))
+        queue.add(task: task)
         
         waitForExpectations(timeout: 0.4) { handlerError in
             print(handlerError)

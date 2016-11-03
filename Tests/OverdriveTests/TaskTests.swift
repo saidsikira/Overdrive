@@ -29,7 +29,7 @@ class TaskTests: XCTestCase {
             expectation.fulfill()
         }
         
-        queue.addTask(task)
+        queue.add(task: task)
         
         waitForExpectations(timeout: 0.3) { handlerError in
             print(handlerError)
@@ -66,7 +66,7 @@ class TaskTests: XCTestCase {
             expectation.fulfill()
         }
         
-        queue.addTask(task)
+        queue.add(task: task)
         
         waitForExpectations(timeout: 0.1) { handlerError in
             print(handlerError)
@@ -84,7 +84,7 @@ class TaskTests: XCTestCase {
                 XCTFail("onValue: block should not be executed")
         }
         
-        queue.addTask(task)
+        queue.add(task: task)
         
         waitForExpectations(timeout: 0.1) { handlerError in
             print(handlerError)

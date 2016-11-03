@@ -27,7 +27,7 @@ class TaskQueueDelegateTests: XCTestCase {
         task.name = "SimpleTask"
         
         queue.delegate = self
-        queue.addTask(task)
+        queue.add(task: task)
         
         waitForExpectations(timeout: 0.2) { handlerError in
             print(handlerError)

@@ -27,7 +27,7 @@ class TaskObserverTests: XCTestCase {
         
         task.add(observer: self)
         
-        queue.addTask(task)
+        queue.add(task: task)
         
         waitForExpectations(timeout: 0.2) { handlerError in
             print(handlerError)

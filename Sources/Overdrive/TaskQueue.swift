@@ -22,7 +22,7 @@ import enum Foundation.QualityOfService
  
  ```swift
  let queue = TaskQueue()
- queue.addTask(task)
+ queue.add(task: someTask)
  ```
  
  After the task is added to the `TaskQueue` complex process of task readiness
@@ -43,14 +43,13 @@ import enum Foundation.QualityOfService
  There are two predefined `TaskQueue` instances already associated with main
  and background queues.
  
- - `TaskQueue.main` - Associated with main UI thread, suitable for execution
+ - `TaskQueue.UI` - Associated with main UI thread, suitable for execution
  tasks that application UI is dependent on.
  - `TaskQueue.background` - Associated with background queue. Any task that is
  added to this queue will be executed in the background.
  
  In addition to the queue specification, you can also create [**Quality Of
- Service**](https://developer.apple.com/library/ios/documentation/Performance/Con
- ceptual/EnergyGuide-iOS/PrioritizeWorkWithQoS.html) aware task queues by
+ Service**](https://developer.apple.com/library/content/documentation/Performance/Conceptual/EnergyGuide-iOS/PrioritizeWorkWithQoS.html) aware task queues by
  passing `NSQualityOfService` object to the initializer.
  
  **Quality Of Service** class allows you to categorize type of work that is
@@ -84,7 +83,11 @@ import enum Foundation.QualityOfService
  in `TaskQueue` lifecycle. See `TaskQueueDelegate` for more information
  
  */
-open class TaskQueue: OperationQueue {
+open class TaskQueue {
+    
+    /// Underlying `Foundation.OperationQueue` instance used for executing
+    /// `Foundation.Operation` operations
+    public let operationQueue: OperationQueue
     
     /**
      Returns queue associated with application main queue.
@@ -96,9 +99,9 @@ open class TaskQueue: OperationQueue {
      TaskQueue.uiQueue.addTask(task)
      ```
      */
-    open static let uiQueue: TaskQueue = {
+    open static let main: TaskQueue = {
         let queue = TaskQueue()
-        queue.underlyingQueue = OperationQueue.main.underlyingQueue
+        queue.operationQueue.underlyingQueue = OperationQueue.main.underlyingQueue
         return queue
     }()
     
@@ -109,24 +112,23 @@ open class TaskQueue: OperationQueue {
      
      ```swift
      let task = SomeTask()
-     TaskQueue.background.addTask(task)
+     TaskQueue.background.add(task: task)
      ```
      */
     open static let background: TaskQueue = {
         let queue = TaskQueue()
-        queue.name = "BackgroundTaskQueue"
-        queue.underlyingQueue = DispatchQueue.global(qos: .background)
+        queue.operationQueue.underlyingQueue = DispatchQueue.global(qos: .background)
         return queue
     }()
     
     /// TaskQueue delegate object
     weak open var delegate: TaskQueueDelegate?
     
-    //MARK: Init methods
+    // MARK: Init methods
     
     /// Creates instance of `TaskQueue`
-    public override init() {
-        super.init()
+    public init() {
+        self.operationQueue = OperationQueue()
     }
     
     /**
@@ -134,8 +136,8 @@ open class TaskQueue: OperationQueue {
      quality of service class will later determine how tasks are executed.
      */
     public init(qos: QualityOfService) {
-        super.init()
-        super.qualityOfService = qos
+        operationQueue = OperationQueue()
+        operationQueue.qualityOfService = qos
     }
     
     /**
@@ -145,8 +147,8 @@ open class TaskQueue: OperationQueue {
      Quality Of Service setting on TaskQueue.
     */
     public init(queue: DispatchQueue) {
-        super.init()
-        super.underlyingQueue = queue
+        operationQueue = OperationQueue()
+        operationQueue.underlyingQueue = queue
     }
     
     //MARK: Task management
@@ -157,7 +159,7 @@ open class TaskQueue: OperationQueue {
      
      - Parameter task: Task<T> to be added
      */
-    open func addTask<T>(_ task: Task<T>) {
+    open func add<T>(task: Task<T>) {
         let finishObserver = FinishBlockObserver { [weak self] in
             if let queue = self {
                 queue.delegate?.didFinish(task: task, inQueue: queue)
@@ -172,19 +174,13 @@ open class TaskQueue: OperationQueue {
         _ = task
             .conditions
             .flatMap { $0.dependencies(forTask: task) }
-            .map { task.addDependency($0); addOperation($0) }
+            .map { add(dependency: $0, forTask: task) }
+        
+        operationQueue.addOperation(task)
         
         delegate?.didAdd(task: task, toQueue: self)
         
-        addOperation(task)
-    }
-    
-    open override func addOperation(_ operation: Operation) {
-        super.addOperation(operation)
-        
-        if operation.responds(to: #selector(Task<Any>.willEnqueue)) {
-            operation.perform(#selector(Task<Any>.willEnqueue))
-        }
+        task.enqueue()
     }
     
     /**
@@ -193,7 +189,19 @@ open class TaskQueue: OperationQueue {
      
      - Parameter tasks: Array of `Task<T>`
      */
-    open func addTasks<T>(_ tasks: [Task<T>]) {
-        _ = tasks.map { addTask($0) }
+    open func add<T: Task<Any>>(tasks: [T]) {
+        _ = tasks.map { add(task: $0) }
+    }
+    
+    /// Adds dependency for specific task
+    ///
+    /// - Parameters:
+    ///   - dependency: `Foundation.Operation` subclass
+    ///   - task: `Task<T>` to add dependency to
+    fileprivate func add<T>(dependency: Operation, forTask task: Task<T>) {
+        task.addDependency(dependency)
+        operationQueue.addOperation(dependency)
+        
+        dependency.enqueue()
     }
 }

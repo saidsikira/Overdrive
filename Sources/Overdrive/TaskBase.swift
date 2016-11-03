@@ -9,6 +9,8 @@
 import class Foundation.Operation
 import class Foundation.DispatchQueue
 
+// MARK: - TaskBase
+
 /// Base class of `Task<T>`. Responsible for state management.
 open class TaskBase: Operation {
     
@@ -57,4 +59,26 @@ open class TaskBase: Operation {
             didChangeValue(forKey: "state")
         }
     }
+    
+    /// This method changes task state to `pending`.
+    ///
+    /// - note: This method should be called as a final step in adding task to the
+    /// `TaskQueue`.
+    @objc fileprivate func willEnqueue() {
+        state = .pending
+    }
 }
+
+extension Operation {
+    
+    /// Changes operation state to `pending` if it responds to
+    /// `willEnqueue` selector.
+    internal func enqueue() {
+        let enqueueSelector = #selector(Task<Any>.willEnqueue)
+        
+        if self.responds(to: enqueueSelector) {
+            self.perform(enqueueSelector)
+        }
+    }
+}
+

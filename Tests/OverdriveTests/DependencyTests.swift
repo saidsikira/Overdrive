@@ -28,7 +28,7 @@ class DependencyTests: XCTestCase {
         
         XCTAssertEqual(testTask.dependencies.count, 1)
         
-        TaskQueue(qos: .default).addTask(testTask)
+        TaskQueue(qos: .default).add(task: testTask)
     }
     
     /// Tests `getDependency(_:)` method

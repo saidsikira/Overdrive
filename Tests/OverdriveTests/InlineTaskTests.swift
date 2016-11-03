@@ -28,7 +28,7 @@ class InlineTaskTests: XCTestCase {
             finishExpecation.fulfill()
         }
         
-        TaskQueue(qos: .default).addTask(task)
+        TaskQueue(qos: .default).add(task: task)
         
         waitForExpectations(timeout: 0.2) { handlerError in
             print(handlerError)

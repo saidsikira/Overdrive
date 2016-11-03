@@ -14,6 +14,7 @@ import TestSupport
 // MARK: - DependencyTestCondition
 
 class DependencyTestCondition: TaskCondition {
+    
     func dependencies<T>(forTask task: Task<T>) -> [Operation] {
         return [SimpleTask()]
     }
@@ -45,7 +46,7 @@ class TaskConditionDependencyTests: XCTestCase {
         XCTAssertEqual(task.conditions.count, 1, "Task condition count should be equal to 1")
         XCTAssertEqual(task.dependencies.count, 0, "Task dependency count should be equal to 0")
         
-        queue.addTask(task)
+        queue.add(task:task)
         
         waitForExpectations(timeout: 1) { handlerError in
             print(handlerError)
