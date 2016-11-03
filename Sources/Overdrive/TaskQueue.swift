@@ -87,7 +87,7 @@ open class TaskQueue {
     
     /// Underlying `Foundation.OperationQueue` instance used for executing
     /// `Foundation.Operation` operations
-    public let operationQueue: OperationQueue
+    internal let operationQueue: OperationQueue
     
     /**
      Returns queue associated with application main queue.
@@ -124,11 +124,47 @@ open class TaskQueue {
     /// TaskQueue delegate object
     weak open var delegate: TaskQueueDelegate?
     
+    /// Boolean indicating if queue is actively scheduling tasks execution
+    var isSuspended: Bool {
+        get { return operationQueue.isSuspended }
+        
+        set(suspended) {
+            operationQueue.isSuspended = suspended
+        }
+    }
+    
+    /// Returns all active tasks in the queue
+    var tasks: [Operation] {
+        return operationQueue.operations
+    }
+    
+    /// Specifies service level that is used in executing tasks
+    /// in the current queue.
+    var qos: QualityOfService {
+        get { return operationQueue.qualityOfService }
+        set(newQos) {
+            operationQueue.qualityOfService = newQos
+        }
+    }
+    
+    /// Queue name identifier
+    var name: String?
+    
+    /// The maximum number of tasks that can be executed at the same time
+    /// concurrently.
+    var maxConcurrentTaskCount: Int {
+        get { return operationQueue.maxConcurrentOperationCount }
+        set(newCount) {
+            operationQueue.maxConcurrentOperationCount = newCount
+        }
+    }
+    
     // MARK: Init methods
     
     /// Creates instance of `TaskQueue`
     public init() {
         self.operationQueue = OperationQueue()
+        operationQueue.isSuspended = true
     }
     
     /**
@@ -160,14 +196,12 @@ open class TaskQueue {
      - Parameter task: Task<T> to be added
      */
     open func add<T>(task: Task<T>) {
-        let finishObserver = FinishBlockObserver { [weak self] in
-            if let queue = self {
-                queue.delegate?.didFinish(task: task, inQueue: queue)
-            }
-        }
-        
         if !task.contains(observer: FinishBlockObserver.self) {
-            task.add(observer: finishObserver)
+            task.add(observer: FinishBlockObserver { [weak self] in
+                if let queue = self {
+                    queue.delegate?.didFinish(task: task, inQueue: queue)
+                }
+            })
         }
         
         // Evaluate condition dependencies and add them to the queue
@@ -203,5 +237,21 @@ open class TaskQueue {
         operationQueue.addOperation(dependency)
         
         dependency.enqueue()
+    }
+}
+
+// MARK: - CustomStringConvertible
+
+extension TaskQueue: CustomStringConvertible {
+    public var description: String {
+        return name ?? operationQueue.description
+    }
+}
+
+// MARK: - CustomDebugStringConvertible 
+
+extension TaskQueue: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        return "Name: \(name), qos: \(qos), Task count: \(tasks.count)"
     }
 }
