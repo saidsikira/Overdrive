@@ -32,10 +32,11 @@ Usage: sh $0 command
 
   [Testing]
 
-  test-iOS      Test iOS target
-  test-macOS    Test macOS target
-  test-tvOS     Test tvOS target
-  test          Runs full tests
+  test-iOS      Run tests on iOS host
+  test-macOS    Run tests on macOS host
+  test-tvOS     Run tests on tvOS target
+  test-native   Run Swift tests without Xcode
+  test          Runs full test suite on all supported hosts
 
   [Docs]
 
@@ -178,6 +179,7 @@ case "$COMMAND" in
     sh $0 test-iOS
     sh $0 test-macOS
     sh $0 test-tvOS
+    sh $0 test-native
     exit 0;
   ;;
 esac
