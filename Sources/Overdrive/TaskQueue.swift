@@ -125,7 +125,7 @@ open class TaskQueue {
     weak open var delegate: TaskQueueDelegate?
     
     /// Boolean indicating if queue is actively scheduling tasks execution
-    var isSuspended: Bool {
+    open var isSuspended: Bool {
         get { return operationQueue.isSuspended }
         
         set(suspended) {
@@ -134,13 +134,13 @@ open class TaskQueue {
     }
     
     /// Returns all active tasks in the queue
-    var tasks: [Operation] {
+    open var tasks: [Operation] {
         return operationQueue.operations
     }
     
     /// Specifies service level that is used in executing tasks
     /// in the current queue.
-    var qos: QualityOfService {
+    open var qos: QualityOfService {
         get { return operationQueue.qualityOfService }
         
         set(newQos) {
@@ -149,7 +149,7 @@ open class TaskQueue {
     }
     
     /// Queue name identifier
-    var name: String?
+    open var name: String?
     
     /// The maximum number of tasks that can be executed at the same time
     /// concurrently.
