@@ -56,7 +56,7 @@ open class InlineTask: InlineTaskBase {
     /// Starts execution of the task
     open override func run() {
         taskBlock? { void in
-            self.finish(.Value(void))
+            self.finish(with: .value(void))
         }
     }
 }

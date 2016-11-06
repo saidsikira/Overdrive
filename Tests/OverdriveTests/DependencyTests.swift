@@ -13,7 +13,7 @@ import TestSupport
 
 class TestTask: Task<Int> {
     override func run() {
-        finish(.Value(1))
+        finish(with: .value(1))
     }
 }
 

@@ -13,7 +13,7 @@ import Overdrive
 */
 public class SimpleTask: Task<Int> {
     override public func run() {
-        finish(.Value(10))
+        finish(with: .value(10))
     }
 }
 

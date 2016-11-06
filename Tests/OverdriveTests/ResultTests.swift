@@ -11,14 +11,14 @@ import XCTest
 
 class ResultTests: XCTestCase {
     func testComputedProperties() {
-        let result: Result = .Value(10)
+        let result: Result = .value(10)
         
         XCTAssertEqual(result.value, 10)
         XCTAssertNil(result.error)
     }
     
     func testMap() {
-        let result: Result = .Value(10)
+        let result: Result = .value(10)
         let stringResult = result.map { String($0) }
         
         XCTAssertEqual(stringResult.value, "10")

@@ -544,15 +544,22 @@ open class Task<T>: TaskBase {
     
     // MARK: Finishing Task execution
     
-    /// Finish execution of the task with result. Calling this method will change
+    @available(*, unavailable, renamed: "finish(with:)")
+    public final func finish(_ result: Result<ResultType>) {
+        self.finish(with: result)
+    }
+    
+    // Finish execution of the task with result. Calling this method will change
     /// task state to `Finished` and call neccesary completion blocks. If task finished
     /// with `Value(T)`, `onValueBlock` will be executed. If task finished with
     /// `Error(Error)` result, `onErrorBlock` will be executed.
     ///
-    /// - parameter result: Task result (`.Value(T)` or `.Error(ErrorType)`)
+    /// - parameter result: Task result (`.value(T)` or `.error(Error)`)
     ///
     /// - note: Safe to call from any thread.
-    public final func finish(_ result: Result<ResultType>) {
+    ///
+    /// - seealso: `Result<T>`
+    public func finish(with result: Result<ResultType>) {
         if shouldRetry {
             attemptRetry()
         } else {
@@ -561,9 +568,9 @@ open class Task<T>: TaskBase {
             moveToFinishedState()
             
             switch result {
-            case .Value(let value):
+            case .value(let value):
                 onValueBlock?(value)
-            case .Error(let error):
+            case .error(let error):
                 onErrorBlock?(error)
             }
         }
@@ -635,7 +642,7 @@ open class Task<T>: TaskBase {
         if isCancelled {
             moveToFinishedState()
         } else if conditionErrors.count > 0 {
-            finish(.Error(TaskConditionError.combined(errors: conditionErrors)))
+            finish(with: .error(TaskConditionError.combined(errors: conditionErrors)))
         } else {
             main()
         }

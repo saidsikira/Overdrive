@@ -13,6 +13,6 @@ import Overdrive
  */
 public class FailableTask: Task<Int> {
     override public func run() {
-        finish(.Error(TaskError.fail("Failed")))
+        finish(with: .error(TaskError.fail("Failed")))
     }
 }

@@ -19,10 +19,10 @@ class RetryTestTask: Task<Int> {
     
     override func run() {
         if failCount == 0 {
-            finish(.Value(1))
+            finish(with: .value(1))
         } else {
             failCount -= 1
-            finish(.Error(TaskError.fail("Failed with retry count \(failCount)")))
+            finish(with: .error(TaskError.fail("Failed with retry count \(failCount)")))
         }
     }
 }
