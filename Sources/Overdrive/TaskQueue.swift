@@ -43,7 +43,7 @@ import enum Foundation.QualityOfService
  There are two predefined `TaskQueue` instances already associated with main
  and background queues.
  
- - `TaskQueue.UI` - Associated with main UI thread, suitable for execution
+ - `TaskQueue.main` - Associated with main UI thread, suitable for execution
  tasks that application UI is dependent on.
  - `TaskQueue.background` - Associated with background queue. Any task that is
  added to this queue will be executed in the background.
@@ -59,7 +59,7 @@ import enum Foundation.QualityOfService
  To create `TaskQueue` with specific `QOS` class use designated initializer:
  
  ```swift
- let queue = TaskQueue(qos: .UserInteractive)
+ let queue = TaskQueue(qos: .userInteractive)
  ```
  
  ### **Concurrency**
@@ -74,7 +74,7 @@ import enum Foundation.QualityOfService
  
  ```swift
  let queue = TaskQueue()
- queue.maxConcurrentOperationCount = 3
+ queue.maxConcurrentTaskCount = 3
  ```
  
  ### **TaskQueueDelegate**
@@ -87,7 +87,7 @@ open class TaskQueue {
     
     /// Underlying `Foundation.OperationQueue` instance used for executing
     /// `Foundation.Operation` operations
-    internal let operationQueue: OperationQueue
+    internal let operationQueue: OperationQueue = OperationQueue()
     
     /**
      Returns queue associated with application main queue.
@@ -142,6 +142,7 @@ open class TaskQueue {
     /// in the current queue.
     var qos: QualityOfService {
         get { return operationQueue.qualityOfService }
+        
         set(newQos) {
             operationQueue.qualityOfService = newQos
         }
@@ -154,6 +155,7 @@ open class TaskQueue {
     /// concurrently.
     var maxConcurrentTaskCount: Int {
         get { return operationQueue.maxConcurrentOperationCount }
+        
         set(newCount) {
             operationQueue.maxConcurrentOperationCount = newCount
         }
@@ -163,8 +165,6 @@ open class TaskQueue {
     
     /// Creates instance of `TaskQueue`
     public init() {
-        self.operationQueue = OperationQueue()
-        operationQueue.isSuspended = true
     }
     
     /**
@@ -172,7 +172,6 @@ open class TaskQueue {
      quality of service class will later determine how tasks are executed.
      */
     public init(qos: QualityOfService) {
-        operationQueue = OperationQueue()
         operationQueue.qualityOfService = qos
     }
     
@@ -181,9 +180,8 @@ open class TaskQueue {
      
      - note: Setting underlying queue for the TaskQueue will override any
      Quality Of Service setting on TaskQueue.
-    */
+     */
     public init(queue: DispatchQueue) {
-        operationQueue = OperationQueue()
         operationQueue.underlyingQueue = queue
     }
     
@@ -248,7 +246,7 @@ extension TaskQueue: CustomStringConvertible {
     }
 }
 
-// MARK: - CustomDebugStringConvertible 
+// MARK: - CustomDebugStringConvertible
 
 extension TaskQueue: CustomDebugStringConvertible {
     public var debugDescription: String {
