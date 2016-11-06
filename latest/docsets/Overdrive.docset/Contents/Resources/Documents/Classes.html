@@ -174,11 +174,11 @@ enum with two cases:</p></li>
 </ol>
 
 <ul>
-<li><code>Value(T)</code></li>
-<li><code>Error(ErrorType)</code></li>
+<li><code>value(T)</code></li>
+<li><code>error(Error)</code></li>
 </ul>
 
-<p>After <code>finish(_:)</code> method is called, you can access result through <code>result</code>
+<p>After <code>finish(with:)</code> method is called, you can access result through <code>result</code>
 property.</p>
 
 <div class="aside aside-note">
@@ -193,9 +193,9 @@ property.</p>
     <span class="k">override</span> <span class="kd">func</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
         <span class="n">asyncOperation</span> <span class="p">{</span> <span class="n">data</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
             <span class="k">if</span> <span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-               <span class="nf">finish</span><span class="p">(</span><span class="o">.</span><span class="kt">Error</span><span class="p">(</span><span class="n">error</span><span class="o">!</span><span class="p">))</span>
+               <span class="nf">finish</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="o">.</span><span class="nf">error</span><span class="p">(</span><span class="n">error</span><span class="o">!</span><span class="p">))</span>
             <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-               <span class="nf">finish</span><span class="p">(</span><span class="o">.</span><span class="kt">Value</span><span class="p">(</span><span class="n">data</span> <span class="k">as!</span> <span class="kt">Int</span><span class="p">))</span>
+               <span class="nf">finish</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="n">data</span> <span class="k">as!</span> <span class="kt">Int</span><span class="p">))</span>
             <span class="p">}</span>
         <span class="p">}</span>
     <span class="p">}</span>
@@ -203,7 +203,7 @@ property.</p>
 
 <span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">TaskQueue</span><span class="p">()</span>
 <span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">SomeTask</span><span class="p">()</span>
-<span class="n">queue</span><span class="o">.</span><span class="nf">addTask</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+<span class="n">queue</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="nv">task</span><span class="p">:</span> <span class="n">task</span><span class="p">)</span>
 </code></pre>
 
 <p><a href='#strong-completion-blocks-strong' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='strong-completion-blocks-strong'><strong>Completion blocks</strong></h3></p>
@@ -214,15 +214,15 @@ property.</p>
 finished with execution.</p>
 
 <ol>
-<li><code>onValue</code> - executed when task finishes with <code>Value(T)</code></li>
-<li><code>onError</code> - executed when task finishes with <code>Error(ErrorType)</code></li>
+<li><code>onValue</code> - executed when task finishes with <code>.value(T)</code></li>
+<li><code>onError</code> - executed when task finishes with <code>.error(Error)</code></li>
 </ol>
 
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">SomeTask</span><span class="p">()</span>
 
 <span class="n">task</span>
    <span class="o">.</span><span class="n">onValue</span> <span class="p">{</span> <span class="n">value</span> <span class="k">in</span>
-       <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+       <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="c1">// Int</span>
    <span class="p">}</span><span class="o">.</span><span class="n">onError</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
        <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 <span class="p">}</span>
@@ -254,7 +254,7 @@ dependency use <code>addDependency(_:)</code> method.</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">SomeTask</span><span class="p">()</span>
 <span class="k">let</span> <span class="nv">otherTask</span> <span class="o">=</span> <span class="kt">OtherTask</span><span class="p">()</span>
 
-<span class="n">task</span><span class="o">.</span><span class="nf">addDependency</span><span class="p">(</span><span class="n">otherTask</span><span class="p">)</span>
+<span class="n">task</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="nv">dependency</span><span class="p">:</span> <span class="n">otherTask</span><span class="p">)</span>
 </code></pre>
 
 <p>When task with dependencies is added to the <code><a href="Classes/TaskQueue.html">TaskQueue</a></code>, dependencies will be
@@ -275,7 +275,7 @@ executed first.</p>
 <p>One example would be location retrieval. In order to get location from the
 device you need to make sure that user granted permissions for location
 services. Granting permissions can be exposed as task condition. You can create conditions using <code><a href="Protocols/TaskCondition.html">TaskCondition</a></code> protocol and add them to the task by using
-<code>addCondition(_:)</code> method.</p>
+<code>add(condition:)</code> method.</p>
 
 <p><a href='#strong-observers-strong' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='strong-observers-strong'><strong>Observers</strong></h3></p>
 
@@ -292,7 +292,7 @@ based on the task execution state.</p>
 
 <p><hr></p>
 
-<p>If the task finishes execution with error, it&rsquo;s execution can be retried. To
+<p>If the task finishes execution with error, its execution can be retried. To
 specify maximum number of retry operations use <code>retry(_:)</code> method.</p>
 
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">SomeTask</span><span class="p">()</span>
