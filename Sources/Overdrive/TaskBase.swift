@@ -9,9 +9,7 @@
 import class Foundation.Operation
 import class Foundation.DispatchQueue
 
-// MARK: - TaskBase
-
-/// Base class of `Task<T>`. Responsible for state management.
+/// Base class of `Task<T>`, responsible for state management.
 open class TaskBase: Operation {
     
     // MARK: Dispatch queue
@@ -24,21 +22,16 @@ open class TaskBase: Operation {
     /// Internal task state
     ///
     /// - warning: Setting the state directly using this property will result
-    /// in unexpected behaviour. Use the `state` property to set and retrieve
+    /// in unexpected behaviour. Always use the `state` property to set and retrieve
     /// current state.
     fileprivate var internalState: State = .initialized
     
-    /// Main task state object. Any state change triggers internal `Foundation.Operation` observers.
-    ///
-    /// State can be one of the following:
-    ///
-    /// * `Initialized`
-    /// * `Pending`
-    /// * `Ready`
-    /// * `Executing`
-    /// * `Finished`
+    /// Main task state object. Any state change triggers internal `Foundation.Operation` 
+    /// KVO observers.
     ///
     /// - note: You can change state from any thread.
+    ///
+    /// - seealso: State
     var state: State {
         get {
             return queue.sync { return internalState }
