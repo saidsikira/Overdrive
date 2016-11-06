@@ -231,7 +231,7 @@ open class TaskQueue {
     ///   - dependency: `Foundation.Operation` subclass
     ///   - task: `Task<T>` to add dependency to
     fileprivate func add<T>(dependency: Operation, forTask task: Task<T>) {
-        task.addDependency(dependency)
+        task.add(dependency: dependency)
         operationQueue.addOperation(dependency)
         
         dependency.enqueue()

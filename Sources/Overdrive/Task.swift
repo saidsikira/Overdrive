@@ -39,10 +39,10 @@ import Foundation
  called. You always finish execution with `Result<T>` object. `Result<T>` is an
  enum with two cases:
  
-	* `Value(T)`
-	* `Error(ErrorType)`
+	* `value(T)`
+	* `error(Error)`
  
- After `finish(_:)` method is called, you can access result through `result`
+ After `finish(with:)` method is called, you can access result through `result`
  property.
  
  - note: You can access `result` object from any thread.
@@ -54,9 +54,9 @@ import Foundation
      override func run() {
          asyncOperation { data, error in
              if error != nil {
-                finish(.Error(error!))
+                finish(with: .error(error!))
              } else {
-                finish(.Value(data as! Int))
+                finish(with: .value(data as! Int))
              }
          }
      }
@@ -64,7 +64,7 @@ import Foundation
  
  let queue = TaskQueue()
  let task = SomeTask()
- queue.addTask(task)
+ queue.add(task: task)
  ```
  
  ### **Completion blocks**
@@ -72,15 +72,15 @@ import Foundation
  You can use one of the defined completion blocks that are executed when task
  finished with execution.
  
- 1. `onValue` - executed when task finishes with `Value(T)`
- 2. `onError` - executed when task finishes with `Error(ErrorType)`
+ 1. `onValue` - executed when task finishes with `.value(T)`
+ 2. `onError` - executed when task finishes with `.error(Error)`
  
  ```swift
  let task = SomeTask()
  
  task
     .onValue { value in
-        print(value)
+        print(value) // Int
     }.onError { error in
         print(error)
  }
@@ -104,7 +104,7 @@ import Foundation
  let task = SomeTask()
  let otherTask = OtherTask()
  
- task.addDependency(otherTask)
+ task.add(dependency: otherTask)
  ```
  
  When task with dependencies is added to the `TaskQueue`, dependencies will be
@@ -120,7 +120,7 @@ import Foundation
  One example would be location retrieval. In order to get location from the
  device you need to make sure that user granted permissions for location
  services. Granting permissions can be exposed as task condition. You can create conditions using `TaskCondition` protocol and add them to the task by using
- `addCondition(_:)` method.
+ `add(condition:)` method.
  
  ### **Observers**
  ---
@@ -135,7 +135,7 @@ import Foundation
  ### **Retry**
  ---
  
- If the task finishes execution with error, it's execution can be retried. To
+ If the task finishes execution with error, its execution can be retried. To
  specify maximum number of retry operations use `retry(_:)` method.
  
  ```swift
@@ -193,9 +193,9 @@ open class Task<T>: TaskBase {
     ///
     /// Task result. Result can contain either value or error.
     ///
-    /// `Value(T)`: value of type defined by the Task
+    /// `value(T)`: value of type defined by the Task
     ///
-    /// `Error(Error)`: error that may have occured
+    /// `error(Error)`: error that may have occured
     ///
     /// This object will not be populated with result until task
     /// achieves `finished` state. You can access the result value directly,
@@ -230,9 +230,9 @@ open class Task<T>: TaskBase {
     // MARK: Completion methods
     
     ///
-    /// Completion block that is executed when the task reaches `Finished` state and
-    /// `.Value` is passed to the `finish:` method. Completion block takes one
-    /// argument `T`, which is `.Value` component from the task result.
+    /// Completion block that is executed when the task reaches `finished` state and
+    /// `.value(T)` is passed to the `finish(with:)` method. Completion block takes one
+    /// argument `T`, which is `.value` component from the task result.
     ///
     /// See `Result<T>`.
     ///
@@ -520,9 +520,9 @@ open class Task<T>: TaskBase {
     ///
     /// ```swift
     /// let myObserver = CustomObserver()
-    /// task.addObserver(myObserver)
+    /// task.add(observer: myObserver)
     ///
-    /// task.removeObserverOfType(CustomObserver)
+    /// task.remove(observerOfType: CustomObserver.self)
     /// ```
     open func remove<T: TaskObserver>(observerWithType type: T.Type) -> Bool {
         assert(state < .executing, "Observer removed after task is added to the task queue")
@@ -549,10 +549,10 @@ open class Task<T>: TaskBase {
         self.finish(with: result)
     }
     
-    // Finish execution of the task with result. Calling this method will change
+    /// Finish execution of the task with result. Calling this method will change
     /// task state to `Finished` and call neccesary completion blocks. If task finished
-    /// with `Value(T)`, `onValueBlock` will be executed. If task finished with
-    /// `Error(Error)` result, `onErrorBlock` will be executed.
+    /// with `value(T)`, `onValueBlock` will be executed. If task finished with
+    /// `error(Error)` result, `onErrorBlock` will be executed.
     ///
     /// - parameter result: Task result (`.value(T)` or `.error(Error)`)
     ///
@@ -686,27 +686,30 @@ open class Task<T>: TaskBase {
         return ["state" as NSObject]
     }
     
-    /// Called by `Foundation.NSOperation` KVO mechanisms to check if task is executing
+    /// Called by `Foundation.Operation` KVO mechanisms to check if task is executing
     @objc class func keyPathsForValuesAffectingIsExecuting() -> Set<NSObject> {
         return ["state" as NSObject]
     }
     
-    /// Called by `NSOperation` KVO mechanisms to check if task is finished
+    /// Called by `Foundation.Operation` KVO mechanisms to check if task is finished
     @objc class func keyPathsForValuesAffectingIsFinished() -> Set<NSObject> {
         return ["state" as NSObject]
     }
     
     // MARK: Dependency management
     
+    @available(*, unavailable, renamed: "add(dependency:)")
+    open override func addDependency(_ operation: Operation) {
+    }
     
-    /// Makes the task dependant on completion of specific task. 
+    /// Makes the task dependant on completion of specific task.
     /// Dependencies can be excuted on arbitary task queues.
     ///
     /// - parameter operation: Dependency task
-    open override func addDependency(_ operation: Operation) {
+    open func add(dependency: Operation) {
         assert(state < .executing)
         
-        super.addDependency(operation)
+        super.addDependency(dependency)
     }
     
     /// Returns dependency instance from the task dependencies.
@@ -718,7 +721,7 @@ open class Task<T>: TaskBase {
     /// ### Example
     /// ```swift
     /// let dependencyTask = SomeTask()
-    /// if let dependency = task.getDependency(SomeTask) {
+    /// if let dependency = task.get(dependencyWithType: SomeTask.self) {
     ///    print(dependency) // dependencyTask instance
     /// }
     /// ```

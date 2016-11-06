@@ -24,7 +24,7 @@ class DependencyTests: XCTestCase {
         let testTask = TestTask()
         let dependencyTask = SimpleTask()
         
-        testTask.addDependency(dependencyTask)
+        testTask.add(dependency: dependencyTask)
         
         XCTAssertEqual(testTask.dependencies.count, 1)
         
@@ -37,7 +37,7 @@ class DependencyTests: XCTestCase {
         let dependencyTask = SimpleTask()
         dependencyTask.name = "DependencyTask"
         
-        testTask.addDependency(dependencyTask)
+        testTask.add(dependency: dependencyTask)
         
         if let dependency = testTask.get(dependencyWithType: SimpleTask.self) {
             XCTAssertEqual(dependency.name, "DependencyTask")
@@ -51,7 +51,7 @@ class DependencyTests: XCTestCase {
         let dependencyTask = SimpleTask()
         dependencyTask.name = "DependencyTask"
         
-        testTask.addDependency(dependencyTask)
+        testTask.add(dependency: dependencyTask)
         
         let dependency = testTask[SimpleTask.self]
 
