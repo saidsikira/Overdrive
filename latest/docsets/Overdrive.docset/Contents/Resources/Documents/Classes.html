@@ -44,7 +44,7 @@ header.header {
         <a class="header-link" href="index.html">
           Overdrive Docs
         </a>
-         (98% documented)
+         (100% documented)
       </p>
     
         <p class="header-col header-col--secondary">
@@ -352,7 +352,7 @@ specify maximum number of retry operations use <code>retry(_:)</code> method.</p
 <code>addTask(_:)</code> or <code>addTasks(_:)</code> method.</p>
 
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">TaskQueue</span><span class="p">()</span>
-<span class="n">queue</span><span class="o">.</span><span class="nf">addTask</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+<span class="n">queue</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="nv">task</span><span class="p">:</span> <span class="n">someTask</span><span class="p">)</span>
 </code></pre>
 
 <p>After the task is added to the <code>TaskQueue</code> complex process of task readiness
@@ -375,13 +375,13 @@ defined queue.</p>
 and background queues.</p>
 
 <ul>
-<li><code>TaskQueue.main</code> - Associated with main UI thread, suitable for execution
+<li><code><a href="Classes/TaskQueue.html#/s:ZvC9Overdrive9TaskQueue4mainS0_">TaskQueue.main</a></code> - Associated with main UI thread, suitable for execution
 tasks that application UI is dependent on.</li>
 <li><code><a href="Classes/TaskQueue.html#/s:ZvC9Overdrive9TaskQueue10backgroundS0_">TaskQueue.background</a></code> - Associated with background queue. Any task that is
 added to this queue will be executed in the background.</li>
 </ul>
 
-<p>In addition to the queue specification, you can also create <a href="https://developer.apple.com/library/ios/documentation/Performance/Con%0Aceptual/EnergyGuide-iOS/PrioritizeWorkWithQoS.html"><strong>Quality Of
+<p>In addition to the queue specification, you can also create <a href="https://developer.apple.com/library/content/documentation/Performance/Conceptual/EnergyGuide-iOS/PrioritizeWorkWithQoS.html"><strong>Quality Of
 Service</strong></a> aware task queues by
 passing <code>NSQualityOfService</code> object to the initializer.</p>
 
@@ -391,7 +391,7 @@ the work that is performed by the user and that should be executed immediately.<
 
 <p>To create <code>TaskQueue</code> with specific <code>QOS</code> class use designated initializer:</p>
 
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">TaskQueue</span><span class="p">(</span><span class="nv">qos</span><span class="p">:</span> <span class="o">.</span><span class="kt">UserInteractive</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">TaskQueue</span><span class="p">(</span><span class="nv">qos</span><span class="p">:</span> <span class="o">.</span><span class="n">userInteractive</span><span class="p">)</span>
 </code></pre>
 
 <p><a href='#strong-concurrency-strong' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='strong-concurrency-strong'><strong>Concurrency</strong></h3></p>
@@ -405,7 +405,7 @@ reach <code>ready</code> state.</p>
 <code>maxConcurrentOperationCount</code> property.</p>
 
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">TaskQueue</span><span class="p">()</span>
-<span class="n">queue</span><span class="o">.</span><span class="n">maxConcurrentOperationCount</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">queue</span><span class="o">.</span><span class="n">maxConcurrentTaskCount</span> <span class="o">=</span> <span class="mi">3</span>
 </code></pre>
 
 <p><a href='#strong-taskqueuedelegate-strong' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='strong-taskqueuedelegate-strong'><strong>TaskQueueDelegate</strong></h3></p>
@@ -419,7 +419,7 @@ in <code>TaskQueue</code> lifecycle. See <code><a href="Protocols/TaskQueueDeleg
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">class</span> <span class="kt">TaskQueue</span><span class="p">:</span> <span class="kt">OperationQueue</span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">class</span> <span class="kt">TaskQueue</span></code></pre>
 
                         </div>
                       </div>
@@ -480,6 +480,13 @@ task that retrieves data from the server.
               </ul>
             </div>
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/TaskBase"></a>
+                <a name="//apple_ref/swift/Section/TaskBase" class="dashAnchor"></a>
+                <a href="#/TaskBase">
+                  <h3 class="section-name">TaskBase</h3>
+                </a>
+              </div>
               <ul class="item-container">
                 <li class="item">
                   <div>
@@ -516,7 +523,7 @@ task that retrieves data from the server.
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2016 <a class="link" href="swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-09-20)</p>
+      <p>&copy; 2016 <a class="link" href="swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-11-06)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

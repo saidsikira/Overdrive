@@ -1,12 +1,6 @@
 {
   "warnings": [
-    {
-      "file": "/Users/said/Developer/Framework/Overdrive/Overdrive/Sources/Overdrive/TaskQueue.swift",
-      "line": 180,
-      "symbol": "TaskQueue.addOperation(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    }
+
   ],
   "source_directory": "/Users/said/Developer/Framework/Overdrive"
 }
