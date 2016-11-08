@@ -6,12 +6,17 @@ xcodebuild_arguments:
   - Overdrive
 custom_categories:
   -
+    name: "Intro"
+    children:
+      - "Getting Started"
+      - "Installation"
+      - "State Machine"
+  -
     name: "Classes"
     children:
       - "Task"
       - "TaskQueue"
       - "InlineTask"
-      - "TaskBase"
   -
     name: "Protocols"
     children:
@@ -24,3 +29,7 @@ custom_categories:
       - "Result"
       - "TaskConditionResult"
       - "TaskConditionError"
+  -
+    name: "More information"
+    children:
+      - "License"

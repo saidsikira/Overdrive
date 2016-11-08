@@ -42,6 +42,7 @@ jazzy \
 		--theme fullwidth \
 		--head "$(cat head.html)" \
 		--readme "Overdrive/README.md" \
+		--documentation "Overdrive/Documentation/*.md" \
 		--github_url $GITHUB_URL \
 		--module Overdrive \
 		--module-version $LATEST_TAG
