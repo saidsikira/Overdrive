@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Protocols  Reference</title>
+    <title>Installation  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
     <meta charset="utf-8">
@@ -37,7 +37,7 @@ header.header {
   <body>
 
 
-    <a title="Protocols  Reference"></a>
+    <a title="Installation  Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -59,7 +59,7 @@ header.header {
     <p class="breadcrumbs">
       <a class="breadcrumb" href="index.html">Overdrive Reference</a>
       <img class="carat" src="img/carat.png" />
-      Protocols  Reference
+      Installation  Reference
     </p>
 
     <div class="content-wrapper">
@@ -146,127 +146,76 @@ header.header {
 
         <section class="section">
           <div class="section-content">
-            <h1>Protocols</h1>
             
+            <a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='installation'>Installation</h1>
+
+<p>You can use Overdrive in your projects by using one of the following package managers:</p>
+
+<ul>
+<li><a href="#carthage">Carthage</a></li>
+<li><a href="#cocoapods">CocoaPods</a></li>
+<li><a href="#swift-package-manager">Swift Package Manager</a></li>
+<li><a href="#manual-integration">Manual integration</a></li>
+</ul>
+<a href='#carthage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='carthage'>Carthage</h2>
+
+<p><a href="#https://github.com/Carthage/Carthage">Carthage</a> is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate Overdrive with Carthage add following to your <code>Cartfile</code>:</p>
+<pre class="highlight plaintext"><code>github "arikis/Overdrive" &gt;= 0.0.2
+</code></pre>
+
+<p>Then download and build Overdrive by running:</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>carthage update
+</code></pre>
+
+<p>Carthage will build a version of framework for each Apple platform (iOS, macOS, tvOS and watchOS) in <code>Carthage/Builds</code> folder.</p>
+
+<blockquote>
+<p>More information on integrating frameworks with Carthage can be found <a href="#https://github.com/Carthage/Carthage#adding-frameworks-to-an-application">here</a></p>
+</blockquote>
+<a href='#cocoapods' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='cocoapods'>CocoaPods</h2>
+
+<p>CocoaPods is a longstanding dependency manager in any Cocoa development. To use Overdrive with CocoaPods add following to your <code>Podfile</code></p>
+<pre class="highlight ruby"><code><span class="n">source</span> <span class="s1">'https://github.com/CocoaPods/Specs.git'</span>
+<span class="n">platform</span> <span class="ss">:ios</span><span class="p">,</span> <span class="s1">'10.0'</span>
+<span class="n">use_frameworks!</span>
+
+<span class="n">target</span> <span class="s1">'Your Target Name'</span> <span class="k">do</span>
+    <span class="n">pod</span> <span class="s1">'Overdrive'</span><span class="p">,</span> <span class="s1">'~&gt; 0.0.2'</span>
+<span class="k">end</span>
+</code></pre>
+<a href='#swift-package-manager' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='swift-package-manager'>Swift Package Manager</h1>
+
+<p>Swift Package Manager is the official package manager for distributing Swift code. Currently, it only supports building for macOS and Linux. To build and integrate Overdrive with Swift PM, add it to your <code>Package.swift</code> file.</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">PackageDescription</span>
+
+<span class="k">let</span> <span class="nv">package</span> <span class="o">=</span> <span class="kt">Package</span><span class="p">(</span>
+  <span class="nv">name</span><span class="p">:</span> <span class="s">"Your Package Name"</span><span class="p">,</span>
+  <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
+    <span class="o">.</span><span class="kt">Package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/arikis/Overdrive.git"</span><span class="p">,</span>
+            <span class="nv">majorVersion</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nv">minorVersion</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="p">]</span>
+<span class="p">)</span>
+</code></pre>
+<a href='#manual-integration' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='manual-integration'>Manual integration</h2>
+
+<p>Overdrive can also be installed without any dependency manager by adding it to the project directly.</p>
+
+<ul>
+<li>If you are <strong>using git</strong>, you can add Overdrive as a submodule inside your project root folder:</li>
+</ul>
+<pre class="highlight shell"><code>git submodule add https://github.com/arikis/Overdrive.git
+</code></pre>
+
+<ul>
+<li><p>If you are not using git, you can simply download Overdrive by clicking <a href="#https://github.com/arikis/Overdrive/archive/master.zip">here</a>. Then, extract the downloaded archive and move everything inside Overdrive folder that you can create in your project root folder.</p></li>
+<li><p>Locate <code>Ovedrive.xcodeproj</code> file inside your <code>Overdrive</code> folder and drag it to your project tree in Xcode.</p></li>
+<li><p>Click on your project in Xcode, click on the <strong>General</strong> tab and scroll until you find <strong>Embedded libraries and frameworks</strong> section. Click on the plus button and select <code>Overdrive.framework</code>. Overdrive can now be used simply by importing it normally in your application.</p></li>
+</ul>
+
           </div>
         </section>
 
-        <section class="section">
-          <div class="section-content">
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/TaskObserver%20protocol%20definition"></a>
-                <a name="//apple_ref/swift/Section/TaskObserver protocol definition" class="dashAnchor"></a>
-                <a href="#/TaskObserver%20protocol%20definition">
-                  <h3 class="section-name">TaskObserver protocol definition</h3>
-                </a>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:P9Overdrive12TaskObserver"></a>
-                    <a name="//apple_ref/swift/Protocol/TaskObserver" class="dashAnchor"></a>
-                    <a class="token" href="#/s:P9Overdrive12TaskObserver">TaskObserver</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Protocol that types implement in order to be notified of significant events
-in task lifecycle.</p>
-
-                        <a href="Protocols/TaskObserver.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">TaskObserver</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/TaskCondition%20protocol"></a>
-                <a name="//apple_ref/swift/Section/TaskCondition protocol" class="dashAnchor"></a>
-                <a href="#/TaskCondition%20protocol">
-                  <h3 class="section-name">TaskCondition protocol</h3>
-                </a>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:P9Overdrive13TaskCondition"></a>
-                    <a name="//apple_ref/swift/Protocol/TaskCondition" class="dashAnchor"></a>
-                    <a class="token" href="#/s:P9Overdrive13TaskCondition">TaskCondition</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Defines protocol that can be used to define conditions that should be satisfied in order
-to run a task. Task conditions manage custom task dependencies and evaluation for the task.</p>
-
-                        <a href="Protocols/TaskCondition.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">TaskCondition</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:P9Overdrive17TaskQueueDelegate"></a>
-                    <a name="//apple_ref/swift/Protocol/TaskQueueDelegate" class="dashAnchor"></a>
-                    <a class="token" href="#/s:P9Overdrive17TaskQueueDelegate">TaskQueueDelegate</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Delegate of <code><a href="Classes/TaskQueue.html">TaskQueue</a></code> that can respond to certain <code><a href="Classes/TaskQueue.html">TaskQueue</a></code> events</p>
-
-                        <a href="Protocols/TaskQueueDelegate.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">TaskQueueDelegate</span><span class="p">:</span> <span class="kd">class</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section>
 
       </article>
     </div>

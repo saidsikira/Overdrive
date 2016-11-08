@@ -17,6 +17,7 @@ custom_categories:
       - "Task"
       - "TaskQueue"
       - "InlineTask"
+      - "TaskBase"
   -
     name: "Protocols"
     children:
