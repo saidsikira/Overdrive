@@ -96,7 +96,7 @@ open class TaskQueue {
      
      ```swift
      let task = SomeTask()
-     TaskQueue.uiQueue.addTask(task)
+     TaskQueue.main.add(task: task)
      ```
      */
     open static let main: TaskQueue = {

@@ -44,7 +44,7 @@ class TaskObserverManagementTests: XCTestCase {
         let observer = SimpleObserver()
         task.add(observer: observer)
         
-        let removeStatus = task.remove(observerWithType: SimpleObserver.self)
+        let removeStatus = task.remove(observer: SimpleObserver.self)
         
         XCTAssertEqual(removeStatus, true)
         XCTAssertEqual(task.observers.count, 0)

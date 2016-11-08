@@ -434,7 +434,7 @@ open class Task<T>: TaskBase {
     /// - parameter type: Type conforming to the `TaskCondition` protocol
     ///
     /// - returns: Boolean indicating whether condition was removed
-    open func remove<T: TaskCondition>(conditionWithType type: T.Type) -> Bool {
+    open func remove<T: TaskCondition>(condition type: T.Type) -> Bool {
         assert(state < .executing, "Tried to remove condition after task started with execution")
         
         let indexes = conditions
@@ -522,9 +522,9 @@ open class Task<T>: TaskBase {
     /// let myObserver = CustomObserver()
     /// task.add(observer: myObserver)
     ///
-    /// task.remove(observerOfType: CustomObserver.self)
+    /// task.remove(observer: CustomObserver.self)
     /// ```
-    open func remove<T: TaskObserver>(observerWithType type: T.Type) -> Bool {
+    open func remove<T: TaskObserver>(observer type: T.Type) -> Bool {
         assert(state < .executing, "Observer removed after task is added to the task queue")
 
         let indexes = observers
@@ -721,11 +721,11 @@ open class Task<T>: TaskBase {
     /// ### Example
     /// ```swift
     /// let dependencyTask = SomeTask()
-    /// if let dependency = task.get(dependencyWithType: SomeTask.self) {
+    /// if let dependency = task.get(dependency: SomeTask.self) {
     ///    print(dependency) // dependencyTask instance
     /// }
     /// ```
-    open func get<T>(dependencyWithType type: Task<T>.Type) -> Task<T>? {
+    open func get<T>(dependency type: Task<T>.Type) -> Task<T>? {
         let filteredDependency = dependencies.filter { $0 as? Task<T> != nil }
         return filteredDependency.first as? Task<T>
     }
@@ -735,8 +735,8 @@ open class Task<T>: TaskBase {
     /// - parameter type: Dependency task type
     ///
     /// - returns: Optional `Task<T>` dependency instance
-    open subscript(type: Task<T>.Type) -> Task<T>? {
-        return get(dependencyWithType: type)
+    open subscript(dependency: Task<T>.Type) -> Task<T>? {
+        return get(dependency: dependency)
     }
 }
 
