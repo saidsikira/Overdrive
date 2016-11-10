@@ -7,12 +7,11 @@
 
 **Contents:**
 
-* [What can I do with Overdrive?](#what-can-i-do-with-overdrive)
-* [Requirements](#requirements)
-* [Usage](#usage)
-* [Concurrency](#concurrency)
-* [Thread safety](#thread-safety)
-* [Inspiration](#inspiration)
+* [**What can I do with Overdrive?**](#what-can-i-do-with-overdrive)
+* [**Requirements**](#requirements)
+* [**Usage**](#usage)
+* [**Concurrency**](#concurrency)
+* **Documentation**: [Getting Started](https://arikis.github.io/Overdrive/latest/getting-started.html), [Installation](https://arikis.github.io/Overdrive/latest/installation.html), [State Machine](https://arikis.github.io/Overdrive/latest/state-machine.html)
 
 ## What can I do with Overdrive?
 
@@ -58,17 +57,17 @@ end
 import PackageDescription
 
 let package = Package(
-  name: "ProjectName",
-  targets: [],
+  name: "Your Package Name",
   dependencies: [
     .Package(url: "https://github.com/arikis/Overdrive.git",
-    versions: "0.0.1"..< Version.max)
+            majorVersion: 0,
+            minorVersion: 2)
   ]
 )
 ```
 
 #### Manual installation
-`Overdrive` can also be installed manualy by dragging the `Overdrive.xcodeproj` to your project and adding `Overdrive.framework` to the embedded libraries in project settings.
+`Overdrive` can also be installed manually by dragging the `Overdrive.xcodeproj` to your project and adding `Overdrive.framework` to the embedded libraries in project settings.
 
 ## Usage
 

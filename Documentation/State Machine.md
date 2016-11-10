@@ -13,6 +13,10 @@ At any point in time, task state can be:
 * [Ready](#ready)
 * [Executing](#executing)
 * [Finished](#finished)
+<<<<<<< HEAD
+=======
+* [Canceled](#canceled)
+>>>>>>> docs
 
 ## Initialized
 
@@ -34,6 +38,13 @@ After task reaches `ready` state, task execution begins. `TaskQueue` doesn't hav
 
 After the `finish(with:)` method is called task changes state to `finished`. Any configured completion blocks like `onValue:` and `onError:` are executed and task is removed from the `TaskQueue`.
 
+<<<<<<< HEAD
+=======
+## Canceled
+
+Canceled is a special task state that be be reached from any other task state. When the task is canceled using `cancel()` method, task queue will stop the execution and change task state to `finished`.
+
+>>>>>>> docs
 ---
 
 <img src="http://i.imgur.com/4nrdY5g.png" width="50%" height="50%" />
