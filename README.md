@@ -5,13 +5,17 @@
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Swift Package Manager Compatible](https://img.shields.io/badge/SwiftPM-Compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
 
-**Contents:**
+Our apps constantly do work. The faster you react to user input and produce an output, the more likely is that the user will continue to use your application. As our applications grow in complexity, the more and more work needs to be done. You need to start thinking about how to categorize and optimize work, how to make that work more efficient, more optimized and finally, faster. In most cases that doesn’t end very well because you need to know a lot about concurrency, multithreading etc. - it’s a very complex field. You need to know all API specifics before you are able to write something.
 
-* [**What can I do with Overdrive?**](#what-can-i-do-with-overdrive)
-* [**Requirements**](#requirements)
-* [**Usage**](#usage)
-* [**Concurrency**](#concurrency)
-* **Documentation**: [Getting Started](https://arikis.github.io/Overdrive/latest/getting-started.html), [Installation](https://arikis.github.io/Overdrive/latest/installation.html), [State Machine](https://arikis.github.io/Overdrive/latest/state-machine.html)
+Overdrive was created as a result of that struggle. It is a framework that exposes several simple concepts which are made on top of complex system frameworks that enable multithreading, concurrency and most importantly, more speed.
+
+### Contents:
+
+* [What can I do with Overdrive?](#what-can-i-do-with-overdrive)
+* [Requirements](#requirements)
+* [Usage](#usage)
+* [Concurrency](#concurrency)
+* Documentation: [Getting Started](https://arikis.github.io/Overdrive/latest/getting-started.html), [Installation](https://arikis.github.io/Overdrive/latest/installation.html), [State Machine](https://arikis.github.io/Overdrive/latest/state-machine.html)
 
 ## What can I do with Overdrive?
 

@@ -25,7 +25,6 @@ To finish work in the task, you pass your task result to the `finish(with: )` me
 ### Example task subclass
 
 Let's say we want to create an task for fetching logo from the internet. Logo is located [**here**](https://swiftable.io/logo.png). Since it's a logo image, we'll `UIImage` class to represent it.
->>>>>>> docs
 
 ```swift
 class GetLogoTask: Task<UIImage> {
