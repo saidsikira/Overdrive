@@ -11,6 +11,7 @@ custom_categories:
       - "Getting Started"
       - "Installation"
       - "State Machine"
+      - "Complex Tasks"
   -
     name: "Classes"
     children:

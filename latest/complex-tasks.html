@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Other Guides  Reference</title>
+    <title>Complex Tasks  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
     <meta charset="utf-8">
@@ -49,7 +49,7 @@ header.header {
   <body>
 
 
-    <a title="Other Guides  Reference"></a>
+    <a title="Complex Tasks  Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -71,7 +71,7 @@ header.header {
     <p class="breadcrumbs">
       <a class="breadcrumb" href="index.html">Overdrive Reference</a>
       <img class="carat" src="img/carat.png" />
-      Other Guides  Reference
+      Complex Tasks  Reference
     </p>
 
     <div class="content-wrapper">
@@ -88,6 +88,9 @@ header.header {
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="state-machine.html">State Machine</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="complex-tasks.html">Complex Tasks</a>
               </li>
             </ul>
           </li>
@@ -144,30 +147,64 @@ header.header {
               </li>
             </ul>
           </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Other Guides.html">Other Guides</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="dependencies.html">Dependencies</a>
-              </li>
-            </ul>
-          </li>
         </ul>
       </nav>
       <article class="main-content">
 
         <section class="section">
           <div class="section-content">
-            <h1>Other Guides</h1>
-            <p>The following guides are available globally.</p>
+            
+            <a href='#dealing-with-complex-tasks' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='dealing-with-complex-tasks'>Dealing with complex tasks</h1>
+
+<p>In most of the scenarios we encounter while we are developing applications, we tackle complexity. And the key to make complex behaviors work is to decouple things one from another so that they can be tested and debugged easily. That almost always comes with a price, especially if you are dealing with asynchronous tasks.</p>
+
+<p>Task dependencies can be used to construct complex task graphs with exact ordering of execution. More importantly, task dependency are not tied to any specific queue. Dependencies are no different than any other tasks - they behave the same. Only difference is that when you add a dependency to a task, task will wait until dependency is executed and finished with work.</p>
+<a href='#example' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='example'>Example</h2>
+
+<p>Imaging you are building application for displaying some photos from the internet. You need to download the photos, present them and cache them. You could build one monolith structure or class that does all this but you&rsquo;ll run into problems soon, most likely because you&rsquo;ll be dealing with loads of asynchronous methods and completion blocks that are hard to debug.</p>
+
+<p>With Overdrive, you can simplify this process and even gain additional performance and speed.</p>
+
+<p>In this case, you will have two main defined tasks:</p>
+
+<ol>
+<li>Task that downloads a photo (<code>DownloadPhotoTask</code>)</li>
+<li>Task that caches downloaded photo on the disk (<code>CachePhotoTask</code>)</li>
+</ol>
+
+<p><code>PresentPhotoTask</code> will be the main task that can be used by the user. By utilizing dependency model, we can add <code>DownloadPhotoTask</code>  as a dependency of the <code>CachePhotoTask</code>, and be sure that dependency will be executed first.</p>
+
+<p>Let&rsquo;s say our photo is located at <code>https://swiftable.io/logo.png</code>. After you implement all three tasks you could create their instances like this:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">downloadPhotoTask</span> <span class="o">=</span> <span class="kt">DownloadPhotoTask</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://swiftable.io/logo.png"</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">cachePhotoTask</span> <span class="o">=</span> <span class="kt">CachePhotoTask</span><span class="p">()</span>
+</code></pre>
+
+<p>Now, in order to add dependency to the <code>cachePhotoTask</code>, you use <code>add(dependency:)</code> method:</p>
+<pre class="highlight swift"><code><span class="n">cachePhotoTask</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="nv">dependency</span><span class="p">:</span> <span class="n">downloadPhotoTask</span><span class="p">)</span>
+</code></pre>
+
+<p>All, that&rsquo;s left now is to execute tasks on queues. We can use different queues for any task:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">downloadQueue</span> <span class="o">=</span> <span class="kt">TaskQueue</span><span class="p">()</span> <span class="c1">// Downloading can happen on any queue</span>
+<span class="k">let</span> <span class="nv">cacheQueue</span> <span class="o">=</span> <span class="kt">TaskQueue</span><span class="p">(</span><span class="nv">qos</span><span class="p">:</span> <span class="o">.</span><span class="n">background</span><span class="p">)</span> <span class="c1">// All caching should be done on background queue</span>
+
+<span class="c1">// Execute tasks</span>
+<span class="n">downloadQueue</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="nv">task</span><span class="p">:</span> <span class="n">downloadPhotoTask</span><span class="p">)</span>
+<span class="n">cacheQueue</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="nv">task</span><span class="p">:</span> <span class="n">cachePhotoTask</span><span class="p">)</span>
+</code></pre>
+
+<p>At this point, tasks will be executed in this order:</p>
+
+<ol>
+<li><code>downloadPhotoTask</code> is executed first</li>
+<li>After successful execution of <code>downloadPhotoTask</code>, <code>cachePhotoTask</code> will be executed on the background queue.</li>
+</ol>
+<a href='#conclusion' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='conclusion'>Conclusion</h2>
+
+<p>Task dependency model can be used to construct complex tasks graphs with very simple syntax in order to achieve better performance, testability and in the end, faster execution.</p>
 
           </div>
         </section>
 
-        <section class="section">
-          <div class="section-content">
-          </div>
-        </section>
 
       </article>
     </div>
