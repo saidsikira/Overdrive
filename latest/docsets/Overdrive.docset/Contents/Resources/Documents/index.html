@@ -56,7 +56,7 @@ header.header {
         <a class="header-link" href="index.html">
           Overdrive Docs
         </a>
-         (100% documented)
+        
       </p>
     
         <p class="header-col header-col--secondary">
@@ -91,6 +91,9 @@ header.header {
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="complex-tasks.html">Complex Tasks</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="unit-testing.html">Unit Testing</a>
               </li>
             </ul>
           </li>
@@ -147,6 +150,14 @@ header.header {
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Other Guides.html">Other Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="intro.html">Intro</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
@@ -164,6 +175,18 @@ header.header {
 <p>Our apps constantly do work. The faster you react to user input and produce an output, the more likely is that the user will continue to use your application. As our applications grow in complexity, the more and more work needs to be done. You need to start thinking about how to categorize and optimize work, how to make that work more efficient, more optimized and finally, faster. In most cases that doesn’t end very well because you need to know a lot about concurrency, multithreading etc. - it’s a very complex field. You need to know all API specifics before you are able to write something.</p>
 
 <p>Overdrive was created as a result of that struggle. It is a framework that exposes several simple concepts which are made on top of complex system frameworks that enable multithreading, concurrency and most importantly, more speed.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">URLSessionTask</span><span class="p">(</span><span class="s">"https://api.swiftable.io"</span><span class="p">)</span>
+
+<span class="n">task</span>
+  <span class="o">.</span><span class="nf">retry</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+  <span class="o">.</span><span class="n">onValue</span> <span class="p">{</span> <span class="n">json</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">json</span><span class="p">[</span><span class="s">"message"</span><span class="p">])</span>
+  <span class="p">}</span><span class="o">.</span><span class="n">onError</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+  <span class="p">}</span>
+
+<span class="kt">TaskQueue</span><span class="o">.</span><span class="n">background</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="nv">task</span><span class="p">:</span> <span class="n">task</span><span class="p">)</span>
+</code></pre>
 <a href='#contents' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='contents'>Contents:</h3>
 
 <ul>
@@ -171,20 +194,29 @@ header.header {
 <li><a href="#requirements">Requirements</a></li>
 <li><a href="#usage">Usage</a></li>
 <li><a href="#concurrency">Concurrency</a></li>
-<li>Documentation: <a href="https://arikis.github.io/Overdrive/latest/getting-started.html">Getting Started</a>, <a href="https://arikis.github.io/Overdrive/latest/installation.html">Installation</a>, <a href="https://arikis.github.io/Overdrive/latest/state-machine.html">State Machine</a></li>
+<li><a href="#thread-safety">Thread safety</a></li>
+<li><a href="#inspiration">Inspiration</a></li>
+<li><a href="https://arikis.github.io/Overdrive/latest/">Documentation</a>
+
+<ul>
+<li><a href="https://arikis.github.io/Overdrive/latest/getting-started.html">Getting Started</a></li>
+<li><a href="https://arikis.github.io/Overdrive/latest/installation.html">Installation</a></li>
+<li><a href="https://arikis.github.io/Overdrive/latest/complex-tasks.html">Complex tasks</a></li>
+<li><a href="https://arikis.github.io/Overdrive/latest/state-machine.html">State Machine</a></li>
+<li><a href="https://arikis.github.io/Overdrive/latest/unit-testing.html">Unit Testing</a></li>
+</ul></li>
 </ul>
 <a href='#what-can-i-do-with-overdrive' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='what-can-i-do-with-overdrive'>What can I do with Overdrive?</h2>
 
 <ul>
-<li>execute tasks concurrently</li>
-<li>utilize multi-core capabilities to ensure faster execution</li>
-<li>easily defer task execution to custom thread or queue</li>
-<li>ensure that multiple tasks are executed in the correct order</li>
-<li>express custom conditions under which tasks can be executed</li>
-<li>enforce testability</li>
-<li>move logic from view controllers to simple modular units</li>
-<li>retry tasks that finished with errors</li>
-<li>don’t worry about thread-safety</li>
+<li>[x] Execute tasks concurrently</li>
+<li>[x] Utilize multi-core systems by default</li>
+<li>[x] Easily defer task execution to custom thread or queue</li>
+<li>[x] Ensure that multiple tasks are executed in the correct order</li>
+<li>[x] Express custom conditions under which tasks can be executed</li>
+<li>[x] Enforce testability</li>
+<li>[x] Retry tasks that finished with errors</li>
+<li>[x] Write thread safe code by default</li>
 </ul>
 <a href='#requirements' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='requirements'>Requirements</h2>
 
@@ -195,8 +227,6 @@ header.header {
 </ul>
 <a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>Installation</h2>
 <a href='#a-href-https-github-com-carthage-carthage-carthage-a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='a-href-https-github-com-carthage-carthage-carthage-a'><a href="https://github.com/Carthage/Carthage">Carthage</a></h4>
-
-<p>Add following to the <code>Cartfile</code>:</p>
 <pre class="highlight shell"><code>github <span class="s2">"arikis/Overdrive"</span> &gt;<span class="o">=</span> 0.0.1
 </code></pre>
 <a href='#a-href-https-github-com-cocoapods-cocoapods-cocoa-pods-a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='a-href-https-github-com-cocoapods-cocoapods-cocoa-pods-a'><a href="https://github.com/CocoaPods/CocoaPods">Cocoa Pods</a></h4>
@@ -227,8 +257,8 @@ header.header {
 <p>Overdrive features two main classes:</p>
 
 <ul>
-<li><code>Task&lt;T&gt;</code> - used to define task <a href="https://arikis.github.io/Overdrive/latest/Classes/Task.html">documentation</a></li>
-<li><code>TaskQueue</code> - used to execute tasks and manage concurrency and multi threading <a href="https://arikis.github.io/Overdrive/latest/Classes/TaskQueue.html">documentation</a></li>
+<li><a href="https://github.com/arikis/Overdrive/blob/docs/Sources/Overdrive/Task.swift"><code>Task&lt;T&gt;</code></a> - Used to encapsulate any asynchronous or synchronous work - <a href="https://arikis.github.io/Overdrive/latest/Classes/Task.html">Documentation</a></li>
+<li><a href="https://github.com/arikis/Overdrive/blob/docs/Sources/Overdrive/TaskQueue.swift"><code>TaskQueue</code></a> - Used to execute tasks and manage concurrency and multi threading -  <a href="https://arikis.github.io/Overdrive/latest/Classes/TaskQueue.html">Documentation</a></li>
 </ul>
 
 <p><strong>Workflow:</strong></p>
@@ -236,70 +266,55 @@ header.header {
 <ol>
 <li>Create subclass of <code>Task&lt;T&gt;</code></li>
 <li>Override <code>run()</code> method and encapsulate any synchronous or asynchronous operation</li>
-<li>Finish execution with value(<code>T</code>) or error by using <code>finish(_:)</code> method</li>
+<li>Finish execution with <code>value(T)</code> or <code>error(Error)</code> by using <code>finish(with:)</code> method</li>
 <li>Create instance of subclass</li>
 <li>Add it to the <code>TaskQueue</code> when you want to start execution</li>
 </ol>
 
-<p>Example <code>Task&lt;NSData&gt;</code> subclass for network operation:</p>
-<pre class="highlight swift"><code><span class="c1">// Create subclass of `Task&lt;NSData&gt;`</span>
-<span class="kd">class</span> <span class="kt">NetworkTask</span><span class="p">:</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">NSData</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">URL</span><span class="p">:</span> <span class="kt">NSURL</span>
+<p>Example <code>Task&lt;UIImage&gt;</code> subclass for photo download task:</p>
+<pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">GetLogoTask</span><span class="p">:</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">UIImage</span><span class="o">&gt;</span> <span class="p">{</span>
 
-    <span class="nf">init</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">self</span><span class="o">.</span><span class="kt">URL</span> <span class="o">=</span> <span class="kt">URL</span>
-    <span class="p">}</span>
+  <span class="k">override</span> <span class="kd">func</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">let</span> <span class="nv">logoURL</span> <span class="o">=</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://swiftable.io/logo.png"</span><span class="p">)</span><span class="o">!</span>
 
-    <span class="c1">// Override run() method</span>
-    <span class="k">override</span> <span class="kd">func</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">let</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span>
-
-        <span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">NSURLSession</span><span class="o">.</span><span class="nf">sharedSession</span><span class="p">()</span><span class="o">.</span><span class="nf">dataTaskWithRequest</span><span class="p">(</span><span class="n">request</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">data</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
-            <span class="k">if</span> <span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-                <span class="c1">// Finish with error if any</span>
-                <span class="k">self</span><span class="o">.</span><span class="nf">finish</span><span class="p">(</span><span class="o">.</span><span class="kt">Error</span><span class="p">(</span><span class="n">error</span><span class="o">!</span><span class="p">))</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="c1">// Finish with value</span>
-                <span class="k">self</span><span class="o">.</span><span class="nf">finish</span><span class="p">(</span><span class="o">.</span><span class="kt">Value</span><span class="p">(</span><span class="n">data</span><span class="o">!</span><span class="p">))</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-
-        <span class="n">task</span><span class="o">.</span><span class="nf">resume</span><span class="p">()</span>
-    <span class="p">}</span>
+      <span class="k">do</span> <span class="p">{</span>
+          <span class="k">let</span> <span class="nv">logoData</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Data</span><span class="p">(</span><span class="nv">contentsOf</span><span class="p">:</span> <span class="n">logoURL</span><span class="p">)</span>
+          <span class="k">let</span> <span class="nv">image</span> <span class="o">=</span> <span class="kt">UIImage</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="n">logoData</span><span class="p">)</span><span class="o">!</span>
+          <span class="nf">finish</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="n">image</span><span class="p">))</span> <span class="c1">// finish with image</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+          <span class="nf">finish</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="o">.</span><span class="nf">error</span><span class="p">(</span><span class="n">error</span><span class="p">))</span> <span class="c1">// finish with error if any</span>
+      <span class="p">}</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
 
-<p>To setup completion blocks, you use <code>onValue()</code> and <code>onError()</code> methods:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">NetworkTask</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://google.com"</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
+<p>To setup completion blocks, you use <code>onValue</code> and <code>onError</code> methods:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">logoTask</span> <span class="o">=</span> <span class="kt">GetLogoTask</span><span class="p">()</span>
 
-<span class="n">task</span>
-    <span class="o">.</span><span class="n">onValue</span> <span class="p">{</span> <span class="n">data</span> <span class="k">in</span>
-        <span class="nf">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">logoTask</span>
+    <span class="o">.</span><span class="n">onValue</span> <span class="p">{</span> <span class="n">logo</span> <span class="k">in</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">logo</span><span class="p">)</span> <span class="c1">// UIImage object</span>
     <span class="p">}</span><span class="o">.</span><span class="n">onError</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
         <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
 
-<p>To execute the task add it to the <code>TaskQueue</code></p>
+<p>To execute the task add it to the instance of <code>TaskQueue</code></p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">TaskQueue</span><span class="p">()</span>
-<span class="n">queue</span><span class="o">.</span><span class="nf">addTask</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+<span class="n">queue</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="nv">task</span><span class="p">:</span> <span class="n">logoTask</span><span class="p">)</span>
 </code></pre>
 <a href='#concurrency' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='concurrency'>Concurrency</h2>
 
-<p><code>TaskQueue</code> executes tasks concurrently by default. Maximum number of concurrent
-operations is defined by the current system conditions. If you want to limit the
-number of maximum concurrent operations use <code>maxConcurrentOperationCount</code> property.</p>
+<p><code>TaskQueue</code> executes tasks concurrently by default. Maximum number of concurrent operations is defined by the current system conditions. If you want to limit the number of maximum concurrent task executions use <code>maxConcurrentTaskCount</code> property.</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">TaskQueue</span><span class="p">()</span>
-<span class="n">queue</span><span class="o">.</span><span class="n">maxConcurrentOperationCount</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">queue</span><span class="o">.</span><span class="n">maxConcurrentTaskCount</span> <span class="o">=</span> <span class="mi">3</span>
 </code></pre>
 <a href='#thread-safety' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='thread-safety'>Thread safety</h2>
 
-<p>All task properties are thread-safe by default, meaning that you can access them
-from any thread or queue and not worry about locks and access synchronization.</p>
+<p>All task properties are thread-safe by default, meaning that you can access them from any thread or queue and not worry about locks and access synchronization.</p>
 <a href='#inspiration' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='inspiration'>Inspiration</h2>
 
-<p>Inspiration for the <code>Overdrive</code> framework came from several WWDC videos:</p>
+<p><code>Overdrive</code> framework was heavily inspired by talks and code from several Apple WWDC videos.</p>
 
 <ul>
 <li><a href="https://developer.apple.com/videos/play/wwdc2015/408/">Protocol Oriented Programming</a></li>
@@ -308,8 +323,7 @@ from any thread or queue and not worry about locks and access synchronization.</
 </ul>
 
 <blockquote>
-<p><code>Overdrive</code> name comes from overdrive guitar pedals that drive amp tubes and create
-louder, distorted sound</p>
+<p><code>Overdrive</code> is a term for an effect used in electric guitar playing that occurs when guitar amp tubes starts to produce overdriven, almost distorted sound, due to the higher gain(master) setting.</p>
 </blockquote>
 
           </div>
@@ -319,7 +333,7 @@ louder, distorted sound</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2016 <a class="link" href="swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-11-12)</p>
+      <p>&copy; 2016 <a class="link" href="http://swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-11-13)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

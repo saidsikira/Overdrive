@@ -38,11 +38,12 @@ jazzy \
 		--clean \
 		--output ./latest \
 		--author "Swiftable" \
-		--author_url "swiftable.io" \
+		--author_url "http://swiftable.io" \
 		--theme fullwidth \
 		--head "$(cat head.html)" \
-		--readme "Overdrive/README.md" \
-		--documentation "Overdrive/Documentation/*.md" \
+		--readme $PROJECT_NAME"/README.md" \
+		--documentation $PROJECT_NAME"/Documentation/*.md" \
+		--hide-documentation-coverage \
 		--github_url $GITHUB_URL \
 		--module Overdrive \
 		--module-version $LATEST_TAG

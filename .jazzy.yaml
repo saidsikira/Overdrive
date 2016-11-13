@@ -12,6 +12,7 @@ custom_categories:
       - "Installation"
       - "State Machine"
       - "Complex Tasks"
+      - "Unit Testing"
   -
     name: "Classes"
     children:

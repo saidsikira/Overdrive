@@ -56,7 +56,7 @@ header.header {
         <a class="header-link" href="index.html">
           Overdrive Docs
         </a>
-         (100% documented)
+        
       </p>
     
         <p class="header-col header-col--secondary">
@@ -91,6 +91,9 @@ header.header {
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="complex-tasks.html">Complex Tasks</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="unit-testing.html">Unit Testing</a>
               </li>
             </ul>
           </li>
@@ -147,6 +150,14 @@ header.header {
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Other Guides.html">Other Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="intro.html">Intro</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
@@ -156,7 +167,7 @@ header.header {
             
             <a href='#state-machine' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='state-machine'>State machine</h1>
 
-<p>Task lifetime is defined through it&rsquo;s state of execution and the task state is exposed as a <a href="https://github.com/arikis/Overdrive/blob/master/Sources/Overdrive/TaskBase.swift#L35"><code>state</code></a> property.</p>
+<p>Task lifetime is defined through it&rsquo;s state of execution. Task state is exposed as a <a href="https://github.com/arikis/Overdrive/blob/master/Sources/Overdrive/TaskBase.swift#L35"><code>state</code></a> property and it&rsquo;s defined in the <a href="https://github.com/arikis/Overdrive/blob/master/Sources/Overdrive/State.swift"><code>State</code> enum</a>.</p>
 
 <p>From the framework user perspective, state can&rsquo;t be changed manually. It can be changed during the execution by the <code>TaskQueue</code> or it can be changed by the user (for ex. calling a <code>finish(with:)</code> method).</p>
 
@@ -177,13 +188,13 @@ header.header {
 <p>Every task starts of with the <code>initialized</code> state. At this point, you can configure task observers, conditions and dependencies.</p>
 <a href='#pending' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='pending'>Pending</h2>
 
-<p>Once the task is added to the <code>TaskQueue</code> instance, its state changes to <code>pending</code> at it is scheduled for execution.</p>
+<p>Once the task is added to the <code>TaskQueue</code> instance, its state changes to <code>pending</code> and it is scheduled for execution.</p>
 <a href='#ready' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='ready'>Ready</h2>
 
-<p>Once the task changes state to <code>pending</code>, complex readiness evaluation begins. This is the most important step before the task is actually executed. Any task subclass can define is own  way of defining when it&rsquo;s ready for execution, but the default implementation checks if all task conditions are satisfied and if all dependencies are finished with work.</p>
+<p>Once the task changes state to <code>pending</code>, complex readiness evaluation begins. This is the most important step before the task is actually executed. Any task subclass can define is own  way of defining when it&rsquo;s ready for execution and the default implementation checks if all task conditions are satisfied and if all dependencies are finished with work.</p>
 <a href='#executing' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='executing'>Executing</h2>
 
-<p>After task reaches <code>ready</code> state, task execution begins. <code>TaskQueue</code> doesn&rsquo;t have any control on how long this process takes since tasks can be asynchronous. To finish execution, you must call <code>finish(with: )</code> method.</p>
+<p>After task reaches <code>ready</code> state, task execution begins. <code>TaskQueue</code> doesn&rsquo;t have any control on how long this this state change is going to last, since tasks can be asynchronous. To finish execution, you must call <code>finish(with: )</code> method.</p>
 <a href='#finished' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='finished'>Finished</h2>
 
 <p>After the <code>finish(with:)</code> method is called task changes state to <code>finished</code>. Any configured completion blocks like <code>onValue:</code> and <code>onError:</code> are executed and task is removed from the <code>TaskQueue</code>.</p>
@@ -192,12 +203,9 @@ header.header {
 <p>Canceled is a special task state that be be reached from any other task state. When the task is canceled using <code>cancel()</code> method, task queue will stop the execution and change task state to <code>finished</code>.</p>
 
 <hr>
+<a href='#task-state-graph' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='task-state-graph'>Task state graph</h3>
 
-<p><img src="http://i.imgur.com/4nrdY5g.png" width="50%" height="50%" /></p>
-
-<blockquote>
-<p>Detailed graph of task state machine.</p>
-</blockquote>
+<p><img src="http://i.imgur.com/9NHFGRq.png" width="50%" height="50%" /></p>
 
           </div>
         </section>
@@ -206,7 +214,7 @@ header.header {
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2016 <a class="link" href="swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-11-12)</p>
+      <p>&copy; 2016 <a class="link" href="http://swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-11-13)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
