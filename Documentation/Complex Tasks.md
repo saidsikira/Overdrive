@@ -15,7 +15,7 @@ In this case, you will have two main defined tasks:
 1. Task that downloads a photo (`DownloadPhotoTask`)
 2. Task that caches downloaded photo on the disk (`CachePhotoTask`)
 
-`PresentPhotoTask` will be the main task that can be used by the user. By utilizing dependency model, we can add `DownloadPhotoTask`  as a dependency of the `CachePhotoTask`, and be sure that dependency will be executed first.
+By utilizing dependency model, we can add `DownloadPhotoTask`  as a dependency of the `CachePhotoTask`, and be sure that dependency will be executed first.
 
 Let's say our photo is located at `https://swiftable.io/logo.png`. After you implement all three tasks you could create their instances like this:
 

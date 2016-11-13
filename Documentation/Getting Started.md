@@ -9,8 +9,8 @@ This guide will walk you through some basic Overdrive concepts.
 ### Topics:
 
 * [Tasks](#tasks)
-  * [Example task](#example-task-subclass)
-  * [Task configuration](#task-configuration)
+* [Example task](#example-task-subclass)
+* [Task configuration](#task-configuration)
 * [Task queues](#queues)
 * [Task execution](#task-execution)
 
