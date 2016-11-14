@@ -60,7 +60,7 @@ TaskQueue.background.add(task: task)
 #### [Carthage](https://github.com/Carthage/Carthage)
 
 ```shell
-github "arikis/Overdrive" >= 0.0.1
+github "arikis/Overdrive" >= 0.0.2
 ```
 
 #### [Cocoa Pods](https://github.com/CocoaPods/CocoaPods)
