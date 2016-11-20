@@ -33,13 +33,13 @@
 		B36FE57C1D9083B5003C6A77 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE56F1D9083A2003C6A77 /* ResultTests.swift */; };
 		B36FE57D1D9083B5003C6A77 /* RetryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5701D9083A2003C6A77 /* RetryTests.swift */; };
 		B36FE57E1D9083B5003C6A77 /* TaskConditionDependencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5711D9083A2003C6A77 /* TaskConditionDependencyTests.swift */; };
-		B36FE57F1D9083B5003C6A77 /* TaskConditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5721D9083A2003C6A77 /* TaskConditionTests.swift */; };
 		B36FE5801D9083B5003C6A77 /* TaskObserverManagementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5731D9083A2003C6A77 /* TaskObserverManagementTests.swift */; };
 		B36FE5811D9083B5003C6A77 /* TaskObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5741D9083A2003C6A77 /* TaskObserverTests.swift */; };
 		B36FE5821D9083B5003C6A77 /* TaskQueueDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5751D9083A2003C6A77 /* TaskQueueDelegateTests.swift */; };
 		B36FE5831D9083B5003C6A77 /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5761D9083A2003C6A77 /* TaskTests.swift */; };
 		B36FE5851D9083B5003C6A77 /* ThreadSafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5781D9083A2003C6A77 /* ThreadSafetyTests.swift */; };
 		B36FE5861D90847E003C6A77 /* TestSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B36FE5201D90818A003C6A77 /* TestSupport.framework */; };
+		B3B03DDB1DE101F600F4A5FC /* TaskConditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5721D9083A2003C6A77 /* TaskConditionTests.swift */; };
 		B3C4EF4E1D908DBD006BE749 /* Overdrive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B36FE4EF1D9080E8003C6A77 /* Overdrive.framework */; };
 		B3C4EF4F1D908DCC006BE749 /* Extensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B36FE5171D908181003C6A77 /* Extensions.framework */; };
 /* End PBXBuildFile section */
@@ -458,7 +458,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B36FE57F1D9083B5003C6A77 /* TaskConditionTests.swift in Sources */,
 				B36FE57D1D9083B5003C6A77 /* RetryTests.swift in Sources */,
 				B36FE5791D9083B5003C6A77 /* DependencyTests.swift in Sources */,
 				B36FE57B1D9083B5003C6A77 /* InlineTaskTests.swift in Sources */,
@@ -466,6 +465,7 @@
 				B36FE57E1D9083B5003C6A77 /* TaskConditionDependencyTests.swift in Sources */,
 				B36FE5821D9083B5003C6A77 /* TaskQueueDelegateTests.swift in Sources */,
 				B36FE5831D9083B5003C6A77 /* TaskTests.swift in Sources */,
+				B3B03DDB1DE101F600F4A5FC /* TaskConditionTests.swift in Sources */,
 				B36FE5801D9083B5003C6A77 /* TaskObserverManagementTests.swift in Sources */,
 				B36FE5811D9083B5003C6A77 /* TaskObserverTests.swift in Sources */,
 				B36FE5851D9083B5003C6A77 /* ThreadSafetyTests.swift in Sources */,

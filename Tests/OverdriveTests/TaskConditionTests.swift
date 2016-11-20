@@ -7,8 +7,8 @@
 //
 
 import XCTest
-import TestSupport
 @testable import Overdrive
+import TestSupport
 
 class TaskConditionTests: XCTestCase {
     
@@ -77,6 +77,38 @@ class TaskConditionTests: XCTestCase {
             handlerError in
             print(handlerError)
         }
+    }
+    
+    func testConditionName() {
+        let condition = SatisfiedTestCondition()
+        
+        XCTAssertEqual(condition.conditionName, "SatisfiedTestCondition")
+    }
+    
+    func testRemoveCondition() {
+        let task = Task<Int>()
+        let condition = SatisfiedTestCondition()
+        
+        task.add(condition: condition)
+        
+        XCTAssertEqual(task.conditions.count, 1)
+        
+        let status = task.remove(condition: condition)
+        
+        XCTAssertEqual(status, true)
+        XCTAssertEqual(task.conditions.count, 0)
+    }
+    
+    func testRemoveConditionWithType() {
+        let task = Task<Int>()
+        let condition = SatisfiedTestCondition()
+        
+        task.add(condition: condition)
+        
+        let status = task.remove(condition: SatisfiedTestCondition.self)
+        
+        XCTAssertEqual(status, true)
+        XCTAssertEqual(task.conditions.count, 0)
     }
 
 }

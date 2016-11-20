@@ -7,9 +7,11 @@
 //
 
 import XCTest
+import TestSupport
 @testable import Overdrive
 
 class ResultTests: XCTestCase {
+    
     func testComputedProperties() {
         let result: Result = .value(10)
         
@@ -17,10 +19,17 @@ class ResultTests: XCTestCase {
         XCTAssertNil(result.error)
     }
     
-    func testMap() {
+    func testMapWithValue() {
         let result: Result = .value(10)
         let stringResult = result.map { String($0) }
         
         XCTAssertEqual(stringResult.value, "10")
+    }
+    
+    func testMapWithError() {
+        let result: Result<Int> = .error(TaskError.fail(""))
+        let stringResult = result.map { String($0) }
+        
+        XCTAssertNotNil(stringResult.error)
     }
 }

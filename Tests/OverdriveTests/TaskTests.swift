@@ -90,4 +90,17 @@ class TaskTests: XCTestCase {
             print(handlerError)
         }
     }
+    
+    func testTaskEqueue() {
+        let task = Task<Int>()
+        
+        (task as Operation).enqueue()
+
+        /// The moment you call `enqueue()` method, `Foundation.Operation`
+        /// KVO observers will check if task is ready for execution. Since
+        /// `isReady` property inside `SimpleTask` is not overriden, `state`
+        /// will change to `.ready` automatically.
+        
+        XCTAssertEqual(task.state, .ready)
+    }
 }

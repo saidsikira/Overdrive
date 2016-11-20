@@ -21,41 +21,26 @@ class DependencyTests: XCTestCase {
     
     /// Test `addDependency(_:)` method
     func testDependencyAdd() {
-        let testTask = TestTask()
-        let dependencyTask = SimpleTask()
+        let testTask = Task<Int>()
+        let dependencyTask = Task<String>()
         
         testTask.add(dependency: dependencyTask)
         
         XCTAssertEqual(testTask.dependencies.count, 1)
-        
-        TaskQueue(qos: .default).add(task: testTask)
     }
     
     /// Tests `getDependency(_:)` method
     func testGetDependency() {
-        let testTask = TestTask()
-        let dependencyTask = SimpleTask()
+        let testTask = Task<Int>()
+        let dependencyTask = Task<String>()
         dependencyTask.name = "DependencyTask"
         
         testTask.add(dependency: dependencyTask)
         
-        if let dependency = testTask.get(dependency: SimpleTask.self) {
+        if let dependency = testTask.get(dependency: type(of: dependencyTask)) {
             XCTAssertEqual(dependency.name, "DependencyTask")
         } else {
             XCTFail("Dependency not returned")
         }
-    }
-    
-    func testDependencySubscript() {
-        let testTask = TestTask()
-        let dependencyTask = SimpleTask()
-        dependencyTask.name = "DependencyTask"
-        
-        testTask.add(dependency: dependencyTask)
-        
-        let dependency = testTask[SimpleTask.self]
-
-        XCTAssertNotNil(dependency, "Should retrurn dependency")
-        XCTAssertEqual(dependency?.name, "DependencyTask")
     }
 }
