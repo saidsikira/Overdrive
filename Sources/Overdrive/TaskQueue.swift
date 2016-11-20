@@ -153,7 +153,7 @@ open class TaskQueue {
     
     /// The maximum number of tasks that can be executed at the same time
     /// concurrently.
-    var maxConcurrentTaskCount: Int {
+    open var maxConcurrentTaskCount: Int {
         get { return operationQueue.maxConcurrentOperationCount }
         
         set(newCount) {
