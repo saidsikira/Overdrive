@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'Overdrive'
-  s.version = '0.2.0'
+  s.version = '0.2.1'
   s.license = 'MIT'
   s.summary = 'Fast advanced task based API in Swift with focus on type safety, concurrency and multi threading'
   s.homepage = 'https://github.com/arikis/Overdrive'

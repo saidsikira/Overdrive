@@ -65,7 +65,7 @@ TaskQueue.background.add(task: task)
 #### [Carthage](https://github.com/Carthage/Carthage)
 
 ```shell
-github "arikis/Overdrive" >= 0.2.0
+github "arikis/Overdrive" >= 0.2
 ```
 
 #### [Cocoa Pods](https://github.com/CocoaPods/CocoaPods)
@@ -74,8 +74,8 @@ github "arikis/Overdrive" >= 0.2.0
 platform :ios, '8.0'
 use_frameworks!
 
-target 'AppTarget' do
-    pod 'Overdrive'
+target 'Your App Target' do
+    pod 'Overdrive', '~> 0.2'
 end
 ```
 
@@ -89,7 +89,7 @@ let package = Package(
   dependencies: [
     .Package(url: "https://github.com/arikis/Overdrive.git",
             majorVersion: 0,
-            minorVersion: 2)
+            minor: 2)
   ]
 )
 ```
