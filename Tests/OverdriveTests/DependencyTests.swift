@@ -43,4 +43,40 @@ class DependencyTests: XCTestCase {
             XCTFail("Dependency not returned")
         }
     }
+    
+    func testRemoveValidDependency() {
+        let task = Task<Int>()
+        let dependency = Task<String>()
+        
+        task.add(dependency: dependency)
+        
+        let status = task.remove(dependency: dependency)
+        
+        XCTAssertEqual(status, true)
+        XCTAssertEqual(task.dependencies.count, 0)
+    }
+    
+    func testRemoveDependencyWithType() {
+        let task = Task<Int>()
+        let dependency = Task<String>()
+        
+        task.add(dependency: dependency)
+        
+        let status = task.remove(dependency: type(of: dependency))
+        
+        XCTAssertEqual(status, true)
+        XCTAssertEqual(task.dependencies.count, 0)
+    }
+    
+    func testRemoveUnknownDependencyWithType() {
+        let task = Task<Int>()
+        let dependency = Task<String>()
+        
+        task.add(dependency: dependency)
+        
+        let status = task.remove(dependency: Task<Double>.self)
+        
+        XCTAssertEqual(status, false)
+        XCTAssertEqual(task.dependencies.count, 1)
+    }
 }

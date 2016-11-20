@@ -702,6 +702,10 @@ open class Task<T>: TaskBase {
     open override func addDependency(_ operation: Operation) {
     }
     
+    @available(*, unavailable, renamed: "remove(dependency:)")
+    open override func removeDependency(_ op: Operation) {
+    }
+    
     /// Makes the task dependant on completion of specific task.
     /// Dependencies can be excuted on arbitary task queues.
     ///
@@ -730,13 +734,47 @@ open class Task<T>: TaskBase {
         return filteredDependency.first as? Task<T>
     }
     
-    /// Return dependency instance
+    /// Removes dependency from `self`
     ///
-    /// - parameter type: Dependency task type
+    /// - Parameter dependency: Dependency to remove
+    /// - Returns: Boolean indicating whether dependency is removed
+    open func remove(dependency: Operation) -> Bool {
+        assert(state < .executing,
+               "Removed dependency after task started with execution")
+        
+        let dependencyExists = dependencies
+            .filter { $0.hashValue == dependency.hashValue }
+            .first
+        
+        super.removeDependency(dependency)
+        
+        if let _ = dependencyExists {
+            return true
+        }
+        
+        return false
+    }
+    
+    /// Removes dependency with specified type
     ///
-    /// - returns: Optional `Task<T>` dependency instance
-    open subscript(dependency: Task<T>.Type) -> Task<T>? {
-        return get(dependency: dependency)
+    /// - Parameter type: Dependency type
+    /// - Returns: Boolean indicating if dependencies of `type` are removed
+    @nonobjc
+    open func remove(dependency type: Operation.Type) -> Bool {
+        assert(state < .executing,
+               "Removed dependency after task started with execution")
+        
+        let filteredDependencies = dependencies
+            .filter { type(of: $0) == type }
+            .flatMap { $0 }
+            .map { remove(dependency: $0) }
+        
+        
+        if filteredDependencies.contains(true) {
+            return true
+        }
+        
+        return false
     }
 }
 
