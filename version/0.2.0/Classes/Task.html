@@ -1,0 +1,1712 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Task Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    <meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="application-name" content="Overdrive">
+<meta name="description" content="Powerful task based API in Swift with focus on type safety, concurrency and multi threading.">
+
+<meta name="rating" content="General">
+<meta http-equiv="set-cookie" content="name=value; expires=date; path=url">
+<meta name="url" content="https://github.com/arikis/Overdrive">
+<meta name="google" value="notranslate">
+
+<!-- Twitter card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@SaidSikira">
+<meta name="twitter:creator" content="@SaidSikira">
+<meta name="twitter:title" content="Overdrive">
+<meta name="twitter:url" content="https://github.com/arikis/Overdrive">
+<meta name="twitter:description" content="Powerful task based API in Swift with focus on type safety, concurrency and multi threading">
+<meta name="twitter:image" content="http://i.imgur.com/ZI34Ho1.png">
+
+<style>
+header.header {
+  background-color: #2D3E4F;
+}
+</style>
+
+<!-- Google tracking code -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-58231067-4', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Class/Task" class="dashAnchor"></a>
+
+    <a title="Task Class Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          Overdrive Docs
+        </a>
+        
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/arikis/Overdrive">
+            <img class="header-icon" src="../img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">Overdrive Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      Task Class Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Intro.html">Intro</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../getting-started.html">Getting Started</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../installation.html">Installation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../state-machine.html">State Machine</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../complex-tasks.html">Complex Tasks</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../unit-testing.html">Unit Testing</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Task.html">Task</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TaskQueue.html">TaskQueue</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/InlineTask.html">InlineTask</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes.html#/s:C9Overdrive8TaskBase">TaskBase</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TaskObserver.html">TaskObserver</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TaskCondition.html">TaskCondition</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TaskQueueDelegate.html">TaskQueueDelegate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/Result.html">Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/TaskConditionResult.html">TaskConditionResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/TaskConditionError.html">TaskConditionError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../More information.html">More information</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../license.html">License</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other Guides.html">Other Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../intro.html">Intro</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            <h1>Task</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="n">open</span> <span class="kd">class</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="../Classes.html#/s:C9Overdrive8TaskBase">TaskBase</a></span></code></pre>
+
+                </div>
+              </div>
+            <p><code>Task&lt;T&gt;</code> is an abstract class that provides interface for encapsuling any
+asynchronous or synchronous operation. Subclassing <code>Task&lt;T&gt;</code>
+is simple operation. You are only required to override <code>run()</code> method that
+defines task execution point and call <code>finish(_:)</code> method to finish execution.
+In order to execute any task you need to add it to the <code><a href="../Classes/TaskQueue.html">TaskQueue</a></code> which
+manages task execution, concurrency and threading mechanisms.</p>
+
+<p><code>Task</code> also provides method chaining and completion blocks that are executed
+depending on the task result. It also features retry mechanisms for tasks
+which finished with errors.</p>
+
+<p>There are several key aspects of the <code>Task&lt;T&gt;</code> that you need to understand:</p>
+
+<ol>
+<li><strong>State machine</strong> - <code>Task&lt;T&gt;</code> works with internal task state machine. State
+of the task at any point can be:</li>
+</ol>
+
+<ul>
+<li>initialized - Task instance is created</li>
+<li>pending - Task is added to the <code><a href="../Classes/TaskQueue.html">TaskQueue</a></code> and started process of
+evaluating readiness</li>
+<li>ready - Task is ready to execute.</li>
+<li>executing - Task is executing</li>
+<li>finished - Task finished with execution</li>
+</ul>
+
+<ol>
+<li><p><strong>Task execution point</strong> - Task execution starts in <code>run()</code> method when state
+reaches <code>ready</code> state. You should always override this method in your subclass.</p></li>
+<li><p><strong>Finishing execution</strong> - Task execution finishes when <code>finish(_:)</code> method is
+called. You always finish execution with <code><a href="../Enums/Result.html">Result&lt;T&gt;</a></code> object. <code><a href="../Enums/Result.html">Result&lt;T&gt;</a></code> is an
+enum with two cases:</p></li>
+</ol>
+
+<ul>
+<li><code>value(T)</code></li>
+<li><code>error(Error)</code></li>
+</ul>
+
+<p>After <code>finish(with:)</code> method is called, you can access result through <code>result</code>
+property.</p>
+
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    You can access <code>result</code> object from any thread.
+
+</div>
+
+<p><strong>Example subclass</strong></p>
+
+<pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">SomeTask</span><span class="p">:</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="kd">func</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">asyncOperation</span> <span class="p">{</span> <span class="n">data</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+            <span class="k">if</span> <span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+               <span class="nf">finish</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="o">.</span><span class="nf">error</span><span class="p">(</span><span class="n">error</span><span class="o">!</span><span class="p">))</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+               <span class="nf">finish</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="n">data</span> <span class="k">as!</span> <span class="kt">Int</span><span class="p">))</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">TaskQueue</span><span class="p">()</span>
+<span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">SomeTask</span><span class="p">()</span>
+<span class="n">queue</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="nv">task</span><span class="p">:</span> <span class="n">task</span><span class="p">)</span>
+</code></pre>
+
+<p><a href='#strong-completion-blocks-strong' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='strong-completion-blocks-strong'><strong>Completion blocks</strong></h3></p>
+
+<p><hr></p>
+
+<p>You can use one of the defined completion blocks that are executed when task
+finished with execution.</p>
+
+<ol>
+<li><code>onValue</code> - executed when task finishes with <code>.value(T)</code></li>
+<li><code>onError</code> - executed when task finishes with <code>.error(Error)</code></li>
+</ol>
+
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">SomeTask</span><span class="p">()</span>
+
+<span class="n">task</span>
+   <span class="o">.</span><span class="n">onValue</span> <span class="p">{</span> <span class="n">value</span> <span class="k">in</span>
+       <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="c1">// Int</span>
+   <span class="p">}</span><span class="o">.</span><span class="n">onError</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
+       <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>Many of the <code>Task</code> methods can be chained to enable simple setup</p>
+
+</div>
+
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    <p>Calling <code>onValue</code> and <code>onError</code> methods after the task is added
+to the <code><a href="../Classes/TaskQueue.html">TaskQueue</a></code> may result in error, since the task may have already finished
+with execution. To avoid this behaviour, always call these methods before task
+is added to the <code><a href="../Classes/TaskQueue.html">TaskQueue</a></code>.</p>
+
+</div>
+
+<p><a href='#strong-dependencies-strong' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='strong-dependencies-strong'><strong>Dependencies</strong></h3></p>
+
+<p><hr></p>
+
+<p>Complex tasks should be always divided into several smaller tasks. To make sure
+that tasks are executed in the correct order you can use dependencies. To add
+dependency use <code>addDependency(_:)</code> method.</p>
+
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">SomeTask</span><span class="p">()</span>
+<span class="k">let</span> <span class="nv">otherTask</span> <span class="o">=</span> <span class="kt">OtherTask</span><span class="p">()</span>
+
+<span class="n">task</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="nv">dependency</span><span class="p">:</span> <span class="n">otherTask</span><span class="p">)</span>
+</code></pre>
+
+<p>When task with dependencies is added to the <code><a href="../Classes/TaskQueue.html">TaskQueue</a></code>, dependencies will be
+executed first.</p>
+
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    You can access all task dependencies with <code>dependencies</code> property.
+
+</div>
+
+<p><a href='#strong-conditions-strong' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='strong-conditions-strong'><strong>Conditions</strong></h3></p>
+
+<p><hr></p>
+
+<p>In some cases, tasks need conditions to be satisfed in order to be executed.</p>
+
+<p>One example would be location retrieval. In order to get location from the
+device you need to make sure that user granted permissions for location
+services. Granting permissions can be exposed as task condition. You can create conditions using <code><a href="../Protocols/TaskCondition.html">TaskCondition</a></code> protocol and add them to the task by using
+<code>add(condition:)</code> method.</p>
+
+<p><a href='#strong-observers-strong' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='strong-observers-strong'><strong>Observers</strong></h3></p>
+
+<p><hr></p>
+
+<p>In addition to the <code>onValue</code> and <code>onError</code> completion methods, you can use
+<code><a href="../Protocols/TaskObserver.html">TaskObserver</a></code> protocol to be notified when task starts and finishes with
+execution.</p>
+
+<p>Classic example would be creating observer that manages <code>UIActivityIndicator</code>
+based on the task execution state.</p>
+
+<p><a href='#strong-retry-strong' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='strong-retry-strong'><strong>Retry</strong></h3></p>
+
+<p><hr></p>
+
+<p>If the task finishes execution with error, its execution can be retried. To
+specify maximum number of retry operations use <code>retry(_:)</code> method.</p>
+
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">SomeTask</span><span class="p">()</span>
+
+<span class="n">task</span>
+   <span class="o">.</span><span class="nf">retry</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+   <span class="o">.</span><span class="n">onValue</span> <span class="p">{</span> <span class="n">value</span> <span class="k">in</span>
+       <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+   <span class="p">}</span><span class="o">.</span><span class="n">onError</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
+       <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+   <span class="p">}</span>
+</code></pre>
+
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <code>retry(_:)</code> method can be chained with other task methods
+
+</div>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Internal%20properties"></a>
+                <a name="//apple_ref/swift/Section/Internal properties" class="dashAnchor"></a>
+                <a href="#/Internal%20properties">
+                  <h3 class="section-name">Internal properties</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:iC9Overdrive4Task9subscriptFMGS0_x_GSqGS0_x__"></a>
+                    <a name="//apple_ref/swift/Method/subscript(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:iC9Overdrive4Task9subscriptFMGS0_x_GSqGS0_x__">subscript(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Return dependency instance</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="nf">subscript</span><span class="p">(</span><span class="nv">dependency</span><span class="p">:</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;.</span><span class="k">Type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Dependency task type</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Optional <code>Task&lt;T&gt;</code> dependency instance</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Class%20properties"></a>
+                <a name="//apple_ref/swift/Section/Class properties" class="dashAnchor"></a>
+                <a href="#/Class%20properties">
+                  <h3 class="section-name">Class properties</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC9Overdrive4Task6resultGSqGOS_6Resultx__"></a>
+                    <a name="//apple_ref/swift/Property/result" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC9Overdrive4Task6resultGSqGOS_6Resultx__">result</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Task result. Result can contain either value or error.</p>
+
+<p><code>value(T)</code>: value of type defined by the Task</p>
+
+<p><code>error(Error)</code>: error that may have occured</p>
+
+<p>This object will not be populated with result until task
+achieves <code>finished</code> state. You can access the result value directly,
+or setup completion blocks that will execute when task finishes.</p>
+
+<div class="aside aside-seealso">
+    <p class="aside-title">Seealso</p>
+    <code>onValue(_: )</code>, <code>onError(_: )</code>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">internal(set)</span> <span class="n">open</span> <span class="k">var</span> <span class="nv">result</span><span class="p">:</span> <span class="kt"><a href="../Enums/Result.html">Result</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Completion%20methods"></a>
+                <a name="//apple_ref/swift/Section/Completion methods" class="dashAnchor"></a>
+                <a href="#/Completion%20methods">
+                  <h3 class="section-name">Completion methods</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9Overdrive4Task7onValueFFxT_DGS0_x_"></a>
+                    <a name="//apple_ref/swift/Method/onValue(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9Overdrive4Task7onValueFFxT_DGS0_x_">onValue(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Use this method to set completion block that will be executed when task
+finishes execution with <code>.Value(T)</code> result.</p>
+
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>If the task finishes with <code>.Error</code> result, onError(_:) method will be called.</p>
+
+</div>
+
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    <p>This method should only be called before the task state becomes <code>.Pending</code>.
+Calling this method after <code>.Pending</code> state may result in unexpected behaviour.</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">func</span> <span class="nf">onValue</span><span class="p">(</span><span class="n">_</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">((</span><span class="kt">ResultType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Completion block that should be executed. Takes <code>T</code> parameter which is extracted from the <code>.Value(T)</code> result.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>Self</code>. This method will always return itself, so that it can be used in chain with other task methods.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9Overdrive4Task7onErrorFFPs5Error_T_DGS0_x_"></a>
+                    <a name="//apple_ref/swift/Method/onError(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9Overdrive4Task7onErrorFFPs5Error_T_DGS0_x_">onError(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Use this method to set completion block that will be executed when task
+finishes with error.</p>
+
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    Completion block set will only be executed if the
+task finishes with <code>.Error</code> result.
+
+</div>
+
+<p>If the task finishes with <code>.Value</code> result, onValue completion will be called.</p>
+
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    <p>This method should only be called before the task state becomes <code>.Pending</code>.
+Calling this method after <code>.Pending</code> state may result in unexpected behaviour.</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">func</span> <span class="nf">onError</span><span class="p">(</span><span class="n">_</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">()))</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Completion block that should be executed. Takes only one parameter <code>ErrorType</code> and no return type.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>Self</code>. This method will always return itself, so that it can be used in chain with other task methods. */</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC9Overdrive4Task15completionBlockGSqFT_T__"></a>
+                    <a name="//apple_ref/swift/Property/completionBlock" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC9Overdrive4Task15completionBlockGSqFT_T__">completionBlock</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Completion block that will be executed when the task finishes execution.</p>
+
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    <strong>DEPRECATED</strong>. Use <code><a href="../Classes/Task.html#/s:FC9Overdrive4Task7onValueFFxT_DGS0_x_">onValue(_:)</a></code> method to set completion
+block.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="k">override</span> <span class="k">var</span> <span class="nv">completionBlock</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Retry%20mechanims"></a>
+                <a name="//apple_ref/swift/Section/Retry mechanims" class="dashAnchor"></a>
+                <a href="#/Retry%20mechanims">
+                  <h3 class="section-name">Retry mechanims</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9Overdrive4Task5retryFSiDGS0_x_"></a>
+                    <a name="//apple_ref/swift/Method/retry(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9Overdrive4Task5retryFSiDGS0_x_">retry(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set retry count. If the task finishes with error, it will be executed
+again until retry count becomes zero.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">func</span> <span class="nf">retry</span><span class="p">(</span><span class="n">_</span> <span class="nv">times</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>times</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Number of times task should be retried if it finishes with error</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>self</code></p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Task%20conditions"></a>
+                <a name="//apple_ref/swift/Section/Task conditions" class="dashAnchor"></a>
+                <a href="#/Task%20conditions">
+                  <h3 class="section-name">Task conditions</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC9Overdrive4Task10conditionsGSaPS_13TaskCondition__"></a>
+                    <a name="//apple_ref/swift/Property/conditions" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC9Overdrive4Task10conditionsGSaPS_13TaskCondition__">conditions</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>All task conditions</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="nf">fileprivate</span><span class="p">(</span><span class="k">set</span><span class="p">)</span> <span class="n">open</span> <span class="k">var</span> <span class="nv">conditions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/TaskCondition.html">TaskCondition</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9Overdrive4Task3addFT9conditionPS_13TaskCondition__T_"></a>
+                    <a name="//apple_ref/swift/Method/add(condition:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9Overdrive4Task3addFT9conditionPS_13TaskCondition__T_">add(condition:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds condition to the task.</p>
+
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    <p>Task conditions should be added before task starts with execution. Otherwise,
+assertion will occur.</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">add</span><span class="p">(</span><span class="nv">condition</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TaskCondition.html">TaskCondition</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>condition</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>TaskCondition</code> to be added</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9Overdrive4Task6removeFT9conditionPS_13TaskCondition__Sb"></a>
+                    <a name="//apple_ref/swift/Method/remove(condition:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9Overdrive4Task6removeFT9conditionPS_13TaskCondition__Sb">remove(condition:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Removes condition from the task.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">remove</span><span class="p">(</span><span class="nv">condition</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TaskCondition.html">TaskCondition</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>condition</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>condition to be removed</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Boolean indicating whether condition was removed</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9Overdrive4Task6removeuRd__S_13TaskConditionrFT9conditionMqd___Sb"></a>
+                    <a name="//apple_ref/swift/Method/remove(condition:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9Overdrive4Task6removeuRd__S_13TaskConditionrFT9conditionMqd___Sb">remove(condition:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Removes all conditions of given type.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="n">remove</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TaskCondition.html">TaskCondition</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">condition</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">T</span><span class="o">.</span><span class="k">Type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Type conforming to the <code>TaskCondition</code> protocol</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Boolean indicating whether condition was removed</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Task%20observers"></a>
+                <a name="//apple_ref/swift/Section/Task observers" class="dashAnchor"></a>
+                <a href="#/Task%20observers">
+                  <h3 class="section-name">Task observers</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC9Overdrive4Task9observersGSaPS_12TaskObserver__"></a>
+                    <a name="//apple_ref/swift/Property/observers" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC9Overdrive4Task9observersGSaPS_12TaskObserver__">observers</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Array of all task observers (read-only).</p>
+
+<p>Default implementation contains <code>FinishBlockObserver</code> which is used to notify
+TaskQueue that the task finished with execution</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">internal(set)</span> <span class="n">open</span> <span class="k">var</span> <span class="nv">observers</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/TaskObserver.html">TaskObserver</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9Overdrive4Task3addFT8observerPS_12TaskObserver__T_"></a>
+                    <a name="//apple_ref/swift/Method/add(observer:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9Overdrive4Task3addFT8observerPS_12TaskObserver__T_">add(observer:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds observer to the task.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">func</span> <span class="nf">add</span><span class="p">(</span><span class="nv">observer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TaskObserver.html">TaskObserver</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>observer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>observer to be added</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9Overdrive4Task8containsuRd__S_12TaskObserverrFT8observerMqd___Sb"></a>
+                    <a name="//apple_ref/swift/Method/contains(observer:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9Overdrive4Task8containsuRd__S_12TaskObserverrFT8observerMqd___Sb">contains(observer:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Checks if task constains observer of specific <code><a href="../Protocols/TaskObserver.html">TaskObserver</a></code> type</p>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter observer: <code><a href="../Protocols/TaskObserver.html">TaskObserver</a></code> type
+
+</div>
+
+<div class="aside aside-returns">
+    <p class="aside-title">Returns</p>
+    Boolean value indicating if task contains observer
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">contains</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TaskObserver.html">TaskObserver</a></span><span class="o">&gt;</span><span class="p">(</span><span class="nv">observer</span><span class="p">:</span> <span class="kt">T</span><span class="o">.</span><span class="k">Type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>observer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>TaskObserver</code> type</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Boolean value indicating if task contains observer</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9Overdrive4Task6removeFT8observerPS_12TaskObserver__Sb"></a>
+                    <a name="//apple_ref/swift/Method/remove(observer:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9Overdrive4Task6removeFT8observerPS_12TaskObserver__Sb">remove(observer:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Removes task observer from the task observers.</p>
+
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    <p>Observer removal should be done before task is added to the <code><a href="../Classes/TaskQueue.html">TaskQueue</a></code></p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">remove</span><span class="p">(</span><span class="nv">observer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TaskObserver.html">TaskObserver</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>observer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Task observer instance to be removed</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Boolean indicating whether observer is removed</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9Overdrive4Task6removeuRd__S_12TaskObserverrFT8observerMqd___Sb"></a>
+                    <a name="//apple_ref/swift/Method/remove(observer:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9Overdrive4Task6removeuRd__S_12TaskObserverrFT8observerMqd___Sb">remove(observer:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Remove all task observers of the defined TaskObserver type. This method will enumerate
+through all task observers, check their type and if the type matches the passed type,
+observer will be removed.</p>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    <p>Parameter type: TaskObserver type</p>
+
+</div>
+
+<div class="aside aside-returns">
+    <p class="aside-title">Returns</p>
+    <p>Boolean indicating whether observer is removed</p>
+
+</div>
+
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    <p>Observer removal should be done before task is added to the <code><a href="../Classes/TaskQueue.html">TaskQueue</a></code></p>
+
+</div>
+
+<p><strong>Example</strong></p>
+
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">myObserver</span> <span class="o">=</span> <span class="kt">CustomObserver</span><span class="p">()</span>
+<span class="n">task</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="nv">observer</span><span class="p">:</span> <span class="n">myObserver</span><span class="p">)</span>
+
+<span class="n">task</span><span class="o">.</span><span class="nf">remove</span><span class="p">(</span><span class="nv">observer</span><span class="p">:</span> <span class="kt">CustomObserver</span><span class="o">.</span><span class="k">self</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="n">remove</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TaskObserver.html">TaskObserver</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">observer</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">T</span><span class="o">.</span><span class="k">Type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>TaskObserver type</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Boolean indicating whether observer is removed</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Finishing%20Task%20execution"></a>
+                <a name="//apple_ref/swift/Section/Finishing Task execution" class="dashAnchor"></a>
+                <a href="#/Finishing%20Task%20execution">
+                  <h3 class="section-name">Finishing Task execution</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9Overdrive4Task6finishFT4withGOS_6Resultx__T_"></a>
+                    <a name="//apple_ref/swift/Method/finish(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9Overdrive4Task6finishFT4withGOS_6Resultx__T_">finish(with:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Finish execution of the task with result. Calling this method will change
+task state to <code>Finished</code> and call neccesary completion blocks. If task finished
+with <code>value(T)</code>, <code>onValueBlock</code> will be executed. If task finished with
+<code>error(Error)</code> result, <code>onErrorBlock</code> will be executed.</p>
+
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>Safe to call from any thread.</p>
+
+</div>
+
+<div class="aside aside-seealso">
+    <p class="aside-title">Seealso</p>
+    <p><code><a href="../Enums/Result.html">Result&lt;T&gt;</a></code></p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">finish</span><span class="p">(</span><span class="n">with</span> <span class="nv">result</span><span class="p">:</span> <span class="kt"><a href="../Enums/Result.html">Result</a></span><span class="o">&lt;</span><span class="kt">ResultType</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>result</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Task result (<code>.value(T)</code> or <code>.error(Error)</code>)</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC9Overdrive4Task14isAsynchronousSb"></a>
+                    <a name="//apple_ref/swift/Property/isAsynchronous" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC9Overdrive4Task14isAsynchronousSb">isAsynchronous</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Defines if task should handle state automatically. Defaults to true.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="k">override</span> <span class="k">var</span> <span class="nv">isAsynchronous</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC9Overdrive4Task7isReadySb"></a>
+                    <a name="//apple_ref/swift/Property/isReady" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC9Overdrive4Task7isReadySb">isReady</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Boolean value indicating Task readiness value</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="k">override</span> <span class="k">var</span> <span class="nv">isReady</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC9Overdrive4Task11isExecutingSb"></a>
+                    <a name="//apple_ref/swift/Property/isExecuting" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC9Overdrive4Task11isExecutingSb">isExecuting</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Boolean value indicating Task execution status.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="k">override</span> <span class="k">var</span> <span class="nv">isExecuting</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC9Overdrive4Task10isFinishedSb"></a>
+                    <a name="//apple_ref/swift/Property/isFinished" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC9Overdrive4Task10isFinishedSb">isFinished</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Boolean value indicating if task finished with execution.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="k">override</span> <span class="k">var</span> <span class="nv">isFinished</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Task%20execution"></a>
+                <a name="//apple_ref/swift/Section/Task execution" class="dashAnchor"></a>
+                <a href="#/Task%20execution">
+                  <h3 class="section-name">Task execution</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9Overdrive4Task5startFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/start()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9Overdrive4Task5startFT_T_">start()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Starts task execution process when task reaches <code>ready</code> state.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">override</span> <span class="kd">final</span> <span class="kd">func</span> <span class="nf">start</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9Overdrive4Task4mainFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/main()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9Overdrive4Task4mainFT_T_">main()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Starts task execution by being called from the <code><a href="../Classes/Task.html#/s:FC9Overdrive4Task5startFT_T_">start()</a></code> method. If the task is
+cancelled it will move to finished state.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">override</span> <span class="kd">final</span> <span class="kd">func</span> <span class="nf">main</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9Overdrive4Task3runFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/run()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9Overdrive4Task3runFT_T_">run()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>You must override this method in order to provide execution point for the
+task. In order to notify task that the task execution finished, call <code>finish(_:)</code>
+method on self.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">run</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Init%20methods"></a>
+                <a name="//apple_ref/swift/Section/Init methods" class="dashAnchor"></a>
+                <a href="#/Init%20methods">
+                  <h3 class="section-name">Init methods</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9Overdrive4TaskcFT_GS0_x_"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9Overdrive4TaskcFT_GS0_x_">init()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create new instance of <code>Task&lt;T&gt;</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">override</span> <span class="nf">init</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Dependency%20management"></a>
+                <a name="//apple_ref/swift/Section/Dependency management" class="dashAnchor"></a>
+                <a href="#/Dependency%20management">
+                  <h3 class="section-name">Dependency management</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9Overdrive4Task3addFT10dependencyCSo9Operation_T_"></a>
+                    <a name="//apple_ref/swift/Method/add(dependency:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9Overdrive4Task3addFT10dependencyCSo9Operation_T_">add(dependency:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Makes the task dependant on completion of specific task.
+Dependencies can be excuted on arbitary task queues.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">add</span><span class="p">(</span><span class="nv">dependency</span><span class="p">:</span> <span class="kt">Operation</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>operation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Dependency task</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9Overdrive4Task3geturFT10dependencyMGS0_qd____GSqGS0_qd____"></a>
+                    <a name="//apple_ref/swift/Method/get(dependency:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9Overdrive4Task3geturFT10dependencyMGS0_qd____GSqGS0_qd____">get(dependency:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns dependency instance from the task dependencies.</p>
+
+<p><a href='#example' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='example'>Example</h3>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">dependencyTask</span> <span class="o">=</span> <span class="kt">SomeTask</span><span class="p">()</span>
+<span class="k">if</span> <span class="k">let</span> <span class="nv">dependency</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="nv">dependency</span><span class="p">:</span> <span class="kt">SomeTask</span><span class="o">.</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span>
+   <span class="nf">print</span><span class="p">(</span><span class="n">dependency</span><span class="p">)</span> <span class="c1">// dependencyTask instance</span>
+<span class="p">}</span>
+</code></pre></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="k">get</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">dependency</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;.</span><span class="k">Type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Dependency task type</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Optional <code>Task&lt;T&gt;</code> dependency instance</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Inline%20task%20creation"></a>
+                <a name="//apple_ref/swift/Section/Inline task creation" class="dashAnchor"></a>
+                <a href="#/Inline%20task%20creation">
+                  <h3 class="section-name">Inline task creation</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFC9Overdrive4Task6createFFT_T_CS_10InlineTask"></a>
+                    <a name="//apple_ref/swift/Method/create(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFC9Overdrive4Task6createFFT_T_CS_10InlineTask">create(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create inline task with completion block</p>
+
+<p><strong>Example:</strong></p>
+
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">inlineTask</span> <span class="o">=</span> <span class="kt">Task</span><span class="o">.</span><span class="n">create</span> <span class="p">{</span>
+   <span class="nf">doWork</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">create</span><span class="p">(</span><span class="n">_</span> <span class="nv">taskBlock</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">((</span><span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/InlineTask.html">InlineTask</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>taskBlock</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Block in which task is executed.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>InlineTask instance</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2016 <a class="link" href="http://swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-11-13)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
