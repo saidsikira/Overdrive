@@ -560,22 +560,23 @@ open class Task<T>: TaskBase {
     ///
     /// - seealso: `Result<T>`
     public func finish(with result: Result<ResultType>) {
-        if shouldRetry {
+        if case .error(_) = result, shouldRetry {
             attemptRetry()
-        } else {
-            self.result = result
-            
-            moveToFinishedState()
-            
-            switch result {
-            case .value(let value):
-                onValueBlock?(value)
-            case .error(let error):
-                onErrorBlock?(error)
-            }
+            return
+        }
+
+        self.result = result
+
+        moveToFinishedState()
+
+        switch result {
+        case .value(let value):
+            onValueBlock?(value)
+        case .error(let error):
+            onErrorBlock?(error)
         }
     }
-    
+
     /// Defines if task should handle state automatically. Defaults to true.
     public final override var isAsynchronous: Bool {
         return true
