@@ -51,16 +51,21 @@ TaskQueue.background.add(task: task)
 
 ## Requirements
 
-- iOS 8.0+ / Mac OS X 10.11+ / tvOS 9.0+ / watchOS 2.0+
-- Xcode 8.0+
+- Xcode `8.0+`
 - Swift 3
+- Platforms:
+  * iOS `8.0+`
+  * macOS `10.11+`
+  * tvOS `9.0+`
+  * watchOS `2.0+`
+  * Ubuntu
 
 ## Installation
 
 #### [Carthage](https://github.com/Carthage/Carthage)
 
 ```shell
-github "arikis/Overdrive" >= 0.0.2
+github "arikis/Overdrive" >= 0.2.0
 ```
 
 #### [Cocoa Pods](https://github.com/CocoaPods/CocoaPods)
