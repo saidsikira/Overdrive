@@ -1,8 +1,8 @@
 language: objective-c
 osx_image: xcode8
 branches:
-  only:
-  - master
+  except:
+    - gh-pages
 env:
   global:
   - LC_CTYPE=en_US.UTF-8
