@@ -717,11 +717,11 @@ open class Task<T>: TaskBase {
         super.addDependency(dependency)
     }
     
-    /// Returns dependency instance from the task dependencies.
+    /// Returns dependency instances from the task dependencies.
     ///
     /// - parameter type: Dependency task type
     ///
-    /// - returns: Optional `Task<T>` dependency instance
+    /// - returns: Array of `Task<T>` dependency instances
     ///
     /// ### Example
     /// ```swift
@@ -730,9 +730,10 @@ open class Task<T>: TaskBase {
     ///    print(dependency) // dependencyTask instance
     /// }
     /// ```
-    open func get<T>(dependency type: Task<T>.Type) -> Task<T>? {
-        let filteredDependency = dependencies.filter { $0 as? Task<T> != nil }
-        return filteredDependency.first as? Task<T>
+    open func get<T>(dependency type: Task<T>.Type) -> [Task<T>] {
+        return dependencies
+            .flatMap { $0 as? Task<T> }
+        
     }
     
     /// Removes dependency from `self`

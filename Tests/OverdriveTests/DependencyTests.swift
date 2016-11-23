@@ -37,11 +37,8 @@ class DependencyTests: XCTestCase {
         
         testTask.add(dependency: dependencyTask)
         
-        if let dependency = testTask.get(dependency: type(of: dependencyTask)) {
-            XCTAssertEqual(dependency.name, "DependencyTask")
-        } else {
-            XCTFail("Dependency not returned")
-        }
+        let dependencies = testTask.get(dependency: type(of: dependencyTask))
+        XCTAssertEqual(dependencies[0].name, "DependencyTask")
     }
     
     func testRemoveValidDependency() {
@@ -79,4 +76,6 @@ class DependencyTests: XCTestCase {
         XCTAssertEqual(status, false)
         XCTAssertEqual(task.dependencies.count, 1)
     }
+    
+    
 }
