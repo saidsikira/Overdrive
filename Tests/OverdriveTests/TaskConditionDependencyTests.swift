@@ -14,7 +14,6 @@ import TestSupport
 // MARK: - DependencyTestCondition
 
 class DependencyTestCondition: TaskCondition {
-    
     func dependencies<T>(forTask task: Task<T>) -> [Operation] {
         return [SimpleTask()]
     }

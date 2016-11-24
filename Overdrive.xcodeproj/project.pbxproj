@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B334B4D31DE727A4006343D0 /* TestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B334B4D21DE727A4006343D0 /* TestCase.swift */; };
 		B36FE5211D9081A4003C6A77 /* Overdrive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B36FE4EF1D9080E8003C6A77 /* Overdrive.framework */; };
 		B36FE53F1D908296003C6A77 /* Overdrive.h in Headers */ = {isa = PBXBuildFile; fileRef = B36FE53E1D908291003C6A77 /* Overdrive.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B36FE5401D90829E003C6A77 /* Overdrive.h in Headers */ = {isa = PBXBuildFile; fileRef = B36FE53E1D908291003C6A77 /* Overdrive.h */; };
@@ -45,6 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B334B4D21DE727A4006343D0 /* TestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCase.swift; sourceTree = "<group>"; };
 		B36FE4E91D9080B7003C6A77 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		B36FE4EF1D9080E8003C6A77 /* Overdrive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Overdrive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B36FE5091D908176003C6A77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -120,6 +122,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B334B4D41DE72F91006343D0 /* TestCase */ = {
+			isa = PBXGroup;
+			children = (
+				B334B4D21DE727A4006343D0 /* TestCase.swift */,
+			);
+			name = TestCase;
+			sourceTree = "<group>";
+		};
 		B36FE4E21D908080003C6A77 = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +242,7 @@
 				B36FE5751D9083A2003C6A77 /* TaskQueueDelegateTests.swift */,
 				B36FE5761D9083A2003C6A77 /* TaskTests.swift */,
 				B36FE5781D9083A2003C6A77 /* ThreadSafetyTests.swift */,
+				B334B4D41DE72F91006343D0 /* TestCase */,
 			);
 			path = OverdriveTests;
 			sourceTree = "<group>";
@@ -463,6 +474,7 @@
 				B36FE57B1D9083B5003C6A77 /* InlineTaskTests.swift in Sources */,
 				B36FE57C1D9083B5003C6A77 /* ResultTests.swift in Sources */,
 				B36FE57E1D9083B5003C6A77 /* TaskConditionDependencyTests.swift in Sources */,
+				B334B4D31DE727A4006343D0 /* TestCase.swift in Sources */,
 				B36FE5821D9083B5003C6A77 /* TaskQueueDelegateTests.swift in Sources */,
 				B36FE5831D9083B5003C6A77 /* TaskTests.swift in Sources */,
 				B3B03DDB1DE101F600F4A5FC /* TaskConditionTests.swift in Sources */,

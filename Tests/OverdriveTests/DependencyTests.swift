@@ -11,13 +11,7 @@ import TestSupport
 
 @testable import Overdrive
 
-class TestTask: Task<Int> {
-    override func run() {
-        finish(with: .value(1))
-    }
-}
-
-class DependencyTests: XCTestCase {
+class DependencyTests: TestCase {
     
     /// Test `addDependency(_:)` method
     func testDependencyAdd() {
@@ -59,9 +53,9 @@ class DependencyTests: XCTestCase {
         
         task.add(dependency: dependency)
         
-        let status = task.remove(dependency: type(of: dependency))
+        task.remove(dependency: type(of: dependency))
         
-        XCTAssertEqual(status, true)
+//        XCTAssertEqual(status, true)
         XCTAssertEqual(task.dependencies.count, 0)
     }
     
@@ -71,11 +65,48 @@ class DependencyTests: XCTestCase {
         
         task.add(dependency: dependency)
         
-        let status = task.remove(dependency: Task<Double>.self)
+        task.remove(dependency: Task<Double>.self)
         
-        XCTAssertEqual(status, false)
         XCTAssertEqual(task.dependencies.count, 1)
     }
     
+    func testOrderOfExecution() {
+        let testExpecation = expectation(description: "Dependency order of execution test expectation")
+        
+        var results: [Result<Int>] = []
+
+        func add(result: Result<Int>) {
+            dispatchQueue.sync {
+                results.append(result)
+            }
+        }
+        
+        let firstTask = task(withResult: .value(1))
+        let secondTask = task(withResult: .value(2))
+        let thirdTask = task(withResult: .value(3))
+        
+        thirdTask.add(dependency: secondTask)
+        secondTask.add(dependency: firstTask)
+        
+        firstTask.onValue { add(result: .value($0)) }
+        secondTask.onValue { add(result: .value($0)) }
+        
+        thirdTask.onValue {
+            add(result: .value($0))
+            testExpecation.fulfill()
+            
+            XCTAssertEqual(results[0].value, 1)
+            XCTAssertEqual(results[1].value, 2)
+            XCTAssertEqual(results[2].value, 3)
+        }
+        
+        let queue = TaskQueue(qos: .utility)
+        
+        queue.add(task: thirdTask)
+        queue.add(task: secondTask)
+        queue.add(task: firstTask)
+        
+        waitForExpectations(timeout: 1, handler: nil)
+    }
     
 }

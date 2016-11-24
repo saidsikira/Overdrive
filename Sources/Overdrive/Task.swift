@@ -701,17 +701,29 @@ open class Task<T>: TaskBase {
     
     @available(*, unavailable, renamed: "add(dependency:)")
     open override func addDependency(_ operation: Operation) {
+        super.addDependency(operation)
     }
     
     @available(*, unavailable, renamed: "remove(dependency:)")
     open override func removeDependency(_ op: Operation) {
+        super.removeDependency(op)
     }
     
     /// Makes the task dependant on completion of specific task.
     /// Dependencies can be excuted on arbitary task queues.
     ///
-    /// - parameter operation: Dependency task
-    open func add(dependency: Operation) {
+    /// - parameter dependency: Any `Task<T>` instance
+    open func add<U>(dependency: Task<U>) {
+        assert(state < .executing)
+
+        super.addDependency(dependency)
+    }
+    
+    /// Makes the task dependant on completion of specific task.
+    /// Dependencies can be excuted on arbitary task queues.
+    ///
+    /// - parameter operation: Any `Operation` subclass
+    internal func add(dependency: Operation) {
         assert(state < .executing)
         
         super.addDependency(dependency)
@@ -761,22 +773,13 @@ open class Task<T>: TaskBase {
     ///
     /// - Parameter type: Dependency type
     /// - Returns: Boolean indicating if dependencies of `type` are removed
-    @nonobjc
-    open func remove(dependency type: Operation.Type) -> Bool {
-        assert(state < .executing,
-               "Removed dependency after task started with execution")
+    open func remove<U>(dependency: Task<U>.Type) {
+        assert(state < .executing)
         
-        let filteredDependencies = dependencies
-            .filter { type(of: $0) == type }
+        dependencies
+            .filter { type(of: $0) == dependency }
             .flatMap { $0 }
-            .map { remove(dependency: $0) }
-        
-        
-        if filteredDependencies.contains(true) {
-            return true
-        }
-        
-        return false
+            .forEach { super.removeDependency($0) }
     }
 }
 
