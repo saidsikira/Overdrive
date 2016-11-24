@@ -7,15 +7,15 @@ set -o pipefail
 PROJECT="Overdrive.xcodeproj"
 SCHEME="Overdrive"
 
-IOS_SDK="iphonesimulator10.0"
+IOS_SDK="iphonesimulator10.2"
 OSX_SDK="macosx10.12"
-TVOS_SDK="appletvsimulator10.0"
-WATCHOS_SDK="watchsimulator3.0"
+TVOS_SDK="appletvsimulator10.1"
+WATCHOS_SDK="watchsimulator3.1"
 
-IOS_DESTINATION="OS=10.0,name=iPhone 6S"
+IOS_DESTINATION="OS=10.2,name=iPhone 6S"
 MACOS_DESTINATION="arch=x86_64"
-TVOS_DESTINATION="OS=10.0,name=Apple TV 1080p"
-WATCHOS_DESTINATION="OS=10.0,name=iPhone 6S"
+TVOS_DESTINATION="OS=10.1,name=Apple TV 1080p"
+WATCHOS_DESTINATION="OS=10.2,name=iPhone 6S"
 
 usage() {
 cat << EOF
