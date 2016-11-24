@@ -7,14 +7,13 @@
 //
 
 import XCTest
-import TestSupport
 
 @testable import Overdrive
 
 class ThreadSafetyTests: XCTestCase {
     
     func testResultOnDispatchQueue() {
-        let task = SimpleTask()
+        let task = anyTask(withResult: .value(1))
         
         let customQueueExpecation = expectation(description: "Value on custom dispatch queue")
         let backgroundQueueExpecation = expectation(description: "Value on background queue")
@@ -24,22 +23,19 @@ class ThreadSafetyTests: XCTestCase {
         
         task.onValue { value in
             customDispatchQueue.async {
-                XCTAssertEqual(value, 10, "Incorrect value on custom queue")
+                XCTAssertEqual(value, 1, "Incorrect value on custom queue")
                 customQueueExpecation.fulfill()
             }
             
             backgroundDispatchQueue.async {
-                XCTAssertEqual(value, 10, "Incorrect value on background queue")
+                XCTAssertEqual(value, 1, "Incorrect value on background queue")
                 backgroundQueueExpecation.fulfill()
             }
         }
         
         TaskQueue(qos: .default).add(task: task)
         
-        waitForExpectations(timeout: 0.4) { handlerError in
-
-            print(handlerError)
-        }
+        waitForExpectations(timeout: 0.4, handler: nil)
     }
     
     func testExecutionOnCustomQueue() {
@@ -47,11 +43,11 @@ class ThreadSafetyTests: XCTestCase {
         
         let backgroundDispatchQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
         
-        let task = SimpleTask()
+        let task = anyTask(withResult: .value(1))
         
         task.onValue { value in
             backgroundDispatchQueue.async {
-                XCTAssertEqual(value, 10, "Incorrect value on background queue")
+                XCTAssertEqual(value, 1, "Incorrect value on background queue")
                 backgroundQueueExpecation.fulfill()
             }
         }
@@ -59,8 +55,6 @@ class ThreadSafetyTests: XCTestCase {
         let queue = TaskQueue(queue: DispatchQueue.global(qos: .background))
         queue.add(task: task)
         
-        waitForExpectations(timeout: 0.4) { handlerError in
-            print(handlerError)
-        }
+        waitForExpectations(timeout: 0.4, handler: nil)
     }
 }

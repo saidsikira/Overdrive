@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import TestSupport
 @testable import Overdrive
 
 class RetryTestTask: Task<Int> {
@@ -70,8 +69,6 @@ class RetryTests: XCTestCase {
         
         TaskQueue(qos: .default).add(task: retryTestTask)
         
-        waitForExpectations(timeout: 0.2) { handlerError in
-            print(handlerError)
-        }
+        waitForExpectations(timeout: 0.2, handler: nil)
     }
 }

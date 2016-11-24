@@ -30,8 +30,6 @@ class InlineTaskTests: XCTestCase {
         
         TaskQueue(qos: .default).add(task: task)
         
-        waitForExpectations(timeout: 0.2) { handlerError in
-            print(handlerError)
-        }
+        waitForExpectations(timeout: 0.2, handler: nil)
     }
 }

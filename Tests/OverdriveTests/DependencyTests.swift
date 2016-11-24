@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import TestSupport
 
 @testable import Overdrive
 
@@ -81,9 +80,9 @@ class DependencyTests: TestCase {
             }
         }
         
-        let firstTask = task(withResult: .value(1))
-        let secondTask = task(withResult: .value(2))
-        let thirdTask = task(withResult: .value(3))
+        let firstTask = anyTask(withResult: .value(1))
+        let secondTask = anyTask(withResult: .value(2))
+        let thirdTask = anyTask(withResult: .value(3))
         
         thirdTask.add(dependency: secondTask)
         secondTask.add(dependency: firstTask)

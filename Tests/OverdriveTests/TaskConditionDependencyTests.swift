@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import TestSupport
 
 @testable import Overdrive
 
@@ -15,7 +14,9 @@ import TestSupport
 
 class DependencyTestCondition: TaskCondition {
     func dependencies<T>(forTask task: Task<T>) -> [Operation] {
-        return [SimpleTask()]
+        return [
+            anyTask(withResult: .value(1))
+        ]
     }
     
     func evaluate<T>(forTask task: Task<T>, evaluationBlock: ((TaskConditionResult) -> Void)) {
@@ -37,7 +38,7 @@ class TaskConditionDependencyTests: XCTestCase {
         let queue = TaskQueue()
         queue.delegate = self
         
-        let task = SimpleTask()
+        let task = anyTask(withResult: .value(1))
         let condition = DependencyTestCondition()
         
         task.add(condition: condition)
@@ -47,9 +48,7 @@ class TaskConditionDependencyTests: XCTestCase {
         
         queue.add(task:task)
         
-        waitForExpectations(timeout: 1) { handlerError in
-            print(handlerError)
-        }
+        waitForExpectations(timeout: 1, handler: nil)
     }
 }
 
@@ -64,9 +63,5 @@ extension TaskConditionDependencyTests: TaskQueueDelegate {
     
     func didFinish<T>(task: Task<T>, inQueue queue: TaskQueue) {
         finishExpecation?.fulfill()
-    }
-    
-    func didRetry<T>(_ task: Task<T>, inQueue queue: TaskQueue) {
-        XCTFail("didRetry:task:inQueue: method should not be called")
     }
 }

@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import TestSupport
 
 @testable import Overdrive
 
@@ -23,15 +22,13 @@ class TaskQueueDelegateTests: XCTestCase {
     }
     
     func testDelegate() {
-        let task = SimpleTask()
+        let task = anyTask(withResult: .value(1))
         task.name = "SimpleTask"
         
         queue.delegate = self
         queue.add(task: task)
         
-        waitForExpectations(timeout: 0.2) { handlerError in
-            print(handlerError)
-        }
+        waitForExpectations(timeout: 0.2, handler: nil)
     }
 }
 

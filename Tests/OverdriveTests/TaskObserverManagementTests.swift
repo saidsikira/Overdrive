@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import TestSupport
+
 @testable import Overdrive
 
 class SimpleObserver: TaskObserver {
@@ -17,7 +17,7 @@ class TaskObserverManagementTests: XCTestCase {
     
     /// Test `addObserver` method
     func testAddObserver() {
-        let task = SimpleTask()
+        let task = anyTask(withResult: .value(1))
         let observer = SimpleObserver()
         
         task.add(observer: observer)
@@ -27,7 +27,7 @@ class TaskObserverManagementTests: XCTestCase {
     
     /// Test `removeObserver(_:)` method
     func testRemoveObserver() {
-        let task = SimpleTask()
+        let task = anyTask(withResult: .value(1))
         let observer = SimpleObserver()
         task.add(observer: observer)
         
@@ -40,7 +40,7 @@ class TaskObserverManagementTests: XCTestCase {
     
     /// Test `removeObserverOfType(_:)`
     func testRemoveObserverOfType() {
-        let task = SimpleTask()
+        let task = anyTask(withResult: .value(1))
         let observer = SimpleObserver()
         task.add(observer: observer)
         
@@ -51,7 +51,7 @@ class TaskObserverManagementTests: XCTestCase {
     }
     
     func testContainsObserver() {
-        let task = SimpleTask()
+        let task = anyTask(withResult: .value(1))
         let observer = SimpleObserver()
         
         task.add(observer: observer)

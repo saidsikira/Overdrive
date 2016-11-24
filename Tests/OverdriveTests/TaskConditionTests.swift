@@ -8,7 +8,6 @@
 
 import XCTest
 @testable import Overdrive
-import TestSupport
 
 class TaskConditionTests: XCTestCase {
     
@@ -28,7 +27,7 @@ class TaskConditionTests: XCTestCase {
     
     /// Tests failed condition
     func testFailedCondition() {
-        let task = SimpleTask()
+        let task = anyTask(withResult: .value(1))
         let condition = FailedTestCondition()
         task.add(condition: condition)
         
@@ -47,14 +46,12 @@ class TaskConditionTests: XCTestCase {
         
         TaskQueue(qos: .default).add(task: task)
         
-        waitForExpectations(timeout: 1) { handlerError in
-            print(handlerError)
-        }
+        waitForExpectations(timeout: 1, handler: nil)
     }
     
     ///Tests satisfied condition
     func testSatisfiedCondition() {
-        let task = SimpleTask()
+        let task = anyTask(withResult: .value(1))
         let condition = SatisfiedTestCondition()
         task.add(condition: condition)
         
@@ -73,10 +70,7 @@ class TaskConditionTests: XCTestCase {
         
         TaskQueue(qos: .default).add(task: task)
         
-        waitForExpectations(timeout: 1) {
-            handlerError in
-            print(handlerError)
-        }
+        waitForExpectations(timeout: 1, handler: nil)
     }
     
     func testConditionName() {

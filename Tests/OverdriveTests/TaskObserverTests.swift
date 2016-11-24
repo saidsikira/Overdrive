@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import TestSupport
 
 @testable import Overdrive
 
@@ -22,16 +21,14 @@ class TaskObserverTests: XCTestCase {
     }
     
     func testTaskObserver() {
-        let task = SimpleTask()
+        let task = anyTask(withResult: .value(1))
         let queue = TaskQueue()
         
         task.add(observer: self)
         
         queue.add(task: task)
         
-        waitForExpectations(timeout: 0.2) { handlerError in
-            print(handlerError)
-        }
+        waitForExpectations(timeout: 0.2, handler: nil)
     }
 }
 

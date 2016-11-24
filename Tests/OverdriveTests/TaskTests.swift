@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import TestSupport
 
 @testable import Overdrive
 
@@ -16,12 +15,12 @@ class TaskTests: XCTestCase {
     let queue = TaskQueue(qos: .default)
     
     func testIntializedState() {
-        let task = SimpleTask()
+        let task = anyTask(withResult: .value(1))
         XCTAssertEqual(task.state, .initialized, "Task state should be: Initialized")
     }
     
     func testFinishedState() {
-        let task = SimpleTask()
+        let task = anyTask(withResult: .value(1))
         let expectation = self.expectation(description: "Task finished state expecation")
         
         task.onValue { value in
@@ -31,13 +30,11 @@ class TaskTests: XCTestCase {
         
         queue.add(task: task)
         
-        waitForExpectations(timeout: 0.3) { handlerError in
-            print(handlerError)
-        }
+        waitForExpectations(timeout: 0.3, handler: nil)
     }
     
     func testOnValueCompletionBlockValue() {
-        let task = SimpleTask()
+        let task = anyTask(withResult: .value(1))
         
         task
             .onValue { _ in }
@@ -47,7 +44,7 @@ class TaskTests: XCTestCase {
     }
     
     func testOnErrorCompletionBlockValue() {
-        let task = SimpleTask()
+        let task = anyTask(withResult: .value(1))
         
         task
             .onValue { _ in }
@@ -58,23 +55,21 @@ class TaskTests: XCTestCase {
     }
     
     func testOnValueBlockExecution() {
-        let task = SimpleTask()
+        let task = anyTask(withResult: .value(1))
         let expectation = self.expectation(description: "Task result value expecation")
         
         task.onValue { value in
-            XCTAssertEqual(value, 10, "Task result value should be 10")
+            XCTAssertEqual(value, 1, "Task result value should be 1")
             expectation.fulfill()
         }
         
         queue.add(task: task)
         
-        waitForExpectations(timeout: 0.1) { handlerError in
-            print(handlerError)
-        }
+        waitForExpectations(timeout: 0.1, handler: nil)
     }
     
     func testOnErrorBlockExecution() {
-        let task = FailableTask()
+        let task = anyTask(withResult: Result<Int>(TaskError.fail("Failed")))
         let expectation = self.expectation(description: "Task result error expecation")
         
         task
@@ -86,9 +81,7 @@ class TaskTests: XCTestCase {
         
         queue.add(task: task)
         
-        waitForExpectations(timeout: 0.1) { handlerError in
-            print(handlerError)
-        }
+        waitForExpectations(timeout: 0.1, handler: nil)
     }
     
     func testTaskEqueue() {

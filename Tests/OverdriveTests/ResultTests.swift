@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import TestSupport
+
 @testable import Overdrive
 
 class ResultTests: XCTestCase {

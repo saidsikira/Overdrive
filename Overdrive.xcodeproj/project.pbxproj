@@ -8,13 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B334B4D31DE727A4006343D0 /* TestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B334B4D21DE727A4006343D0 /* TestCase.swift */; };
-		B36FE5211D9081A4003C6A77 /* Overdrive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B36FE4EF1D9080E8003C6A77 /* Overdrive.framework */; };
 		B36FE53F1D908296003C6A77 /* Overdrive.h in Headers */ = {isa = PBXBuildFile; fileRef = B36FE53E1D908291003C6A77 /* Overdrive.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B36FE5401D90829E003C6A77 /* Overdrive.h in Headers */ = {isa = PBXBuildFile; fileRef = B36FE53E1D908291003C6A77 /* Overdrive.h */; };
-		B36FE5411D9082B2003C6A77 /* Overdrive.h in Headers */ = {isa = PBXBuildFile; fileRef = B36FE53E1D908291003C6A77 /* Overdrive.h */; };
-		B36FE5421D9082E8003C6A77 /* FailableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5371D9081E2003C6A77 /* FailableTask.swift */; };
-		B36FE5431D9082E8003C6A77 /* SimpleTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5381D9081E2003C6A77 /* SimpleTask.swift */; };
-		B36FE5441D9082E8003C6A77 /* TaskError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5391D9081E2003C6A77 /* TaskError.swift */; };
 		B36FE5501D9082F3003C6A77 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5281D9081E2003C6A77 /* Condition.swift */; };
 		B36FE5511D9082F3003C6A77 /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5291D9081E2003C6A77 /* Create.swift */; };
 		B36FE5521D9082F3003C6A77 /* FinishBlockObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE52A1D9081E2003C6A77 /* FinishBlockObserver.swift */; };
@@ -39,7 +34,6 @@
 		B36FE5821D9083B5003C6A77 /* TaskQueueDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5751D9083A2003C6A77 /* TaskQueueDelegateTests.swift */; };
 		B36FE5831D9083B5003C6A77 /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5761D9083A2003C6A77 /* TaskTests.swift */; };
 		B36FE5851D9083B5003C6A77 /* ThreadSafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5781D9083A2003C6A77 /* ThreadSafetyTests.swift */; };
-		B36FE5861D90847E003C6A77 /* TestSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B36FE5201D90818A003C6A77 /* TestSupport.framework */; };
 		B3B03DDB1DE101F600F4A5FC /* TaskConditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5721D9083A2003C6A77 /* TaskConditionTests.swift */; };
 		B3C4EF4E1D908DBD006BE749 /* Overdrive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B36FE4EF1D9080E8003C6A77 /* Overdrive.framework */; };
 		B3C4EF4F1D908DCC006BE749 /* Extensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B36FE5171D908181003C6A77 /* Extensions.framework */; };
@@ -49,10 +43,7 @@
 		B334B4D21DE727A4006343D0 /* TestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCase.swift; sourceTree = "<group>"; };
 		B36FE4E91D9080B7003C6A77 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		B36FE4EF1D9080E8003C6A77 /* Overdrive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Overdrive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B36FE5091D908176003C6A77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B36FE50A1D908176003C6A77 /* Overdrive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Overdrive.h; sourceTree = "<group>"; };
 		B36FE5171D908181003C6A77 /* Extensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Extensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B36FE5201D90818A003C6A77 /* TestSupport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TestSupport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B36FE5241D9081E2003C6A77 /* CollectionType+Overdrive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionType+Overdrive.swift"; sourceTree = "<group>"; };
 		B36FE5251D9081E2003C6A77 /* Operation+Overdrive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Operation+Overdrive.swift"; sourceTree = "<group>"; };
 		B36FE5261D9081E2003C6A77 /* QualityOfService+Overdrive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QualityOfService+Overdrive.swift"; sourceTree = "<group>"; };
@@ -67,9 +58,6 @@
 		B36FE5301D9081E2003C6A77 /* TaskObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskObserver.swift; sourceTree = "<group>"; };
 		B36FE5311D9081E2003C6A77 /* TaskQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskQueue.swift; sourceTree = "<group>"; };
 		B36FE5321D9081E2003C6A77 /* TaskQueueDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskQueueDelegate.swift; sourceTree = "<group>"; };
-		B36FE5371D9081E2003C6A77 /* FailableTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailableTask.swift; sourceTree = "<group>"; };
-		B36FE5381D9081E2003C6A77 /* SimpleTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTask.swift; sourceTree = "<group>"; };
-		B36FE5391D9081E2003C6A77 /* TaskError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskError.swift; sourceTree = "<group>"; };
 		B36FE53D1D908291003C6A77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B36FE53E1D908291003C6A77 /* Overdrive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Overdrive.h; sourceTree = "<group>"; };
 		B36FE5621D908387003C6A77 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,21 +89,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B36FE51A1D90818A003C6A77 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B36FE5211D9081A4003C6A77 /* Overdrive.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		B36FE55F1D908387003C6A77 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				B3C4EF4F1D908DCC006BE749 /* Extensions.framework in Frameworks */,
 				B3C4EF4E1D908DBD006BE749 /* Overdrive.framework in Frameworks */,
-				B36FE5861D90847E003C6A77 /* TestSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,7 +115,6 @@
 				B36FE4E91D9080B7003C6A77 /* Package.swift */,
 				B36FE4F01D9080E8003C6A77 /* Products */,
 				B36FE5221D9081E2003C6A77 /* Sources */,
-				B36FE5081D908176003C6A77 /* Support */,
 				B36FE56A1D9083A2003C6A77 /* Tests */,
 			);
 			sourceTree = "<group>";
@@ -146,20 +124,9 @@
 			children = (
 				B36FE4EF1D9080E8003C6A77 /* Overdrive.framework */,
 				B36FE5171D908181003C6A77 /* Extensions.framework */,
-				B36FE5201D90818A003C6A77 /* TestSupport.framework */,
 				B36FE5621D908387003C6A77 /* Tests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		B36FE5081D908176003C6A77 /* Support */ = {
-			isa = PBXGroup;
-			children = (
-				B36FE5091D908176003C6A77 /* Info.plist */,
-				B36FE50A1D908176003C6A77 /* Overdrive.h */,
-			);
-			name = Support;
-			path = Sources/Support;
 			sourceTree = "<group>";
 		};
 		B36FE5221D9081E2003C6A77 /* Sources */ = {
@@ -168,7 +135,6 @@
 				B36FE5231D9081E2003C6A77 /* Extensions */,
 				B36FE5271D9081E2003C6A77 /* Overdrive */,
 				B36FE53C1D908291003C6A77 /* Support */,
-				B36FE5361D9081E2003C6A77 /* TestSupport */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -199,16 +165,6 @@
 				B36FE5321D9081E2003C6A77 /* TaskQueueDelegate.swift */,
 			);
 			path = Overdrive;
-			sourceTree = "<group>";
-		};
-		B36FE5361D9081E2003C6A77 /* TestSupport */ = {
-			isa = PBXGroup;
-			children = (
-				B36FE5371D9081E2003C6A77 /* FailableTask.swift */,
-				B36FE5381D9081E2003C6A77 /* SimpleTask.swift */,
-				B36FE5391D9081E2003C6A77 /* TaskError.swift */,
-			);
-			path = TestSupport;
 			sourceTree = "<group>";
 		};
 		B36FE53C1D908291003C6A77 /* Support */ = {
@@ -266,14 +222,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B36FE51B1D90818A003C6A77 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B36FE5411D9082B2003C6A77 /* Overdrive.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -313,24 +261,6 @@
 			productReference = B36FE5171D908181003C6A77 /* Extensions.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		B36FE5181D90818A003C6A77 /* TestSupport */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B36FE51D1D90818A003C6A77 /* Build configuration list for PBXNativeTarget "TestSupport" */;
-			buildPhases = (
-				B36FE5191D90818A003C6A77 /* Sources */,
-				B36FE51A1D90818A003C6A77 /* Frameworks */,
-				B36FE51B1D90818A003C6A77 /* Headers */,
-				B36FE51C1D90818A003C6A77 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = TestSupport;
-			productName = Overdrive;
-			productReference = B36FE5201D90818A003C6A77 /* TestSupport.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		B36FE5611D908387003C6A77 /* Tests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B36FE5671D908387003C6A77 /* Build configuration list for PBXNativeTarget "Tests" */;
@@ -365,9 +295,6 @@
 					B36FE50F1D908181003C6A77 = {
 						DevelopmentTeam = UMX462F87M;
 					};
-					B36FE5181D90818A003C6A77 = {
-						DevelopmentTeam = UMX462F87M;
-					};
 					B36FE5611D908387003C6A77 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = UMX462F87M;
@@ -389,7 +316,6 @@
 			targets = (
 				B36FE4EE1D9080E8003C6A77 /* Overdrive */,
 				B36FE50F1D908181003C6A77 /* Extensions */,
-				B36FE5181D90818A003C6A77 /* TestSupport */,
 				B36FE5611D908387003C6A77 /* Tests */,
 			);
 		};
@@ -404,13 +330,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		B36FE5131D908181003C6A77 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B36FE51C1D90818A003C6A77 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -452,16 +371,6 @@
 				B36FE55C1D9082F8003C6A77 /* Operation+Overdrive.swift in Sources */,
 				B36FE55B1D9082F8003C6A77 /* CollectionType+Overdrive.swift in Sources */,
 				B36FE55D1D9082F8003C6A77 /* QualityOfService+Overdrive.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B36FE5191D90818A003C6A77 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B36FE5431D9082E8003C6A77 /* SimpleTask.swift in Sources */,
-				B36FE5441D9082E8003C6A77 /* TaskError.swift in Sources */,
-				B36FE5421D9082E8003C6A77 /* FailableTask.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -805,139 +714,6 @@
 			};
 			name = Release;
 		};
-		B36FE51E1D90818A003C6A77 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = UMX462F87M;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Sources/Support/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = io.swiftable.Overdrive;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = "";
-				SKIP_INSTALL = NO;
-				SUPPORTED_PLATFORMS = "watchsimulator watchos appletvsimulator appletvos iphonesimulator iphoneos macosx";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Debug;
-		};
-		B36FE51F1D90818A003C6A77 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = UMX462F87M;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Sources/Support/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = io.swiftable.Overdrive;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = "";
-				SKIP_INSTALL = NO;
-				SUPPORTED_PLATFORMS = "watchsimulator watchos appletvsimulator appletvos iphonesimulator iphoneos macosx";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Release;
-		};
 		B36FE5681D908387003C6A77 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1075,15 +851,6 @@
 			buildConfigurations = (
 				B36FE5151D908181003C6A77 /* Debug */,
 				B36FE5161D908181003C6A77 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B36FE51D1D90818A003C6A77 /* Build configuration list for PBXNativeTarget "TestSupport" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B36FE51E1D90818A003C6A77 /* Debug */,
-				B36FE51F1D90818A003C6A77 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
