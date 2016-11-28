@@ -8,9 +8,8 @@ DOC_FOLDER="latest"
 SOURCE_BRANCH="master"
 GITHUB_URL="https://github.com/arikis/Overdrive"
 
-#if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != $SOURCE_BRANCH ]; then exit 0; fi
+echo "[GIT]   Cloning from $GITHUB_URL\n"
 
-echo "[GIT]   Cloning from $GITHUB_URL"
 if [ -d $PROJECT_NAME ]; then
 	git -C $PROJECT_NAME pull origin $SOURCE_BRANCH
 else
@@ -26,12 +25,14 @@ git fetch --tags
 # Get latest tag
 LATEST_TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
 
+# Checkout to the latest tag
+echo "[GIT]   Checking out $LATEST_TAG\n"
+
+git checkout tags/$LATEST_TAG
+
 popd
 
-# Checkout to the latest tag
-echo "[GIT]   Checking out $LATEST_TAG"
-
-echo "[JAZZY] Generating documentation . . ."
+echo "[JAZZY] Generating documentation \n"
 
 # Generate documentation with jazzy
 jazzy \
