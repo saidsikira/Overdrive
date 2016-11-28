@@ -37,6 +37,7 @@ TaskQueue.background.add(task: task)
   * [Complex tasks](https://arikis.github.io/Overdrive/latest/complex-tasks.html)
   * [State Machine](https://arikis.github.io/Overdrive/latest/state-machine.html)
   * [Unit Testing](https://arikis.github.io/Overdrive/latest/unit-testing.html)
+* [Long term plans](#long-term-plans)
 
 ## What can I do with Overdrive?
 
@@ -173,3 +174,15 @@ All task properties are thread-safe by default, meaning that you can access them
 * [Protocol and Value Oriented Programming](https://developer.apple.com/videos/play/wwdc2016/419/)
 
 > `Overdrive` is a term for an effect used in electric guitar playing that occurs when guitar amp tubes starts to produce overdriven, almost distorted sound, due to the higher gain(master) setting.
+
+## Long term plans
+
+This section defines some long term plans for Overdrive. They're not scheduled for implementation or for any specific version.
+
+#### Remove `Foundation.Operation` dependency
+
+Currently, Overdrive leverages `Foundation.Operation` and `Foundation.OperationQueue` classes for concurrency and execution. While those classes provide excellent functionality, they're still rewrites of their Objective C counterpart (`NSOperation` and `NSOperationQueue`). This means that writing `Task<T>` requires a lot of overrides and state management.
+
+For example, any task subclass must override `run()` method to define execution point. If this method is not overridden, queue will perform assert to notify that this method should be overridden. Same will happen if `super.run()` is called.
+
+In the future, Overdrive should only use `libdispatch` for it's functionality.
