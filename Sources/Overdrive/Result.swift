@@ -34,11 +34,11 @@ public enum Result<T> {
     
     // MARK: Init methods
     
-    init(_ value: T) {
+    public init(_ value: T) {
         self = .value(value)
     }
     
-    init(_ error: Error) {
+    public init(_ error: Error) {
         self = .error(error)
     }
     
