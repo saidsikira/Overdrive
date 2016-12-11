@@ -676,8 +676,19 @@ open class Task<T>: TaskBase {
     // MARK: Init methods
     
     /// Create new instance of `Task<T>`
-    public override init() {
-        super.init()
+    ///
+    /// - Parameters:
+    ///   - dependencies: Dependencies
+    ///   - observers: Observers
+    ///   - conditions: Conditions
+    public convenience init(dependencies: [Operation] = [],
+                            observers: [TaskObserver] = [],
+                            conditions: [TaskCondition] = []) {
+        self.init()
+        
+        dependencies.forEach { add(dependency: $0) }
+        observers.forEach { add(observer: $0) }
+        conditions.forEach { add(condition: $0) }
     }
     
     // MARK: `Foundation.Operation` Key value observation
