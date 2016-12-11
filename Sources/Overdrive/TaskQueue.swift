@@ -203,10 +203,10 @@ open class TaskQueue {
         }
         
         // Evaluate condition dependencies and add them to the queue
-        _ = task
+        task
             .conditions
             .flatMap { $0.dependencies(forTask: task) }
-            .map { add(dependency: $0, forTask: task) }
+            .forEach { add(dependency: $0, forTask: task) }
         
         operationQueue.addOperation(task)
         
@@ -221,8 +221,8 @@ open class TaskQueue {
      
      - Parameter tasks: Array of `Task<T>`
      */
-    open func add<T: Task<Any>>(tasks: [T]) {
-        _ = tasks.map { add(task: $0) }
+    open func add<T>(tasks: Task<T>...) {
+        tasks.forEach { add(task: $0) }
     }
     
     /// Adds dependency for specific task

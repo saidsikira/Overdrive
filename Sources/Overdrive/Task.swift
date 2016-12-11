@@ -445,7 +445,7 @@ open class Task<T>: TaskBase {
             }
         
         if indexes.count > 0 {
-            _ = indexes.map { conditions.remove(at: $0) }
+            indexes.forEach { conditions.remove(at: $0) }
             return true
         }
         
@@ -535,7 +535,7 @@ open class Task<T>: TaskBase {
             }
         
         if indexes.count > 0 {
-            _ = indexes.map { observers.remove(at: $0) }
+            indexes.forEach { observers.remove(at: $0) }
             return true
         }
 
