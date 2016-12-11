@@ -12,7 +12,7 @@ You can use Overdrive in your projects by using one of the following package man
 [Carthage](#https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate Overdrive with Carthage add following to your `Cartfile`:
 
 ```
-github "arikis/Overdrive" >= 0.0.2
+github "arikis/Overdrive" >= 0.2
 ```
 
 Then download and build Overdrive by running:
@@ -30,12 +30,11 @@ Carthage will build a version of framework for each Apple platform (iOS, macOS, 
 CocoaPods is a longstanding dependency manager in any Cocoa development. To use Overdrive with CocoaPods add following to your `Podfile`
 
 ```ruby
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '10.0'
+platform :ios, '8.0'
 use_frameworks!
 
-target 'Your Target Name' do
-    pod 'Overdrive', '~> 0.0.2'
+target 'Your App Target' do
+    pod 'Overdrive', '~> 0.2'
 end
 ```
 
@@ -51,7 +50,7 @@ let package = Package(
   dependencies: [
     .Package(url: "https://github.com/arikis/Overdrive.git",
             majorVersion: 0,
-            minorVersion: 2)
+            minor: 2)
   ]
 )
 ```
