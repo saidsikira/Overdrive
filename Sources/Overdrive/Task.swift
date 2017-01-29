@@ -589,6 +589,7 @@ open class Task<T>: TaskBase {
             return isCancelled
         case .pending:
             guard !isCancelled else {
+				self.state = .ready
                 return true
             }
             
