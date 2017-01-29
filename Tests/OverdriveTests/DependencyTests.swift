@@ -107,5 +107,35 @@ class DependencyTests: TestCase {
         
         waitForExpectations(timeout: 1, handler: nil)
     }
+	
+	func testCancellationOfDependentTask()
+	{
+		let queue = TaskQueue()
+		let delay: TimeInterval = 1.0
+		let delayTask = TestCaseDelayedTask(withResult: .value(()), delay: delay)
+		
+		let equalExpectation = expectation(description: "value is equal to initial value")
+		let initialValue = 0
+		var value = initialValue
+		
+		let modifyTask = InlineTask({
+			value = 1
+		})
+		modifyTask.add(dependency: delayTask)
+		
+		DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+			if value == initialValue
+			{
+				equalExpectation.fulfill()
+			}
+		})
+		
+		queue.add(task: delayTask)
+		queue.add(task: modifyTask)
+		
+		modifyTask.cancel()
+		
+		waitForExpectations(timeout: delay + 1.0)
+	}
     
 }
