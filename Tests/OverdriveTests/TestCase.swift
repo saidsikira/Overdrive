@@ -37,18 +37,18 @@ class TestCaseTask<T>: Task<T> {
 /// in cases where task should finished after a predefinied period of time
 /// with result should be defined at initialization stage.
 class TestCaseDelayedTask<T>: TestCaseTask<T> {
-    
+
     /// Test result
     let delay: TimeInterval
-    
+
     /// Create new instance with specified result
     ///
     /// - Parameter result: Any `Result<T>`
     init(withResult result: Result<T>, delay: TimeInterval) {
         self.delay = delay
-		super.init(withResult: result)
+        super.init(withResult: result)
     }
-    
+
     override func run() {
         DispatchQueue.main.asyncAfter(
             deadline: DispatchTime.now() + Double(Int64(self.delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {

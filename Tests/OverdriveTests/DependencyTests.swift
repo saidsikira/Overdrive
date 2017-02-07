@@ -108,34 +108,33 @@ class DependencyTests: TestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
 	
-	func testCancellationOfDependentTask()
-	{
-		let queue = TaskQueue()
-		let delay: TimeInterval = 1.0
-		let delayTask = TestCaseDelayedTask(withResult: .value(()), delay: delay)
-		
-		let equalExpectation = expectation(description: "value is equal to initial value")
-		let initialValue = 0
-		var value = initialValue
-		
-		let modifyTask = InlineTask({
-			value = 1
-		})
-		modifyTask.add(dependency: delayTask)
-		
-		let checkTask = InlineTask({
-			XCTAssert(value == initialValue)
-			equalExpectation.fulfill()
-		})
-		checkTask.add(dependency: modifyTask)
-		
-		queue.add(task: delayTask)
-		queue.add(task: modifyTask)
-		queue.add(task: checkTask)
-		
-		modifyTask.cancel()
-		
-		waitForExpectations(timeout: delay + 0.5)
-	}
-    
+    func testCancellationOfDependentTask()
+    {
+        let queue = TaskQueue()
+        let delay: TimeInterval = 1.0
+        let delayTask = TestCaseDelayedTask(withResult: .value(()), delay: delay)
+
+        let equalExpectation = expectation(description: "value is equal to initial value")
+        let initialValue = 0
+        var value = initialValue
+
+        let modifyTask = InlineTask({
+            value = 1
+        })
+        modifyTask.add(dependency: delayTask)
+
+        let checkTask = InlineTask({
+            XCTAssert(value == initialValue)
+            equalExpectation.fulfill()
+        })
+        checkTask.add(dependency: modifyTask)
+
+        queue.add(task: delayTask)
+        queue.add(task: modifyTask)
+        queue.add(task: checkTask)
+        
+        modifyTask.cancel()
+        
+        waitForExpectations(timeout: delay + 0.5)
+    }
 }
