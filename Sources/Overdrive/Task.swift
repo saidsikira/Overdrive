@@ -588,8 +588,13 @@ open class Task<T>: TaskBase {
         case .initialized:
             return isCancelled
         case .pending:
-            guard !isCancelled else {
-                return true
+            if isCancelled {
+                let ready = super.isReady
+                if ready
+                {
+                    self.state = .ready
+                }
+                return ready
             }
             
             if super.isReady {
