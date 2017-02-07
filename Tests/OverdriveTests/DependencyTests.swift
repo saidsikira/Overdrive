@@ -108,8 +108,7 @@ class DependencyTests: TestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
 	
-    func testCancellationOfDependentTask()
-    {
+    func testCancellationOfDependentTask() {
         let queue = TaskQueue()
         let delay: TimeInterval = 1.0
         let delayTask = TestCaseDelayedTask(withResult: .value(()), delay: delay)

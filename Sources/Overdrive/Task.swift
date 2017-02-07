@@ -590,8 +590,7 @@ open class Task<T>: TaskBase {
         case .pending:
             if isCancelled {
                 let ready = super.isReady
-                if ready
-                {
+                if ready {
                     self.state = .ready
                 }
                 return ready
