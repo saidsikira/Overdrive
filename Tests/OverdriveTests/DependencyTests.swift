@@ -111,7 +111,7 @@ class DependencyTests: TestCase {
     func testCancellationOfDependentTask() {
         let queue = TaskQueue()
         let delay: TimeInterval = 1.0
-        let delayTask = TestCaseDelayedTask(withResult: .value(()), delay: delay)
+        let delayTask = TestCaseTask(withResult: .value(()), delay: delay)
 
         let equalExpectation = expectation(description: "value is equal to initial value")
         let initialValue = 0
