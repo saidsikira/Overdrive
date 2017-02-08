@@ -19,17 +19,21 @@ class TestCaseTask<T>: Task<T> {
     
     /// Test result
     let testResult: Result<T>
+    let delay: TimeInterval
     
     
     /// Create new instance with specified result
     ///
     /// - Parameter result: Any `Result<T>`
-    init(withResult result: Result<T>) {
+    init(withResult result: Result<T>, delay: TimeInterval = 0.0) {
+        self.delay = delay
         self.testResult = result
     }
     
     override func run() {
-        finish(with: testResult)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(self.delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+            self.finish(with: self.testResult)
+        })
     }
 }
 
