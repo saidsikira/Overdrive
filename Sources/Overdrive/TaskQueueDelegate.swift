@@ -40,7 +40,6 @@ public protocol TaskQueueDelegate: class {
     func willFinish<T>(task: Task<T>, inQueue queue: TaskQueue)
 }
 
-
 //MARK: - TaskQueueDelegate default implementations
 extension TaskQueueDelegate {
     
