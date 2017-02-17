@@ -6,6 +6,7 @@
 //  Copyright © 2016 Said Sikira. All rights reserved.
 //
 
+import class Foundation.NSObject
 import class Foundation.Operation
 import class Foundation.DispatchQueue
 
@@ -43,14 +44,35 @@ open class TaskBase: Operation {
             willChangeValue(forKey: "state")
             
             queue.sync {
-                assert(internalState.canTransition(toState: newState),
-                       "Invalid state transformation")
+                assert(internalState.canTransition(to: newState),
+                       "Invalid state transformation from \(internalState) to \(newState)")
                 internalState = newState
             }
             
             // Notifity internal `Foundation.Operation` observers that task state is changed
             didChangeValue(forKey: "state")
         }
+    }
+    
+    // MARK: `Foundation.Operation` Key value observation
+    
+    /// Called by `Foundation.Operation` KVO mechanisms to check if task is ready
+    @objc class func keyPathsForValuesAffectingIsReady() -> Set<NSObject> {
+        return ["state" as NSObject]
+    }
+    
+    /// Called by `Foundation.Operation` KVO mechanisms to check if task is executing
+    @objc class func keyPathsForValuesAffectingIsExecuting() -> Set<NSObject> {
+        return ["state" as NSObject]
+    }
+    
+    /// Called by `Foundation.Operation` KVO mechanisms to check if task is finished
+    @objc class func keyPathsForValuesAffectingIsFinished() -> Set<NSObject> {
+        return ["state" as NSObject]
+    }
+    
+    @objc class func keyPathsForValuesAffectingIsCancelled() -> Set<NSObject> {
+        return ["state" as NSObject]
     }
     
     /// This method changes task state to `pending`.
