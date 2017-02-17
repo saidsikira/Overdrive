@@ -12,12 +12,14 @@ import XCTest
 
 class TaskObserverTests: XCTestCase {
     
-    var startExecutionExpecation: XCTestExpectation?
-    var finishExecutionExpecation: XCTestExpectation?
+    var startExecutionExpection: XCTestExpectation?
+    var finishExecutionExpection: XCTestExpectation?
+    var willFinishExecutionExpection: XCTestExpectation?
     
     override func setUp() {
-        startExecutionExpecation = expectation(description: "Task started expecatation")
-        finishExecutionExpecation = expectation(description: "Task finished expecation")
+        startExecutionExpection = expectation(description: "Task started expectation")
+        willFinishExecutionExpection = expectation(description: "Task will finish expection")
+        finishExecutionExpection = expectation(description: "Task finished expection")
     }
     
     func testTaskObserver() {
@@ -34,10 +36,15 @@ class TaskObserverTests: XCTestCase {
 
 extension TaskObserverTests: TaskObserver {
     func taskDidStartExecution<T>(_ task: Task<T>) {
-        startExecutionExpecation?.fulfill()
+        startExecutionExpection?.fulfill()
     }
     
     func taskDidFinishExecution<T>(_ task: Task<T>) {
-        finishExecutionExpecation?.fulfill()
+        finishExecutionExpection?.fulfill()
+    }
+
+    func taskWillFinishExecution<T>(_ task: Task<T>) {
+        willFinishExecutionExpection?.fulfill()
+        XCTAssert(task.isExecuting)
     }
 }

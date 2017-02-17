@@ -633,6 +633,10 @@ open class Task<T>: TaskBase {
     
     /// Changes task state to `finished`
     internal final func moveToFinishedState() {
+        for observer in observers {
+            observer.taskWillFinishExecution(self)
+        }
+        
         state = .finished
         
         for observer in observers {

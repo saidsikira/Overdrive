@@ -13,12 +13,14 @@ import XCTest
 class TaskQueueDelegateTests: XCTestCase {
     let queue = TaskQueue(qos: .default)
     
-    var startExecutionExpecation: XCTestExpectation?
-    var finishExecutionExpecation: XCTestExpectation?
-    
+    var startExecutionExpection: XCTestExpectation?
+    var finishExecutionExpection: XCTestExpectation?
+    var willFinishExecutionExpection: XCTestExpectation?
+
     override func setUp() {
-        startExecutionExpecation = expectation(description: "Task added to the queue expecatation")
-        finishExecutionExpecation = expectation(description: "Task finished expecation")
+        startExecutionExpection = expectation(description: "Task added to the queue expectation")
+        finishExecutionExpection = expectation(description: "Task finished expection")
+        willFinishExecutionExpection = expectation(description: "Task will finish expection")
     }
     
     func testDelegate() {
@@ -36,15 +38,21 @@ extension TaskQueueDelegateTests: TaskQueueDelegate {
     func didAdd<T>(task: Task<T>, toQueue queue: TaskQueue) {
         XCTAssertEqual(task.state, State.initialized)
         XCTAssertEqual(task.name, "SimpleTask")
-        startExecutionExpecation?.fulfill()
+        startExecutionExpection?.fulfill()
     }
     
     func didFinish<T>(task: Task<T>, inQueue queue: TaskQueue) {
         XCTAssertEqual(task.state, State.finished)
         XCTAssertEqual(task.name, "SimpleTask")
-        finishExecutionExpecation?.fulfill()
+        finishExecutionExpection?.fulfill()
     }
-    
+
+    func willFinish<T>(task: Task<T>, inQueue queue: TaskQueue) {
+        XCTAssertEqual(task.state, State.executing)
+        XCTAssertEqual(task.name, "SimpleTask")
+        willFinishExecutionExpection?.fulfill()
+    }
+
     func didRetry<T>(_ task: Task<T>, inQueue queue: TaskQueue) {
         XCTFail("Should retry should not be called")
     }

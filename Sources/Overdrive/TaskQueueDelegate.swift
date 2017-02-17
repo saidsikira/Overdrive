@@ -14,7 +14,7 @@ import Foundation
 public protocol TaskQueueDelegate: class {
     
     /**
-     Notifies reciever that the task was added to the queue.
+     Notifies receiver that the task was added to the queue.
      
      - Note: This method is called also when task execution is retried
      
@@ -24,10 +24,32 @@ public protocol TaskQueueDelegate: class {
     func didAdd<T>(task: Task<T>, toQueue queue: TaskQueue)
     
     /**
-     Notifies reciever that the task finished with execution
+     Notifies receiver that the task finished with execution
      
      - Parameter task: Task that finished execution
      - Parameter queue: Queue in which task was added
      */
     func didFinish<T>(task: Task<T>, inQueue queue: TaskQueue)
+
+    /**
+     Notifies receiver that the task is about to finish executing
+
+     - Parameter task: Task that will finish execution
+     - Parameter queue: Queue in which task was added
+     */
+    func willFinish<T>(task: Task<T>, inQueue queue: TaskQueue)
+}
+
+
+//MARK: - TaskQueueDelegate default implementations
+extension TaskQueueDelegate {
+    
+    public func didAdd<T>(task: Task<T>, toQueue queue: TaskQueue) {
+    }
+    
+    public func didFinish<T>(task: Task<T>, inQueue queue: TaskQueue) {
+    }
+    
+    public func willFinish<T>(task: Task<T>, inQueue queue: TaskQueue) {        
+    }
 }
