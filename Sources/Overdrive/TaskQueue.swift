@@ -129,7 +129,13 @@ open class TaskQueue {
         get { return operationQueue.isSuspended }
         
         set(suspended) {
+            operationQueue.willChangeValue(forKey: "isSuspended")
             operationQueue.isSuspended = suspended
+            operationQueue.didChangeValue(forKey: "isSuspended")
+            
+            for task in tasks {
+                task.enqueue(suspended: suspended)
+            }
         }
     }
     
@@ -216,17 +222,7 @@ open class TaskQueue {
         
         delegate?.didAdd(task: task, toQueue: self)
         
-        task.enqueue()
-    }
-    
-    /**
-     Adds array of tasks to the TaskQueue and starts execution. Method will
-     call delegate method responsible for adding tasks.
-     
-     - Parameter tasks: Array of `Task<T>`
-     */
-    open func add<T>(tasks: Task<T>...) {
-        tasks.forEach { add(task: $0) }
+        task.enqueue(suspended: isSuspended)
     }
     
     /// Adds dependency for specific task
@@ -238,7 +234,10 @@ open class TaskQueue {
         task.add(dependency: dependency)
         operationQueue.addOperation(dependency)
         
-        dependency.enqueue()
+        dependency.enqueue(suspended: isSuspended)
+    }
+    
+    func executeSuspendedTasks() {
     }
 }
 

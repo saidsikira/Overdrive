@@ -6,8 +6,20 @@
 //  Copyright © 2016 Said Sikira. All rights reserved.
 //
 
+import class Foundation.NSObject
 import class Foundation.Operation
 import class Foundation.DispatchQueue
+
+extension Operation {
+    
+    /// Enqueue methods changes task state to `pending`. Default implementation
+    /// defined in `Operation` extension does nothing. Subclasses should override
+    /// this method to define how they are enqueued.
+    ///
+    /// - Parameter suspended: Task queue suspended state
+    func enqueue(suspended: Bool) {
+    }
+}
 
 /// Base class of `Task<T>`, responsible for state management.
 open class TaskBase: Operation {
@@ -43,8 +55,8 @@ open class TaskBase: Operation {
             willChangeValue(forKey: "state")
             
             queue.sync {
-                assert(internalState.canTransition(toState: newState),
-                       "Invalid state transformation")
+                assert(internalState.canTransition(to: newState),
+                       "Invalid state transformation from \(internalState) to \(newState)")
                 internalState = newState
             }
             
@@ -53,25 +65,28 @@ open class TaskBase: Operation {
         }
     }
     
-    /// This method changes task state to `pending`.
-    ///
-    /// - note: This method should be called as a final step in adding task to the
-    /// `TaskQueue`.
-    @objc fileprivate func willEnqueue() {
-        state = .pending
+    override func enqueue(suspended: Bool) {
+        if !suspended { state = .pending }
     }
-}
-
-extension Operation {
     
-    /// Changes operation state to `pending` if it responds to
-    /// `willEnqueue` selector.
-    internal func enqueue() {
-        let enqueueSelector = #selector(Task<Any>.willEnqueue)
-        
-        if self.responds(to: enqueueSelector) {
-            self.perform(enqueueSelector)
-        }
+    // MARK: `Foundation.Operation` Key value observation
+    
+    /// Called by `Foundation.Operation` KVO mechanisms to check if task is ready
+    @objc class func keyPathsForValuesAffectingIsReady() -> Set<NSObject> {
+        return ["state" as NSObject]
+    }
+    
+    /// Called by `Foundation.Operation` KVO mechanisms to check if task is executing
+    @objc class func keyPathsForValuesAffectingIsExecuting() -> Set<NSObject> {
+        return ["state" as NSObject]
+    }
+    
+    /// Called by `Foundation.Operation` KVO mechanisms to check if task is finished
+    @objc class func keyPathsForValuesAffectingIsFinished() -> Set<NSObject> {
+        return ["state" as NSObject]
+    }
+    
+    @objc class func keyPathsForValuesAffectingIsCancelled() -> Set<NSObject> {
+        return ["state" as NSObject]
     }
 }
-

@@ -587,18 +587,13 @@ open class Task<T>: TaskBase {
         switch state {
         case .initialized:
             return isCancelled
+        case .cancelled:
+            return true
         case .pending:
-            if isCancelled {
-                let ready = super.isReady
-                if ready {
-                    self.state = .ready
-                }
-                return ready
-            }
+            guard !isCancelled == true else { return true }
             
-            if super.isReady {
-                evaluateConditions()
-            }
+            if super.isReady { evaluateConditions() }
+            
             return false
         case .ready:
             return super.isReady || isCancelled
@@ -615,6 +610,11 @@ open class Task<T>: TaskBase {
     /// Boolean value indicating if task finished with execution.
     open override var isFinished: Bool {
         return state == .finished
+    }
+    
+    /// Boolean value indicating if task execution is cancelled.
+    public final override var isCancelled: Bool {
+        return state == .cancelled
     }
     
     /// Evaluates all task conditions
@@ -681,6 +681,10 @@ open class Task<T>: TaskBase {
         assertionFailure("run() method should be overrided in \(type(of: self))")
     }
     
+    open override func cancel() {
+        self.state = .cancelled
+    }
+    
     // MARK: Init methods
     
     /// Create new instance of `Task<T>`
@@ -697,23 +701,6 @@ open class Task<T>: TaskBase {
         dependencies.forEach { add(dependency: $0) }
         observers.forEach { add(observer: $0) }
         conditions.forEach { add(condition: $0) }
-    }
-    
-    // MARK: `Foundation.Operation` Key value observation
-    
-    /// Called by `Foundation.Operation` KVO mechanisms to check if task is ready
-    @objc class func keyPathsForValuesAffectingIsReady() -> Set<NSObject> {
-        return ["state" as NSObject]
-    }
-    
-    /// Called by `Foundation.Operation` KVO mechanisms to check if task is executing
-    @objc class func keyPathsForValuesAffectingIsExecuting() -> Set<NSObject> {
-        return ["state" as NSObject]
-    }
-    
-    /// Called by `Foundation.Operation` KVO mechanisms to check if task is finished
-    @objc class func keyPathsForValuesAffectingIsFinished() -> Set<NSObject> {
-        return ["state" as NSObject]
     }
     
     // MARK: Dependency management

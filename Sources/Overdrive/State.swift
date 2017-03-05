@@ -14,6 +14,9 @@ enum State: Int, Comparable {
     /// Task state is `Initialized`
     case initialized
     
+    /// Task is cancelled
+    case cancelled
+    
     /// Task state is `Pending` and ready to evaluate conditions
     case pending
     
@@ -35,8 +38,12 @@ enum State: Int, Comparable {
      
      - Returns: Boolean value indicating whether state change is possible
     */
-    func canTransition(toState state: State) -> Bool {
+    func canTransition(to state: State) -> Bool {
         switch (self, state) {
+        case (let anyState, .cancelled) where anyState != .cancelled || anyState != .finished:
+            return true
+        case (.cancelled, .finished):
+            return true
         case (.initialized, .pending):
             return true
         case (.pending, .ready):
