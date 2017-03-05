@@ -87,7 +87,8 @@ class TaskTests: XCTestCase {
     func testTaskEqueue() {
         let task = Task<Int>()
         
-        (task as Operation).enqueue()
+        (task as Operation).enqueue(suspended: false)
+        sleep(1)
 
         /// The moment you call `enqueue()` method, `Foundation.Operation`
         /// KVO observers will check if task is ready for execution. Since

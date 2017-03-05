@@ -34,6 +34,7 @@
 		B36FE5821D9083B5003C6A77 /* TaskQueueDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5751D9083A2003C6A77 /* TaskQueueDelegateTests.swift */; };
 		B36FE5831D9083B5003C6A77 /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5761D9083A2003C6A77 /* TaskTests.swift */; };
 		B36FE5851D9083B5003C6A77 /* ThreadSafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5781D9083A2003C6A77 /* ThreadSafetyTests.swift */; };
+		B375EE1A1E6B723A00A7181C /* TaskQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B375EE191E6B723A00A7181C /* TaskQueueTests.swift */; };
 		B3B03DDB1DE101F600F4A5FC /* TaskConditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5721D9083A2003C6A77 /* TaskConditionTests.swift */; };
 		B3C4EF4E1D908DBD006BE749 /* Overdrive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B36FE4EF1D9080E8003C6A77 /* Overdrive.framework */; };
 		B3C4EF4F1D908DCC006BE749 /* Extensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B36FE5171D908181003C6A77 /* Extensions.framework */; };
@@ -72,6 +73,7 @@
 		B36FE5751D9083A2003C6A77 /* TaskQueueDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskQueueDelegateTests.swift; sourceTree = "<group>"; };
 		B36FE5761D9083A2003C6A77 /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		B36FE5781D9083A2003C6A77 /* ThreadSafetyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafetyTests.swift; sourceTree = "<group>"; };
+		B375EE191E6B723A00A7181C /* TaskQueueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskQueueTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +198,7 @@
 				B36FE5731D9083A2003C6A77 /* TaskObserverManagementTests.swift */,
 				B36FE5741D9083A2003C6A77 /* TaskObserverTests.swift */,
 				B36FE5751D9083A2003C6A77 /* TaskQueueDelegateTests.swift */,
+				B375EE191E6B723A00A7181C /* TaskQueueTests.swift */,
 				B36FE5761D9083A2003C6A77 /* TaskTests.swift */,
 				B36FE5781D9083A2003C6A77 /* ThreadSafetyTests.swift */,
 				B334B4D41DE72F91006343D0 /* TestCase */,
@@ -386,6 +389,7 @@
 				B334B4D31DE727A4006343D0 /* TestCase.swift in Sources */,
 				B36FE5821D9083B5003C6A77 /* TaskQueueDelegateTests.swift in Sources */,
 				B36FE5831D9083B5003C6A77 /* TaskTests.swift in Sources */,
+				B375EE1A1E6B723A00A7181C /* TaskQueueTests.swift in Sources */,
 				B3B03DDB1DE101F600F4A5FC /* TaskConditionTests.swift in Sources */,
 				B36FE5801D9083B5003C6A77 /* TaskObserverManagementTests.swift in Sources */,
 				B36FE5811D9083B5003C6A77 /* TaskObserverTests.swift in Sources */,
@@ -500,6 +504,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = io.swiftable.Overdrive;
 				PRODUCT_NAME = "$(PROJECT_NAME)";
 				SDKROOT = "";
@@ -565,6 +570,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = io.swiftable.Overdrive;
 				PRODUCT_NAME = "$(PROJECT_NAME)";
 				SDKROOT = "";
