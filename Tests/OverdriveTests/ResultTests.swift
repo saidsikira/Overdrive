@@ -32,4 +32,12 @@ class ResultTests: XCTestCase {
         
         XCTAssertNotNil(stringResult.error)
     }
+    
+    func testFlatMap() {
+        let result: Result = .value(10)
+        let stringResult = result.flatMap { return Result("\($0)") }
+        
+        XCTAssertEqual(stringResult.value, "10")
+        XCTAssertNil(stringResult.error)
+    }
 }
