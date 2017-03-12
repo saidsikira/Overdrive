@@ -97,4 +97,81 @@ class TaskTests: XCTestCase {
         
         XCTAssertEqual(task.state, .ready)
     }
+    
+    func testIsCancelled() {
+        let task = anyTask(withResult: .value(0))
+        task.cancel()
+        
+        /// operations / tasks MUST report isCancelled = true if cancelled
+        XCTAssertTrue(task.isCancelled)
+    }
+    
+    func testStateIfCancelled() {
+        let queue = TaskQueue()
+        let task = anyTask(withResult: .value(0))
+        task.cancel()
+        queue.add(task: task)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+            
+            /// Tasks cancelled while not beeing enqueued yet need to be able
+            /// to transition from `initialized` to `finished` state
+        
+            /// According to `Foundation.Operation` API Reference
+            /// operations / tasks MUST finally
+            /// report isFinished = true if cancelled
+            XCTAssertEqual(task.state, .finished)
+            
+            /// Tasks MUST NOT call run() if cancelled before being enqueued
+            XCTAssert(task.result == nil)
+        })
+    }
+    
+    func testCancelSuspendedTask() {
+        let task = anyTask(withResult: .value(0))
+        queue.isSuspended = true
+        queue.add(task: task)
+        task.cancel()
+        queue.isSuspended = false
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+            
+            /// Tasks MUST NOT transition to `pending` state 
+            /// if being cancelled before
+            XCTAssertEqual(task.state, .finished)
+            
+            /// Tasks MUST NOT call run() if the queue's 
+            /// `isSuspended` state is set to false 
+            /// after task has been cancelled
+            XCTAssert(task.result == nil)
+        })
+    }
+    
+    func testCancellationOfDependentTask() {
+        let queue = TaskQueue()
+        let delay: TimeInterval = 1.0
+        let delayTask = TestCaseTask(withResult: .value(()), delay: delay)
+        
+        let equalExpectation = expectation(description: "value is equal to initial value")
+        let initialValue = 0
+        var value = initialValue
+        
+        let modifyTask = InlineTask({
+            value = 1
+        })
+        modifyTask.add(dependency: delayTask)
+        
+        let checkTask = InlineTask({
+            XCTAssert(value == initialValue)
+            equalExpectation.fulfill()
+        })
+        checkTask.add(dependency: modifyTask)
+        
+        queue.add(task: delayTask)
+        queue.add(task: modifyTask)
+        queue.add(task: checkTask)
+        
+        modifyTask.cancel()
+        
+        waitForExpectations(timeout: delay + 0.5)
+    }
 }
