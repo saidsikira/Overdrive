@@ -66,7 +66,7 @@ open class TaskBase: Operation {
     }
     
     override func enqueue(suspended: Bool) {
-        if !suspended { state = .pending }
+		if !suspended && !isCancelled { state = .pending }
     }
     
     // MARK: `Foundation.Operation` Key value observation
