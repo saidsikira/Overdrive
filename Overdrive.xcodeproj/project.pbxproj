@@ -15,7 +15,6 @@
 		B36FE5521D9082F3003C6A77 /* FinishBlockObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE52A1D9081E2003C6A77 /* FinishBlockObserver.swift */; };
 		B36FE5531D9082F3003C6A77 /* InlineTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE52B1D9081E2003C6A77 /* InlineTask.swift */; };
 		B36FE5541D9082F3003C6A77 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE52C1D9081E2003C6A77 /* Result.swift */; };
-		B36FE5551D9082F3003C6A77 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE52D1D9081E2003C6A77 /* State.swift */; };
 		B36FE5561D9082F3003C6A77 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE52E1D9081E2003C6A77 /* Task.swift */; };
 		B36FE5571D9082F3003C6A77 /* TaskBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE52F1D9081E2003C6A77 /* TaskBase.swift */; };
 		B36FE5581D9082F3003C6A77 /* TaskObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FE5301D9081E2003C6A77 /* TaskObserver.swift */; };
@@ -53,7 +52,6 @@
 		B36FE52A1D9081E2003C6A77 /* FinishBlockObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishBlockObserver.swift; sourceTree = "<group>"; };
 		B36FE52B1D9081E2003C6A77 /* InlineTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineTask.swift; sourceTree = "<group>"; };
 		B36FE52C1D9081E2003C6A77 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
-		B36FE52D1D9081E2003C6A77 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		B36FE52E1D9081E2003C6A77 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		B36FE52F1D9081E2003C6A77 /* TaskBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskBase.swift; sourceTree = "<group>"; };
 		B36FE5301D9081E2003C6A77 /* TaskObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskObserver.swift; sourceTree = "<group>"; };
@@ -159,7 +157,6 @@
 				B36FE52A1D9081E2003C6A77 /* FinishBlockObserver.swift */,
 				B36FE52B1D9081E2003C6A77 /* InlineTask.swift */,
 				B36FE52C1D9081E2003C6A77 /* Result.swift */,
-				B36FE52D1D9081E2003C6A77 /* State.swift */,
 				B36FE52E1D9081E2003C6A77 /* Task.swift */,
 				B36FE52F1D9081E2003C6A77 /* TaskBase.swift */,
 				B36FE5301D9081E2003C6A77 /* TaskObserver.swift */,
@@ -362,7 +359,6 @@
 				B36FE5511D9082F3003C6A77 /* Create.swift in Sources */,
 				B36FE5581D9082F3003C6A77 /* TaskObserver.swift in Sources */,
 				B36FE5561D9082F3003C6A77 /* Task.swift in Sources */,
-				B36FE5551D9082F3003C6A77 /* State.swift in Sources */,
 				B36FE5571D9082F3003C6A77 /* TaskBase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

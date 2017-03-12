@@ -36,19 +36,19 @@ class TaskQueueDelegateTests: XCTestCase {
 
 extension TaskQueueDelegateTests: TaskQueueDelegate {
     func didAdd<T>(task: Task<T>, toQueue queue: TaskQueue) {
-        XCTAssertEqual(task.state, State.initialized)
+        XCTAssertEqual(task.state, .initialized)
         XCTAssertEqual(task.name, "SimpleTask")
         startExecutionExpection?.fulfill()
     }
     
     func didFinish<T>(task: Task<T>, inQueue queue: TaskQueue) {
-        XCTAssertEqual(task.state, State.finished)
+        XCTAssertEqual(task.state, .finished)
         XCTAssertEqual(task.name, "SimpleTask")
         finishExecutionExpection?.fulfill()
     }
 
     func willFinish<T>(task: Task<T>, inQueue queue: TaskQueue) {
-        XCTAssertEqual(task.state, State.executing)
+        XCTAssertEqual(task.state, .executing)
         XCTAssertEqual(task.name, "SimpleTask")
         willFinishExecutionExpection?.fulfill()
     }
