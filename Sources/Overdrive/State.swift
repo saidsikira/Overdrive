@@ -35,16 +35,16 @@ enum State: Int, Comparable {
      
      - Returns: Boolean value indicating whether state change is possible
     */
-    func canTransition(to state: State) -> Bool {
+    func canTransition(to state: State, ifCancelled cancelled: Bool) -> Bool {
         switch (self, state) {
-        case (let anyState, .cancelled) where anyState != .cancelled || anyState != .finished:
-            return true
-        case (.cancelled, .finished):
-            return true
         case (.initialized, .pending):
             return true
+        case (.initialized, .finished):
+            return cancelled
         case (.pending, .ready):
             return true
+        case (.pending, .finished):
+            return cancelled
         case (.ready, .executing):
             return true
         case (.ready, .finished):

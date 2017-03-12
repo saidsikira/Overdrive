@@ -55,7 +55,7 @@ open class TaskBase: Operation {
             willChangeValue(forKey: "state")
             
             queue.sync {
-                assert(internalState.canTransition(to: newState),
+                assert(internalState.canTransition(to: newState, ifCancelled: isCancelled),
                        "Invalid state transformation from \(internalState) to \(newState)")
                 internalState = newState
             }
