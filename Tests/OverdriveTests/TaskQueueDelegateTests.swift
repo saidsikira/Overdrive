@@ -13,14 +13,15 @@ import XCTest
 class TaskQueueDelegateTests: XCTestCase {
     let queue = TaskQueue(qos: .default)
     
-    var startExecutionExpection: XCTestExpectation?
-    var finishExecutionExpection: XCTestExpectation?
-    var willFinishExecutionExpection: XCTestExpectation?
+    var startExecutionExpectation: XCTestExpectation?
+    var finishExecutionExpectation: XCTestExpectation?
+    var willFinishExecutionExpectation: XCTestExpectation?
 
+	
     override func setUp() {
-        startExecutionExpection = expectation(description: "Task added to the queue expectation")
-        finishExecutionExpection = expectation(description: "Task finished expection")
-        willFinishExecutionExpection = expectation(description: "Task will finish expection")
+        startExecutionExpectation = expectation(description: "Task added to the queue expectation")
+        finishExecutionExpectation = expectation(description: "Task finished expectation")
+        willFinishExecutionExpectation = expectation(description: "Task will finish expectation")
     }
     
     func testDelegate() {
@@ -38,19 +39,19 @@ extension TaskQueueDelegateTests: TaskQueueDelegate {
     func didAdd<T>(task: Task<T>, toQueue queue: TaskQueue) {
         XCTAssertEqual(task.state, .initialized)
         XCTAssertEqual(task.name, "SimpleTask")
-        startExecutionExpection?.fulfill()
+        startExecutionExpectation?.fulfill()
     }
     
     func didFinish<T>(task: Task<T>, inQueue queue: TaskQueue) {
         XCTAssertEqual(task.state, .finished)
         XCTAssertEqual(task.name, "SimpleTask")
-        finishExecutionExpection?.fulfill()
+        finishExecutionExpectation?.fulfill()
     }
 
     func willFinish<T>(task: Task<T>, inQueue queue: TaskQueue) {
         XCTAssertEqual(task.state, .executing)
         XCTAssertEqual(task.name, "SimpleTask")
-        willFinishExecutionExpection?.fulfill()
+        willFinishExecutionExpectation?.fulfill()
     }
 
     func didRetry<T>(_ task: Task<T>, inQueue queue: TaskQueue) {
