@@ -67,12 +67,21 @@ extension Result {
     ///
     /// - parameter transform: transform block
     ///
-    /// - returns: `Result<T>`
-    public func map<U>(_ transform: (T) -> U) -> Result<U> {
+    /// - returns: `Result<U>`
+    public func map<U>(_ transform: (T) throws -> U) rethrows -> Result<U> {
+        return try flatMap { .value(try transform($0)) }
+    }
+    
+    /// Flat map over the result
+    ///
+    /// - Parameter transform: transform block
+    ///
+    /// - Returns: `Result<U>`
+    public func flatMap<U>(_ transform: (T) throws -> Result<U>) rethrows -> Result<U> {
         switch self {
-        case .value(let value):
-            return Result<U>.value(transform(value))
-        case .error(let error):
+        case let .value(value):
+            return try transform(value)
+        case let .error(error):
             return Result<U>.error(error)
         }
     }
