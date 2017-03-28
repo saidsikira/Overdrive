@@ -50,11 +50,11 @@ open class TaskBase: Operation {
          in already defined way.
          
          - Parameter state: Target state
-         - Parameter cancelled: Current cancelled state
+         - Parameter isCancelled: Current cancelled state
          
          - Returns: Boolean value indicating whether state change is possible
          */
-        func canTransition(to state: State, ifCancelled cancelled: Bool) -> Bool {
+        func canTransition(to state: State, isCancelled cancelled: Bool) -> Bool {
             switch (self, state) {
             case (.initialized, .pending):
                 return true
@@ -116,7 +116,7 @@ open class TaskBase: Operation {
             willChangeValue(forKey: "state")
             
             queue.sync {
-                assert(internalState.canTransition(to: newState, ifCancelled: isCancelled),
+                assert(internalState.canTransition(to: newState, isCancelled: isCancelled),
                        "Invalid state transformation from \(internalState) to \(newState)")
                 internalState = newState
             }
