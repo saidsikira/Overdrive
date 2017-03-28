@@ -17,7 +17,6 @@ class TaskQueueDelegateTests: XCTestCase {
     var finishExecutionExpectation: XCTestExpectation?
     var willFinishExecutionExpectation: XCTestExpectation?
 
-	
     override func setUp() {
         startExecutionExpectation = expectation(description: "Task added to the queue expectation")
         finishExecutionExpectation = expectation(description: "Task finished expectation")
