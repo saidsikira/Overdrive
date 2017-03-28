@@ -13,12 +13,14 @@ import XCTest
 class TaskQueueDelegateTests: XCTestCase {
     let queue = TaskQueue(qos: .default)
     
-    var startExecutionExpecation: XCTestExpectation?
-    var finishExecutionExpecation: XCTestExpectation?
-    
+    var startExecutionExpectation: XCTestExpectation?
+    var finishExecutionExpectation: XCTestExpectation?
+    var willFinishExecutionExpectation: XCTestExpectation?
+
     override func setUp() {
-        startExecutionExpecation = expectation(description: "Task added to the queue expecatation")
-        finishExecutionExpecation = expectation(description: "Task finished expecation")
+        startExecutionExpectation = expectation(description: "Task added to the queue expectation")
+        finishExecutionExpectation = expectation(description: "Task finished expectation")
+        willFinishExecutionExpectation = expectation(description: "Task will finish expectation")
     }
     
     func testDelegate() {
@@ -34,17 +36,23 @@ class TaskQueueDelegateTests: XCTestCase {
 
 extension TaskQueueDelegateTests: TaskQueueDelegate {
     func didAdd<T>(task: Task<T>, toQueue queue: TaskQueue) {
-        XCTAssertEqual(task.state, State.initialized)
+        XCTAssertEqual(task.state, .initialized)
         XCTAssertEqual(task.name, "SimpleTask")
-        startExecutionExpecation?.fulfill()
+        startExecutionExpectation?.fulfill()
     }
     
     func didFinish<T>(task: Task<T>, inQueue queue: TaskQueue) {
-        XCTAssertEqual(task.state, State.finished)
+        XCTAssertEqual(task.state, .finished)
         XCTAssertEqual(task.name, "SimpleTask")
-        finishExecutionExpecation?.fulfill()
+        finishExecutionExpectation?.fulfill()
     }
-    
+
+    func willFinish<T>(task: Task<T>, inQueue queue: TaskQueue) {
+        XCTAssertEqual(task.state, .executing)
+        XCTAssertEqual(task.name, "SimpleTask")
+        willFinishExecutionExpectation?.fulfill()
+    }
+
     func didRetry<T>(_ task: Task<T>, inQueue queue: TaskQueue) {
         XCTFail("Should retry should not be called")
     }

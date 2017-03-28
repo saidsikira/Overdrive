@@ -587,10 +587,8 @@ open class Task<T>: TaskBase {
         switch state {
         case .initialized:
             return isCancelled
-        case .cancelled:
-            return true
         case .pending:
-            guard !isCancelled == true else { return true }
+            if isCancelled == true { return true }
             
             if super.isReady { evaluateConditions() }
             
@@ -612,11 +610,6 @@ open class Task<T>: TaskBase {
         return state == .finished
     }
     
-    /// Boolean value indicating if task execution is cancelled.
-    public final override var isCancelled: Bool {
-        return state == .cancelled
-    }
-    
     /// Evaluates all task conditions
     final func evaluateConditions() {
         assert(state == .pending && !isCancelled, "evaluateConditions() was called out-of-order")
@@ -633,6 +626,10 @@ open class Task<T>: TaskBase {
     
     /// Changes task state to `finished`
     internal final func moveToFinishedState() {
+        for observer in observers {
+            observer.taskWillFinishExecution(self)
+        }
+        
         state = .finished
         
         for observer in observers {
@@ -675,10 +672,6 @@ open class Task<T>: TaskBase {
     /// method on self.
     open func run() {
         assertionFailure("run() method should be overrided in \(type(of: self))")
-    }
-    
-    open override func cancel() {
-        self.state = .cancelled
     }
     
     // MARK: Init methods

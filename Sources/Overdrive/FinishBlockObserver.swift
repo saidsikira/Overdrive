@@ -17,15 +17,21 @@ class FinishBlockObserver: TaskObserver {
      Called regardless of the task result.
     */
     var finishExecutionBlock: ((Void) -> ())
+    var willFinishExecutionBlock: ((Void) -> ())
     
     var observerName: String = "FinishBlockObserver"
     
     /// Create new `FinishBlockObserver` with completion block
-    init(finishExecutionBlock: @escaping ((Void) -> ())) {
+    init(finishExecutionBlock: @escaping ((Void) -> ()), willFinishExecutionBlock: @escaping ((Void) -> ())) {
         self.finishExecutionBlock = finishExecutionBlock
+        self.willFinishExecutionBlock = willFinishExecutionBlock
     }
     
     func taskDidFinishExecution<T>(_ task: Task<T>) {
         finishExecutionBlock()
+    }
+
+    func taskWillFinishExecution<T>(_ task: Task<T>) {
+        willFinishExecutionBlock()
     }
 }

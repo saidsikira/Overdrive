@@ -201,11 +201,15 @@ open class TaskQueue {
      */
     open func add<T>(task: Task<T>) {
         if !task.contains(observer: FinishBlockObserver.self) {
-            task.add(observer: FinishBlockObserver { [weak self, unowned task] in
+            task.add(observer: FinishBlockObserver(finishExecutionBlock: { [weak self, unowned task] in
                 if let queue = self {
                     queue.delegate?.didFinish(task: task, inQueue: queue)
                 }
-            })
+                }, willFinishExecutionBlock: { [weak self, unowned task] in
+                    if let queue = self {
+                        queue.delegate?.willFinish(task: task, inQueue: queue)
+                    }
+            }))
         }
         
         // Evaluate condition dependencies and add them to the queue

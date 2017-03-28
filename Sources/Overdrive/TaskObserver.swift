@@ -15,18 +15,25 @@
 public protocol TaskObserver {
     
     /**
-     Notifies reciever that task began execution
+     Notifies receiver that task began execution
      
      - Parameter task: Task that started execution
     */
     func taskDidStartExecution<T>(_ task: Task<T>)
     
     /**
-     Notifies reciever that task finished execution
+     Notifies receiver that task finished execution
      
      - Parameter task: Task that finished execution
     */
     func taskDidFinishExecution<T>(_ task: Task<T>)
+    
+    /**
+     Notifies receiver that task finished execution
+     
+     - Parameter task: Task that finished execution
+    */
+    func taskWillFinishExecution<T>(_ task: Task<T>)
 }
 
 //MARK: - TaskObserver default implementations
@@ -42,5 +49,8 @@ extension TaskObserver {
     }
     
     public func taskDidFinishExecution<T>(_ task: Task<T>) {
+    }
+    
+    public func taskWillFinishExecution<T>(_ task: Task<T>) {
     }
 }
