@@ -201,13 +201,13 @@ open class TaskQueue {
      */
     open func add<T>(task: Task<T>) {
         if !task.contains(observer: FinishBlockObserver.self) {
-            task.add(observer: FinishBlockObserver(finishExecutionBlock: { [weak self, unowned task] in
-                if let queue = self {
-                    queue.delegate?.didFinish(task: task, inQueue: queue)
-                }
-                }, willFinishExecutionBlock: { [weak self, unowned task] in
+            task.add(observer: FinishBlockObserver(
+                finishExecutionBlock: { [weak self, unowned task] in
+                    if let queue = self { queue.delegate?.didFinish(task: task, in: queue) }
+                },
+                willFinishExecutionBlock: { [weak self, unowned task] in
                     if let queue = self {
-                        queue.delegate?.willFinish(task: task, inQueue: queue)
+                        queue.delegate?.willFinish(task: task, in: queue)
                     }
             }))
         }
@@ -220,7 +220,7 @@ open class TaskQueue {
         
         operationQueue.addOperation(task)
         
-        delegate?.didAdd(task: task, toQueue: self)
+        delegate?.didAdd(task: task, to: self)
         
         task.enqueue(suspended: isSuspended)
     }

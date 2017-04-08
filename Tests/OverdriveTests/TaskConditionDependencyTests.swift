@@ -56,7 +56,7 @@ class TaskConditionDependencyTests: XCTestCase {
 
 extension TaskConditionDependencyTests: TaskQueueDelegate {
     
-    func didAdd<T>(task: Task<T>, toQueue queue: TaskQueue) {
+    func didAdd<T>(task: Task<T>, to queue: TaskQueue) {
         XCTAssertEqual(task.dependencies.count, 1, "Task dependency count should be equal to 1")
         addExpecation?.fulfill()
     }

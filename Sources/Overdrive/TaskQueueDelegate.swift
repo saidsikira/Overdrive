@@ -20,8 +20,8 @@ public protocol TaskQueueDelegate: class {
      
      - Parameter task: Task that was added
      - Parameter queue: Queue in which task was added
-    */
-    func didAdd<T>(task: Task<T>, toQueue queue: TaskQueue)
+     */
+    func didAdd<T>(task: Task<T>, to queue: TaskQueue)
     
     /**
      Notifies receiver that the task finished with execution
@@ -29,7 +29,7 @@ public protocol TaskQueueDelegate: class {
      - Parameter task: Task that finished execution
      - Parameter queue: Queue in which task was added
      */
-    func didFinish<T>(task: Task<T>, inQueue queue: TaskQueue)
+    func didFinish<T>(task: Task<T>, in queue: TaskQueue)
 
     /**
      Notifies receiver that the task is about to finish executing
@@ -37,18 +37,18 @@ public protocol TaskQueueDelegate: class {
      - Parameter task: Task that will finish execution
      - Parameter queue: Queue in which task was added
      */
-    func willFinish<T>(task: Task<T>, inQueue queue: TaskQueue)
+    func willFinish<T>(task: Task<T>, in queue: TaskQueue)
 }
 
 //MARK: - TaskQueueDelegate default implementations
 extension TaskQueueDelegate {
     
-    public func didAdd<T>(task: Task<T>, toQueue queue: TaskQueue) {
+    public func didAdd<T>(task: Task<T>, to queue: TaskQueue) {
     }
     
-    public func didFinish<T>(task: Task<T>, inQueue queue: TaskQueue) {
+    public func didFinish<T>(task: Task<T>, in queue: TaskQueue) {
     }
     
-    public func willFinish<T>(task: Task<T>, inQueue queue: TaskQueue) {        
+    public func willFinish<T>(task: Task<T>, in queue: TaskQueue) {
     }
 }

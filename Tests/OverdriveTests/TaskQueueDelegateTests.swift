@@ -35,7 +35,7 @@ class TaskQueueDelegateTests: XCTestCase {
 }
 
 extension TaskQueueDelegateTests: TaskQueueDelegate {
-    func didAdd<T>(task: Task<T>, toQueue queue: TaskQueue) {
+    func didAdd<T>(task: Task<T>, to queue: TaskQueue) {
         XCTAssertEqual(task.state, .initialized)
         XCTAssertEqual(task.name, "SimpleTask")
         startExecutionExpectation?.fulfill()
