@@ -41,19 +41,19 @@ extension TaskQueueDelegateTests: TaskQueueDelegate {
         startExecutionExpectation?.fulfill()
     }
     
-    func didFinish<T>(task: Task<T>, inQueue queue: TaskQueue) {
+    func didFinish<T>(task: Task<T>, in queue: TaskQueue) {
         XCTAssertEqual(task.state, .finished)
         XCTAssertEqual(task.name, "SimpleTask")
         finishExecutionExpectation?.fulfill()
     }
 
-    func willFinish<T>(task: Task<T>, inQueue queue: TaskQueue) {
+    func willFinish<T>(task: Task<T>, in queue: TaskQueue) {
         XCTAssertEqual(task.state, .executing)
         XCTAssertEqual(task.name, "SimpleTask")
         willFinishExecutionExpectation?.fulfill()
     }
 
-    func didRetry<T>(_ task: Task<T>, inQueue queue: TaskQueue) {
+    func didRetry<T>(_ task: Task<T>, in queue: TaskQueue) {
         XCTFail("Should retry should not be called")
     }
 }
