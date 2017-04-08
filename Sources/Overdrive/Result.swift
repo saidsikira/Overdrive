@@ -63,16 +63,7 @@ public enum Result<T> {
 
 extension Result {
     
-    /// Maps over result
-    ///
-    /// - parameter transform: transform block
-    ///
-    /// - returns: `Result<U>`
-    public func map<U>(_ transform: (T) throws -> U) rethrows -> Result<U> {
-        return try flatMap { .value(try transform($0)) }
-    }
-    
-    /// Flat map over the result
+    /// Flat map over the result value
     ///
     /// - Parameter transform: transform block
     ///
@@ -84,6 +75,33 @@ extension Result {
         case let .error(error):
             return Result<U>.error(error)
         }
+    }
+    
+    /// Flat map over result error
+    ///
+    /// - Parameter transform: Transform block
+    /// - Returns: `Result`
+    public func flatMapError(_ transform: (Error) throws -> Result) rethrows -> Result {
+        switch self {
+        case let .value(current): return .value(current)
+        case let .error(error): return try transform(error)
+        }
+    }
+    
+    /// Maps over result
+    ///
+    /// - Parameter transform: Transform block
+    /// - Returns: `Result<U>`
+    public func map<U>(_ transform: (T) throws -> U) rethrows -> Result<U> {
+        return try flatMap { .value(try transform($0)) }
+    }
+    
+    /// Map over task error
+    ///
+    /// - Parameter transform: Transform block
+    /// - Returns: `Result`
+    public func mapError<O: Error>(_ transform: (Error) throws -> O) rethrows -> Result {
+        return try flatMapError{ .error(try transform($0)) }
     }
 }
 

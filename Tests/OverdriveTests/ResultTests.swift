@@ -12,6 +12,10 @@ import XCTest
 
 class ResultTests: XCTestCase {
     
+    enum CustomError: Error {
+        case error
+    }
+    
     func testComputedProperties() {
         let result: Result = .value(10)
         
@@ -19,7 +23,7 @@ class ResultTests: XCTestCase {
         XCTAssertNil(result.error)
     }
     
-    func testMapWithValue() {
+    func testMap() {
         let result: Result = .value(10)
         let stringResult = result.map { String($0) }
         
@@ -33,11 +37,35 @@ class ResultTests: XCTestCase {
         XCTAssertNotNil(stringResult.error)
     }
     
+    func testMapError() {
+        let result: Result<Int> = .error(TaskError.fail(""))
+        let mapped = result.mapError { _ in return CustomError.error }
+        
+        XCTAssertNil(mapped.value)
+        XCTAssertEqual((mapped.error as? CustomError), .error)
+    }
+    
+    func testMapErrorWithValue() {
+        let result: Result<Int> = .value(10)
+        let mapped = result.mapError { _ in return CustomError.error }
+        
+        XCTAssertNotNil(mapped.value)
+        XCTAssertEqual(mapped.value, 10)
+    }
+    
     func testFlatMap() {
         let result: Result = .value(10)
         let stringResult = result.flatMap { return Result("\($0)") }
         
         XCTAssertEqual(stringResult.value, "10")
         XCTAssertNil(stringResult.error)
+    }
+    
+    func testFlatMapError() {
+        let result: Result<Int> = .error(TaskError.fail(""))
+        let mapped = result.flatMapError { _ in return .error(CustomError.error) }
+        
+        XCTAssertNotNil(mapped.error)
+        XCTAssertEqual((mapped.error as? CustomError), .error)
     }
 }
