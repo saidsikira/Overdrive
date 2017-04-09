@@ -27,6 +27,9 @@ class FinishBlockObserver: TaskObserver {
         self.willFinishExecutionBlock = willFinishExecutionBlock
     }
     
+    func taskDidStartExecution<T>(_ task: Task<T>) {
+    }
+    
     func taskDidFinishExecution<T>(_ task: Task<T>) {
         finishExecutionBlock()
     }

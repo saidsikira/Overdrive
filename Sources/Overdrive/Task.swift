@@ -276,18 +276,19 @@ open class Task<T>: TaskBase {
     }
     
     /// Use this method to set completion block that will be executed when task
-    /// finishes execution with `.Value(T)` result.
+    /// finishes execution with `.value(T)` result.
     ///
-    /// - note:
-    /// If the task finishes with `.Error` result, onError(_:) method will be called.
+    /// - Note:
+    /// If the task finishes with `.error` result, `onError(_:)` method will be called.
     ///
-    /// - warning: This method should only be called before the task state becomes `.Pending`.
-    /// Calling this method after `.Pending` state may result in unexpected behaviour.
+    /// - Warning: This method should only be called before the task state becomes `.Pending`.
+    /// Calling this method after `.pending` state may result in unexpected behaviour.
     ///
-    /// - parameter completion: Completion block that should be executed. Takes `T` parameter
-    /// which is extracted from the `.Value(T)` result.
+    /// - Parameter completion: Completion block that should be executed. Takes `T` parameter
+    /// which is extracted from the `.value(T)` result. If error is thrown in `completion`, it
+    /// will be passed down to the `onError(:_)` method.
     ///
-    /// - returns: `Self`. This method will always return itself, so that it can be used
+    /// - Returns: `Self`. This method will always return itself, so that it can be used
     /// in chain with other task methods.
     @discardableResult
     public final func onValue(_ completion: @escaping ((ResultType) throws -> Void)) -> Self {
@@ -299,18 +300,18 @@ open class Task<T>: TaskBase {
     /// Use this method to set completion block that will be executed when task
     /// finishes with error.
     ///
-    /// - note: Completion block set will only be executed if the
-    /// task finishes with `.Error` result.
+    /// - Note: Completion block set will only be executed if the
+    /// task finishes with `.error` result.
     ///
-    /// If the task finishes with `.Value` result, onValue completion will be called.
+    /// If the task finishes with `.value` result, onValue completion will be called.
     ///
-    /// - warning: This method should only be called before the task state becomes `.Pending`.
-    /// Calling this method after `.Pending` state may result in unexpected behaviour.
+    /// - Warning: This method should only be called before the task state becomes `.Pending`.
+    /// Calling this method after `.pending` state may result in unexpected behaviour.
     ///
-    /// - parameter completion: Completion block that should be executed. Takes only
-    /// one parameter `ErrorType` and no return type.
+    /// - Parameter completion: Completion block that should be executed. Takes only
+    /// one `Error` parameter and no return type.
     ///
-    /// - returns: `Self`. This method will always return itself, so that it can be used
+    /// - Returns: `Self`. This method will always return itself, so that it can be used
     /// in chain with other task methods.
     /// */
     @discardableResult
@@ -571,9 +572,7 @@ open class Task<T>: TaskBase {
 
         switch result {
         case .value(let value):
-            do {
-                try onValueBlock?(value)
-            } catch { onErrorBlock?(error) }
+            do { try onValueBlock?(value) } catch { onErrorBlock?(error) }
         case .error(let error):
             onErrorBlock?(error)
         }

@@ -64,4 +64,8 @@ extension TaskConditionDependencyTests: TaskQueueDelegate {
     func didFinish<T>(task: Task<T>, in queue: TaskQueue) {
         finishExpecation?.fulfill()
     }
+    
+    func willFinish<T>(task: Task<T>, in queue: TaskQueue) {
+        
+    }
 }

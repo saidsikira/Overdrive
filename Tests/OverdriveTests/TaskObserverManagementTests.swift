@@ -11,6 +11,14 @@ import XCTest
 @testable import Overdrive
 
 class SimpleObserver: TaskObserver {
+    func taskDidStartExecution<T>(_ task: Task<T>) {
+    }
+    
+    func taskDidFinishExecution<T>(_ task: Task<T>) {
+    }
+    
+    func taskWillFinishExecution<T>(_ task: Task<T>) {
+    }
 }
 
 class TaskObserverManagementTests: XCTestCase {
