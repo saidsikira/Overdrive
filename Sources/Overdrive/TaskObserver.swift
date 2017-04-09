@@ -44,13 +44,4 @@ extension TaskObserver {
     public var observerName: String {
         return String(describing: type(of: self))
     }
-    
-    public func taskDidStartExecution<T>(_ task: Task<T>) {
-    }
-    
-    public func taskDidFinishExecution<T>(_ task: Task<T>) {
-    }
-    
-    public func taskWillFinishExecution<T>(_ task: Task<T>) {
-    }
 }

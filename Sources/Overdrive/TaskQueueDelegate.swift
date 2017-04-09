@@ -39,16 +39,3 @@ public protocol TaskQueueDelegate: class {
      */
     func willFinish<T>(task: Task<T>, in queue: TaskQueue)
 }
-
-//MARK: - TaskQueueDelegate default implementations
-extension TaskQueueDelegate {
-    
-    public func didAdd<T>(task: Task<T>, to queue: TaskQueue) {
-    }
-    
-    public func didFinish<T>(task: Task<T>, in queue: TaskQueue) {
-    }
-    
-    public func willFinish<T>(task: Task<T>, in queue: TaskQueue) {
-    }
-}

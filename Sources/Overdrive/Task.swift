@@ -167,7 +167,7 @@ open class Task<T>: TaskBase {
     ///
     /// - warning: Accessing this property directly will result in unexpected behavior.
     /// Use `onValueBlock` instead.
-    fileprivate var internalOnValueBlock: ((ResultType) -> Void)?
+    fileprivate var internalOnValueBlock: ((ResultType) throws -> Void)?
     
     /// Internal error completion block
     ///
@@ -240,7 +240,7 @@ open class Task<T>: TaskBase {
     ///
     /// - Warning: Setting this property directly may result in unexpected behaviour.
     /// Always use `onValue(_:)` method on `Self` to set the block.
-    var onValueBlock: ((T) -> Void)? {
+    var onValueBlock: ((T) throws -> Void)? {
         get { return queue.sync {
                 return internalOnValueBlock
             }
@@ -290,7 +290,7 @@ open class Task<T>: TaskBase {
     /// - returns: `Self`. This method will always return itself, so that it can be used
     /// in chain with other task methods.
     @discardableResult
-    public final func onValue(_ completion: @escaping ((ResultType) -> Void)) -> Self {
+    public final func onValue(_ completion: @escaping ((ResultType) throws -> Void)) -> Self {
         assert(state < .executing, "On complete called after task is executed")
         onValueBlock = completion
         return self
@@ -571,7 +571,9 @@ open class Task<T>: TaskBase {
 
         switch result {
         case .value(let value):
-            onValueBlock?(value)
+            do {
+                try onValueBlock?(value)
+            } catch { onErrorBlock?(error) }
         case .error(let error):
             onErrorBlock?(error)
         }

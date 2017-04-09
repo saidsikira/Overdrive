@@ -84,6 +84,23 @@ class TaskTests: XCTestCase {
         waitForExpectations(timeout: 0.1, handler: nil)
     }
     
+    func testOnValueThrow() {
+        let task = anyTask(withResult: .value(10))
+        let expectation = self.expectation(description: "Task finished with error expectation")
+        
+        task
+            .onValue { value in
+                throw TaskError.fail("onValueError")
+            }.onError { error in
+                XCTAssertNotNil(error as? TaskError)
+                expectation.fulfill()
+        }
+        
+        TaskQueue.main.add(task: task)
+        
+        waitForExpectations(timeout: 0.1)
+    }
+    
     func testTaskEqueue() {
         let task = Task<Int>()
         
