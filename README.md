@@ -10,7 +10,7 @@ Our apps constantly do work. The faster you react to user input and produce an o
 Overdrive was created as a result of that struggle. It is a framework that exposes several simple concepts which are made on top of complex system frameworks that enable multithreading, concurrency and most importantly, more speed.
 
 ```swift
-let task = URLSessionTask("https://api.swiftable.io")
+let task = URLSessionTask(url: "https://api.swiftable.io")
 
 task
   .retry(3)
@@ -18,7 +18,7 @@ task
     print(json["message"])
   }.onError { error in
     print(error)
-  }
+}
 
 TaskQueue.background.add(task: task)
 ```
@@ -76,7 +76,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'Your App Target' do
-    pod 'Overdrive', '~> 0.2'
+  pod 'Overdrive', '~> 0.2'
 end
 ```
 
@@ -89,8 +89,8 @@ let package = Package(
   name: "Your Package Name",
   dependencies: [
     .Package(url: "https://github.com/arikis/Overdrive.git",
-            majorVersion: 0,
-            minor: 2)
+             majorVersion: 0,
+             minor: 2)
   ]
 )
 ```
@@ -119,15 +119,15 @@ Example `Task<UIImage>` subclass for photo download task:
 class GetLogoTask: Task<UIImage> {
 
   override func run() {
-      let logoURL = URL(string: "https://swiftable.io/logo.png")!
+    let logoURL = URL(string: "https://swiftable.io/logo.png")!
 
-      do {
-          let logoData = try Data(contentsOf: logoURL)
-          let image = UIImage(data: logoData)!
-          finish(with: .value(image)) // finish with image
-      } catch {
-          finish(with: .error(error)) // finish with error if any
-      }
+    do {
+      let logoData = try Data(contentsOf: logoURL)
+      let image = UIImage(data: logoData)!
+      finish(with: .value(image)) // Finish with image
+    } catch {
+      finish(with: .error(error)) // Finish with error if any
+    }
   }
 }
 ```
@@ -138,10 +138,10 @@ To setup completion blocks, you use `onValue` and `onError` methods:
 let logoTask = GetLogoTask()
 
 logoTask
-    .onValue { logo in
-        print(logo) // UIImage object
-    }.onError { error in
-        print(error)
+  .onValue { logo in
+    print(logo) // UIImage object
+  }.onError { error in
+    print(error)
 }
 ```
 
