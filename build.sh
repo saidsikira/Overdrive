@@ -169,7 +169,7 @@ case "$COMMAND" in
   ;;
 
   "--test-native" | "test-native")
-    swift build --clean
+    swift package clean
     swift build
     swift test
     exit 0;
