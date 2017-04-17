@@ -253,6 +253,6 @@ extension TaskQueue: CustomStringConvertible {
 
 extension TaskQueue: CustomDebugStringConvertible {
     public var debugDescription: String {
-        return "Name: \(name), qos: \(qos), Task count: \(tasks.count)"
+        return "Name: \(String(describing: name)), qos: \(qos), Task count: \(tasks.count)"
     }
 }
