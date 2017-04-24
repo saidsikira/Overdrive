@@ -15,7 +15,7 @@ WATCHOS_SDK="watchsimulator3.1"
 IOS_DESTINATION="OS=10.3,name=iPhone 7"
 MACOS_DESTINATION="arch=x86_64"
 TVOS_DESTINATION="OS=10.2,name=Apple TV 1080p"
-WATCHOS_DESTINATION="OS=10.1,name=iPhone SE"
+WATCHOS_DESTINATION="OS=10.3,name=iPhone SE"
 
 usage() {
 cat << EOF
