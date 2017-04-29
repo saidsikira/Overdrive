@@ -62,6 +62,9 @@ body {
   ga('send', 'pageview');
 
 </script>
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
 
@@ -75,6 +78,12 @@ body {
           Overdrive Docs
         </a>
         
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
       </p>
     
         <p class="header-col header-col--secondary">
@@ -206,27 +215,13 @@ in task lifecycle.</p>
                     <a name="//apple_ref/swift/Method/taskDidStartExecution(_:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:FP9Overdrive12TaskObserver21taskDidStartExecutionurFGCS_4Taskqd___T_">taskDidStartExecution(_:)</a>
                     </code>
-                      <span class="declaration-note">
-                        Default implementation
-                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Notifies reciever that task began execution</p>
-
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter task: Task that started execution
-
-</div>
-
-                      </div>
-                      <h4>Default Implementation</h4>
-                      <div class="default_impl abstract">
-                        <p>Observer name, returns conforming type name (read-only)</p>
+                        <p>Notifies receiver that task began execution</p>
 
                       </div>
                       <div class="declaration">
@@ -267,27 +262,13 @@ in task lifecycle.</p>
                     <a name="//apple_ref/swift/Method/taskDidFinishExecution(_:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:FP9Overdrive12TaskObserver22taskDidFinishExecutionurFGCS_4Taskqd___T_">taskDidFinishExecution(_:)</a>
                     </code>
-                      <span class="declaration-note">
-                        Default implementation
-                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Notifies reciever that task finished execution</p>
-
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter task: Task that finished execution
-
-</div>
-
-                      </div>
-                      <h4>Default Implementation</h4>
-                      <div class="default_impl abstract">
-                        <p>Observer name, returns conforming type name (read-only)</p>
+                        <p>Notifies receiver that task finished execution</p>
 
                       </div>
                       <div class="declaration">
@@ -295,6 +276,53 @@ in task lifecycle.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">func</span> <span class="n">taskDidFinishExecution</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">task</span><span class="p">:</span> <span class="kt"><a href="../Classes/Task.html">Task</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>task</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Task that finished execution</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP9Overdrive12TaskObserver23taskWillFinishExecutionurFGCS_4Taskqd___T_"></a>
+                    <a name="//apple_ref/swift/Method/taskWillFinishExecution(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP9Overdrive12TaskObserver23taskWillFinishExecutionurFGCS_4Taskqd___T_">taskWillFinishExecution(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Notifies receiver that task finished execution</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="n">taskWillFinishExecution</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">task</span><span class="p">:</span> <span class="kt"><a href="../Classes/Task.html">Task</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -363,8 +391,8 @@ in task lifecycle.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2016 <a class="link" href="http://swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-11-28)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2017 <a class="link" href="http://swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2017-04-29)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

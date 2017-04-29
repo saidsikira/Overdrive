@@ -1,6 +1,19 @@
 {
   "warnings": [
-
+    {
+      "file": "/Users/said/Developer/Overdrive/Overdrive/Sources/Overdrive/Result.swift",
+      "line": 37,
+      "symbol": "Result.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/said/Developer/Overdrive/Overdrive/Sources/Overdrive/Result.swift",
+      "line": 41,
+      "symbol": "Result.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
   ],
-  "source_directory": "/Users/said/Developer/Frameworks/Overdrive"
+  "source_directory": "/Users/said/Developer/Overdrive"
 }

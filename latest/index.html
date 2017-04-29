@@ -62,6 +62,9 @@ body {
   ga('send', 'pageview');
 
 </script>
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
 
@@ -74,6 +77,12 @@ body {
           Overdrive Docs
         </a>
         
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
       </p>
     
         <p class="header-col header-col--secondary">
@@ -186,13 +195,14 @@ body {
 
 <p><a href="https://travis-ci.org/arikis/Overdrive"><img src="https://travis-ci.org/arikis/Overdrive.svg?branch=master" alt="Build Status"></a>
 <img src="https://img.shields.io/badge/platform-%20iOS%20%7C%20macOS%20%7C%20tvOS%20%7C%20linux-gray.svg" alt="Plaforms">
-<a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage Compatible"></a>
-<a href="https://github.com/apple/swift-package-manager"><img src="https://img.shields.io/badge/SwiftPM-Compatible-brightgreen.svg" alt="Swift Package Manager Compatible"></a></p>
+<img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage Compatible">
+<img src="https://img.shields.io/badge/SwiftPM-Compatible-brightgreen.svg" alt="Swift Package Manager Compatible">
+<img src="https://img.shields.io/cocoapods/v/Overdrive.svg" alt="Pod version"></p>
 
 <p>Our apps constantly do work. The faster you react to user input and produce an output, the more likely is that the user will continue to use your application. As our applications grow in complexity, the more and more work needs to be done. You need to start thinking about how to categorize and optimize work, how to make that work more efficient, more optimized and finally, faster. In most cases that doesn’t end very well because you need to know a lot about concurrency, multithreading etc. - it’s a very complex field. You need to know all API specifics before you are able to write something.</p>
 
 <p>Overdrive was created as a result of that struggle. It is a framework that exposes several simple concepts which are made on top of complex system frameworks that enable multithreading, concurrency and most importantly, more speed.</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">URLSessionTask</span><span class="p">(</span><span class="s">"https://api.swiftable.io"</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">URLSessionTask</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://api.swiftable.io"</span><span class="p">)</span>
 
 <span class="n">task</span>
   <span class="o">.</span><span class="nf">retry</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -200,7 +210,7 @@ body {
     <span class="nf">print</span><span class="p">(</span><span class="n">json</span><span class="p">[</span><span class="s">"message"</span><span class="p">])</span>
   <span class="p">}</span><span class="o">.</span><span class="n">onError</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
-  <span class="p">}</span>
+<span class="p">}</span>
 
 <span class="kt">TaskQueue</span><span class="o">.</span><span class="n">background</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="nv">task</span><span class="p">:</span> <span class="n">task</span><span class="p">)</span>
 </code></pre>
@@ -222,6 +232,7 @@ body {
 <li><a href="https://arikis.github.io/Overdrive/latest/state-machine.html">State Machine</a></li>
 <li><a href="https://arikis.github.io/Overdrive/latest/unit-testing.html">Unit Testing</a></li>
 </ul></li>
+<li><a href="#long-term-plans">Long term plans</a></li>
 </ul>
 <a href='#what-can-i-do-with-overdrive' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='what-can-i-do-with-overdrive'>What can I do with Overdrive?</h2>
 
@@ -259,7 +270,7 @@ body {
 <span class="n">use_frameworks!</span>
 
 <span class="n">target</span> <span class="s1">'Your App Target'</span> <span class="k">do</span>
-    <span class="n">pod</span> <span class="s1">'Overdrive'</span><span class="p">,</span> <span class="s1">'~&gt; 0.2'</span>
+  <span class="n">pod</span> <span class="s1">'Overdrive'</span><span class="p">,</span> <span class="s1">'~&gt; 0.2'</span>
 <span class="k">end</span>
 </code></pre>
 <a href='#a-href-https-github-com-apple-swift-package-manager-swift-package-manager-a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='a-href-https-github-com-apple-swift-package-manager-swift-package-manager-a'><a href="https://github.com/apple/swift-package-manager">Swift Package Manager</a></h4>
@@ -269,8 +280,8 @@ body {
   <span class="nv">name</span><span class="p">:</span> <span class="s">"Your Package Name"</span><span class="p">,</span>
   <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
     <span class="o">.</span><span class="kt">Package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/arikis/Overdrive.git"</span><span class="p">,</span>
-            <span class="nv">majorVersion</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="nv">minor</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span>
+             <span class="nv">majorVersion</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+             <span class="nv">minor</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span>
   <span class="p">]</span>
 <span class="p">)</span>
 </code></pre>
@@ -300,15 +311,15 @@ body {
 <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">GetLogoTask</span><span class="p">:</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">UIImage</span><span class="o">&gt;</span> <span class="p">{</span>
 
   <span class="k">override</span> <span class="kd">func</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
-      <span class="k">let</span> <span class="nv">logoURL</span> <span class="o">=</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://swiftable.io/logo.png"</span><span class="p">)</span><span class="o">!</span>
+    <span class="k">let</span> <span class="nv">logoURL</span> <span class="o">=</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://swiftable.io/logo.png"</span><span class="p">)</span><span class="o">!</span>
 
-      <span class="k">do</span> <span class="p">{</span>
-          <span class="k">let</span> <span class="nv">logoData</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Data</span><span class="p">(</span><span class="nv">contentsOf</span><span class="p">:</span> <span class="n">logoURL</span><span class="p">)</span>
-          <span class="k">let</span> <span class="nv">image</span> <span class="o">=</span> <span class="kt">UIImage</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="n">logoData</span><span class="p">)</span><span class="o">!</span>
-          <span class="nf">finish</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="n">image</span><span class="p">))</span> <span class="c1">// finish with image</span>
-      <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-          <span class="nf">finish</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="o">.</span><span class="nf">error</span><span class="p">(</span><span class="n">error</span><span class="p">))</span> <span class="c1">// finish with error if any</span>
-      <span class="p">}</span>
+    <span class="k">do</span> <span class="p">{</span>
+      <span class="k">let</span> <span class="nv">logoData</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Data</span><span class="p">(</span><span class="nv">contentsOf</span><span class="p">:</span> <span class="n">logoURL</span><span class="p">)</span>
+      <span class="k">let</span> <span class="nv">image</span> <span class="o">=</span> <span class="kt">UIImage</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="n">logoData</span><span class="p">)</span><span class="o">!</span>
+      <span class="nf">finish</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="o">.</span><span class="nf">value</span><span class="p">(</span><span class="n">image</span><span class="p">))</span> <span class="c1">// Finish with image</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+      <span class="nf">finish</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="o">.</span><span class="nf">error</span><span class="p">(</span><span class="n">error</span><span class="p">))</span> <span class="c1">// Finish with error if any</span>
+    <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
@@ -317,10 +328,10 @@ body {
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">logoTask</span> <span class="o">=</span> <span class="kt">GetLogoTask</span><span class="p">()</span>
 
 <span class="n">logoTask</span>
-    <span class="o">.</span><span class="n">onValue</span> <span class="p">{</span> <span class="n">logo</span> <span class="k">in</span>
-        <span class="nf">print</span><span class="p">(</span><span class="n">logo</span><span class="p">)</span> <span class="c1">// UIImage object</span>
-    <span class="p">}</span><span class="o">.</span><span class="n">onError</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
-        <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+  <span class="o">.</span><span class="n">onValue</span> <span class="p">{</span> <span class="n">logo</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">logo</span><span class="p">)</span> <span class="c1">// UIImage object</span>
+  <span class="p">}</span><span class="o">.</span><span class="n">onError</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
 
@@ -350,6 +361,16 @@ body {
 <blockquote>
 <p><code>Overdrive</code> is a term for an effect used in electric guitar playing that occurs when guitar amp tubes starts to produce overdriven, almost distorted sound, due to the higher gain(master) setting.</p>
 </blockquote>
+<a href='#long-term-plans' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='long-term-plans'>Long term plans</h2>
+
+<p>This section defines some long term plans for Overdrive. They&rsquo;re not scheduled for implementation or for any specific version.</p>
+<a href='#remove-code-foundation-operation-code-dependency' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='remove-code-foundation-operation-code-dependency'>Remove <code>Foundation.Operation</code> dependency</h4>
+
+<p>Currently, Overdrive leverages <code>Foundation.Operation</code> and <code>Foundation.OperationQueue</code> classes for concurrency and execution. While those classes provide excellent functionality, they&rsquo;re still rewrites of their Objective C counterpart (<code>NSOperation</code> and <code>NSOperationQueue</code>). This means that writing <code>Task&lt;T&gt;</code> requires a lot of overrides and state management.</p>
+
+<p>For example, any task subclass must override <code>run()</code> method to define execution point. If this method is not overridden, queue will perform assert to notify that this method should be overridden. Same will happen if <code>super.run()</code> is called.</p>
+
+<p>In the future, Overdrive should only use <code>libdispatch</code> for it&rsquo;s functionality.</p>
 
           </div>
         </section>
@@ -358,8 +379,8 @@ body {
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2016 <a class="link" href="http://swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2016-11-28)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2017 <a class="link" href="http://swiftable.io" target="_blank" rel="external">Swiftable</a>. All rights reserved. (Last updated: 2017-04-29)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>
