@@ -12,7 +12,7 @@ You can use Overdrive in your projects by using one of the following package man
 [Carthage](#https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate Overdrive with Carthage add following to your `Cartfile`:
 
 ```
-github "arikis/Overdrive" >= 0.2
+github "arikis/Overdrive" >= 0.3
 ```
 
 Then download and build Overdrive by running:
@@ -34,7 +34,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'Your App Target' do
-    pod 'Overdrive', '~> 0.2'
+    pod 'Overdrive', '~> 0.3'
 end
 ```
 
@@ -50,7 +50,7 @@ let package = Package(
   dependencies: [
     .Package(url: "https://github.com/arikis/Overdrive.git",
             majorVersion: 0,
-            minor: 2)
+            minor: 3)
   ]
 )
 ```
