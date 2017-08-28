@@ -16,13 +16,13 @@ class FinishBlockObserver: TaskObserver {
      
      Called regardless of the task result.
     */
-    var finishExecutionBlock: ((Void) -> ())
-    var willFinishExecutionBlock: ((Void) -> ())
+    var finishExecutionBlock: (() -> ())
+    var willFinishExecutionBlock: (() -> ())
     
     var observerName: String = "FinishBlockObserver"
     
     /// Create new `FinishBlockObserver` with completion block
-    init(finishExecutionBlock: @escaping ((Void) -> ()), willFinishExecutionBlock: @escaping ((Void) -> ())) {
+    init(finishExecutionBlock: @escaping (() -> ()), willFinishExecutionBlock: @escaping (() -> ())) {
         self.finishExecutionBlock = finishExecutionBlock
         self.willFinishExecutionBlock = willFinishExecutionBlock
     }

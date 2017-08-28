@@ -27,25 +27,25 @@ public typealias InlineTaskBase = Task<Void>
 /// task that retrieves data from the server.
 open class InlineTask: InlineTaskBase {
     
-    fileprivate var internalTaskBlock: (((Void) -> ()) -> ())?
+    fileprivate var internalTaskBlock: ((() -> ()) -> ())?
     
     /// Sets task block
     ///
     /// - parameter taskBlock: Block to be executed
-    fileprivate func set(taskBlock: @escaping ((Void) -> (Void)) -> Void) {
+    fileprivate func set(taskBlock: @escaping (() -> (Void)) -> Void) {
         queue.sync {
             internalTaskBlock = taskBlock
         }
     }
     
-    var taskBlock: (((Void) -> ()) -> ())? {
+    var taskBlock: ((() -> ()) -> ())? {
         get { return queue.sync { return internalTaskBlock } }
     }
     
     /// Initializes `InlineTask` with closure block.
     ///
     /// - Parameter taskBlock: block that will be executed when task is added to the TaskQueue.
-    public init(_ taskBlock: @escaping (Void) -> ()) {
+    public init(_ taskBlock: @escaping () -> ()) {
         super.init()
         set(taskBlock: { void in
             taskBlock()
@@ -55,8 +55,8 @@ open class InlineTask: InlineTaskBase {
     
     /// Starts execution of the task
     open override func run() {
-        taskBlock? { void in
-            self.finish(with: .value(void))
+        taskBlock? {
+            self.finish(with: .value(()))
         }
     }
 }

@@ -25,12 +25,12 @@ import Foundation
  1. **State machine** - `Task<T>` works with internal task state machine. State
  of the task at any point can be:
  
-	* initialized - Task instance is created
-	* pending - Task is added to the `TaskQueue` and started process of
-	evaluating readiness
-	* ready - Task is ready to execute.
-	* executing - Task is executing
-	* finished - Task finished with execution
+    * initialized - Task instance is created
+    * pending - Task is added to the `TaskQueue` and started process of
+    evaluating readiness
+    * ready - Task is ready to execute.
+    * executing - Task is executing
+    * finished - Task finished with execution
  
  2. **Task execution point** - Task execution starts in `run()` method when state
  reaches `ready` state. You should always override this method in your subclass.
@@ -39,8 +39,8 @@ import Foundation
  called. You always finish execution with `Result<T>` object. `Result<T>` is an
  enum with two cases:
  
-	* `value(T)`
-	* `error(Error)`
+    * `value(T)`
+    * `error(Error)`
  
  After `finish(with:)` method is called, you can access result through `result`
  property.
@@ -441,7 +441,7 @@ open class Task<T>: TaskBase {
         let indexes = conditions
             .enumerated()
             .flatMap { offset, condition -> Int? in
-                if type(of: condition) is T.Type { return offset }
+                if Swift.type(of: condition) is T.Type { return offset }
                 return nil
             }
         
@@ -531,7 +531,7 @@ open class Task<T>: TaskBase {
         let indexes = observers
             .enumerated()
             .flatMap { offset, observer -> Int? in
-                if type(of: observer) is T.Type { return offset }
+                if Swift.type(of: observer) is T.Type { return offset }
                 return nil
             }
         

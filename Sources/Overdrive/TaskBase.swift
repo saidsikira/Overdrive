@@ -17,7 +17,7 @@ extension Operation {
     /// this method to define how they are enqueued.
     ///
     /// - Parameter suspended: Task queue suspended state
-    func enqueue(suspended: Bool) {
+    @objc func enqueue(suspended: Bool) {
     }
 }
 
@@ -84,7 +84,7 @@ open class TaskBase: Operation {
             return lhs.rawValue > rhs.rawValue
         }
     }
-	
+    
     // MARK: Dispatch queue
     
     /// Private queue used in task state machine
@@ -127,7 +127,7 @@ open class TaskBase: Operation {
     }
     
     override func enqueue(suspended: Bool) {
-		if !suspended && !isCancelled { state = .pending }
+        if !suspended && !isCancelled { state = .pending }
     }
     
     // MARK: `Foundation.Operation` Key value observation
