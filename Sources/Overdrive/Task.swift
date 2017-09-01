@@ -182,6 +182,9 @@ open class Task<T>: TaskBase {
     /// Internal task conditions
     fileprivate var internalConditions: [TaskCondition] = []
     
+    /// Internal property indicating whether condition evaluation started
+    fileprivate var internalConditionEvaluationStarted = false
+    
     /// Internal number of retry counts
     fileprivate var internalRetryCount: Int = 0
     
@@ -383,6 +386,20 @@ open class Task<T>: TaskBase {
         set(newConditions) {
             queue.sync {
                 internalConditions = newConditions
+            }
+        }
+    }
+    
+    fileprivate var conditionEvaluationStarted: Bool {
+        get {
+            return queue.sync {
+                return internalConditionEvaluationStarted
+            }
+        }
+        
+        set {
+            queue.sync {
+                internalConditionEvaluationStarted = newValue
             }
         }
     }
@@ -591,7 +608,11 @@ open class Task<T>: TaskBase {
         case .pending:
             if isCancelled == true { return true }
             
-            if super.isReady { evaluateConditions() }
+            if super.isReady {
+                if !conditionEvaluationStarted {
+                    evaluateConditions()
+                }
+            }
             
             return false
         case .ready:
@@ -614,6 +635,8 @@ open class Task<T>: TaskBase {
     /// Evaluates all task conditions
     final func evaluateConditions() {
         assert(state == .pending && !isCancelled, "evaluateConditions() was called out-of-order")
+        
+        conditionEvaluationStarted = true
         
         if conditions.count > 0 {
             TaskConditionEvaluator.evaluate(conditions, forTask: self) { errors in

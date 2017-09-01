@@ -289,8 +289,7 @@
 				TargetAttributes = {
 					B36FE4EE1D9080E8003C6A77 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = UMX462F87M;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					B36FE50F1D908181003C6A77 = {
 						DevelopmentTeam = UMX462F87M;
@@ -473,7 +472,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = UMX462F87M;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -503,6 +502,7 @@
 				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = io.swiftable.Overdrive;
 				PRODUCT_NAME = "$(PROJECT_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = "";
 				SKIP_INSTALL = NO;
 				SUPPORTED_PLATFORMS = "watchsimulator watchos appletvsimulator appletvos iphonesimulator iphoneos macosx";
@@ -546,7 +546,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = UMX462F87M;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -569,6 +569,7 @@
 				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = io.swiftable.Overdrive;
 				PRODUCT_NAME = "$(PROJECT_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = "";
 				SKIP_INSTALL = NO;
 				SUPPORTED_PLATFORMS = "watchsimulator watchos appletvsimulator appletvos iphonesimulator iphoneos macosx";
